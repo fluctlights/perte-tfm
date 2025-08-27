@@ -1,0 +1,46 @@
+\thispagestyle{empty}
+\makeatletter
+\parindent=0mm 
+
+\vspace*{9cm}
+
+\textbf{{\@author}}
+
+\vspace*{0.5cm}
+
+
+\noindent
+\begin{minipage}[t]{.5\textwidth}
+\raggedright
+{\@schoolCR}\\
+{\@schoolBuildingCR}\\
+{\@schoolAddressCR}\\
+\end{minipage}% <---------------- Note the use of "%"
+\begin{minipage}[t]{.5\textwidth}
+\raggedright
+{\@schoolAB}\\
+{\@schoolBuildingAB}\\
+{\@schoolAddressAB}\\
+\end{minipage}
+
+
+%{\@schoolCR} \hspace{1.9cm} {\@schoolAB} \\
+%{\@schoolBuildingCR} \hspace{1.9cm}  {\@schoolBuildingAB} \\
+%{\@schoolAddressCR} \hspace{1.9cm} {\@schoolAddressAB} \\
+
+\vspace*{0.5cm}
+
+Teléfono:~~~{\@authorPhone}\\
+E-mail:~~~~~{\@authorEmail}\\
+Web site:~~~{\@authorWeb}
+
+\vspace*{0.75cm}
+
+\textcopyleft~{\@author}, {\@yearTF}.
+
+\begin{changemargin}{0.2cm}{3cm} 
+{\footnotesize Se permite la copia, distribución y/o modificación de este documento bajo los términos de la Licencia CC BY-NC-SA 4.0. El texto completo de la licencia puede obtenerse en \url{https://creativecommons.org/licenses/by-nc-sa/4.0/}.}
+\end{changemargin} 
+
+{\footnotesize Este documento fue realizado en \LaTeX.}
+\makeatother

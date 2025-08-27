@@ -1,0 +1,159 @@
+\documentclass[a4paper,12pt,spanish,twoside]{book} 
+
+
+\usepackage[spanish]{babel} 		% Ortografía española
+\usepackage[utf8]{inputenc} 		% Acentos
+\usepackage{ragged2e}
+\usepackage{acronym}
+\usepackage{master} 			% Thesis style
+\usepackage{sectsty}
+\usepackage{changepage}   % for the adjustwidth environment
+
+\paragraphfont{\bfseries\normalsize}
+
+\begin{document}
+
+\author{Antonio Fernando Mateo Francés}
+\authorPossition{Ingeniero Informático}
+\authorUniversity{Universidad de Castilla-La Mancha}
+\authorGender{male}
+\authorEmail{antoniofernando.mateo@alu.uclm.es}
+\authorPhone{648556069}
+\authorWeb{}
+\title{Tareas hardware para FreeRTOS y X-Heep}
+
+\principalAdvisor{Fernando Rincón Calle}
+\principalAdvisorPossition{Profesor Titular de Universidad}
+\principalAdvisorUniversity{Universidad de Castilla-La Mancha}
+
+%\secondaryAdvisor{Director 2}
+%\secondaryAdvisorPossition{Profesor Titular de Universidad}
+%\secondaryAdvisorUniversity{Universidad de Castilla-La Mancha}
+
+\departamentCR{Departamento de Tecnologías y Sistemas de la Información}
+\departamentAB{Departamento de Sistemas Informáticos}
+\schoolCR{Escuela Superior de Informática}
+\schoolAB{Escuela Superior de Ingeniería Informática}
+
+\schoolBuildingCR{Edificio Fermín Caballero}
+\schoolAddressCR{Paseo de la Universidad, 4\\13071 Ciudad Real, España}
+
+
+\schoolBuildingAB{Edificio Infante Don Juan Manuel}
+\schoolAddressAB{Avda. de España s/n.\\02071 Albacete, España}
+
+
+%\schoolBuilding{Edificio Fermín Caballero\hspace*{3.2cm}Edificio Infante Don Juan Manuel}
+%\schoolAddress{Paseo de la Universidad, 4\hspace*{3cm}Avda. de España s/n.\\13071 Ciudad Real, España\hspace{2.8cm} 02071 Albacete, España}
+
+\university{Universidad de Castilla-La Mancha}
+\academicDegree{Sistemas Microelectrónicos Basados en Arquitecturas Abiertas}
+\docType{Máster en Sistemas Microelectrónicos\\Basados en Arquitecturas Abiertas}
+\monthTF{Julio}
+\yearTF{2025}
+\city{Ciudad Real, Albacete}
+
+
+% COVERS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\include{preamble/cover}           % Cover
+\include{preamble/titleCover}      % Title Cover
+\include{preamble/internalCover}   % Internal Cover
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+% AGRADECIMIENTOS Y COPYLEFT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\include{preamble/copyleft}        % Copyleft
+\include{preamble/rating}          % Rating
+\include{preamble/thanks}          % Thanks
+\include{preamble/dedication}      % Dedication
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+% ABSTRACT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\include{preamble/abstractSpanish}     % Abstract Spanish
+\emptyPage
+\include{preamble/abstractEnglish}     % Abstract English
+\emptyPage
+
+
+% ACRONYMS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\input{acronyms}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% CONFIGURACIÓN DE NUMERACIÓN
+\newpage
+\pagenumbering{Roman}     
+\setcounter{page}{1}      
+
+
+% TOC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \dominitoc
+\thispagestyle{empty}
+\tableofcontents           % TOC
+\clearpage
+\thispagestyle{empty}
+\listoffigures             % TOF
+
+
+
+
+%\emptyPage
+
+
+
+% CONFIGURACIÓN DE NUMERACIÓN
+\newpage
+\pagenumbering{arabic}    
+\setcounter{page}{1}      
+
+
+\parindent=16mm      
+
+% CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\input{chapter1/chapterTemplate}     % Chapter
+\input{chapter2/chapterTemplate}     % Chapter
+\input{chapter3/chapterTemplate}     % Chapter
+\input{chapter4/chapterTemplate}     % Chapter
+\input{chapter5/chapterTemplate}     % Chapter
+
+% Add more chapters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+% APPENDIX
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\appendix
+\parindent=16mm 
+\input{appendix1/appendixTemplate}         % Appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+
+
+% GLOSSARY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%\printglossaries
+%\addcontentsline{toc}{chapter}{Glosario}
+%\addcontentsline{toc}{chapter}{Acrónimos}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+% BILBIOGRAPHY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newpage
+\thispagestyle{empty}
+\bibliographystyle{alpha}
+\bibliography{bibliography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+
+\end{document}
+
+

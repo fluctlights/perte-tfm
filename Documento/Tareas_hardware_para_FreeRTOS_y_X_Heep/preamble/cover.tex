@@ -1,0 +1,58 @@
+\begin{titlepage}
+\makeatletter
+  \begin{figure}
+    \begin{center}
+      \includegraphics[width=4.5cm]{figures/template/logoUCLM.png}    
+    \end{center}
+  \end{figure}
+  
+  \begin{center}
+    \begin{large}
+      \textbf{\MakeUppercase\@university}\\
+      \vspace*{1.25cm}
+      \textbf{\MakeUppercase{\@schoolCR}}\\
+    \end{large}
+      {\footnotesize\textbf{\MakeUppercase {\@departmentCR}}}\\
+    \vspace*{0.5cm}
+    \begin{large}
+      \textbf{\MakeUppercase{\@schoolAB}}\\
+    \end{large}
+      {\footnotesize\textbf{\MakeUppercase {\@departmentAB}}}\\
+  \end{center}
+
+  \vspace*{1.2cm}
+
+  \begin{center}
+    \begin{Large}\textit{\@title}\end{Large}\\
+
+    \uclmRule
+
+    \begin{Large}\textbf{\@docType}\end{Large}
+  \end{center}
+
+  \vspace*{0.5cm}
+  \begin{flushright}
+    \begin{large}
+    \ifthenelse{\equal{\@authorGender}{male}}
+      {% True case
+      \textbf{Autor:}\\
+      }
+      {% false case
+      \textbf{Autora:}\\
+      }  
+      {\@author } \\
+      \vspace*{1cm}
+      \textbf{Director:}\\
+      {\@principalAdvisor }
+    \end{large}
+  \end{flushright}
+
+  \vspace*{0.5cm}
+
+  \begin{center}
+    \textbf{\textit{{\@city}, {\@yearTF}}}
+  \end{center}
+
+  \emptyPage
+\makeatother
+\end{titlepage}

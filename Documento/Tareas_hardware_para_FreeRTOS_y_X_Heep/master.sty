@@ -1,0 +1,614 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%                              THESIS STYLE   (JULIAN CABA)                                  %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\AtBeginDocument{%
+  \typeout{..................................................................}
+  \typeout{You are using the Master Style (Julian Caba)}
+  \typeout{Version: 0.1 Oct. 2012.}
+  \typeout{..................................................................}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% URI
+\usepackage[colorlinks=true, linkcolor=black, plainpages=false, citecolor=black, urlcolor=black]{hyperref}
+%\usepackage[pdftex=true, colorlinks=true, linkcolor=black, plainpages=false, citecolor=black, urlcolor=black]{hyperref} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TEXT FORMAT
+\usepackage{anysize}                    % Needed for \marginsize
+\usepackage{amsmath}                    % Paragraph skip
+\usepackage{indentfirst} 		% Paragraph identation
+
+\marginsize{3.5cm}{2cm}{2.5cm}{2.5cm}   % Margins (left,right,top,bottom)
+\parindent=16mm                         % Paragraph identation
+\frenchspacing                          % Skip after dot
+\parskip 0.45cm                         % Skip between paragraphs
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% REFERENCES
+\usepackage{cleveref}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FIGURES
+\usepackage{graphicx}
+\usepackage[nooneline,footnotesize,center,bf]{caption}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage{subfig}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SYMBOLS
+\usepackage{textcomp} 
+\usepackage{amssymb}
+\usepackage{pifont}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACUTES
+\usepackage[utf8]{inputenc}   
+\usepackage{fontspec}
+%% \usepackage{selinput}
+%% \usepackage[T1]{fontenc}
+
+%% \SelectInputMappings{%
+%%   aacute={á},
+%%   ntilde={ñ},
+%%   Euro={€}
+%% }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAPHY
+%\usepackage[style=alphabetic,maxnames=4,minnames=3,maxbibnames=99]{biblatex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ROTATING
+\usepackage{lscape}
+\usepackage{rotating}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLES
+\usepackage{booktabs}                 
+\usepackage{tabulary}              
+\usepackage{longtable} 
+\usepackage{multirow}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COLORS
+\usepackage{color}
+\usepackage{xcolor}
+
+\definecolor{gray97}{gray}{.97}
+\definecolor{gray90}{gray}{.90}
+\definecolor{gray80}{gray}{.80}
+\definecolor{gray75}{gray}{.75}
+\definecolor{gray45}{gray}{.45}
+\definecolor{gray30}{gray}{.30}
+\definecolor{uclmColor}{rgb}{0.6,0.07,0.15}
+\definecolor{masterColor}{rgb}{0.36,0.50,0.55}
+\definecolor{lorange}{cmyk}{0,0.05,0.1,0}
+\definecolor{lblue}{cmyk}{0.2,0.2,0.05,0}
+\definecolor{lgray}{cmyk}{0.2,0.2,0.2,0.2}
+\definecolor{mypurple}{cmyk}{0.4,0.8,0.2,0.4}
+\definecolor{lred}{cmyk}{0,0.1,0,0}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOXES
+\usepackage[most]{tcolorbox}
+\usepackage{fancybox}
+
+\def\bbox#1{\begin{center}\shadowbox{\begin{minipage}{14cm}
+\centering\textbf{#1}
+\end{minipage}}\end{center}}
+
+\def\uclmbox#1{\begin{center}\color{uclmColor}\shadowbox{\begin{minipage}{13cm}
+\centering\textbf{\color{black}#1}
+\end{minipage}}\end{center}}
+
+\def\gbox#1{\begin{center}\color{gray45}\shadowbox{\begin{minipage}{13cm}
+\centering\textbf{\color{black}#1}
+\end{minipage}}\end{center}}
+
+\newtcolorbox{mybox}[2][]{enhanced,title=#2,colback=lblue,
+fonttitle=\bfseries,coltitle=white,
+attach boxed title to top left=
+{xshift=3.2mm,yshift=-3mm},
+boxed title style={
+colback=lblue!30!black}
+#1}
+
+\newtcolorbox{myboxlred}[2][]{enhanced,title=#2,colback=lred,
+fonttitle=\bfseries,coltitle=white,
+attach boxed title to top left=
+{xshift=3.2mm,yshift=-3mm},
+boxed title style={
+colback=lred!30!black}
+#1}
+
+\newtcolorbox{myboxgray}[3][]{enhanced,title=#2,colback=gray90,
+fonttitle=\bfseries,coltitle=white,
+attach boxed title to top left=
+{xshift=#3,yshift=-3mm},
+boxed title style={
+colback=gray}
+#1}
+
+\usepackage{varwidth}
+
+\usetikzlibrary{calc}
+
+\newcommand{\myboxhow}[4][\textwidth-\pgfkeysvalueof{/pgf/inner xsep}-2mm]{%
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\node[line width=.5mm, rounded corners, draw=#2, inner ysep=10pt, text width=#1, outer sep=0] (one) {\vspace*{15pt}\\\begin{varwidth}{\textwidth}#4\end{varwidth}};
+\node[text=white,anchor=north east,align=center, minimum height=20pt] (two) at (one.north east) {#3 \hspace*{.5mm}};
+\path[fill=#2] 
+    (one.north west|-two.west) --
+    ($(two.west)+(-1.5cm,0)$) 
+    to[out=0,in=180] (two.south west) --
+    (two.south east) [rounded corners] --
+    (one.north east) -- 
+    (one.north west) [sharp corners] -- cycle;
+\node[text=white,anchor=north east,align=center, minimum height=20pt, text height=2ex] (three) at (one.north east) {#3 \hspace*{.5mm}};
+\end{tikzpicture} 
+\end{figure}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Minimize Itemize
+\newenvironment{itemizePacket}{
+\vspace*{-0.75cm}
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}{\vspace*{-0.5cm}\end{itemize}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RULES
+
+\def \uclmRule{
+  {\color{uclmColor}
+  \rule{12cm}{0.5mm}}
+}
+
+\def \masterRule{
+  {\color{masterColor}
+  \rule{12cm}{0.5mm}}
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% EMPTY PAGE
+
+\def \emptyPage{
+  \newpage
+  \thispagestyle{empty}
+  \textcolor{white}{word}     % It prints word with white color
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ACRONYMS
+
+\usepackage[acronym,nonumberlist]{glossaries}
+%\makeglossaries
+%\glsdisablehyper
+\setacronymstyle{long-short}
+%\renewcommand{\acronymname}{Acrónimos}
+%\renewcommand{\glossaryname}{Glosario}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLE OF CONTENTS
+\usepackage{minitoc} 			% Mini TOC
+
+% Mini TOC configurationk
+\mtcsetrules{minitoc}{off}
+\mtcsettitle{minitoc}{}
+\mtcsetdepth{minitoc}{1}
+\mtcsetpagenumbers{minitoc}{off}
+\setlength{\mtcindent}{3cm} 
+\mtcsetfont{minitoc}{section}{\bfseries}
+\mtcsetfont{minitoc}{subsection}{}
+\mtcsetfont{minitoc}{subsubsection}{}
+
+% Gray Minitoc
+\def \grayMinitoc{
+  \hypersetup{linkcolor=gray}
+  \minitoc
+  \hypersetup{linkcolor=black}
+}
+
+
+
+% Configuration names
+\addto\captionsspanish{
+  \def\listtablename{Í\lowercase{ndice de tablas}}      % TOT name
+  \def\listfigurename{Í\lowercase{ndice de figuras}}    % TOF name
+  \def\contentsname{Í\lowercase{ndice general}}         % TOC name
+  \def\bibname{R\lowercase{eferencias bibliogr\'aficas}}  % Bibliography name
+  \def\refname{R\lowercase{eferencias}}                 % Bibliography name
+  \def\tablename{Tabla}                                 % Table caption name
+  \def\lstlistingname{Listado}}                         % List caption name
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CAPITAL LETTER
+\def\CAPstart#1#2{\begingroup\def\par{\endgraf\endgroup\lineskiplimit=0pt}
+    \setbox2=\hbox{#2}\newdimen\tmpht \tmpht \ht2
+    \advance\tmpht by \baselineskip\font\hhuge=cmr10 at \tmpht
+    \setbox1=\hbox{{\hhuge #1}}
+    \count7=\tmpht \count8=\ht1\divide\count8 by 1000 \divide\count7 by\count8
+    \tmpht=.001\tmpht\multiply\tmpht by \count7\font\hhuge=cmr10 at \tmpht
+    \setbox1=\hbox{{\hhuge #1}}\hangindent3.2\wd1
+    \hangafter=-2 {\hskip-\hangindent \lower1\ht1\hbox{\raise1.0\ht2\copy1}%
+    \kern-0\wd1}\copy2\lineskiplimit=-1000pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% LIST FORMAT
+\usepackage{listings}
+
+\lstset{
+%  frame=Ltb,
+  framerule=0pt,
+  aboveskip=0.5cm,
+  framextopmargin=10pt,
+  framexbottommargin=4pt,
+  framexleftmargin=17pt,
+  framexrightmargin=6pt,
+  xleftmargin=17pt,
+  framesep=0pt,
+  backgroundcolor=\color{gray97},
+  rulesepcolor=\color{black},
+  %
+  stringstyle=\ttfamily,
+  basicstyle=\small\ttfamily,
+  commentstyle=\color{gray45},
+  keywordstyle=\bfseries,
+  showstringspaces = false,
+  tabsize=2, 
+  extendedchars=true, 
+  %
+  numbers=left,
+  numbersep=8pt,
+  numberstyle=\tiny,
+  numberfirstline = false,
+  breaklines=true,
+  rulesep=0pt,
+}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{412pt}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+% Lower enviroment
+\lstnewenvironment{listing}[1][]
+   {\lstset{#1}\pagebreak[0]}{\pagebreak[0]}
+
+\lstdefinestyle{consoleSTY}
+{
+  numbers=none,
+  backgroundcolor=\color{gray75},
+}
+
+
+\usepackage{minted}
+
+\tcbuselibrary{listings}
+\tcbuselibrary{minted}
+
+%\Crefname{lstlisting}{Listing}{Listings}
+
+\newtcblisting[auto counter, number within=chapter, list inside=mypyg]{mycode}[3]{
+  listing engine=minted,
+  minted style=colorful,
+  minted language=#1,
+  minted options={fontsize=\small,linenos,numbersep=3mm},
+  listing only,
+  left=5mm,
+  enhanced,
+  title={\bfseries Listing \thetcbcounter : #2 \hfill%
+    \smash{\raisebox{-13pt}{\includegraphics[width=1.25cm,height=1.25cm]{figures/template/#1.png}}}},
+  list entry= Listing~\thetcbcounter : #2,
+  label=#3
+}
+% VHDL Style
+% \lstdefinestyle{VHDL}
+%    {language=VHDL,
+%     xleftmargin=1.5cm,
+%     %xrightmargin=1cm,
+%     basicstyle=\scriptsize\ttfamily,
+%    }
+
+% % C++ Style
+% \lstdefinestyle{C++}
+%    {language=C++,
+%     xleftmargin=1.5cm,
+%     %xrightmargin=1cm,
+%     basicstyle=\scriptsize\ttfamily,
+%    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+              
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HEADERS AND FOOTERS
+\usepackage{fancyhdr}
+
+\def \headerNumberPageStyle{
+  \fancyhead{}       % Clean header
+  \fancyhead[RO]{{\mdseries\bfseries[~\thepage~]}}    
+% Section to left in even pages
+  \fancyhead[LE]{{\mdseries\bfseries[~\thepage~]}}    
+}
+
+\pagestyle{fancy}
+
+%%% HEADER %%%
+\def \headerStyle{
+\fancyhead{}       % Clean header
+
+
+% Chapter to right in odd pages
+\fancyhead[RO]{{\mdseries\footnotesize\leftmark}\hspace*{1cm}{\mdseries\bfseries[~\thepage~]}}    
+% Section to left in even pages
+\fancyhead[LE]{{\mdseries\bfseries[~\thepage~]}\hspace*{1cm}{\mdseries\footnotesize\rightmark}}
+}
+% Top line
+\renewcommand{\headrulewidth}{0.3pt}
+
+
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+
+
+
+%%% FOOTER %%%
+\fancyfoot{}    % Clean footer
+
+%\renewcommand{\footrulewidth}{0.3pt}       % Bottom line
+
+% Clean header and footer in empty pages
+\makeatletter \def\cleardoublepage{
+\clearpage\if@twoside \ifodd\c@page\else%
+\hbox{}%
+\thispagestyle{empty}  
+\newpage%
+\if@twocolumn\hbox{}\newpage\fi\fi\fi} \makeatother
+
+% Footer of chapter pages
+\makeatletter
+\def\ps@chapterFooterStyle{%
+  \let\@oddhead\@empty%
+  \let\@evenhead\@empty%
+  \def\@oddfoot{\hfil{\mdseries\bfseries[~\thepage~]}\hfil}%
+  \def\@evenfoot{\hfil{\mdseries\bfseries[~\thepage~]}\hfil}%
+}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ENVIRONMENT MARGIN
+
+\newenvironment{changemargin}[2]{% 
+\begin{list}{}{% 
+\setlength{\topsep}{0pt}% 
+\setlength{\leftmargin}{#1}% 
+\setlength{\rightmargin}{#2}% 
+\setlength{\listparindent}{\parindent}% 
+\setlength{\itemindent}{\parindent}% 
+\setlength{\parsep}{\parskip}% 
+}% 
+\item[]}{\end{list}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ENVIRONMENT QUOATATION GREY
+\usepackage{xcolor,colortbl}
+\usepackage{framed}
+
+\definecolor{shadecolor}{named}{gray90}
+
+\newenvironment{quotationGrayTT}%
+{\begin{snugshade}\begin{quotation}\it\ttfamily}
+{\hfill\end{quotation}\end{snugshade}}
+
+\newenvironment{quotationGraySF}%
+{\begin{snugshade}\begin{quotation}\it\sffamily}
+{\hfill\end{quotation}\end{snugshade}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHAPTER TITLE STYLE
+%\usepackage{pstcol}
+\usepackage{pstricks}
+\usepackage{xcolor,colortbl}
+
+
+\makeatletter
+\def\thickhrulefill{\leavevmode \leaders \hrule height 1ex \hfill \kern \z@}
+\def\@makechapterhead#1{%
+  \reset@font
+  \parindent \z@ 
+  \vspace*{10\p@}%
+  \hbox{%
+    \vbox{%
+      \hsize=2cm%
+      \scshape \strut \@chapapp{} \\
+      \vrule height 0pt depth 0pt width 10pt%
+       \begin{tabular}{c}
+         \rowcolor{masterColor}\\
+         \arrayrulecolor{masterColor}\hline
+         \rowcolor{masterColor}{\white \centering \LARGE \bfseries \thechapter} \\
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\includegraphics[width=0.85cm]{figures/template/logo-Chip.png}\\         
+       \end{tabular}%
+      }%
+    \vbox{%
+      \advance\hsize by -2cm
+      {\color{masterColor}\hrule height 0.8pt depth 0pt width \hsize}
+      \par
+      \vskip 6pt%
+      \hspace{20pt}%
+      \parbox{360pt}{%
+        \Huge \bfseries \begin{flushleft} #1\end{flushleft}}%
+      }%
+    }%
+  \vskip 25\p@
+  \thispagestyle{chapterFooterStyle}
+}
+\def\@makeschapterhead#1{%
+  \reset@font
+  \parindent \z@ 
+  \vspace*{10\p@}%
+  \hbox{%
+    \vbox{%
+      \hsize=2cm%
+      \begin{tabular}{c}
+         \rowcolor{masterColor}\\
+         \arrayrulecolor{masterColor}\hline
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\\
+         \rowcolor{masterColor}\includegraphics[width=0.85cm]{figures/template/logo-Chip.png}\\  
+      \end{tabular}%
+      }%
+    \vbox{%
+      \advance\hsize by -2cm
+      {\color{masterColor}\hrule height 0.8pt depth 0pt width \hsize}
+      \par
+      \vskip 6pt%
+      \hspace{20pt}%
+      \parbox{360pt}{%
+        \Huge \bfseries \begin{flushleft} #1 \end{flushleft}}%
+      }%
+    }%
+  \vskip 75\p@
+  \thispagestyle{chapterFooterStyle}
+  
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NEW COMANDS
+\makeatletter
+%\newcommand{\titulo}[1]{\newcommand{\@tituloCorto}{#1}\renewcommand{\@title}{#1}}
+%\newcommand{\autor}[1]{\newcommand{\@autor}{#1}\renewcommand{\@author}{#1}}
+
+\newcommand{\authorGender}[1]{\newcommand{\@authorGender}{#1}}
+\newcommand{\authorPossition}[1]{\newcommand{\@authorPossition}{#1}}
+\newcommand{\authorUniversity}[1]{\newcommand{\@authorUniversity}{#1}}
+\newcommand{\authorEmail}[1]{\newcommand{\@authorEmail}{\url{#1}}}
+\newcommand{\authorPhone}[1]{\newcommand{\@authorPhone}{#1}}
+\newcommand{\authorWeb}[1]{\newcommand{\@authorWeb}{\url{#1}}}
+
+
+\newcommand{\principalAdvisor}[1]{\newcommand{\@principalAdvisor}{#1}}
+\newcommand{\principalAdvisorPossition}[1]{\newcommand{\@principalAdvisorPossition}{#1}}
+\newcommand{\principalAdvisorUniversity}[1]{\newcommand{\@principalAdvisorUniversity}{#1}}
+
+\newcommand{\secondaryAdvisor}[1]{\newcommand{\@secondaryAdvisor}{#1}}
+\newcommand{\secondaryAdvisorPossition}[1]{\newcommand{\@secondaryAdvisorPossition}{#1}}
+\newcommand{\secondaryAdvisorUniversity}[1]{\newcommand{\@secondaryAdvisorUniversity}{#1}}
+
+\newcommand{\university}[1]{\newcommand{\@university}{#1}}
+\newcommand{\departamentCR}[1]{\newcommand{\@departmentCR}{#1}}
+\newcommand{\departamentAB}[1]{\newcommand{\@departmentAB}{#1}}
+\newcommand{\schoolCR}[1]{\newcommand{\@schoolCR}{#1}}
+\newcommand{\schoolAB}[1]{\newcommand{\@schoolAB}{#1}}
+\newcommand{\schoolBuildingCR}[1]{\newcommand{\@schoolBuildingCR}{#1}}
+\newcommand{\schoolBuildingAB}[1]{\newcommand{\@schoolBuildingAB}{#1}}
+\newcommand{\schoolAddressCR}[1]{\newcommand{\@schoolAddressCR}{#1}}
+\newcommand{\schoolAddressAB}[1]{\newcommand{\@schoolAddressAB}{#1}}
+\newcommand{\academicDegree}[1]{\newcommand{\@academicDegree}{#1}}
+\newcommand{\docType}[1]{\newcommand{\@docType}{#1}}
+\newcommand{\monthTF}[1]{\newcommand{\@monthTF}{#1}}
+\newcommand{\yearTF}[1]{\newcommand{\@yearTF}{#1}}
+\newcommand{\city}[1]{\newcommand{\@city}{#1}}
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

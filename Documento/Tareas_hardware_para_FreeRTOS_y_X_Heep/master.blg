@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: master.aux
+A level-1 auxiliary file: preamble/cover.aux
+A level-1 auxiliary file: preamble/titleCover.aux
+A level-1 auxiliary file: preamble/internalCover.aux
+A level-1 auxiliary file: preamble/copyleft.aux
+A level-1 auxiliary file: preamble/rating.aux
+A level-1 auxiliary file: preamble/thanks.aux
+A level-1 auxiliary file: preamble/dedication.aux
+A level-1 auxiliary file: preamble/abstractSpanish.aux
+A level-1 auxiliary file: preamble/abstractEnglish.aux
+The style file: alpha.bst
+Database file #1: bibliography.bib
+Warning--I didn't find a database entry for "vscodeInfo"
+You've used 50 entries,
+            2543 wiz_defined-function locations,
+            848 strings with 14469 characters,
+and the built_in function-call counts, 14183 in all, are:
+= -- 1413
+> -- 460
+< -- 46
++ -- 131
+- -- 123
+* -- 616
+:= -- 2301
+add.period$ -- 194
+call.type$ -- 50
+change.case$ -- 254
+chr.to.int$ -- 46
+cite$ -- 50
+duplicate$ -- 570
+empty$ -- 1253
+format.name$ -- 213
+if$ -- 3001
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 9
+newline$ -- 298
+num.names$ -- 150
+pop$ -- 445
+preamble$ -- 1
+purify$ -- 307
+quote$ -- 0
+skip$ -- 503
+stack$ -- 0
+substring$ -- 369
+swap$ -- 50
+text.length$ -- 46
+text.prefix$ -- 41
+top$ -- 0
+type$ -- 384
+warning$ -- 0
+while$ -- 105
+width$ -- 57
+write$ -- 692
+(There was 1 warning)

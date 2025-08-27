@@ -1,0 +1,370 @@
+\newcommand{\etalchar}[1]{$^{#1}$}
+\begin{thebibliography}{MSM{\etalchar{+}}24}
+
+\bibitem[AF15]{PUD-2}
+Suliman Al~Freidi.
+\newblock A unified project management methodology (upmm) based on pmbok and
+  prince2 protocols: foundations, principles, structures and benefits of the
+  integrated approach.
+\newblock {\em International Journal of Business Policy and Strategy
+  Management}, 2:27--38, 11 2015.
+
+\bibitem[AMD22]{nexysFoto}
+AMD.
+\newblock Digilent nexys a7.
+\newblock Recurso web:
+  \url{https://www.amd.com/es/corporate/university-program/aup-boards/digilent-nexys-a7.html},
+  2022.
+\newblock Accedido: 11-08-2025.
+
+\bibitem[AMD25a]{vitisHLSInfo}
+AMD.
+\newblock Amd vitis hls empowers rtl designers with faster verification and
+  design iteration.
+\newblock Recurso web:
+  \url{https://www.amd.com/en/products/software/adaptive-socs-and-fpgas/vitis/vitis-hls.html},
+  2025.
+\newblock Página principal Vitis HLS. Accedido: 14-08-2025.
+
+\bibitem[AMD25b]{vitisHLSDocs}
+AMD.
+\newblock Amd vitis hls user guide (ug1399).
+\newblock Recurso web: \url{https://docs.amd.com/r/en-US/ug1399-vitis-hls},
+  2025.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[AMD25c]{vivadoInfo}
+AMD.
+\newblock Amd vivado design suite.
+\newblock Recurso web:
+  \url{https://www.amd.com/es/products/software/adaptive-socs-and-fpgas/vivado.html},
+  2025.
+\newblock Página de descarga. Accedido: 10-08-2025.
+
+\bibitem[AMD25d]{amdACAP}
+AMD.
+\newblock Versal adaptive soc design guide (ug1273).
+\newblock Recurso web:
+  \url{https://docs.amd.com/r/en-US/ug1273-versal-acap-design/System-Architecture},
+  2025.
+\newblock Accedido: 11-08-2025.
+
+\bibitem[Auf19]{soporteRISCVFreeRTOS}
+Jean-Luc Aufranc.
+\newblock Freertos kernel now supports risc-v architecture.
+\newblock Recurso web:
+  \url{https://www.cnx-software.com/2019/03/06/amazon-freertos-risc-v/}, 2019.
+\newblock Accedido: 10-08-2025.
+
+\bibitem[Awa22]{moduloIP}
+Rahul Awati.
+\newblock What is an intellectual property core (ip core)?
+\newblock Recurso web:
+  \url{https://www.techtarget.com/whatis/definition/IP-core-intellectual-property-core},
+  2022.
+\newblock TechTarget. Accedido: 14-08-2025.
+
+\bibitem[Chi22]{infoTop}
+ChipVerify.
+\newblock What are top-level modules?
+\newblock Recurso web:
+  \url{https://www.chipverify.com/verilog/verilog-modules}, 2022.
+\newblock Accedido: 15-08-2025.
+
+\bibitem[Com25]{freeRTOSLogo}
+Wikipedia Community.
+\newblock Logo de freertos.
+\newblock Recurso web:
+  \url{https://es.wikipedia.org/wiki/FreeRTOS#/media/Archivo:Logo_freeRTOS.png},
+  2025.
+\newblock Accedido: 10-08-2025.
+
+\bibitem[Cor21]{resetTechniques}
+Intel Corporation.
+\newblock An 917: Reset design techniques for hyperflex architecture fpgas.
+\newblock Recurso web:
+  \url{https://www.intel.com/programmable/technical-pdfs/683539.pdf}, 2021.
+\newblock Documento PDF. Accedido: 14-08-2025.
+
+\bibitem[EE24]{xheepInfo}
+ESL-EPFL.
+\newblock X-heep.
+\newblock Recurso web: \url{https://github.com/esl-epfl/x-heep}, 2024.
+\newblock Repositorio GitHub. Accedido: 13-08-2025.
+
+\bibitem[EE25a]{xheepInfoASIC}
+ESL-EPFL.
+\newblock X-heep asic implementations.
+\newblock Recurso web:
+  \url{https://x-heep.readthedocs.io/en/latest/ASIC/asic.html}, 2025.
+\newblock Accedido: 13-08-2025.
+
+\bibitem[EE25b]{xheepDocs}
+ESL-EPFL.
+\newblock X-heep documentation.
+\newblock Recurso web:
+  \url{https://x-heep.readthedocs.io/en/latest/index.html}, 2025.
+\newblock Documentación de X-HEEP. Accedido: 13-08-2025.
+
+\bibitem[Eng22]{infoHLS}
+Semiconductor Engineering.
+\newblock High-level synthesis (hls).
+\newblock Recurso web:
+  \url{https://semiengineering.com/knowledge_centers/eda-design/verification/high-level-synthesis},
+  2022.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[EPF25]{xheepLogo}
+EPFL.
+\newblock Logo de x-heep.
+\newblock Recurso web:
+  \url{https://github.com/esl-epfl/x-heep/blob/main/docs/source/images/x-heep-outline.png},
+  2025.
+\newblock Accedido: 10-08-2025.
+
+\bibitem[Esp]{metodologiaRAE}
+Real~Academia Española.
+\newblock Definición de metodología.
+\newblock Recurso web: \url{https://dle.rae.es/metodología}.
+\newblock Página web de la Real Academia Española. Accedido 18-08-2025.
+
+\bibitem[Eur24]{europaRISCV}
+Comisión Europea.
+\newblock Propuesta de modificación del reglamento (ue) 2021/2085.
+\newblock Recurso web:
+  \url{https://eur-lex.europa.eu/legal-content/ES/TXT/HTML/?uri=CELEX:52022PC0047},
+  2024.
+\newblock Accedido: 12-08-2025.
+
+\bibitem[For06]{infoWrapper}
+Edaboard Forum.
+\newblock What does "wrapper" stand for?
+\newblock Recurso web:
+  \url{https://www.edaboard.com/threads/what-does-wrapper-stand-for.63932/},
+  2006.
+\newblock Accedido: 15-08-2025.
+
+\bibitem[Fou25]{gccRISCVInfo}
+RISC-V Foundation.
+\newblock Risc-v gnu toolchain.
+\newblock Recurso web:
+  \url{https://github.com/riscv-collab/riscv-gnu-toolchain}, 2025.
+\newblock Repositorio de GCC para RISC-V. Accedido: 18-08-2025.
+
+\bibitem[Fre25]{freeRTOSInfo}
+FreeRTOS.
+\newblock Página web de freertos.
+\newblock Recurso web: \url{https://www.freertos.org/}, 2025.
+\newblock Accedido: 10-08-2025.
+
+\bibitem[Gro21]{infoOBI}
+OpenHW Group.
+\newblock Obi v1.2.
+\newblock Recurso web:
+  \url{https://raw.githubusercontent.com/openhwgroup/obi/188c87089975a59c56338949f5c187c1f8841332/OBI-v1.2.pdf},
+  2021.
+\newblock Documento PDF. Accedido: 18-08-2025.
+
+\bibitem[HH21]{harris2021digital}
+S.~Harris and D.~Harris.
+\newblock {\em Digital Design and Computer Architecture, RISC-V Edition}.
+\newblock Elsevier Science, 2021.
+
+\bibitem[IEE01]{verilogEstandar}
+IEEE.
+\newblock Ieee standard verilog hardware description language.
+\newblock Recurso web: \url{https://standards.ieee.org/ieee/1364/2052/}, 2001.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Int21]{riscvInfo}
+RISC-V International.
+\newblock About risc-v.
+\newblock Recurso web: \url{https://riscv.org/about/}, 2021.
+\newblock Accedido: 12-08-2025.
+
+\bibitem[ISD23]{moduloRTL}
+ISDI.
+\newblock Rtl verilog.
+\newblock Recurso web:
+  \url{https://www.doulos.com/knowhow/verilog/rtl-verilog/}, 2023.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Jac00]{libro-PUD}
+Rumbaugh Jacobson, Booch.
+\newblock {\em El proceso unificado de desarrollo de software}.
+\newblock Addison Wesley, second edition, July 2000.
+\newblock {ISBN}: 978-8478290369.
+
+\bibitem[Jim23]{disenoHW}
+Ormarys Jimenez.
+\newblock ¿qué es diseño de software y hardware?
+\newblock Recurso web:
+  \url{https://www.iutepi.edu/que-es-diseno-de-software-y-hardware/#:~:text=En%20pocas%20palabras%2C%20se%20refiere%20al%20proceso,PCB%2C%20cables%2C%20resistencias%2C%20capacitores%20y%20mucho%20m%C3%A1s},
+  2023.
+\newblock Accedido: 12-08-2025.
+
+\bibitem[Mic14]{vivadoRazones}
+Microchip.
+\newblock 9 reasons why the vivado design suite accelerates design
+  productivity.
+\newblock Recurso web:
+  \url{https://www.xilinx.com/publications/prod_mktg/vivado/Vivado_9_Reasons_Backgrounder.pdf
+  }, 2014.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Mic24]{vivadoHistoria_1}
+Microchip.
+\newblock Amd vivado design suite: Redefining fpga and soc development.
+\newblock Recurso web:
+  \url{https://www.microchipusa.com/articles/amd/amd-vivado-design-suite-redefining-fpga-and-soc-development},
+  2024.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[MK04]{maxfield2004design}
+C.~Maxfield and I.~Kerszenbaum.
+\newblock {\em The design warrior's guide to FPGAs}.
+\newblock Elsevier, 2004.
+
+\bibitem[MSM{\etalchar{+}}24]{machetti2024xheep}
+Simone Machetti, Pasquale~Davide Schiavone, Thomas~Christoph Müller, Miguel
+  Peón-Quirós, and David Atienza.
+\newblock X-heep: An open-source, configurable and extendible risc-v
+  microcontroller for the exploration of ultra-low-power edge accelerators,
+  2024.
+
+\bibitem[Pro25]{zephyrInfo}
+Zephyr Project.
+\newblock Página web de zephyr.
+\newblock Recurso web: \url{https://www.zephyrproject.org/}, 2025.
+\newblock Accedido: 10-08-2025.
+
+\bibitem[Ray22]{compraXilinx}
+Adrián Raya.
+\newblock Amd completa la mayor adquisición del sector de los semiconductores
+  con la compra de xilinx.
+\newblock Recurso web:
+  \url{https://www.eleconomista.es/tecnologia/noticias/11619399/02/22/AMD-completa-la-mayor-adquisicion-del-sector-de-los-semiconductores-con-la-compra-de-Xilinx.html},
+  03 2022.
+\newblock elEconomista. Accedido: 09-08-2025.
+
+\bibitem[Rea20]{verilogHistoria}
+RealDigital.
+\newblock A brief history of verilog.
+\newblock Recurso web:
+  \url{https://www.realdigital.org/doc/1946d210d1411b214203a6673322a61f}, 2020.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Rin24]{metodologiaFernando}
+Fernando Rincón.
+\newblock Microsof stream - metodología.
+\newblock Recurso web:
+  \url{https://pruebasaluuclm-my.sharepoint.com/personal/fernando_rincon_uclm_es/_layouts/15/stream.aspx?id=%2Fpersonal%2Ffernando%5Frincon%5Fuclm%5Fes%2FDocuments%2Fmaster%2Fmetodologia%2Emp4&ga=1&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E121e8790%2Daeb0%2D4659%2Da548%2Dc3808491aa3a},
+  2024.
+\newblock Vídeo de metodologías EDA. Accedido: 14-08-2025.
+
+\bibitem[Rom19]{historiaFPGA}
+David Romano.
+\newblock A brief history of fpga.
+\newblock Recurso web:
+  \url{https://makezine.com/article/maker-news/a-brief-history-of-fpga/}, 2019.
+\newblock Accedido: 11-08-2025.
+
+\bibitem[Sch02]{metodologiasHW}
+R.J Schweers.
+\newblock Metodologías de diseño de hardware.
+\newblock Recurso web:
+  \url{https://sedici.unlp.edu.ar/bitstream/handle/10915/3835/2_-_Metodolog%C3%ADas_de_dise%C3%B1o_de_hardware.pdf?sequence=4&isAllowed=y},
+  2002.
+\newblock Documento PDF, Universidad de la Plata. Accedido: 10-08-2025.
+
+\bibitem[SER22]{perteChip}
+Cadena SER.
+\newblock La cátedra perte-chip llega a la uclm para la formación de expertos
+  en microelectrónica y semiconductores.
+\newblock Recurso web:
+  \url{https://cadenaser.com/castillalamancha/2024/10/04/la-catedra-perte-chip-llega-a-la-uclm-para-la-formacion-de-expertos-en-microelectronica-y-semiconductores-radio-albacete/},
+  2022.
+\newblock Accedido: 12-08-2025.
+
+\bibitem[Sha23]{vitisVivadoRelacion}
+Vishal Sharma.
+\newblock Fpga development made easy: A comprehensive guide to vivado and vitis
+  hls.
+\newblock Recurso web:
+  \url{https://medium.com/@the_daft_introvert/fpga-development-made-easy-a-comprehensive-guide-to-vivado-and-vitis-hls-5f30958f60b1},
+  2023.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Sta99]{makeInfo}
+Richard Stallman.
+\newblock make - gnu make utility to maintain groups of programs.
+\newblock Recurso web: \url{https://linux.die.net/man/1/make}, 1999.
+\newblock Manual de make. Accedido: 18-08-2025.
+
+\bibitem[Tec24]{rtosInfo}
+TechTarget.
+\newblock What is a real-time operating system (rtos)?
+\newblock Recurso web:
+  \url{https://www.techtarget.com/searchdatacenter/definition/real-time-operating-system},
+  2024.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Tor24]{grheepInfo}
+VLSI Lab Politecnico~Di Torino.
+\newblock Gr-heep, a fork of x-heep.
+\newblock Recurso web: \url{ttps://github.com/esl-epfl/x-heep}, 2024.
+\newblock Repositorio de GR-HEEP. Accedido: 13-08-2025.
+
+\bibitem[Tos22]{ventajasHLS}
+Frank Toshioka.
+\newblock Beneficios del hls.
+\newblock Recurso web:
+  \url{https://es.linkedin.com/advice/1/what-advantages-disadvantages-using-high-level?lang=es&lang=es&contributionUrn=urn%3Ali%3Acomment%3A%28articleSegment%3A%28urn%3Ali%3AlinkedInArticle%3A7046538086146580481%2C7046538089065787392%29%2C7169942824606535681%29&articleSegmentUrn=urn%3Ali%3AarticleSegment%3A%28urn%3Ali%3AlinkedInArticle%3A7046538086146580481%2C7046538089065787392%29&dashContributionUrn=urn%3Ali%3Afsd_comment%3A%287169942824606535681%2CarticleSegment%3A%28urn%3Ali%3AlinkedInArticle%3A7046538086146580481%2C7046538089065787392%29%29},
+  2022.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[WH15]{weste2015cmos}
+N.H.E. Weste and D.~Harris.
+\newblock {\em CMOS VLSI Design : A circuits and systems perspective}.
+\newblock Pearson, 2015.
+
+\bibitem[Wik23]{infoHDL}
+Wikipedia.
+\newblock Hardware description language.
+\newblock Recurso web:
+  \url{https://en.wikipedia.org/wiki/Hardware_description_language}, 2023.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Win23]{rtosInfo_2}
+Windriver.
+\newblock What is a real-time operating system (rtos)?
+\newblock Recurso web: \url{https://www.windriver.com/solutions/learning/rtos},
+  2023.
+\newblock Accedido: 14-08-2025.
+
+\bibitem[Xat21]{chipFoto}
+Xataka.
+\newblock El primer chip risc-v europeo cobra vida: Epac está destinado a
+  supercomputadoras, pero esto es solo el principio.
+\newblock Recurso web:
+  \url{https://www.xataka.com/componentes/primer-chip-risc-v-europeo-cobra-vida-epac-esta-destinado-a-supercomputadoras-esto-solo-principio},
+  2021.
+\newblock Accedido: 12-08-2025.
+
+\bibitem[Xil23]{infoBlockDesign}
+Xilinx.
+\newblock Vivado design suite user guide: Designing with ip (ug896).
+\newblock Recurso web:
+  \url{https://docs.amd.com/r/2023.2-English/ug896-vivado-ip/IP-Integrator},
+  2023.
+\newblock Accedido: 16-08-2025.
+
+\bibitem[�A25]{nvidiaRISCV}
+Ángel Aller.
+\newblock Nvidia cuda soportará la arquitectura risc-v, ¿se viene una
+  revolución?
+\newblock Recurso web:
+  \url{https://www.profesionalreview.com/2025/07/21/nvidia-cuda-risc-v/}, 2025.
+\newblock Accedido: 10-08-2025.
+
+\end{thebibliography}

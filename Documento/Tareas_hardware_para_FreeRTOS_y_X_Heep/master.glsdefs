@@ -1,0 +1,56 @@
+\glsdefs@newdocentry{IA}%
+{%
+name={\acronymfont {\glsentryshort {IA}}},%
+sort={IA},%
+type={acronym},%
+first={IA},%
+firstplural={IAs},%
+text={IA},%
+plural={IAs},%
+description={Inteligencia Artificial},%
+descriptionplural={Inteligencia Artificial},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Inteligencia Artificial},%
+longplural={Inteligencia Artificials},%
+short={IA},%
+shortplural={IAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{computer}%
+{%
+name={computer},%
+sort={computer},%
+type={main},%
+first={computer},%
+firstplural={computers},%
+text={computer},%
+plural={computers},%
+description={is a programmable machine that receives input, stores and manipulates data, and provides output in a useful format},%
+descriptionplural={is a programmable machine that receives input, stores and manipulates data, and provides output in a useful format},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={},%
+longplural={},%
+short={},%
+shortplural={},%
+counter={page},%
+parent={},%
+%
+}%
+

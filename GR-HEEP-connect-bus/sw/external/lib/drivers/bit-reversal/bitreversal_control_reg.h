@@ -1,0 +1,1 @@
+/home/fluctlights/Escritorio/PERTE/TFM/GR-HEEP-connect-bus/hw/vendor/bit_reversal/sw/bitreversal_control_reg.h

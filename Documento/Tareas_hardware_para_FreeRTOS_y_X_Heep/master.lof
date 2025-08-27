@@ -1,0 +1,31 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {}}}{1}{subfigure.1.1}%
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {}}}{1}{subfigure.1.2}%
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {}}}{1}{subfigure.1.3}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Introducción}{1}{chapter.1}%
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Logo de RISC-V. Wikimedia Commons\relax }}{2}{figure.caption.12}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Logo de X-HEEP. Fuente: \cite {xheepLogo}\relax }}{2}{figure.caption.12}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Título común para ambas figuras.\relax }}{2}{figure.caption.12}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Estado del arte}{5}{chapter.2}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces El primer chip RISC-V europeo, EPAC. Fuente: \cite {chipFoto}\relax }}{6}{figure.caption.21}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Diligent Nexys A7. Fuente: \cite {nexysFoto}\relax }}{7}{figure.caption.27}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Block Design del diseño realizado en Vivado\relax }}{15}{figure.caption.37}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Arquitectura de X-HEEP. Fuente: \cite {xheepInfo}\relax }}{17}{figure.caption.44}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Logo de FreeRTOS. Fuente: \cite {freeRTOSLogo}\relax }}{18}{figure.caption.49}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Proyecto abierto\relax }}{20}{figure.caption.51}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Proyecto abierto\relax }}{21}{figure.caption.53}%
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Logo de GTKWave\relax }}{22}{figure.caption.57}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Diseño de la solución}{23}{chapter.3}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Gantt\relax }}{25}{figure.caption.60}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Resultados}{29}{chapter.4}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Digrama de bloques final\relax }}{32}{figure.caption.67}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Simulación de Vivado vista con su visor integrado\relax }}{47}{figure.caption.71}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Simulación de EdaPlayground vista con GTKWave\relax }}{48}{figure.caption.73}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Conclusiones y trabajo futuro}{49}{chapter.5}%
+\addvspace {10\p@ }
+\contentsline {xchapter}{Apéndice A}{51}{appendix.Alph1}%

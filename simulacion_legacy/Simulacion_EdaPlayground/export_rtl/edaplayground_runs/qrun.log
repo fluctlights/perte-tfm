@@ -1,0 +1,129 @@
+QuestaSim-64 qrun 2024.3_1 Utility 2024.10 Oct 17 2024
+Start time: 14:00:12 on Aug 16,2025
+qrun -batch -access=rw+/. -timescale 1ns/1ps -mfcu design.sv testbench.sv -voptargs="+acc=npr" -do "run.do" 
+Creating library 'qrun.out/work'.
+QuestaSim-64 vlog 2024.3_1 Compiler 2024.10 Oct 17 2024
+Start time: 14:00:12 on Aug 16,2025
+vlog -timescale 1ns/1ps -mfcu design.sv testbench.sv -work qrun.out/work -statslog qrun.out/stats_log -writesessionid "+qrun.out/top_dus" -csession=incr 
+-- Compiling module axis2fifo
+-- Compiling module bit_reverse_accel_hls_deadlock_idx0_monitor
+-- Compiling module bit_reverse_accel_regslice_both
+-- Compiling module bit_reverse_accel_regslice_both_w1
+-- Compiling module bit_reverse_accel
+-- Compiling module design_1_axis2fifo_0_0
+-- Compiling module design_1_bit_reverse_accel_1_0
+-- Compiling module design_1_fifo2axis_0_0
+-- Compiling module fifo2axis
+-- Compiling module design_1
+-- Compiling module design_1_wrapper
+-- Compiling module tb_pipeline_blockdesign
+
+Top level modules:
+	bit_reverse_accel_regslice_both_w1
+	tb_pipeline_blockdesign
+End time: 14:00:12 on Aug 16,2025, Elapsed time: 0:00:00
+Errors: 0, Warnings: 0
+QuestaSim-64 vopt 2024.3_1 Compiler 2024.10 Oct 17 2024
+** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+Start time: 14:00:12 on Aug 16,2025
+vopt -access=rw+/. -timescale 1ns/1ps -mfcu "+acc=npr" -findtoplevels qrun.out/work+1+ -work qrun.out/work -statslog qrun.out/stats_log -csession=incr -o qrun_opt -csessionid=2 
+
+Top level modules:
+	bit_reverse_accel_regslice_both_w1
+	tb_pipeline_blockdesign
+
+Analyzing design...
+-- Loading module bit_reverse_accel_regslice_both_w1
+-- Loading module tb_pipeline_blockdesign
+-- Loading module design_1_wrapper
+-- Loading module design_1
+-- Loading module design_1_axis2fifo_0_0
+-- Loading module axis2fifo
+-- Loading module design_1_bit_reverse_accel_1_0
+-- Loading module bit_reverse_accel
+-- Loading module bit_reverse_accel_regslice_both
+-- Loading module bit_reverse_accel_hls_deadlock_idx0_monitor
+-- Loading module design_1_fifo2axis_0_0
+-- Loading module fifo2axis
+Optimizing 14 design-units (inlining 0/19 module instances):
+-- Optimizing module bit_reverse_accel(fast)
+-- Optimizing module bit_reverse_accel_regslice_both(fast)
+-- Optimizing module bit_reverse_accel_regslice_both(fast__1)
+-- Optimizing module bit_reverse_accel_regslice_both(fast__2)
+-- Optimizing module bit_reverse_accel_regslice_both_w1(fast)
+-- Optimizing module fifo2axis(fast)
+-- Optimizing module axis2fifo(fast)
+-- Optimizing module design_1(fast)
+** Warning: design_1.v(62): (vopt-2685) [TFMPC] - Too few port connections for 'bit_reverse_accel_1'.  Expected 14, found 11.
+** Warning: design_1.v(62): (vopt-2718) [TFMPC] - Missing connection for port 'm_axis_TSTRB'.
+** Warning: design_1.v(62): (vopt-2718) [TFMPC] - Missing connection for port 'm_axis_TKEEP'.
+** Warning: design_1.v(62): (vopt-2718) [TFMPC] - Missing connection for port 'm_axis_TVALID'.
+-- Optimizing module tb_pipeline_blockdesign(fast)
+-- Optimizing module design_1_bit_reverse_accel_1_0(fast)
+-- Optimizing module bit_reverse_accel_hls_deadlock_idx0_monitor(fast)
+-- Optimizing module design_1_wrapper(fast)
+-- Optimizing module design_1_fifo2axis_0_0(fast)
+-- Optimizing module design_1_axis2fifo_0_0(fast)
+Optimized design name is qrun_opt
+End time: 14:00:13 on Aug 16,2025, Elapsed time: 0:00:01
+Errors: 0, Warnings: 5
+# vsim -batch -lib qrun.out/work -do "run.do" -statslog qrun.out/stats_log qrun_opt -appendlog -l qrun.log 
+# Start time: 14:00:13 on Aug 16,2025
+# //  Questa Sim-64
+# //  Version 2024.3_1 linux_x86_64 Oct 17 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.bit_reverse_accel_regslice_both_w1(fast)
+# Loading work.tb_pipeline_blockdesign(fast)
+# Loading work.design_1_wrapper(fast)
+# Loading work.design_1(fast)
+# Loading work.design_1_axis2fifo_0_0(fast)
+# Loading work.axis2fifo(fast)
+# Loading work.design_1_bit_reverse_accel_1_0(fast)
+# Loading work.bit_reverse_accel(fast)
+# Loading work.bit_reverse_accel_regslice_both(fast)
+# Loading work.bit_reverse_accel_regslice_both(fast__1)
+# Loading work.bit_reverse_accel_regslice_both(fast__2)
+# Loading work.bit_reverse_accel_hls_deadlock_idx0_monitor(fast)
+# Loading work.design_1_fifo2axis_0_0(fast)
+# Loading work.fifo2axis(fast)
+# 
+# do run.do
+# Reversed = 666a0f8d
+# Reversed = 666a0f8d
+# Reversed = 666a0f8d
+# Reversed = 666a0f8d
+# Reversed = a84aec91
+# Reversed = a84aec91
+# Reversed = a84aec91
+# Reversed = a84aec91
+# Reversed = 02b3b178
+# Reversed = 02b3b178
+# Reversed = 02b3b178
+# Reversed = 02b3b178
+# Reversed = 9324ecc7
+# Reversed = 9324ecc7
+# Reversed = 9324ecc7
+# Reversed = 9324ecc7
+# ** Note: $finish    : testbench.sv(78)
+#    Time: 1 us  Iteration: 0  Instance: /tb_pipeline_blockdesign
+# End time: 14:00:14 on Aug 16,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+End time: 14:00:14 on Aug 16,2025, Elapsed time: 0:00:02
+*** Summary *********************************************
+    qrun: Errors:   0, Warnings:   0
+    vlog: Errors:   0, Warnings:   0
+    vopt: Errors:   0, Warnings:   5
+    vsim: Errors:   0, Warnings:   0
+  Totals: Errors:   0, Warnings:   5
