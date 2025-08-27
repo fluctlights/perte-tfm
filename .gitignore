@@ -1,5 +1,5 @@
-GRHEEP_Integration/applications_symlink/
-Documento_symlink/
-GR-HEEP-connect-bus_symlink/
-simulacion_legacy_symlink/
-tfm_freertos_symlink/
+GRHEEP_Integration/applications_symlink
+Documento_symlink
+GR-HEEP-connect-bus_symlink
+simulacion_legacy_symlink
+tfm_freertos_symlink
