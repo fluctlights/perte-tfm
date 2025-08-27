@@ -1,6 +1,0 @@
-0.7
-2020.2
-Oct 13 2023
-20:21:30
-/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.sim/sim_1/synth/timing/xsim/tb_pipeline_blockdesign_time_synth.v,1755347643,verilog,,/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.srcs/sim_1/new/tb_pipeline_blockdesign.v,,design_1;design_1_axis2fifo_0_0;design_1_axis2fifo_0_0_axis2fifo;design_1_bit_reverse_accel_1_0;design_1_bit_reverse_accel_1_0_bit_reverse_accel;design_1_bit_reverse_accel_1_0_bit_reverse_accel_regslice_both;design_1_bit_reverse_accel_1_0_bit_reverse_accel_regslice_both_0;design_1_bit_reverse_accel_1_0_bit_reverse_accel_regslice_both__parameterized1;design_1_fifo2axis_0_0;design_1_fifo2axis_0_0_fifo2axis;design_1_wrapper;glbl,,,../../../../../../fifo_freertos_pruebas/fifo_freertos.gen/sources_1/bd/design_1/ipshared/f352/hdl/verilog,,,,,
-/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.srcs/sim_1/new/tb_pipeline_blockdesign.v,1755286597,verilog,,,,tb_pipeline_blockdesign,,,../../../../../../fifo_freertos_pruebas/fifo_freertos.gen/sources_1/bd/design_1/ipshared/f352/hdl/verilog,,,,,

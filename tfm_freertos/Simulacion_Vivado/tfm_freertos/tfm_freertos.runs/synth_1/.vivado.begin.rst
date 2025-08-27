@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<ProcessHandle Version="1" Minor="0">
-    <Process Command="vivado" Owner="fluctlights" Host="ubuntu" Pid="34934" HostCore="8" HostMemory="16181684">
-    </Process>
-</ProcessHandle>

@@ -1,6 +1,6 @@
 # PERTE CHIP - TFM 
-Autor : Antonio Mateo Francés
-Tutor : Fernando Rincón Calle
+	- Autor : Antonio Mateo Francés
+	- Tutor : Fernando Rincón Calle
 
 ## Descripción
 En este repositorio se aloja el proyecto "Tareas Hardware Para FreeRTOS y X-HEEP"
