@@ -83,6 +83,7 @@ module axis2fifo #
                         buffer[buffer_index] <= s_axis_tdata;
                         buffer_index <= 0;
                         next_state <= SEND_OUTSIDE;
+                        done <= 1;
                         
                     end else begin
                         next_state <= READ_STREAM;
@@ -91,10 +92,10 @@ module axis2fifo #
                 
                 SEND_OUTSIDE: begin
                     dout <= buffer[buffer_index];
-                    done <= 1;
+                    
                     if (buffer_index == THRESHOLD -1) begin
                         next_state <= DONE;
-                        
+                        done <= 0;
                     end else begin
 				        buffer_index <= buffer_index + 1;
                     end
@@ -103,14 +104,11 @@ module axis2fifo #
                 DONE: begin
                     // Set output to X, all data transfered
                     dout <= {32{1'bX}};
-                    done <= 0;
                     
                     // Set all bits to X into the internal memory FIFO
                     for (i = 0; i < THRESHOLD; i = i+1) begin
-                        buffer[i] = {32{1'bX}}; 
+                        buffer[i] <= {32{1'bX}}; 
                     end
-                    
-                    next_state <= IDLE;
                 end
 
                 default: begin

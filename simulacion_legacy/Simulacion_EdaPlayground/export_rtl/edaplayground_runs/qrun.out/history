@@ -1,3 +1,0 @@
-- Entry: 1
-  Time: Sat Aug 16 14:00:12 2025
-  Command: qrun -batch -access=rw+/. -timescale 1ns/1ps -mfcu design.sv testbench.sv -voptargs=+acc=npr -do run.do 

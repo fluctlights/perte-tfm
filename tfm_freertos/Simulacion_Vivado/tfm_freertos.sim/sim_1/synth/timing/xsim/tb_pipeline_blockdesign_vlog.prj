@@ -1,0 +1,7 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../fifo_freertos_pruebas/fifo_freertos.gen/sources_1/bd/design_1/ipshared/f352/hdl/verilog" \
+"tb_pipeline_blockdesign_time_synth.v" \
+"../../../../../tfm_freertos.srcs/sim_1/new/tb_pipeline_blockdesign.v" \
+
+# Do not sort compile order
+nosort
