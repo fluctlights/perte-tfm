@@ -4,3 +4,4 @@ GR-HEEP-connect-bus_symlink
 simulacion_legacy_symlink
 tfm_freertos_symlink
 tfm_freertos/Simulacion_Vivado/tfm_freertos_symlink
+GRHEEP_Integration/HW_Design/bit_reversal_symlink
