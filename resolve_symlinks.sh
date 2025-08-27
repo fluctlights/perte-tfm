@@ -57,14 +57,10 @@ find "$SEARCH_ROOT_DIR" -type l | while read SYMLINK_PATH; do
     # The 'cp -R' command handles both directories and single files.
     echo "Copying content from '$SOURCE_PATH' to '$DEST_PATH'..."
     cp -R "$SOURCE_PATH" "$DEST_PATH"
-
-    # # Stage the new files for a commit
-    echo "Staging new content at '$DEST_PATH' for git commit..."
-    git add "$DEST_PATH"
-
     echo "Finished processing '$SYMLINK_PATH'."
 done
 
-echo "--- All symlinks processed. The copied content is ready for commit. ---"
-
-echo "Done. The copied content is ready for commit, and the symlink is untouched."
+# # Stage the new files for a commit
+echo "Staging new content for git commit..."
+git add .
+echo "Done. The copied content is ready for commit"
