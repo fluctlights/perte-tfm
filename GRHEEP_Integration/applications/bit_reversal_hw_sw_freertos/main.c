@@ -15,6 +15,8 @@
 /* c stdlib */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>   
 #include <unistd.h>
 #include <assert.h>
 
@@ -34,44 +36,6 @@
 /* HW Design includes */
 #include "bitreversal.h"
 
-/****************************************************************************/
-/**                                                                        **/
-/*                        DEFINITIONS AND MACROS                            */
-/**                                                                        **/
-/****************************************************************************/
-
-/* Priorities used by the tasks. */
-#define mainQUEUE_RECEIVE_TASK_PRIORITY		( tskIDLE_PRIORITY + 2 )
-#define	mainQUEUE_SEND_TASK_PRIORITY		( tskIDLE_PRIORITY + 1 )
-#define mainQUEUE_SEND_FREQUENCY_MS			pdMS_TO_TICKS( 3 )
-
-/* The maximum number items the queue can hold.  The priority of the receiving
-task is above the priority of the sending task, so the receiving task will
-preempt the sending task and remove the queue items each time the sending task
-writes to the queue.  Therefore the queue will never have more than one item in
-it at any time, and even with a queue length of 1, the sending task will never
-find the queue full. */
-#define mainQUEUE_LENGTH					( 3 )
-
-/* Const value to play with TICK counts within the APP */
-#define TICK_COUNT                          ( 50 )
-
-
-#define configCPU_CLOCK_HZ              (100000000)
-#define configTICK_RATE_HZ              ((TickType_t)1000)
-#define configMAX_PRIORITIES            (5)
-#define configMINIMAL_STACK_SIZE        (128)
-#define configTOTAL_HEAP_SIZE           ((size_t)(10 * 1024))
-#define configUSE_16_BIT_TICKS          0
-#define configUSE_MUTEXES               1
-#define INCLUDE_vTaskDelay              1
-#define INCLUDE_xTaskCreate             1
-#define INCLUDE_xQueueCreate            1
-#define INCLUDE_xQueueSend              1
-#define INCLUDE_xQueueReceive           1
-#define configUSE_IDLE_HOOK             0
-
-
 // Hooks required by FreeRTOS config (empty implementations)
 void vApplicationTickHook(void) {}
 void vApplicationIdleHook(void) {}
@@ -80,9 +44,6 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     (void)xTask; (void)pcTaskName; for(;;);
 }
 
-static void prvQueueReceiveTask( void *pvParameters );
-static void prvQueueSendTask( void *pvParameters );
-
 /* Allocate heap to special section. Note that we have no references in the
  * whole program to this variable (since its just here to allocate space in the
  * section for our heap), so when using LTO it will be removed. We force it to
@@ -90,97 +51,38 @@ static void prvQueueSendTask( void *pvParameters );
  */
 __attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
 
-typedef struct {
-    int type;             // HW (0) or SW (1)
-    uint32_t data[4];    // 32bit set of 4 numbers
-} InputPacket_t;
-
+// Data structure for messages (can be the same for both directions or different)
 typedef struct {
     int type;
-    uint32_t cycles;                 // number of cycles
-    uint32_t reversed[4];            // 32bit set of 4 numbers
-} ResultPacket_t;
+    uint32_t cycles;             // number of cycles
+    uint32_t data[4];            // 32bit set of 4 numbers
+} Packet_t;
 
-ResultPacket_t reverseBits_SW(InputPacket_t received);
-ResultPacket_t reverseBits_HW(InputPacket_t received);
-
-////////////////////
-// Queue handlers //
-////////////////////
-
-static QueueHandle_t xQueueInputs = NULL;
-static QueueHandle_t xQueueResults = NULL;
-static int mutex = 0;
-
-/////////////////
-// SENDER TASK //
-/////////////////
-
-static void prvQueueSendTask(void *pvParameters)
-{
-    InputPacket_t packet;
-    ResultPacket_t result;
-    TickType_t xNextWakeTime;
-    xNextWakeTime = xTaskGetTickCount();
-    ( void ) pvParameters; //compiler warning if not used
-
-    // Initial values
-    packet.type = 0;
-    packet.data[0] = 0b10110000;
-    packet.data[1] = 0b11001100;
-    packet.data[2] = 0b11110000;
-    packet.data[3] = 0b00001111;
-
-    // Send packet to receivers
-
-    for(;;)
-    {
-        xQueueSend(xQueueInputs, &packet, pdMS_TO_TICKS(1000));
-		printf("S: OK\n");
-        if (xQueueReceive(xQueueResults, &result, pdMS_TO_TICKS(1000)) == pdPASS) {
-            printf("RCV!: C=%d, data={%08X}\n",result.cycles,result.reversed[0]);
-        }
-    }
-}
-
-
-static void prvQueueReceiveTask(void *pvParameters)
-{
-    InputPacket_t received;
-    ResultPacket_t modified;
-    
-    while (1) {
-        
-        if (xQueueReceive(xQueueInputs, &received, pdMS_TO_TICKS(1000)) == pdPASS) {
-            // Invert bits via hardware (0) or software (1)
-            if (received.type == 0)
-                modified = reverseBits_HW(received);
-            else
-                modified = reverseBits_SW(received);
-
-            //printf("R:data={%08X}\n", modified.reversed[0]);
-        
-        
-            // Send result back
-            BaseType_t ok = xQueueSend(xQueueResults, &modified, pdMS_TO_TICKS(1000));
-            if (ok != pdPASS) {
-                printf("R: failed!\n");
-            } else {
-                printf("R: OK\n");
-            }
-            
-            mutex = 1;
-        }
-    }
-}
+// Queue handler
+static QueueHandle_t xQueue = NULL;
 
 /////////////////////////////////////////////////////////////
 // Reverse the bits of all numbers in the array - SOFTWARE //
 /////////////////////////////////////////////////////////////
+Packet_t reverseBits_SW(Packet_t received);
+Packet_t reverseBits_HW(Packet_t received);
+unsigned long seed = 123456789;
 
-ResultPacket_t reverseBits_SW(InputPacket_t received) {
+// Generador lineal congruencial
+unsigned long myrand() {
+    seed = (1103515245 * seed + 12345) % (1UL << 31);  
+    return seed;
+}
+
+// Para obtener un número en rango [0, max)
+unsigned long myrand_range(unsigned long max) {
+    return myrand() % max;
+}
+
+Packet_t reverseBits_SW(Packet_t received) {
     
-    ResultPacket_t result;
+    Packet_t result;
+    result.cycles = 0;
     result.type = received.type;
     
     // Input array of 4 numbers
@@ -208,7 +110,7 @@ ResultPacket_t reverseBits_SW(InputPacket_t received) {
             reversed_num |= (num & 1);      // Get the last bit of num and set it in reversed_num
             num >>= 1;                      // Shift num right
         }
-        result.reversed[i] = reversed_num;        // Store the reversed number
+        result.data[i] = reversed_num;        // Store the reversed number
     } 
 
     result.cycles = timer_stop();
@@ -220,9 +122,10 @@ ResultPacket_t reverseBits_SW(InputPacket_t received) {
 // Reverse the bits of all numbers in the array - HARDWARE //
 /////////////////////////////////////////////////////////////
 
-ResultPacket_t reverseBits_HW(InputPacket_t received) {
+Packet_t reverseBits_HW(Packet_t received) {
 	
-    ResultPacket_t result;
+    Packet_t result;
+    result.cycles = 0;
     result.type = received.type;
     
     // Input array of 4 numbers
@@ -251,26 +154,60 @@ ResultPacket_t reverseBits_HW(InputPacket_t received) {
     while (!bitrev_is_done());
 
     for (size_t i = 0; i < 4; i++) {
-        result.reversed[i] = bitrev_get_output();     // Get result
+        result.data[i] = bitrev_get_output();     // Get result
     }
 
     result.cycles = timer_stop();
     return result;
 }
 
+void vSenderTask(void *pvParameters)
+{
+    Packet_t input;
+
+    // Send a message to the receiver
+    for (int i = 0; i < 3; i++)
+    {
+        // Initial values
+        input.type = rand() % 2;
+        input.cycles = 0; //init cycle number
+        input.data[0] = (rand() % 255) + 1;
+        input.data[1] = (rand() % 255) + 1;
+        input.data[2] = (rand() % 255) + 1;
+        input.data[3] = (rand() % 255) + 1;
+        printf("Input: {%08X, %08X, %08X, %08X}\n", input.data[0],input.data[1],input.data[2],input.data[3]);
+        if (xQueueSend(xQueue, &input, portMAX_DELAY) == pdPASS);
+    }
+}
+void vReceiverTask(void *pvParameters)
+{
+    Packet_t received;
+    Packet_t result;
+
+    for (int i = 0; i < 3; i++)
+    {
+        // Receive a message from sender
+        if (xQueueReceive(xQueue, &received, portMAX_DELAY) == pdPASS)
+        {
+            if (received.type == 0)
+                result = reverseBits_HW(received);
+            else
+                result = reverseBits_SW(received);
+            
+            printf("Result, type %d, input %d: {%08X, %08X, %08X, %08X}, cycles:%d\n", result.type, i, result.data[0],result.data[1],result.data[2],result.data[3], result.cycles);
+        }
+    }
+}
+
 int main() {
     
+    //srand(time(NULL));
+    xQueue = xQueueCreate(3, sizeof(Packet_t));
 
-    xQueueInputs = xQueueCreate(3, sizeof(InputPacket_t));
-    xQueueResults = xQueueCreate(3, sizeof(ResultPacket_t));
-    
-    // Create the mutex
-    mutex = 0;
-
-    if (xQueueInputs != NULL && xQueueResults != NULL && mutex == 0)
+    if (xQueue != NULL)
     {
-        xTaskCreate(vTaskSender, "Sender",  300, NULL, 1, NULL);
-        xTaskCreate(vTaskReceiver,  "Receiver", 300, NULL, 1, NULL);
+        xTaskCreate(vSenderTask, "Sender",  300, NULL, 3, NULL);
+        xTaskCreate(vReceiverTask,  "Receiver", 300, NULL, 3, NULL);
         vTaskStartScheduler();
     }
 

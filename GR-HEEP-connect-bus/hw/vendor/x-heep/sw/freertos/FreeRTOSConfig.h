@@ -66,7 +66,7 @@
 #define configMTIMECMP_BASE_ADDRESS                 (RV_TIMER_AO_START_ADDRESS + RV_TIMER_COMPARE_LOWER0_0_REG_OFFSET)
 
 
-#define configUSE_PREEMPTION	 1
+#define configUSE_PREEMPTION	 1 //yield
 #define configUSE_IDLE_HOOK	     1
 #define configUSE_TICK_HOOK	     1
 #define configCPU_CLOCK_HZ	 DEFAULT_SYSTEM_CLOCK

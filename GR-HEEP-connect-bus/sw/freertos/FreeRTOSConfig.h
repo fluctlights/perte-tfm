@@ -66,7 +66,7 @@
 #define configMTIMECMP_BASE_ADDRESS                 (RV_TIMER_AO_START_ADDRESS + RV_TIMER_COMPARE_LOWER0_0_REG_OFFSET)
 
 
-#define configUSE_PREEMPTION	 1
+#define configUSE_PREEMPTION	 1 //yield
 #define configUSE_IDLE_HOOK	     1
 #define configUSE_TICK_HOOK	     1
 #define configCPU_CLOCK_HZ	 DEFAULT_SYSTEM_CLOCK
@@ -76,11 +76,11 @@
 #define configMINIMAL_STACK_SIZE ((unsigned short)80)
 /* we want to put the heap into special section */
 #define configAPPLICATION_ALLOCATED_HEAP 1
-#define configTOTAL_HEAP_SIZE   ((size_t)(11 * 1024))
+#define configTOTAL_HEAP_SIZE   ((size_t)(10 * 1024))
 #define configMAX_TASK_NAME_LEN		 (12)
 #define configUSE_TRACE_FACILITY	 0 /* TODO: 0 */
 #define configUSE_16_BIT_TICKS		 0
-#define configIDLE_SHOULD_YIELD		 0
+#define configIDLE_SHOULD_YIELD		 1 //yield
 #define configUSE_MUTEXES		 1
 #define configQUEUE_REGISTRY_SIZE	 8
 #define configCHECK_FOR_STACK_OVERFLOW	 2
