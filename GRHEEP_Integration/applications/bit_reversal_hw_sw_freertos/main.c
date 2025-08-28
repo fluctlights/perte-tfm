@@ -71,6 +71,7 @@ find the queue full. */
 #define INCLUDE_xQueueReceive           1
 #define configUSE_IDLE_HOOK             0
 
+
 // Hooks required by FreeRTOS config (empty implementations)
 void vApplicationTickHook(void) {}
 void vApplicationIdleHook(void) {}
@@ -78,6 +79,9 @@ void vApplicationMallocFailedHook(void) { for(;;); }
 void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     (void)xTask; (void)pcTaskName; for(;;);
 }
+
+static void prvQueueReceiveTask( void *pvParameters );
+static void prvQueueSendTask( void *pvParameters );
 
 /* Allocate heap to special section. Note that we have no references in the
  * whole program to this variable (since its just here to allocate space in the
@@ -112,10 +116,13 @@ static int mutex = 0;
 // SENDER TASK //
 /////////////////
 
-void vTaskSender(void *pvParameters)
+static void prvQueueSendTask(void *pvParameters)
 {
     InputPacket_t packet;
     ResultPacket_t result;
+    TickType_t xNextWakeTime;
+    xNextWakeTime = xTaskGetTickCount();
+    ( void ) pvParameters; //compiler warning if not used
 
     // Initial values
     packet.type = 0;
@@ -125,14 +132,10 @@ void vTaskSender(void *pvParameters)
     packet.data[3] = 0b00001111;
 
     // Send packet to receivers
-	
 
     for(;;)
     {
         xQueueSend(xQueueInputs, &packet, pdMS_TO_TICKS(1000));
-        
-        // Wait for a response back
-        while (mutex != 1){}
 		printf("S: OK\n");
         if (xQueueReceive(xQueueResults, &result, pdMS_TO_TICKS(1000)) == pdPASS) {
             printf("RCV!: C=%d, data={%08X}\n",result.cycles,result.reversed[0]);
@@ -141,15 +144,12 @@ void vTaskSender(void *pvParameters)
 }
 
 
-void vTaskReceiver(void *pvParameters)
+static void prvQueueReceiveTask(void *pvParameters)
 {
     InputPacket_t received;
     ResultPacket_t modified;
-    ResultPacket_t result;
     
-        
     while (1) {
-        mutex = 0;
         
         if (xQueueReceive(xQueueInputs, &received, pdMS_TO_TICKS(1000)) == pdPASS) {
             // Invert bits via hardware (0) or software (1)

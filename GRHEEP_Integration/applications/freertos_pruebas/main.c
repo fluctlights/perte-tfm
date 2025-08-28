@@ -1,111 +1,188 @@
+/* FreeRTOS kernel includes */
+#include <FreeRTOS.h>
+#include <task.h>
+#include <queue.h>
+#include "semphr.h"
+
+/* c stdlib */
 #include <stdio.h>
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
+#include <string.h>
+#include <unistd.h>
+#include <assert.h>
 
-#define configUSE_PREEMPTION            1
-#define configUSE_IDLE_HOOK             0
-#define configUSE_TICK_HOOK             0
-#define configCPU_CLOCK_HZ              (100000000)
-#define configTICK_RATE_HZ              ((TickType_t)1000)
-#define configMAX_PRIORITIES            (5)
-#define configMINIMAL_STACK_SIZE        (128)
-#define configTOTAL_HEAP_SIZE           ((size_t)(10 * 1024))
-#define configUSE_16_BIT_TICKS          0
-#define configUSE_MUTEXES               1
-#define configCHECK_FOR_STACK_OVERFLOW  2
-#define configSUPPORT_DYNAMIC_ALLOCATION 1
+/* X-HEEP related includes */
+#include "csr.h"
+#include "hart.h"
+#include "handler.h"
+#include "core_v_mini_mcu.h"
+#include "rv_timer.h"
+#include "soc_ctrl.h"
+#include "gpio.h"
+#include "x-heep.h"
+#include "fast_intr_ctrl.h"
+#include "ext_irq.h"
+#include "timer_sdk.h"
 
-#define configKERNEL_INTERRUPT_PRIORITY         (1)
-#define configMAX_SYSCALL_INTERRUPT_PRIORITY    (1)
-
-#define INCLUDE_vTaskDelay             1
-#define INCLUDE_xTaskCreate            1
-#define INCLUDE_xQueueCreate           1
-#define INCLUDE_xQueueSend             1
-#define INCLUDE_xQueueReceive          1
+/* HW Design includes */
+#include "bitreversal.h"
 
 
-__attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
-QueueHandle_t xQueue;
 
-// Hooks required by FreeRTOS config (empty implementations)
-void vApplicationTickHook(void) {}
-void vApplicationIdleHook(void) {}
-void vApplicationMallocFailedHook(void) { for(;;); }
-void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
-    (void)xTask; (void)pcTaskName; for(;;);
-}
-
-// Define a handle for the queue from Task A to Task B
-QueueHandle_t xQueue_A_to_B;
-
-// Define a handle for the queue from Task B to Task A
-QueueHandle_t xQueue_B_to_A;
+/* Prototypes for the standard FreeRTOS callback/hook functions implemented
+within this file.  See https://www.freertos.org/a00016.html */
+void vApplicationMallocFailedHook( void );
+void vApplicationIdleHook( void );
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
+void vApplicationTickHook( void );
 
 // Data structure for messages (can be the same for both directions or different)
 typedef struct {
-    int message_id;
-    char payload[20];
-} MyMessage_t;
+    int type;
+    uint32_t cycles;             // number of cycles
+    uint32_t data[4];            // 32bit set of 4 numbers
+} ResultPacket_t;
 
-// Task A
-void vTaskA(void* pvParameters) {
-    MyMessage_t msg_to_B;
-    MyMessage_t msg_from_B;
+#define QUEUE_LENGTH 5
+#define QUEUE_ITEM_SIZE sizeof(int)
 
-    for (;;) {
-        // Step 1: Send a message to Task B
-        msg_to_B.message_id = 1;
-        strcpy(msg_to_B.payload, "Hello from A");
-        xQueueSend(xQueue_A_to_B, &msg_to_B, portMAX_DELAY);
+__attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
 
-        // Step 2: Wait for a reply from Task B
-        xQueueReceive(xQueue_B_to_A, &msg_from_B, portMAX_DELAY);
-        
-        // Process the received reply
-        printf("Task A received from Task B: %s\n", msg_from_B.payload);
+
+/* Declare queues */
+static QueueHandle_t xQueueSenderToReceiver = NULL;
+static QueueHandle_t xQueueReceiverToSender = NULL;
+
+
+
+void vSenderTask(void *pvParameters)
+{
+    int txValue = 0;
+    int rxResponse = 0;
+
+    for (;;)
+    {
+        /* Send a message to the receiver */
+        txValue++;
+        if (xQueueSend(xQueueSenderToReceiver, &txValue, portMAX_DELAY) == pdPASS)
+        {
+            printf("S: snt %d\n", txValue);
+        }
+
+        /* Wait for a response */
+        if (xQueueReceive(xQueueReceiverToSender, &rxResponse, portMAX_DELAY) == pdPASS)
+        {
+            printf("S: rsp %d\n", rxResponse);
+        }
 
         vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
-// Task B
-void vTaskB(void* pvParameters) {
-    MyMessage_t msg_from_A;
-    MyMessage_t msg_to_A;
+void vReceiverTask(void *pvParameters)
+{
+    int rxValue = 0;
+    int responseValue = 0;
 
-    for (;;) {
-        // Step 1: Wait for a message from Task A
-        xQueueReceive(xQueue_A_to_B, &msg_from_A, portMAX_DELAY);
+    for (;;)
+    {
+        /* Receive a message from sender */
+        if (xQueueReceive(xQueueSenderToReceiver, &rxValue, portMAX_DELAY) == pdPASS)
+        {
+            printf("R: got %d\n", rxValue);
 
-        // Process the received message
-        printf("Task B received from Task A: %s\n", msg_from_A.payload);
+            /* Create a response */
+            responseValue = rxValue * 10;
 
-        // Step 2: Send a reply back to Task A
-        msg_to_A.message_id = 2;
-        strcpy(msg_to_A.payload, "Reply from B");
-        xQueueSend(xQueue_B_to_A, &msg_to_A, portMAX_DELAY);
-
-        // Add a delay here to let the other task run
-        vTaskDelay(pdMS_TO_TICKS(100)); // or simply vTaskDelay(1);
+            /* Send response back */
+            if (xQueueSend(xQueueReceiverToSender, &responseValue, portMAX_DELAY) == pdPASS)
+            {
+                printf("R: snt %d\n", responseValue);
+            }
+        }
     }
 }
 
-int main(void) {
-    // Create the two queues
-    xQueue_A_to_B = xQueueCreate(5, sizeof(MyMessage_t));
-    xQueue_B_to_A = xQueueCreate(5, sizeof(MyMessage_t));
+/*-----------------------------------------------------------*/
 
-    // Create the tasks
-    if (xQueue_A_to_B != NULL && xQueue_B_to_A != NULL) {
-        xTaskCreate(vTaskA, "Task A", 256, NULL, 1, NULL);
-        xTaskCreate(vTaskB, "Task B", 256, NULL, 1, NULL);
+void vApplicationMallocFailedHook( void )
+{
+	/* vApplicationMallocFailedHook() will only be called if
+	configUSE_MALLOC_FAILED_HOOK is set to 1 in FreeRTOSConfig.h.  It is a hook
+	function that will get called if a call to pvPortMalloc() fails.
+	pvPortMalloc() is called internally by the kernel whenever a task, queue,
+	timer or semaphore is created.  It is also called by various parts of the
+	demo application.  If heap_1.c or heap_2.c are used, then the size of the
+	heap available to pvPortMalloc() is defined by configTOTAL_HEAP_SIZE in
+	FreeRTOSConfig.h, and the xPortGetFreeHeapSize() API function can be used
+	to query the size of free heap space that remains (although it does not
+	provide information on how the remaining heap might be fragmented). */
+	taskDISABLE_INTERRUPTS();
+	printf( "error: application malloc failed\n\r" );
+	__asm volatile( "ebreak" );
+	for( ;; );
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationIdleHook( void )
+{
+	/* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
+	to 1 in FreeRTOSConfig.h.  It will be called on each iteration of the idle
+	task.  It is essential that code added to this hook function never attempts
+	to block in any way (for example, call xQueueReceive() with a block time
+	specified, or call vTaskDelay()).  If the application makes use of the
+	vTaskDelete() API function (as this demo application does) then it is also
+	important that vApplicationIdleHook() is permitted to return to its calling
+	function, because it is the responsibility of the idle task to clean up
+	memory allocated by the kernel to any task that has since been deleted. */
+	taskENTER_CRITICAL();
+	printf("I\r\n");
+	taskEXIT_CRITICAL();
+	
+}
+/*-----------------------------------------------------------*/
+
+void freertos_risc_v_application_exception_handler(uint32_t mcause)
+{
+	printf("App mcause:%d\r\n", mcause);
+}
+
+/*-----------------------------------------------------------*/
+
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
+{
+	( void ) pcTaskName;
+	( void ) pxTask;
+
+	/* Run time stack overflow checking is performed if
+	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
+	function is called if a stack overflow is detected. */
+	taskDISABLE_INTERRUPTS();
+	__asm volatile( "ebreak" );
+	for( ;; );
+}
+
+/*****************************************************************************
+*****************************************************************************/
+
+void vApplicationTickHook( void )
+{}
+
+int main(void)
+{
+    /* Create queues */
+    xQueueSenderToReceiver = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
+    xQueueReceiverToSender = xQueueCreate(QUEUE_LENGTH, QUEUE_ITEM_SIZE);
+
+    if (xQueueSenderToReceiver != NULL && xQueueReceiverToSender != NULL)
+    {
+        /* Create tasks */
+        xTaskCreate(vSenderTask, "Sender", 300, NULL, 3, NULL);
+        xTaskCreate(vReceiverTask, "Receiver", 300, NULL, 3, NULL);
+
+        /* Start scheduler */
         vTaskStartScheduler();
-    } else {
-        printf("Failed to create one or both queues.\n");
     }
 
-    for(;;){}
-    return 0;
+    /* Should never reach here */
+    for (;;);
 }

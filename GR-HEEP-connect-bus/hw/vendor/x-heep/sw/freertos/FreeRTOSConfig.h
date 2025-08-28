@@ -36,7 +36,7 @@
 #include "rv_timer_regs.h"
 
 
-#define DEFAULT_SYSTEM_CLOCK           REFERENCE_CLOCK_Hz /* Default System clock value */
+#define DEFAULT_SYSTEM_CLOCK           100000000//REFERENCE_CLOCK_Hz /* 150 MHz */
 
 /*-----------------------------------------------------------
  * Application specific definitions.
@@ -69,18 +69,18 @@
 #define configUSE_PREEMPTION	 1
 #define configUSE_IDLE_HOOK	     1
 #define configUSE_TICK_HOOK	     1
-#define configCPU_CLOCK_HZ	 100000000
+#define configCPU_CLOCK_HZ	 DEFAULT_SYSTEM_CLOCK
 #define configTICK_RATE_HZ	 ((TickType_t)1000)
 #define configMAX_PRIORITIES	 (5)
 /* Can be as low as 60 but some of the demo tasks that use this constant require it to be higher. */
 #define configMINIMAL_STACK_SIZE ((unsigned short)80)
 /* we want to put the heap into special section */
 #define configAPPLICATION_ALLOCATED_HEAP 1
-#define configTOTAL_HEAP_SIZE   ((size_t)(6 * 1024))
+#define configTOTAL_HEAP_SIZE   ((size_t)(10 * 1024))
 #define configMAX_TASK_NAME_LEN		 (12)
 #define configUSE_TRACE_FACILITY	 0 /* TODO: 0 */
 #define configUSE_16_BIT_TICKS		 0
-#define configIDLE_SHOULD_YIELD		 0
+#define configIDLE_SHOULD_YIELD		 1
 #define configUSE_MUTEXES		 1
 #define configQUEUE_REGISTRY_SIZE	 8
 #define configCHECK_FOR_STACK_OVERFLOW	 2
@@ -136,5 +136,8 @@ header file. */
 #define configUSE_PORT_OPTIMISED_TASK_SELECTION 0
 #define configKERNEL_INTERRUPT_PRIORITY 7
 
+#define configUSE_TASK_FPU_SUPPORT 		0
+#define configENABLE_TRUSTZONE    0
+#define configUSE_TIME_SLICING    1
 
 #endif /* FREERTOS_CONFIG_H */
