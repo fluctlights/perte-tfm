@@ -3,22 +3,10 @@
 #include "task.h"
 #include "queue.h"
 
-// Accelerator base address and registers (adjust base if needed)
-#define ACCEL_BASE    0x50000000UL
-#define REG_DATA_IN   0x00  // Write data to FIFO input
-#define REG_START     0x04  // Write 1 to start processing
-#define REG_STATUS    0x08  // Bit 0 = done flag
-#define REG_DATA_OUT  0x0C  // Read data from FIFO output
-
-static volatile uint32_t* const accel_data_in  = (uint32_t*)(ACCEL_BASE + REG_DATA_IN);
-static volatile uint32_t* const accel_start    = (uint32_t*)(ACCEL_BASE + REG_START);
-static volatile uint32_t* const accel_status   = (uint32_t*)(ACCEL_BASE + REG_STATUS);
-static volatile uint32_t* const accel_data_out = (uint32_t*)(ACCEL_BASE + REG_DATA_OUT);
-
 #define configUSE_PREEMPTION            1
 #define configUSE_IDLE_HOOK             0
 #define configUSE_TICK_HOOK             0
-#define configCPU_CLOCK_HZ              (50000000UL)
+#define configCPU_CLOCK_HZ              (100000000)
 #define configTICK_RATE_HZ              ((TickType_t)1000)
 #define configMAX_PRIORITIES            (5)
 #define configMINIMAL_STACK_SIZE        (128)
@@ -37,6 +25,8 @@ static volatile uint32_t* const accel_data_out = (uint32_t*)(ACCEL_BASE + REG_DA
 #define INCLUDE_xQueueSend             1
 #define INCLUDE_xQueueReceive          1
 
+
+__attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
 QueueHandle_t xQueue;
 
 // Hooks required by FreeRTOS config (empty implementations)
@@ -47,53 +37,75 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     (void)xTask; (void)pcTaskName; for(;;);
 }
 
-// Accelerator write function: writes data and starts processing
-void accelerator_write(uint32_t value) {
-    *accel_data_in = value;  // push data into FIFO
-    *accel_start = 1;        // trigger accelerator start
-}
+// Define a handle for the queue from Task A to Task B
+QueueHandle_t xQueue_A_to_B;
 
-// Accelerator read function: polls done and reads output data
-uint32_t accelerator_read() {
-    while ((*accel_status & 0x1) == 0); // wait for done
-    return *accel_data_out;
-}
+// Define a handle for the queue from Task B to Task A
+QueueHandle_t xQueue_B_to_A;
 
-// Sender task: reads from queue, sends data to accelerator
-void vSenderTask(void *pvParameters) {
-    int valueToSend = 100;
+// Data structure for messages (can be the same for both directions or different)
+typedef struct {
+    int message_id;
+    char payload[20];
+} MyMessage_t;
+
+// Task A
+void vTaskA(void* pvParameters) {
+    MyMessage_t msg_to_B;
+    MyMessage_t msg_from_B;
+
     for (;;) {
-        xQueueSend(xQueue, &valueToSend, portMAX_DELAY);
-        vTaskDelay(pdMS_TO_TICKS(1000));  // every 1 second
-        valueToSend++;
+        // Step 1: Send a message to Task B
+        msg_to_B.message_id = 1;
+        strcpy(msg_to_B.payload, "Hello from A");
+        xQueueSend(xQueue_A_to_B, &msg_to_B, portMAX_DELAY);
+
+        // Step 2: Wait for a reply from Task B
+        xQueueReceive(xQueue_B_to_A, &msg_from_B, portMAX_DELAY);
+        
+        // Process the received reply
+        printf("Task A received from Task B: %s\n", msg_from_B.payload);
+
+        vTaskDelay(pdMS_TO_TICKS(1000));
     }
 }
 
-// Receiver task: receives from queue, sends to accelerator, reads result, prints it
-void vReceiverTask(void *pvParameters) {
-    int receivedValue;
-    for (;;) {
-        if (xQueueReceive(xQueue, &receivedValue, portMAX_DELAY) == pdPASS) {
-            accelerator_write((uint32_t)receivedValue);
-            uint32_t accelResult = accelerator_read();
+// Task B
+void vTaskB(void* pvParameters) {
+    MyMessage_t msg_from_A;
+    MyMessage_t msg_to_A;
 
-            printf("Accelerator processed input %d, got result %u\n", receivedValue, accelResult);
-        }
+    for (;;) {
+        // Step 1: Wait for a message from Task A
+        xQueueReceive(xQueue_A_to_B, &msg_from_A, portMAX_DELAY);
+
+        // Process the received message
+        printf("Task B received from Task A: %s\n", msg_from_A.payload);
+
+        // Step 2: Send a reply back to Task A
+        msg_to_A.message_id = 2;
+        strcpy(msg_to_A.payload, "Reply from B");
+        xQueueSend(xQueue_B_to_A, &msg_to_A, portMAX_DELAY);
+
+        // Add a delay here to let the other task run
+        vTaskDelay(pdMS_TO_TICKS(100)); // or simply vTaskDelay(1);
     }
 }
 
 int main(void) {
-    xQueue = xQueueCreate(5, sizeof(int));
+    // Create the two queues
+    xQueue_A_to_B = xQueueCreate(5, sizeof(MyMessage_t));
+    xQueue_B_to_A = xQueueCreate(5, sizeof(MyMessage_t));
 
-    if (xQueue == NULL) {
-        printf("Error creating queue.\n");
-        while (1);
+    // Create the tasks
+    if (xQueue_A_to_B != NULL && xQueue_B_to_A != NULL) {
+        xTaskCreate(vTaskA, "Task A", 256, NULL, 1, NULL);
+        xTaskCreate(vTaskB, "Task B", 256, NULL, 1, NULL);
+        vTaskStartScheduler();
+    } else {
+        printf("Failed to create one or both queues.\n");
     }
 
-    xTaskCreate(vSenderTask, "Sender", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-    xTaskCreate(vReceiverTask, "Receiver", configMINIMAL_STACK_SIZE, NULL, 1, NULL);
-
-    vTaskStartScheduler();
-
-    for (;;);  // Should never reach here
+    for(;;){}
+    return 0;
 }

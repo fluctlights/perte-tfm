@@ -1,0 +1,420 @@
+
+
+/****************************************************************************/
+/**                                                                        **/
+/*                             MODULES USED                                 */
+/**                                                                        **/
+/****************************************************************************/
+
+/* FreeRTOS kernel includes */
+#include <FreeRTOS.h>
+#include <task.h>
+#include <queue.h>
+
+/* c stdlib */
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <assert.h>
+
+/* X-HEEP related includes */
+#include "csr.h"
+#include "hart.h"
+#include "handler.h"
+#include "core_v_mini_mcu.h"
+#include "rv_timer.h"
+#include "soc_ctrl.h"
+#include "gpio.h"
+#include "x-heep.h"
+#include "fast_intr_ctrl.h"
+#include "ext_irq.h"
+#include "timer_sdk.h"
+
+/* HW Design includes */
+#include "bitreversal.h"
+
+/****************************************************************************/
+/**                                                                        **/
+/*                        DEFINITIONS AND MACROS                            */
+/**                                                                        **/
+/****************************************************************************/
+
+/* Priorities used by the tasks. */
+#define mainQUEUE_RECEIVE_TASK_PRIORITY		( tskIDLE_PRIORITY + 2 )
+#define	mainQUEUE_SEND_TASK_PRIORITY		( tskIDLE_PRIORITY + 1 )
+#define mainQUEUE_SEND_FREQUENCY_MS			pdMS_TO_TICKS( 3 )
+
+/* The maximum number items the queue can hold.  The priority of the receiving
+task is above the priority of the sending task, so the receiving task will
+preempt the sending task and remove the queue items each time the sending task
+writes to the queue.  Therefore the queue will never have more than one item in
+it at any time, and even with a queue length of 1, the sending task will never
+find the queue full. */
+#define mainQUEUE_LENGTH					( 3 )
+
+/* Const value to play with TICK counts within the APP */
+#define TICK_COUNT                          ( 50 )
+
+/* Set mainCREATE_SIMPLE_BLINKY_DEMO_ONLY to one to run the simple blinky demo,
+or 0 to run the more comprehensive test and demo application. */
+#define mainCREATE_SIMPLE_BLINKY_DEMO_ONLY	1
+
+static void prvQueueReceiveTask( void *pvParameters );
+static void prvQueueSendTask( void *pvParameters );
+
+/* Prototypes for the standard FreeRTOS callback/hook functions implemented
+within this file.  See https://www.freertos.org/a00016.html */
+void vApplicationMallocFailedHook( void );
+void vApplicationIdleHook( void );
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName );
+void vApplicationTickHook( void );
+
+/* Prepare haredware to run the demo. */
+static void SetupHardware( void );
+
+/* Send a messaage to the UART initialised in prvSetupHardware. */
+void vSendString( const char * const pcString );
+
+/****************************************************************************/
+/**                                                                        **/
+/*                           EXPORTED VARIABLES                             */
+/**                                                                        **/
+/****************************************************************************/
+
+/****************************************************************************/
+/**                                                                        **/
+/*                            GLOBAL VARIABLES                              */
+/**                                                                        **/
+/****************************************************************************/
+
+/* Allocate heap to special section. Note that we have no references in the
+ * whole program to this variable (since its just here to allocate space in the
+ * section for our heap), so when using LTO it will be removed. We force it to
+ * stay with the "used" attribute
+ */
+__attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
+
+/* Timer 0 AO Domain as Tick Counter */
+static rv_timer_t timer_0_1;
+
+/* In case of playing with the Tick Frequency, set it to the desired value
+ * E.g.: REFERENCE_CLOCK_Hz/configTICK_RATE_HZ --> 100kHz
+ */
+static const uint64_t kTickFreqHz = (REFERENCE_CLOCK_Hz/configTICK_RATE_HZ); 
+
+/* Temporal flag to store ISR status */
+int8_t intr_flag = 0;
+
+/* Temporal counter to store blinking status */
+int8_t intr_blink = 0;
+
+/**
+ * Use this function in case you want an ad-hoc MTIME logic.
+ */
+void handler_irq_timer(void)
+{
+	configASSERT(rv_timer_reset(&timer_0_1)==kRvTimerOk);
+    configASSERT(rv_timer_irq_enable(&timer_0_1, 0, 0, kRvTimerEnabled) == kRvTimerOk);
+	configASSERT(rv_timer_arm(&timer_0_1, 0, 0, TICK_COUNT) == kRvTimerOk);
+	
+    if (xTaskIncrementTick() != 0) {
+		vTaskSwitchContext();
+		intr_flag = 1;
+	}
+	
+	uint32_t out = 0;
+	out = xTaskGetTickCountFromISR();
+	printf( "I %d\r\n",out);
+	
+	configASSERT(rv_timer_counter_set_enabled(&timer_0_1, 0, kRvTimerEnabled) == kRvTimerOk);
+}
+
+/*****************************************************************************
+*****************************************************************************/
+
+
+/*****************************************************************************
+*****************************************************************************/
+
+
+
+/*****************************************************************************
+*****************************************************************************/
+
+
+/*****************************************************************************
+*****************************************************************************/
+
+
+
+/*****************************************************************************
+*****************************************************************************/
+
+void vSendString( const char * const pcString )
+{
+	taskENTER_CRITICAL();
+	/* TODO: UART dumping */
+	printf( "%s", pcString );
+	taskEXIT_CRITICAL();
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationMallocFailedHook( void )
+{
+	/* vApplicationMallocFailedHook() will only be called if
+	configUSE_MALLOC_FAILED_HOOK is set to 1 in FreeRTOSConfig.h.  It is a hook
+	function that will get called if a call to pvPortMalloc() fails.
+	pvPortMalloc() is called internally by the kernel whenever a task, queue,
+	timer or semaphore is created.  It is also called by various parts of the
+	demo application.  If heap_1.c or heap_2.c are used, then the size of the
+	heap available to pvPortMalloc() is defined by configTOTAL_HEAP_SIZE in
+	FreeRTOSConfig.h, and the xPortGetFreeHeapSize() API function can be used
+	to query the size of free heap space that remains (although it does not
+	provide information on how the remaining heap might be fragmented). */
+	taskDISABLE_INTERRUPTS();
+	printf( "error: application malloc failed\n\r" );
+	__asm volatile( "ebreak" );
+	for( ;; );
+}
+/*-----------------------------------------------------------*/
+
+void vApplicationIdleHook( void )
+{
+	/* vApplicationIdleHook() will only be called if configUSE_IDLE_HOOK is set
+	to 1 in FreeRTOSConfig.h.  It will be called on each iteration of the idle
+	task.  It is essential that code added to this hook function never attempts
+	to block in any way (for example, call xQueueReceive() with a block time
+	specified, or call vTaskDelay()).  If the application makes use of the
+	vTaskDelete() API function (as this demo application does) then it is also
+	important that vApplicationIdleHook() is permitted to return to its calling
+	function, because it is the responsibility of the idle task to clean up
+	memory allocated by the kernel to any task that has since been deleted. */
+	taskENTER_CRITICAL();
+	printf("I\r\n");
+	taskEXIT_CRITICAL();
+	
+}
+/*-----------------------------------------------------------*/
+
+void freertos_risc_v_application_exception_handler(uint32_t mcause)
+{
+	printf("App mcause:%d\r\n", mcause);
+}
+
+/*-----------------------------------------------------------*/
+
+void vApplicationStackOverflowHook( TaskHandle_t pxTask, char *pcTaskName )
+{
+	( void ) pcTaskName;
+	( void ) pxTask;
+
+	/* Run time stack overflow checking is performed if
+	configCHECK_FOR_STACK_OVERFLOW is defined to 1 or 2.  This hook
+	function is called if a stack overflow is detected. */
+	taskDISABLE_INTERRUPTS();
+	__asm volatile( "ebreak" );
+	for( ;; );
+}
+
+/*****************************************************************************
+*****************************************************************************/
+
+void vApplicationTickHook( void )
+{
+	/* The tests in the full demo expect some interaction with interrupts. */
+	#if( mainCREATE_SIMPLE_BLINKY_DEMO_ONLY != 1 )
+	{
+		extern void vFullDemoTickHook( void );
+		vFullDemoTickHook();
+	}
+	#endif
+}
+
+/*****************************************************************************
+*****************************************************************************/
+
+typedef struct {
+    int type;             // HW (0) or SW (1)
+    uint32_t data[4];    // 32bit set of 4 numbers
+} InputPacket_t;
+
+typedef struct {
+    int type;
+    uint32_t cycles;                 // number of cycles
+    uint32_t reversed[4];            // 32bit set of 4 numbers
+} ResultPacket_t;
+
+ResultPacket_t reverseBits_SW(InputPacket_t received);
+ResultPacket_t reverseBits_HW(InputPacket_t received);
+
+////////////////////
+// Queue handlers //
+////////////////////
+
+static QueueHandle_t xQueueInputs = NULL;
+static QueueHandle_t xQueueResults = NULL;
+
+/////////////////
+// SENDER TASK //
+/////////////////
+
+void vTaskSender(void *pvParameters)
+{
+    InputPacket_t packet;
+    ResultPacket_t result;
+
+    // Initial values
+    packet.type = 0;
+    packet.data[0] = 0b10110000;
+    packet.data[1] = 0b11001100;
+    packet.data[2] = 0b11110000;
+    packet.data[3] = 0b00001111;
+
+    // Send packet to receivers
+	xQueueSend(xQueueInputs, &packet, pdMS_TO_TICKS(1000));
+
+    while (1)
+    {
+
+        // Wait for a response back
+		if (xQueueReceive(xQueueResults, &result, pdMS_TO_TICKS(1000)) == pdPASS) {
+			printf("RCV!: C=%d, data={%08X}\n",result.cycles,result.reversed[0]);
+		}
+		else {
+			printf("No rsp\n");
+		}
+
+		// Next iteration
+		//vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+}
+
+
+void vTaskReceiver(void *pvParameters)
+{
+    InputPacket_t received;
+    ResultPacket_t modified;
+        
+    while (1) {
+        if (xQueueReceive(xQueueInputs, &received, pdMS_TO_TICKS(1000)) == pdPASS) {
+
+            // Invert bits via hardware (0) or software (1)
+            if (received.type == 0)
+                modified = reverseBits_HW(received);
+            else
+                modified = reverseBits_SW(received);
+
+            //printf("R:data={%08X}\n", modified.reversed[0]);
+
+            // Send result back
+            BaseType_t ok = xQueueSend(xQueueResults, &modified, pdMS_TO_TICKS(1000));
+            if (ok != pdPASS) {
+                printf("R: failed!\n");
+            } else {
+                printf("R: OK\n");
+            }
+        }
+    }
+}
+
+/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - SOFTWARE //
+/////////////////////////////////////////////////////////////
+
+ResultPacket_t reverseBits_SW(InputPacket_t received) {
+    
+    ResultPacket_t result;
+    result.type = received.type;
+    
+    // Input array of 4 numbers
+    uint32_t nums[4];
+
+    for (int i = 0; i < 4; i++) {
+        nums[i] = received.data[i];
+    }
+
+    // Get current Frequency
+    soc_ctrl_t soc_ctrl;
+    soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
+    uint32_t freq_hz = soc_ctrl_get_frequency(&soc_ctrl);
+
+    timer_cycles_init();         // Init the timer SDK for clock cycles
+    timer_start();               // Start counting the time
+    
+    // SOFTWARE BIT REVERSAL
+    for (size_t i = 0; i < 4; i++) {
+        uint32_t num = nums[i];
+        uint32_t reversed_num = 0;
+        
+        for (int j = 0; j < 32; j++) {
+            reversed_num <<= 1;             // Shift left
+            reversed_num |= (num & 1);      // Get the last bit of num and set it in reversed_num
+            num >>= 1;                      // Shift num right
+        }
+        result.reversed[i] = reversed_num;        // Store the reversed number
+    } 
+
+    result.cycles = timer_stop();
+
+    return result;
+}
+
+/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - HARDWARE //
+/////////////////////////////////////////////////////////////
+
+ResultPacket_t reverseBits_HW(InputPacket_t received) {
+	
+    ResultPacket_t result;
+    result.type = received.type;
+    
+    // Input array of 4 numbers
+    uint32_t nums[4];
+
+    for (int i = 0; i < 4; i++) {
+        nums[i] = received.data[i];
+    }
+
+    // Get current Frequency
+    soc_ctrl_t soc_ctrl;
+    soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
+    uint32_t freq_hz = soc_ctrl_get_frequency(&soc_ctrl);
+
+    timer_cycles_init();         // Init the timer SDK for clock cycles
+    timer_start();               // Start counting the time
+
+    // HARDWARE BIT REVERSAL
+    bitrev_start();
+
+    for (size_t i = 0; i < 4; i++) {
+        bitrev_set_input(nums[i]);
+    }   
+    
+    // Wait until done flag is 1 (polling)
+    while (!bitrev_is_done());
+
+    for (size_t i = 0; i < 4; i++) {
+        result.reversed[i] = bitrev_get_output();     // Get result
+    }
+
+    result.cycles = timer_stop();
+
+    return result;
+}
+
+int main() {
+    
+
+    xQueueInputs = xQueueCreate(3, sizeof(InputPacket_t));
+    xQueueResults = xQueueCreate(3, sizeof(ResultPacket_t));
+
+    if (xQueueInputs != NULL && xQueueResults != NULL)
+    {
+        xTaskCreate(vTaskSender, "Sender",  300, NULL, 3, NULL);
+        xTaskCreate(vTaskReceiver,  "Receiver", 300, NULL, 3, NULL);
+        vTaskStartScheduler();
+    }
+
+    for (;;);
+}
+

@@ -18,3 +18,14 @@ Cada carpeta corresponde a una subparte del proyecto:
 - **GR-HEEP-connect-bus:** archivos de la plataforma GR-HEEP (fork de X-HEEP).
 - **simulation_legacy:** archivos antiguos de la primera versión planteada para simular en Vivado
 - **tfm_freertos:** códigos y proyectos en Vivado y EdaPlayground de las simulaciones funcionales
+
+## Referencias para apuntar
+
+- https://x-heep.readthedocs.io/en/latest/How_to/CompileApps.html#compiling-freertos-based-applications
+- https://fusesoc.readthedocs.io/en/stable/user/index.html
+- El PDF de la Practica 5 de Aceleradores Especificos
+- https://github.com/Integrated-Systems-Architecture/simple_cnt
+- Mencionar a David Mallasen que me ha ayudado
+- https://opentitan.org/book/util/reggen/index.html#type-wo
+- https://edaplayground.com/x/uBMa  (es mi repo de EdaPlayground para simular con las normas de Verilator)
+- https://verilator.org/guide/latest/warnings.html
