@@ -78,6 +78,9 @@ module bitreversal_control_reg_top #(
   logic read_qs;
   logic read_wd;
   logic read_we;
+  logic write_qs;
+  logic write_wd;
+  logic write_we;
   logic done_qs;
   logic done_wd;
   logic done_we;
@@ -165,6 +168,33 @@ module bitreversal_control_reg_top #(
   );
 
 
+  // R[write]: V(False)
+
+  prim_subreg #(
+    .DW      (1),
+    .SWACCESS("RW"),
+    .RESVAL  (1'h0)
+  ) u_write (
+    .clk_i   (clk_i    ),
+    .rst_ni  (rst_ni  ),
+
+    // from register interface
+    .we     (write_we),
+    .wd     (write_wd),
+
+    // from internal hardware
+    .de     (1'b0),
+    .d      ('0  ),
+
+    // to internal hardware
+    .qe     (),
+    .q      (reg2hw.write.q ),
+
+    // to register interface (read)
+    .qs     (write_qs)
+  );
+
+
   // R[done]: V(False)
 
   prim_subreg #(
@@ -220,14 +250,15 @@ module bitreversal_control_reg_top #(
 
 
 
-  logic [4:0] addr_hit;
+  logic [5:0] addr_hit;
   always_comb begin
     addr_hit = '0;
     addr_hit[0] = (reg_addr == BITREVERSAL_CONTROL_DIN_OFFSET);
     addr_hit[1] = (reg_addr == BITREVERSAL_CONTROL_START_OFFSET);
     addr_hit[2] = (reg_addr == BITREVERSAL_CONTROL_READ_OFFSET);
-    addr_hit[3] = (reg_addr == BITREVERSAL_CONTROL_DONE_OFFSET);
-    addr_hit[4] = (reg_addr == BITREVERSAL_CONTROL_DOUT_OFFSET);
+    addr_hit[3] = (reg_addr == BITREVERSAL_CONTROL_WRITE_OFFSET);
+    addr_hit[4] = (reg_addr == BITREVERSAL_CONTROL_DONE_OFFSET);
+    addr_hit[5] = (reg_addr == BITREVERSAL_CONTROL_DOUT_OFFSET);
   end
 
   assign addrmiss = (reg_re || reg_we) ? ~|addr_hit : 1'b0 ;
@@ -239,7 +270,8 @@ module bitreversal_control_reg_top #(
                (addr_hit[1] & (|(BITREVERSAL_CONTROL_PERMIT[1] & ~reg_be))) |
                (addr_hit[2] & (|(BITREVERSAL_CONTROL_PERMIT[2] & ~reg_be))) |
                (addr_hit[3] & (|(BITREVERSAL_CONTROL_PERMIT[3] & ~reg_be))) |
-               (addr_hit[4] & (|(BITREVERSAL_CONTROL_PERMIT[4] & ~reg_be)))));
+               (addr_hit[4] & (|(BITREVERSAL_CONTROL_PERMIT[4] & ~reg_be))) |
+               (addr_hit[5] & (|(BITREVERSAL_CONTROL_PERMIT[5] & ~reg_be)))));
   end
 
   assign din_we = addr_hit[0] & reg_we & !reg_error;
@@ -251,7 +283,10 @@ module bitreversal_control_reg_top #(
   assign read_we = addr_hit[2] & reg_we & !reg_error;
   assign read_wd = reg_wdata[0];
 
-  assign done_we = addr_hit[3] & reg_we & !reg_error;
+  assign write_we = addr_hit[3] & reg_we & !reg_error;
+  assign write_wd = reg_wdata[0];
+
+  assign done_we = addr_hit[4] & reg_we & !reg_error;
   assign done_wd = reg_wdata[0];
 
   // Read data return
@@ -271,10 +306,14 @@ module bitreversal_control_reg_top #(
       end
 
       addr_hit[3]: begin
-        reg_rdata_next[0] = done_qs;
+        reg_rdata_next[0] = write_qs;
       end
 
       addr_hit[4]: begin
+        reg_rdata_next[0] = done_qs;
+      end
+
+      addr_hit[5]: begin
         reg_rdata_next[31:0] = dout_qs;
       end
 

@@ -26,6 +26,10 @@ package bitreversal_control_reg_pkg;
   } bitreversal_control_reg2hw_read_reg_t;
 
   typedef struct packed {
+    logic        q;
+  } bitreversal_control_reg2hw_write_reg_t;
+
+  typedef struct packed {
     logic        d;
     logic        de;
   } bitreversal_control_hw2reg_done_reg_t;
@@ -37,9 +41,10 @@ package bitreversal_control_reg_pkg;
 
   // Register -> HW type
   typedef struct packed {
-    bitreversal_control_reg2hw_din_reg_t din; // [33:2]
-    bitreversal_control_reg2hw_start_reg_t start; // [1:1]
-    bitreversal_control_reg2hw_read_reg_t read; // [0:0]
+    bitreversal_control_reg2hw_din_reg_t din; // [34:3]
+    bitreversal_control_reg2hw_start_reg_t start; // [2:2]
+    bitreversal_control_reg2hw_read_reg_t read; // [1:1]
+    bitreversal_control_reg2hw_write_reg_t write; // [0:0]
   } bitreversal_control_reg2hw_t;
 
   // HW -> register type
@@ -52,25 +57,28 @@ package bitreversal_control_reg_pkg;
   parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_DIN_OFFSET = 5'h 0;
   parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_START_OFFSET = 5'h 4;
   parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_READ_OFFSET = 5'h 8;
-  parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_DONE_OFFSET = 5'h c;
-  parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_DOUT_OFFSET = 5'h 10;
+  parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_WRITE_OFFSET = 5'h c;
+  parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_DONE_OFFSET = 5'h 10;
+  parameter logic [BlockAw-1:0] BITREVERSAL_CONTROL_DOUT_OFFSET = 5'h 14;
 
   // Register index
   typedef enum int {
     BITREVERSAL_CONTROL_DIN,
     BITREVERSAL_CONTROL_START,
     BITREVERSAL_CONTROL_READ,
+    BITREVERSAL_CONTROL_WRITE,
     BITREVERSAL_CONTROL_DONE,
     BITREVERSAL_CONTROL_DOUT
   } bitreversal_control_id_e;
 
   // Register width information to check illegal writes
-  parameter logic [3:0] BITREVERSAL_CONTROL_PERMIT [5] = '{
+  parameter logic [3:0] BITREVERSAL_CONTROL_PERMIT [6] = '{
     4'b 1111, // index[0] BITREVERSAL_CONTROL_DIN
     4'b 0001, // index[1] BITREVERSAL_CONTROL_START
     4'b 0001, // index[2] BITREVERSAL_CONTROL_READ
-    4'b 0001, // index[3] BITREVERSAL_CONTROL_DONE
-    4'b 1111  // index[4] BITREVERSAL_CONTROL_DOUT
+    4'b 0001, // index[3] BITREVERSAL_CONTROL_WRITE
+    4'b 0001, // index[4] BITREVERSAL_CONTROL_DONE
+    4'b 1111  // index[5] BITREVERSAL_CONTROL_DOUT
   };
 
 endpackage

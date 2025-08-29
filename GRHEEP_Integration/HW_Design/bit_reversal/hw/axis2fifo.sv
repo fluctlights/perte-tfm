@@ -1,9 +1,9 @@
-/* verilator lint_off UNUSED */
-/* verilator lint_off BLKSEQ */
-/* verilator lint_off MULTIDRIVEN */
-/* verilator lint_off EOFNEWLINE */
 
 module axis2fifo #(
+  /* verilator lint_off UNUSED */
+  /* verilator lint_off BLKSEQ */
+  /* verilator lint_off EOFNEWLINE */
+  /* verilator lint_off WIDTH */
   parameter DATA_WIDTH = 32,
   parameter THRESHOLD  = 4,
   parameter DEPTH      = 10
@@ -12,14 +12,15 @@ module axis2fifo #(
   input  wire rst,
 
   // AXI Stream master
-  input  wire [31:0] s_axis_tdata,
+  input  wire [31:0] result_data,
   input  wire        last,
+  input  wire	     valid_result,
+  output  reg	     ready_for_results,
 
   // To FIFO
   output reg  [31:0] dout,
   output reg         done,
   
-  // Changed! To control the output data flow
   input wire 		 read
 );
 
@@ -38,38 +39,46 @@ module axis2fifo #(
 
   always @(posedge clk or posedge rst) begin
     if (rst) begin
-      state        = IDLE;
-      buffer_index <= 2'd0;
-      done         <= 0;
+      state              = IDLE;
+      buffer_index      <= 2'd0;
+      done              <= 0;
+      ready_for_results <= 0;
 
     end else begin
       state = next_state;
 
       case (state)
         IDLE: begin
-          if (s_axis_tdata !== {32{1'bx}} && s_axis_tdata !== {32{1'b0}}) begin
-            buffer[buffer_index] <= s_axis_tdata;
+          ready_for_results <= 1;
+          
+          if (valid_result) begin
+            
+            //First value entered! We have to read it!
+            buffer[buffer_index] <= result_data;
             buffer_index         <= buffer_index + 1;
             next_state           = READ_STREAM;
+            
           end else begin
             next_state = IDLE;
           end
         end
 
         READ_STREAM: begin
+          
           if (last == 1'b0) begin
-            buffer[buffer_index] <= s_axis_tdata;
+            buffer[buffer_index] <= result_data;
             buffer_index         <= buffer_index + 1;
-            next_state           = READ_STREAM;
+            next_state            = READ_STREAM;
 
           end else if (last == 1'b1) begin
-            buffer[buffer_index] <= s_axis_tdata;
+            buffer[buffer_index] <= result_data;
             buffer_index         <= 0;
-            next_state           = SEND_OUTSIDE;
+            next_state            = SEND_OUTSIDE;
 
           end else begin
             next_state = READ_STREAM;
           end
+          
         end
 
         SEND_OUTSIDE: begin
@@ -78,11 +87,13 @@ module axis2fifo #(
           if (read) begin
             dout <= buffer[buffer_index];
             
-            if (buffer_index == 3) begin
+            // end of stream
+            if (buffer_index == (THRESHOLD-1)) begin 
               next_state = DONE;
             end else begin
               buffer_index <= buffer_index + 1;
             end
+            
           end else begin
           	next_state = SEND_OUTSIDE;
           end
@@ -90,25 +101,17 @@ module axis2fifo #(
 
         DONE: begin
           // Set output to X, all data transferred
-          dout <= {32{1'bX}};
-          done <= 0;
-
-          // Set all bits to X into the internal memory FIFO
-          for (i = 0; i < THRESHOLD; i = i + 1) begin
-            buffer[i] <= {32{1'bX}};
-          end
-
-          next_state = IDLE;
+          dout              <= {32{1'bX}};
+          done              <= 0;
+	      ready_for_results <= 0;
+          next_state         = IDLE;
         end
 
         default: next_state = IDLE;
+        
       endcase
     end
   end
 
 endmodule
 
-/* verilator lint_on UNUSED */
-/* verilator lint_on BLKSEQ */
-/* verilator lint_on MULTIDRIVEN */
-/* verilator lint_on EOFNEWLINE */

@@ -1,7 +1,8 @@
 // System library headers
 #include <stdio.h>
 #include <stdint.h>
-
+#include <stdlib.h>
+#include <time.h>  
 #include "core_v_mini_mcu.h"
 #include "fast_intr_ctrl.h"
 #include "bitreversal.h"
@@ -18,8 +19,8 @@
 static inline uint32_t reverseBits_SW() {
     uint32_t timer_cycles;
 
-    // Input array of 4 numbers
-    uint32_t nums[4] = {0b10110000, 0b11001100, 0b11110000, 0b00001111};
+    // Input array of 4 random numbers
+    uint32_t nums[4] = {(rand() % 255), (rand() % 255), (rand() % 255), (rand() % 255)};
     uint32_t reversed[4];  // Array to store reversed numbers
 
     // Get current Frequency
@@ -60,8 +61,8 @@ static inline uint32_t reverseBits_HW() {
 	
     uint32_t timer_cycles;
 
-    // Input array of 4 numbers
-    uint32_t nums[4] = {0b10110000, 0b11001100, 0b11110000, 0b00001111};
+    // Input array of 4 random numbers
+    uint32_t nums[4] = {(rand() % 255), (rand() % 255), (rand() % 255), (rand() % 255)};
     uint32_t reversed[4];  // Array to store reversed numbers
 
     // Get current Frequency
@@ -76,9 +77,10 @@ static inline uint32_t reverseBits_HW() {
     bitrev_start();
 
     for (size_t i = 0; i < 4; i++) {
-        bitrev_set_input(nums[i]);
+        //printf("VALOR A METER: 0x%08X\n", nums[i]);
+        bitrev_write_val(nums[i]);
         uint32_t number = bitrev_get_input();
-        //printf("VALOR LEIDO DIN: 0x%08X\n", number);
+        printf("VALOR LEIDO DIN: 0x%08X\n", number);
     }   
     
     // Wait until done flag is 1 (polling)
@@ -89,7 +91,7 @@ static inline uint32_t reverseBits_HW() {
 
     for (size_t i = 0; i < 4; i++) {
         reversed[i] = bitrev_get_output();     // Get result
-        //printf("HARDWARE Reversed: 0x%08X\n", reversed[i]);
+        printf("HARDWARE Reversed: 0x%08X\n", reversed[i]);
     }
 
     timer_cycles = timer_stop();

@@ -56,6 +56,20 @@
             ]
         },
 
+	    {
+            name: "WRITE",
+            desc: "Permite encolar un dato en la FIFO, por cada activacion",
+            fields: [
+                {
+                    bits: "0",
+                    name: "WRITE",
+                    desc: "Escribir 1 para iniciar la operación, escribir 0 para parar",
+                    swaccess: "rw",
+                    hwaccess: "hro",
+                    resval: "0"
+                }
+            ]
+        },
 
         {
             name: "DONE",

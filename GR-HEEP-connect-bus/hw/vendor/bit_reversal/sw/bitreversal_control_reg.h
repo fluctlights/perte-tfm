@@ -20,12 +20,16 @@ extern "C" {
 #define BITREVERSAL_CONTROL_READ_REG_OFFSET 0x8
 #define BITREVERSAL_CONTROL_READ_READ_BIT 0
 
+// Permite encolar un dato en la FIFO, por cada activacion
+#define BITREVERSAL_CONTROL_WRITE_REG_OFFSET 0xc
+#define BITREVERSAL_CONTROL_WRITE_WRITE_BIT 0
+
 // Estado de la operación
-#define BITREVERSAL_CONTROL_DONE_REG_OFFSET 0xc
+#define BITREVERSAL_CONTROL_DONE_REG_OFFSET 0x10
 #define BITREVERSAL_CONTROL_DONE_DONE_BIT 0
 
 // Resultado de la operación
-#define BITREVERSAL_CONTROL_DOUT_REG_OFFSET 0x10
+#define BITREVERSAL_CONTROL_DOUT_REG_OFFSET 0x14
 
 #ifdef __cplusplus
 }  // extern "C"

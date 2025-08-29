@@ -12,6 +12,7 @@ module bitreversal_control_reg (
 
   output logic        start_o,
   output logic        read_o,
+  output logic        write_o,
   output logic [31:0] din_o
 );
 
@@ -19,9 +20,9 @@ module bitreversal_control_reg (
   bitreversal_control_reg_pkg::bitreversal_control_reg2hw_t reg2hw;
   bitreversal_control_reg_pkg::bitreversal_control_hw2reg_t hw2reg;
 
-  // ------------------------
+  // -------------------------
   // Señales escritas por HW
-  // ------------------------
+  // -------------------------
 
   // DONE (rw1c/hwo): HW sets, SW clears
   assign hw2reg.done.d  = done_i;
@@ -31,9 +32,9 @@ module bitreversal_control_reg (
   assign hw2reg.dout.d  = dout_i;
   assign hw2reg.dout.de = 1'b1;
 
-  // ---------------------------------------------
+  // ----------------------------------------------
   // Instancia del toplevel de registros generado
-  // ---------------------------------------------
+  // ----------------------------------------------
   bitreversal_control_reg_top #(
     .reg_req_t(bitreversal_reg_pkg::reg_req_t),
     .reg_rsp_t(bitreversal_reg_pkg::reg_resp_t)
@@ -47,22 +48,32 @@ module bitreversal_control_reg (
     .devmode_i(1'b0)
   );
 
-  // ------------------------
-  // Señales escritas por SW
-  // ------------------------
+  // --------------------------------------------------------
+  // SW Signals - Sticky Mode for simplicity
+  // --------------------------------------------------------
 
+  // -----------------------------------------------------------
+  // START (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.din.* (RTL never clears it!)
+  // -----------------------------------------------------------
+  assign din_o   = reg2hw.din.q;
+  
   // -----------------------------------------------------------
   // START (rw/hro): SW controlled, no HW override
   // --> no assignment to hw2reg.start.* (RTL never clears it!)
   // -----------------------------------------------------------
-
-    // -----------------------------------------------------------
-  // READ (rw/hro): SW controlled, no HW override
-  // expose as a pulse to RTL
-  // --> no assignment to hw2reg.start.* (RTL never clears it!)
-  // -----------------------------------------------------------
+  
   assign start_o = reg2hw.start.q;
-  assign din_o   = reg2hw.din.q;
+  // -----------------------------------------------------------
+  // READ (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.read.* (RTL never clears it!)
+  // -----------------------------------------------------------
   assign read_o  = reg2hw.read.q;
+  
+  // -----------------------------------------------------------
+  // WRITE (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.read.* (RTL never clears it!)
+  // -----------------------------------------------------------
+  assign write_o  = reg2hw.write.q;
 
 endmodule

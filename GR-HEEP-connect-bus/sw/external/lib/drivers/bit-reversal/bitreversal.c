@@ -12,10 +12,14 @@
 /************************************************/
 
 /**
- * @brief Write input operand (DIN).
+ * @brief Write an input operand into DIN
+ * 
+ * @param value The 32-bit input value.
  */
-void bitrev_set_input(uint32_t value) {
+void bitrev_write_val(uint32_t value) {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DIN_REG_OFFSET) = value;
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 1U; //activate write once DIN is updated
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 0U; //deactivate write
 }
 
 /**
@@ -51,6 +55,15 @@ void bitrev_trigger_read() {
 }
 
 /**
+ * @brief Starts a WRITE then clears it to make the result available in DOUT.
+ * 
+ */
+void bitrev_trigger_write() {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 1U; //activate write once DIN is updated
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 0U; //deactivate write
+}
+
+/**
  * @brief Check if DONE flag is set.
  */
 uint8_t bitrev_is_done() {
@@ -73,9 +86,9 @@ inline void bitrev_clear_done() {
  * @return The computed result (bit-reversed value).
  */
 uint32_t bitrev_get_output() {
-    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 1U;
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 1U; //activate read
     uint32_t val = *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DOUT_REG_OFFSET);
-    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 0U;
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 0U; //deactivate read
     return val;
 }
 

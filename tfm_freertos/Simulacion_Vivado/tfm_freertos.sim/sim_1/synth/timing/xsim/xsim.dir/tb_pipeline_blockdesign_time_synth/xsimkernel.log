@@ -1,7 +1,0 @@
-Running: xsim.dir/tb_pipeline_blockdesign_time_synth/xsimk -simmode gui -wdb tb_pipeline_blockdesign_time_synth.wdb -simrunnum 0 -socket 41133
-Design successfully loaded
-Design Loading Memory Usage: 36940 KB (Peak: 36940 KB)
-Design Loading CPU Usage: 80 ms
-Simulation completed
-Simulation Memory Usage: 119000 KB (Peak: 176208 KB)
-Simulation CPU Usage: 90 ms

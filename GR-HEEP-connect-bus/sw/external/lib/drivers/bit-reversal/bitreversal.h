@@ -15,14 +15,14 @@
 // -----------------------------------------------
 
 /**
- * @brief Write input operand (DIN).
+ * @brief Write an input operand into DIN
  * 
  * @param value The 32-bit input value.
  */
-void bitrev_set_input(uint32_t value);
+void bitrev_write_val(uint32_t value);
 
 /**
- * @brief Read back the last input operand (DIN).
+ * @brief Read back the last input operand from DIN.
  * 
  * @return The current input value stored in DIN.
  */
@@ -38,7 +38,7 @@ void bitrev_start();
  * @brief Stop the accelerator operation (set START=0).
  * 
  */
-__attribute__((inline)) void bitrev_stop();
+void bitrev_stop();
 
 /**
  * @brief Starts a READ then clears it to make the result available in DOUT.

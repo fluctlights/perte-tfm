@@ -13,11 +13,12 @@ module bitreversal_obi (
 );
 
   // Señales internas
-  logic        start;
   logic [31:0] din_i;
+  logic        done_flag_o;
   logic [31:0] dout_o;
-  logic        done;
-  logic	       read;
+  logic        start_flag_i;
+  logic        read_i;
+  logic        write_i;
 
   // Señales temporales (registro de pipeline de lectura)
   logic        obi_rvalid_q;
@@ -25,17 +26,18 @@ module bitreversal_obi (
 
   // Señal para grant: aceptamos la transacción si es válida
   logic        reg_req_valid;
-  assign reg_req_valid = reg_req_i.valid;
+  assign       reg_req_valid = reg_req_i.valid;
 
   // Instancia del diseño completo
   bitreversal u_bitrev (
-    .clk         (clk_i),
-    .rst_ni      (rst_ni),
-    .din_i       (din_i),
-    .dout_o      (dout_o),
-    .done_flag_o (done),
-    .start_flag_i(start),
-    .read	 (read)
+    .clk          (clk_i),
+    .rst_ni       (rst_ni),
+    .din_i        (din_i),
+    .dout_o       (dout_o),
+    .done_flag_o  (done_flag_o),
+    .start_flag_i (start_flag_i),
+    .read_i	  (read_i),
+    .write_i	  (write_i)
   );
 
   // Señal de grant (acepta la transacción)
@@ -45,11 +47,11 @@ module bitreversal_obi (
     if (!rst_ni) begin
       obi_rvalid_q <= 1'b0;
       obi_rdata_q  <= 32'b0;
-    end else if (done) begin
-      obi_rvalid_q <= reg_req_valid;  // lectura válida cuando done este listo
+    end else if (done_flag_o) begin
+      obi_rvalid_q <= reg_req_valid;    // lectura válida cuando done este listo
       obi_rdata_q  <= reg_rsp_o.rdata;  // respuesta de los registros
     end else begin
-      obi_rvalid_q <= 1'b0;  // esperamos como si nada pasara?
+      obi_rvalid_q <= 1'b0;  // esperar
       obi_rdata_q  <= 32'b0;
     end
   end
@@ -57,15 +59,16 @@ module bitreversal_obi (
 
   // Instancia de los registros de control
   bitreversal_control_reg u_bitreversal_control_reg (
-    .clk_i  (clk_i),
-    .rst_ni (rst_ni),
-    .req_i  (reg_req_i),
-    .rsp_o  (reg_rsp_o),
-    .done_i (done),
-    .dout_i (dout_o),
-    .din_o  (din_i),
-    .start_o(start),
-    .read_o (read)
+    .clk_i    (clk_i),
+    .rst_ni   (rst_ni),
+    .req_i    (reg_req_i),
+    .rsp_o    (reg_rsp_o),
+    .done_i   (done_flag_o),
+    .dout_i   (dout_o),
+    .din_o    (din_i),
+    .start_o  (start_flag_i),
+    .read_o   (read_i),
+    .write_o  (write_i)
   );
 
   logic unused;

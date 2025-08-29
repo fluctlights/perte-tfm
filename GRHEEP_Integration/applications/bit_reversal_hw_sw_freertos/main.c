@@ -66,32 +66,12 @@ static QueueHandle_t xQueue = NULL;
 /////////////////////////////////////////////////////////////
 Packet_t reverseBits_SW(Packet_t received);
 Packet_t reverseBits_HW(Packet_t received);
-unsigned long seed = 123456789;
-
-// Generador lineal congruencial
-unsigned long myrand() {
-    seed = (1103515245 * seed + 12345) % (1UL << 31);  
-    return seed;
-}
-
-// Para obtener un número en rango [0, max)
-unsigned long myrand_range(unsigned long max) {
-    return myrand() % max;
-}
 
 Packet_t reverseBits_SW(Packet_t received) {
     
     Packet_t result;
-    result.cycles = 0;
     result.type = received.type;
     
-    // Input array of 4 numbers
-    uint32_t nums[4];
-
-    for (int i = 0; i < 4; i++) {
-        nums[i] = received.data[i];
-    }
-
     // Get current Frequency
     soc_ctrl_t soc_ctrl;
     soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
@@ -101,8 +81,8 @@ Packet_t reverseBits_SW(Packet_t received) {
     timer_start();               // Start counting the time
     
     // SOFTWARE BIT REVERSAL
-    for (size_t i = 0; i < 4; i++) {
-        uint32_t num = nums[i];
+    for (int i = 0; i < 4; i++) {
+        uint32_t num = received.data[i];
         uint32_t reversed_num = 0;
         
         for (int j = 0; j < 32; j++) {
@@ -125,15 +105,7 @@ Packet_t reverseBits_SW(Packet_t received) {
 Packet_t reverseBits_HW(Packet_t received) {
 	
     Packet_t result;
-    result.cycles = 0;
     result.type = received.type;
-    
-    // Input array of 4 numbers
-    uint32_t nums[4];
-
-    for (int i = 0; i < 4; i++) {
-        nums[i] = received.data[i];
-    }
 
     // Get current Frequency
     soc_ctrl_t soc_ctrl;
@@ -146,14 +118,14 @@ Packet_t reverseBits_HW(Packet_t received) {
     // HARDWARE BIT REVERSAL
     bitrev_start();
 
-    for (size_t i = 0; i < 4; i++) {
-        bitrev_set_input(nums[i]);
+    for (int i = 0; i < 4; i++) {
+        bitrev_write_val(received.data[i]);
     }   
     
     // Wait until done flag is 1 (polling)
     while (!bitrev_is_done());
 
-    for (size_t i = 0; i < 4; i++) {
+    for (int i = 0; i < 4; i++) {
         result.data[i] = bitrev_get_output();     // Get result
     }
 
@@ -171,11 +143,11 @@ void vSenderTask(void *pvParameters)
         // Initial values
         input.type = rand() % 2;
         input.cycles = 0; //init cycle number
-        input.data[0] = (rand() % 255) + 1;
-        input.data[1] = (rand() % 255) + 1;
-        input.data[2] = (rand() % 255) + 1;
-        input.data[3] = (rand() % 255) + 1;
-        printf("Input: {%08X, %08X, %08X, %08X}\n", input.data[0],input.data[1],input.data[2],input.data[3]);
+        input.data[0] = (rand() % 255);
+        input.data[1] = (rand() % 255);
+        input.data[2] = (rand() % 255);
+        input.data[3] = (rand() % 255);
+        printf("Sent: {0x%08X, 0x%08X, 0x%08X, 0x%08X}\n", input.data[0],input.data[1],input.data[2],input.data[3]);
         if (xQueueSend(xQueue, &input, portMAX_DELAY) == pdPASS);
     }
 }
@@ -183,18 +155,21 @@ void vReceiverTask(void *pvParameters)
 {
     Packet_t received;
     Packet_t result;
+    char o; //store operation type
 
     for (int i = 0; i < 3; i++)
     {
         // Receive a message from sender
         if (xQueueReceive(xQueue, &received, portMAX_DELAY) == pdPASS)
         {
-            if (received.type == 0)
+            if (received.type == 0) {
+                o = 'H'; 
                 result = reverseBits_HW(received);
-            else
+            }else {
+                o = 'S'; 
                 result = reverseBits_SW(received);
-            
-            printf("Result, type %d, input %d: {%08X, %08X, %08X, %08X}, cycles:%d\n", result.type, i, result.data[0],result.data[1],result.data[2],result.data[3], result.cycles);
+            }
+            printf("Processed: type %c, input %d: {0x%08X, 0x%08X, 0x%08X, 0x%08X}, cycles:%d\n", o, i, result.data[0],result.data[1],result.data[2],result.data[3], result.cycles);
         }
     }
 }
