@@ -1,0 +1,13 @@
+Time resolution is 1 ps
+Reversed = xxxxxxxx
+Stopped at time : 30 ns : File "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/fifo2axis.v" Line 62
+Stopped at time : 30 ns : File "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/fifo2axis.v" Line 74
+Stopped at time : 40 ns : File "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/fifo2axis.v" Line 62
+Stopped at time : 50 ns : File "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/fifo2axis.v" Line 62
+Stopped at time : 50 ns : File "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/fifo2axis.v" Line 74
+Reversed = 24aca848
+Reversed = 817a9103
+Reversed = 906b2121
+Reversed = c66a0f8d
+Reversed = xxxxxxxx
+$finish called at time : 410 ns : File "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.srcs/sim_1/new/tb_pipeline_blockdesign.v" Line 90

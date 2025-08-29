@@ -1,0 +1,379 @@
+{
+  "design": {
+    "design_info": {
+      "boundary_crc": "0x9EF7993678F832DD",
+      "device": "xc7a100tcsg324-3",
+      "gen_directory": "../../../../tfm_freertos.gen/sources_1/bd/design_1",
+      "name": "design_1",
+      "rev_ctrl_bd_flag": "RevCtrlBdOff",
+      "synth_flow_mode": "Hierarchical",
+      "tool_version": "2023.2",
+      "validated": "true"
+    },
+    "design_tree": {
+      "bit_reverse_accel_1": "",
+      "fifo2axis_0": "",
+      "axis2fifo_0": ""
+    },
+    "ports": {
+      "done_flag_o": {
+        "direction": "O"
+      },
+      "dout_o": {
+        "direction": "O",
+        "left": "31",
+        "right": "0"
+      },
+      "din_i": {
+        "direction": "I",
+        "left": "31",
+        "right": "0"
+      },
+      "start_flag_i": {
+        "direction": "I"
+      },
+      "clk": {
+        "type": "clk",
+        "direction": "I",
+        "parameters": {
+          "ASSOCIATED_RESET": {
+            "value": "reset",
+            "value_src": "default"
+          },
+          "CLK_DOMAIN": {
+            "value": "design_1_clk_0",
+            "value_src": "default"
+          },
+          "FREQ_HZ": {
+            "value": "100000000",
+            "value_src": "default"
+          },
+          "FREQ_TOLERANCE_HZ": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "PHASE": {
+            "value": "0.0",
+            "value_src": "default"
+          }
+        }
+      },
+      "reset": {
+        "type": "rst",
+        "direction": "I",
+        "parameters": {
+          "INSERT_VIP": {
+            "value": "0",
+            "value_src": "default"
+          },
+          "POLARITY": {
+            "value": "ACTIVE_HIGH"
+          }
+        }
+      },
+      "read_i": {
+        "direction": "I"
+      },
+      "write_i": {
+        "direction": "I"
+      }
+    },
+    "components": {
+      "bit_reverse_accel_1": {
+        "vlnv": "xilinx.com:hls:bit_reverse_accel:1.0",
+        "ip_revision": "2114205346",
+        "xci_name": "design_1_bit_reverse_accel_0_0",
+        "xci_path": "ip/design_1_bit_reverse_accel_0_0/design_1_bit_reverse_accel_0_0.xci",
+        "inst_hier_path": "bit_reverse_accel_1"
+      },
+      "fifo2axis_0": {
+        "vlnv": "xilinx.com:module_ref:fifo2axis:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_fifo2axis_0_0",
+        "xci_path": "ip/design_1_fifo2axis_0_0/design_1_fifo2axis_0_0.xci",
+        "inst_hier_path": "fifo2axis_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "fifo2axis",
+          "boundary_crc": "0x0"
+        },
+        "interface_ports": {
+          "s_axis": {
+            "mode": "Master",
+            "vlnv_bus_definition": "xilinx.com:interface:axis:1.0",
+            "vlnv": "xilinx.com:interface:axis_rtl:1.0",
+            "parameters": {
+              "TDATA_NUM_BYTES": {
+                "value": "4",
+                "value_src": "constant"
+              },
+              "TDEST_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "TID_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "TUSER_WIDTH": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TREADY": {
+                "value": "1",
+                "value_src": "constant"
+              },
+              "HAS_TSTRB": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TKEEP": {
+                "value": "0",
+                "value_src": "constant"
+              },
+              "HAS_TLAST": {
+                "value": "1",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_0",
+                "value_src": "default_prop"
+              }
+            },
+            "port_maps": {
+              "TDATA": {
+                "physical_name": "s_axis_tdata",
+                "direction": "O",
+                "left": "31",
+                "right": "0"
+              },
+              "TLAST": {
+                "physical_name": "s_axis_tlast",
+                "direction": "I"
+              },
+              "TVALID": {
+                "physical_name": "s_axis_tvalid",
+                "direction": "O"
+              },
+              "TREADY": {
+                "physical_name": "s_axis_tready",
+                "direction": "I"
+              }
+            }
+          }
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_BUSIF": {
+                "value": "s_axis",
+                "value_src": "constant"
+              },
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_HIGH"
+              }
+            }
+          },
+          "din": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "start": {
+            "direction": "I"
+          },
+          "write": {
+            "direction": "I"
+          },
+          "start_accel": {
+            "direction": "O"
+          }
+        }
+      },
+      "axis2fifo_0": {
+        "vlnv": "xilinx.com:module_ref:axis2fifo:1.0",
+        "ip_revision": "1",
+        "xci_name": "design_1_axis2fifo_0_0",
+        "xci_path": "ip/design_1_axis2fifo_0_0/design_1_axis2fifo_0_0.xci",
+        "inst_hier_path": "axis2fifo_0",
+        "reference_info": {
+          "ref_type": "hdl",
+          "ref_name": "axis2fifo",
+          "boundary_crc": "0x0"
+        },
+        "ports": {
+          "clk": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_RESET": {
+                "value": "rst",
+                "value_src": "constant"
+              },
+              "CLK_DOMAIN": {
+                "value": "design_1_clk_0",
+                "value_src": "default_prop"
+              }
+            }
+          },
+          "rst": {
+            "type": "rst",
+            "direction": "I",
+            "parameters": {
+              "POLARITY": {
+                "value": "ACTIVE_HIGH"
+              }
+            }
+          },
+          "result_data": {
+            "direction": "I",
+            "left": "31",
+            "right": "0"
+          },
+          "last": {
+            "direction": "I"
+          },
+          "valid_result": {
+            "direction": "I"
+          },
+          "ready_for_results": {
+            "direction": "O"
+          },
+          "dout": {
+            "direction": "O",
+            "left": "31",
+            "right": "0"
+          },
+          "done": {
+            "direction": "O"
+          },
+          "read": {
+            "direction": "I"
+          }
+        }
+      }
+    },
+    "nets": {
+      "Net": {
+        "ports": [
+          "axis2fifo_0/ready_for_results",
+          "bit_reverse_accel_1/m_axis_TREADY"
+        ]
+      },
+      "axis2fifo_0_done": {
+        "ports": [
+          "axis2fifo_0/done",
+          "done_flag_o"
+        ]
+      },
+      "axis2fifo_0_dout": {
+        "ports": [
+          "axis2fifo_0/dout",
+          "dout_o"
+        ]
+      },
+      "bit_reverse_accel_1_m_axis_TDATA": {
+        "ports": [
+          "bit_reverse_accel_1/m_axis_TDATA",
+          "axis2fifo_0/result_data"
+        ]
+      },
+      "bit_reverse_accel_1_m_axis_TLAST": {
+        "ports": [
+          "bit_reverse_accel_1/m_axis_TLAST",
+          "axis2fifo_0/last",
+          "fifo2axis_0/s_axis_tlast"
+        ]
+      },
+      "bit_reverse_accel_1_m_axis_TVALID": {
+        "ports": [
+          "bit_reverse_accel_1/m_axis_TVALID",
+          "axis2fifo_0/valid_result"
+        ]
+      },
+      "bit_reverse_accel_1_s_axis_TREADY": {
+        "ports": [
+          "bit_reverse_accel_1/s_axis_TREADY",
+          "fifo2axis_0/s_axis_tready"
+        ]
+      },
+      "clk_0_1": {
+        "ports": [
+          "clk",
+          "bit_reverse_accel_1/ap_clk",
+          "axis2fifo_0/clk",
+          "fifo2axis_0/clk"
+        ]
+      },
+      "fifo2axis_0_s_axis_tdata": {
+        "ports": [
+          "fifo2axis_0/s_axis_tdata",
+          "bit_reverse_accel_1/s_axis_TDATA"
+        ]
+      },
+      "fifo2axis_0_s_axis_tvalid": {
+        "ports": [
+          "fifo2axis_0/s_axis_tvalid",
+          "bit_reverse_accel_1/s_axis_TVALID"
+        ]
+      },
+      "fifo2axis_0_start_accel": {
+        "ports": [
+          "fifo2axis_0/start_accel",
+          "bit_reverse_accel_1/ap_rst_n"
+        ]
+      },
+      "fifo_data_0_1": {
+        "ports": [
+          "din_i",
+          "fifo2axis_0/din"
+        ]
+      },
+      "read_0_1": {
+        "ports": [
+          "read_i",
+          "axis2fifo_0/read"
+        ]
+      },
+      "rst_0_1": {
+        "ports": [
+          "reset",
+          "axis2fifo_0/rst",
+          "fifo2axis_0/rst"
+        ]
+      },
+      "start_0_1": {
+        "ports": [
+          "start_flag_i",
+          "fifo2axis_0/start"
+        ]
+      },
+      "write_0_1": {
+        "ports": [
+          "write_i",
+          "fifo2axis_0/write"
+        ]
+      }
+    }
+  }
+}

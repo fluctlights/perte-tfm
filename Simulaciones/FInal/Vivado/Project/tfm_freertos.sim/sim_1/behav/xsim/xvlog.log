@@ -1,0 +1,23 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/fifo2axis.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module fifo2axis
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/axis2fifo.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module axis2fifo
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.gen/sources_1/bd/design_1/ipshared/f352/hdl/verilog/bit_reverse_accel_hls_deadlock_idx0_monitor.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bit_reverse_accel_hls_deadlock_idx0_monitor
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.gen/sources_1/bd/design_1/ipshared/f352/hdl/verilog/bit_reverse_accel_regslice_both.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bit_reverse_accel_regslice_both
+INFO: [VRFC 10-311] analyzing module bit_reverse_accel_regslice_both_w1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.gen/sources_1/bd/design_1/ipshared/f352/hdl/verilog/bit_reverse_accel.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module bit_reverse_accel
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.ip_user_files/bd/design_1/ip/design_1_bit_reverse_accel_0_0/sim/design_1_bit_reverse_accel_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_bit_reverse_accel_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.ip_user_files/bd/design_1/ip/design_1_fifo2axis_0_0/sim/design_1_fifo2axis_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_fifo2axis_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.ip_user_files/bd/design_1/ip/design_1_axis2fifo_0_0/sim/design_1_axis2fifo_0_0.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_axis2fifo_0_0
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.ip_user_files/bd/design_1/sim/design_1.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.gen/sources_1/bd/design_1/hdl/design_1_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module design_1_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.srcs/sim_1/new/tb_pipeline_blockdesign.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tb_pipeline_blockdesign

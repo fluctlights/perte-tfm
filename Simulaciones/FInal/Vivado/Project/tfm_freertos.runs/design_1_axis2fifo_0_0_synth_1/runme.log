@@ -1,0 +1,220 @@
+
+*** Running vivado
+    with args -log design_1_axis2fifo_0_0.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source design_1_axis2fifo_0_0.tcl
+
+
+****** Vivado v2023.2 (64-bit)
+  **** SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+
+source design_1_axis2fifo_0_0.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1324.941 ; gain = 0.023 ; free physical = 2384 ; free virtual = 13624
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository '/home/fluctlights/HlsProjects/bit_reversal/solution2/impl/ip'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository '/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vivado/2023.2/data/ip'.
+INFO: [IP_Flow 19-6924] IPCACHE: Running cache check for IP inst: design_1_axis2fifo_0_0
+Command: synth_design -top design_1_axis2fifo_0_0 -part xc7a100tcsg324-3 -incremental_mode off -mode out_of_context
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Designutils 20-5008] Incremental synthesis strategy off
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 4 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 571949
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1713.602 ; gain = 388.660 ; free physical = 1736 ; free virtual = 12976
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'design_1_axis2fifo_0_0' [/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.gen/sources_1/bd/design_1/ip/design_1_axis2fifo_0_0/synth/design_1_axis2fifo_0_0.v:53]
+INFO: [Synth 8-6157] synthesizing module 'axis2fifo' [/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/axis2fifo.v:6]
+	Parameter DATA_WIDTH bound to: 32 - type: integer 
+	Parameter THRESHOLD bound to: 4 - type: integer 
+	Parameter DEPTH bound to: 10 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'axis2fifo' (0#1) [/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/axis2fifo.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'design_1_axis2fifo_0_0' (0#1) [/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.gen/sources_1/bd/design_1/ip/design_1_axis2fifo_0_0/synth/design_1_axis2fifo_0_0.v:53]
+WARNING: [Synth 8-6014] Unused sequential element state_reg was removed.  [/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/axis2fifo.v:42]
+WARNING: [Synth 8-7137] Register buffer_reg in module axis2fifo has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code 
+WARNING: [Synth 8-7137] Register next_state_reg in module axis2fifo has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/axis2fifo.v:48]
+WARNING: [Synth 8-7137] Register dout_reg in module axis2fifo has both Set and reset with same priority. This may cause simulation mismatches. Consider rewriting code  [/home/fluctlights/Escritorio/PERTE/TFM/SImulaciones/FInal/Vivado/RTL_Files/axis2fifo.v:89]
+WARNING: [Synth 8-4767] Trying to implement RAM 'buffer_reg' in registers. Block RAM or DRAM implementation is not possible; see log for reasons.
+Reason is one or more of the following :
+	1: RAM is sensitive to asynchronous reset signal. this RTL style is not supported. 
+RAM "buffer_reg" dissolved into registers
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1786.570 ; gain = 461.629 ; free physical = 1635 ; free virtual = 12876
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1804.383 ; gain = 479.441 ; free physical = 1635 ; free virtual = 12875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-3
+INFO: [Device 21-403] Loading part xc7a100tcsg324-3
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1812.387 ; gain = 487.445 ; free physical = 1635 ; free virtual = 12875
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1821.293 ; gain = 496.352 ; free physical = 1631 ; free virtual = 12873
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 5     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   4 Input   32 Bit        Muxes := 1     
+	   6 Input    3 Bit        Muxes := 1     
+	   5 Input    2 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 2     
+	   2 Input    1 Bit        Muxes := 7     
+	   5 Input    1 Bit        Muxes := 8     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1496 ; free virtual = 12718
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1496 ; free virtual = 12718
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1496 ; free virtual = 12718
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-----+------+
+|      |Cell |Count |
++------+-----+------+
+|1     |LUT3 |     2|
+|2     |LUT4 |     2|
+|3     |LUT5 |    10|
+|4     |LUT6 |    36|
+|5     |FDCE |     4|
+|6     |FDRE |   163|
++------+-----+------+
+
+Report Instance Areas: 
++------+---------+----------+------+
+|      |Instance |Module    |Cells |
++------+---------+----------+------+
+|1     |top      |          |   217|
+|2     |  inst   |axis2fifo |   217|
++------+---------+----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 6 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.629 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+Synthesis Optimization Complete : Time (s): cpu = 00:00:13 ; elapsed = 00:00:13 . Memory (MB): peak = 1971.637 ; gain = 646.688 ; free physical = 1511 ; free virtual = 12725
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1971.637 ; gain = 0.000 ; free physical = 1692 ; free virtual = 12906
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2109.312 ; gain = 0.000 ; free physical = 1644 ; free virtual = 12858
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: 85c908ae
+INFO: [Common 17-83] Releasing license: Synthesis
+19 Infos, 6 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:15 . Memory (MB): peak = 2109.348 ; gain = 784.406 ; free physical = 1644 ; free virtual = 12858
+INFO: [Common 17-2834] synth_design peak Physical Memory [PSS] (MB): overall = 1621.581; main = 1377.869; forked = 377.509
+INFO: [Common 17-2834] synth_design peak Virtual Memory [VSS] (MB): overall = 2968.527; main = 2109.316; forked = 996.895
+INFO: [Timing 38-35] Done setting XDC timing constraints.
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2472.285 ; gain = 0.000 ; free physical = 1502 ; free virtual = 12716
+INFO: [Common 17-1381] The checkpoint '/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.runs/design_1_axis2fifo_0_0_synth_1/design_1_axis2fifo_0_0.dcp' has been generated.
+write_checkpoint: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2472.285 ; gain = 362.938 ; free physical = 1478 ; free virtual = 12693
+INFO: [Coretcl 2-1648] Added synthesis output to IP cache for IP design_1_axis2fifo_0_0, cache-ID = a8c7a4301a0b4903
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2472.285 ; gain = 0.000 ; free physical = 1430 ; free virtual = 12644
+INFO: [Common 17-1381] The checkpoint '/home/fluctlights/VivadoProjects/tfm_freertos/tfm_freertos.runs/design_1_axis2fifo_0_0_synth_1/design_1_axis2fifo_0_0.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file design_1_axis2fifo_0_0_utilization_synth.rpt -pb design_1_axis2fifo_0_0_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Aug 29 14:30:45 2025...
