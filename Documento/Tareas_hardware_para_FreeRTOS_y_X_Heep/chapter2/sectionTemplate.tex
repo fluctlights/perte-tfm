@@ -178,6 +178,7 @@ La diferencia principal entre ambos es que el módulo RTL es un diseño abierto 
 \vspace{0.4em} % Espacio vertical entre párrafos
 
 \begin{adjustwidth}{1.5cm}{}
+\label{st:topModule}
 \textbf{Módulo Top} \vspace{0.25cm} \\
 El módulo top (conocido también por \textit{top-level module}) es la unidad más elevada en la jerarquía de la arquitectura del sistema \textit{hardware} diseñado. Este módulo no es instanciado dentro de otro, y sirve como contenedor de todos los submódulos necesarios para materializar el diseño completo, actuando como el punto de integración final antes de su implementación física \cite{infoTop}. Es en el módulo Top donde se define y organiza la interfaz global con el exterior, como los pines I/O de un FPGA, a la vez que sincroniza la interconexión entre bloques internos que tiene instanciados.
 \end{adjustwidth}
@@ -185,6 +186,7 @@ El módulo top (conocido también por \textit{top-level module}) es la unidad m�
 \vspace{0.4em} % Espacio vertical entre párrafos
 
 \begin{adjustwidth}{1.5cm}{}
+\label{st:wrapper}
 \textbf{Wrapper} \vspace{0.25cm} \\
 Por otra parte, el \textit{wrapper} desempeña un rol igualmente crucial como intermediario entre un módulo RTL o IP ya existente con el resto del sistema. En plataformas como Vivado Design Suite, herramienta empleada en este trabajo, el \textit{wrapper} se genera para conectar los puertos de entrada y salida del diseño con los pines físicos definidos en el archivo de restricciones. Asimismo, el \textit{wrapper} también facilita la adaptación entre jerarquías, ajustes en nombres de señales o protocolos, y la integración de módulos que de otra forma serían incompatibles \cite{infoWrapper}. El uso de \textit{wrappers} permite mantener la integridad del módulo original (por ejemplo, un IP de terceros), mientras se ajusta a requerimientos externos sin modificar su código fuente. El objetivo general de un \textit{wrapper} es, en múltiples ocasiones, facilitar la conectividad exclusivamente, lo que hace que casi siempre estén carentes de lógica específica. 
 
@@ -199,7 +201,7 @@ En el diseño de \textit{hardware} digital, el concepto de \emph{Block Design} s
 
 Una de las principales ventajas del enfoque de Block Design es la modularidad, permitiéndose el reuso de IPs de terceros, así como módulos personalizados, dentro de un mismo desarrollo. De esta manera, no se necesita trabajar directamente a nivel de puertas lógicas o escribir RTL desde cero, basta con importar cada componente dentro del diseño y generar un \textit{wrapper} que contenga información de todos los presentes dentro del mismo. Así, se acelera el proceso de desarrollo y mejora la escalabilidad del diseño, permitiendo a la vez una visualización clara y jerárquica del sistema, útil para entender y depurar arquitecturas complejas \cite{infoBlockDesign} \cite{maxfield2004design}.
 
-En la práctica, este método es ampliamente utilizado en el desarrollo \textit{hardware}. En el contexto de este trabajo, se ha realizado el desarrollo del diseño a nivel \textit{hardware} precisamente sobre un Block Design, por la buena integración y facilidad de uso dentro de Vivado Design Suite.En la figura \ref{fig:bdVivado} se presenta un ejemplo de Block Design realizado con Vivado Design Suite
+En la práctica, este método es ampliamente utilizado en el desarrollo \textit{hardware}. En el contexto de este trabajo, se ha realizado el desarrollo del diseño a nivel \textit{hardware} precisamente sobre un Block Design, por la cómoda integración y facilidad de uso dentro de Vivado Design Suite.En la figura \ref{fig:bdVivado} se presenta un ejemplo de Block Design realizado con Vivado Design Suite
 
 \begin{figure}[!ht]
   \centering
@@ -207,47 +209,120 @@ En la práctica, este método es ampliamente utilizado en el desarrollo \textit{
   \caption{Block Design del diseño realizado en Vivado}
   \label{fig:bdVivado}
 \end{figure}
-
 \end{adjustwidth}
 
+\vspace{0.4em} % Espacio vertical entre párrafos
+
 \begin{adjustwidth}{1.5cm}{}
+\label{st:testbench}
 \textbf{Testbench} \vspace{0.25cm} \\
 En el diseño de circuitos digitales, un \emph{testbench} o banco de pruebas es un archivo escrito generalmente en lenguajes HDL como Verilog, y su función principal es aplicar estímulos al circuito bajo prueba, el \ac{DUT}, (o el \ac{UUT}, si se quiere probar un módulo y no el conjunto completo), para finalmente observar las respuestas que se producen, y así comprobar el cumplimiento de los requisitos. El testbench no es un módulo más del diseño; es una herramienta de simulación. Dentro de él, se generan señales de entrada, se definen patrones de prueba (como impulsos de reloj, valores de datos, resets, etc.) y se supervisan las salidas del DUT por medio de equivalencias con lo esperado y aserciones.
 
 Existen distintos niveles de sofisticación en los testbenchs: desde versiones simples que solo aplican algunos vectores de entrada manualmente, hasta entornos más complejos con generación automática de estímulos, verificación dirigida por cobertura (coverage-driven verification), e incluso entornos basados en metodologías formales como UVM (Universal Verification Methodology). En el máster se ha trabajado con UVM, sin embargo, los testbenchs realizados no lo emplean principalmente por errores incomprensibles al intentar integrarlo en el testbench utilizado para las simulaciones en Vivado.
 \end{adjustwidth}
 
-\subsection{Herramientas utilizadas}
+\vspace{0.4em} % Espacio vertical entre párrafos
 
-\subsubsection{X-HEEP}
-\label{st:xheep}
-\ac{X-HEEP} \cite{machetti2024xheep} \cite{xheepInfo} es una plataforma RISC-V \textit{open-source}, diseñada como microcontrolador configurable y extensible, desarrollada en SystemVerilog por el \ac{EPFL}. Su arquitectura permite personalización en niveles como \textit{cores}, periféricos, memorias y topologías para habilitar aceleradores especializados sin modificar el \ac{MCU} base. Además, soporta múltiples flujos de simulación para pruebas y verificación, destacando Verilator, así como despliegue físico en FPGAs y ASICs, dando resultado a implementaciones como HEEPocrates o X-TRELA \cite{xheepInfoASIC}. A modo de resumen, se puede decir que X-HEEP es una plataforma de prototipado y simulación a nivel de \ac{SoC} RISC-V con capacidad de ir desde simulación RTL hasta emulación en FPGA y implementación en ASIC. Sin embargo, aunque se ha hablado sobre X-HEEP, lo cierto es que, en realidad, se haá uso de un \textit{fork} de X-HEEP llamado GR-HEEP \cite{grheepInfo}, preparado para el uso de periféricos y aceleradores externos, como el desarrollado en este proyecto.
+\begin{adjustwidth}{1.5cm}{}
+\label{st:axiStream}
+\textbf{AXI Stream} \vspace{0.25cm} \\
+El protocolo \ac{AXI} Stream es una interfaz estándar de un solo sentido utilizada para la transmisión de datos de forma continua y eficiente entre componentes conectados, sin necesidad de direcciones o complejas fases de control \cite{arm-doc}. Constituye un enlace punto a punto entre un transmisor (\emph{master}) y un receptor (\emph{slave}), basado en una simple señalización de \textit{handshake} mediante un par de señales: 
 
-En lo que respecta a su arquitectura, el diseño modular de X-HEEP está dividido en distintos dominios de energía (CPU, periféricos, memoria, always-on), optimizando el consumo y permitiendo habilitar/deshabilitar componentes según necesidad. Emplea cores del OpenHW Group como CVE2, CV32E40P(X), todos RISC-V de 32 bits estilo Harvard y sin cache, ideales para escenarios ultra-low-power y RTOS integrados. \cite{xheepDocs}. En \ref{tbl:xheepArch} se presentan los principales dominios en detalle. Finalmente, en la figura \ref{fig:xheepArch} se presenta un diagrama de la arquitectura en cuestión.
+\begin{itemize}
+    \item \texttt{TVALID}: indica que el transmisor está enviando datos válidos.  
+    \item \texttt{TREADY}: indica que el receptor está listo para recibir datos.  
+\end{itemize}
+
+Cuando se cumple la condición de que ambas señales están en alto en el mismo ciclo, se realiza la transferencia de datos por \texttt{TDATA} \cite{infoHandshakeAXI}. Para determinar si el dato a enviar es el último o no se tiene la señal \texttt{TLAST}, también empleada en este proyecto para implementar correctamente el flujo de los datos. Hay más señales, como \texttt{TKEEP}, \texttt{TSTRB}, \texttt{TID}, \texttt{TDEST} o \texttt{TUSER}, que permiten delimitar paquetes, identificar flujos o transmitir datos auxiliares \cite{amd-hls}, aunque estas últimas no tendrán relevancia en este proyecto.
+
+El esquema básico del \textit{handshake} se presenta en \ref{fig:handshakeAXI}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=8cm]{figures/handshakeAXI.png}
+  \caption{Handshake básico del protocolo AXI. Fuente: \cite{infoHandshakeAXI}}
+  \label{fig:handshakeAXI}
+\end{figure}
+\end{adjustwidth}
+
+\vspace{0.4em} % Espacio vertical entre párrafos
+
+\begin{adjustwidth}{1.5cm}{}
+\label{st:obi}
+\textbf{OBI} \vspace{0.25cm} \\
+\ac{OBI} es un protocolo abierto, como su propio nombre indica, empleado en la arquitectura RISC-V, especialmente dentro del proyecto CORE-V del grupo OpenHW, para interconexiones punto a punto entre núcleos como el CV32E40* y módulos de memoria o periféricos \cite{infoOBI} \cite{ openhw-docs}.   
+
+OBI se distingue por su diseño simple y eficiente, enfocado en facilitar la interconexión entre IPs abiertos dentro del ecosistema RISC-V, sin la complejidad de protocolos más pesados, lo que favorece la implementación modular y la interoperabilidad. En el contexto de este trabajo, se trabajará tanto con los protocolos AXI Stream, para el acelerador, y OBI, para comunicar el diseño desarrollado con la plataforma completa creada con X-HEEP.
+
+Las diferencias entre AXI-Stream y OBI se presentan en \ref{tbl:diferenciasAxiObi}
 
 \begin{table}[h!]
 \centering
-\caption{Dominios del SoC X-HEEP}
-\label{tab:dominios_xheep_texto}
-\begin{tabular}{|l|p{9cm}|}
-\hline
-\textbf{Dominio} & \textbf{Descripción resumida} \\ \hline
-CPU Subsystem & Núcleos RISC-V OpenHW de 32 bits (CVE2, CV32E40P, CV32E40PX, CV32E40X), arquitectura Harvard sin caché, protocolo OBI, diseñados para bajo consumo y con capacidad de apagado completo o por clock-gating. \\ \hline
-Memory Banks & Múltiples bancos de memoria independientes para instrucciones y datos, accesibles en paralelo sin conflictos, con control granular de energía mediante clock-gating, retención o apagado individual. \\ \hline
-Peripheral Subsystem & Conjunto de periféricos generales (timer, PLIC, I2C, SPI, 24 GPIO) conectados por una única interfaz con decodificación interna, con posibilidad de apagado o reducción de consumo cuando están inactivos. \\ \hline
-Always-On Peripherals & Periféricos e IPs críticos que permanecen activos todo el tiempo (controlador SoC, boot ROM, gestor de energía, fast interrupt, DMA, timer, UART, 2 SPI, 8 GPIO), sin aplicar técnicas de apagado de energía. \\ \hline
-\end{tabular}
-\label{tbl:xheepArch}
+  \begin{tabular}{|>{\bfseries}m{4cm}|m{5.5cm}|m{5.5cm}|}
+    \hline
+    Característica & AXI-Stream & OBI (Open Bus Interface) \\
+    \hline
+    Tipo de comunicación & Flujo de datos continuo, unidireccional, sin direccionamiento. & Transacciones direccionadas (lectura/escritura) hacia memoria y periféricos. \\
+    \hline
+    Uso principal & Transmisión de datos en tiempo real: vídeo, señales digitales, comunicaciones. & Interconexión de CPU RISC-V con memoria y periféricos. \\
+    \hline
+    Señales clave & \texttt{TVALID}, \texttt{TREADY}, \texttt{TDATA}, opcionalmente \texttt{TLAST}, \texttt{TKEEP}, etc. & Señales de dirección, datos de lectura/escritura, tamaño de acceso (byte, media palabra, palabra). \\
+    \hline
+    Complejidad & Simple, diseñado solo para transferencias de datos. & Ligero, pero más completo: soporta direccionamiento y control. \\
+    \hline
+    Flexibilidad & Altamente eficiente para flujos secuenciales y de gran ancho de banda. & Diseñado para ser modular, interoperable y escalable en sistemas RISC-V. \\
+    \hline
+    Ejemplo de aplicación & Pipeline de datos en procesadores de señal digital (DSP) o bloques de vídeo. & Interfaz Harvard en procesadores CORE-V (separación de instrucciones y datos). \\
+    \hline
+  \end{tabular}
+\caption{Comparación entre AXI-Stream y OBI}
+\label{tbl:diferenciasAxiObi}
 \end{table}
+\end{adjustwidth}
+
+\subsection{Herramientas utilizadas}
+
+\subsubsection{X-HEEP y GR-HEEP}
+\label{st:xheep}
+\ac{X-HEEP} \cite{machetti2024xheep} \cite{xheepInfo} es una plataforma RISC-V \textit{open-source}, diseñada como microcontrolador configurable y extensible, desarrollada en SystemVerilog por el \ac{EPFL}. Su arquitectura permite personalización en niveles como \textit{cores}, periféricos, memorias y topologías para habilitar aceleradores especializados sin modificar el \ac{MCU} base. Además, soporta múltiples flujos de simulación para pruebas y verificación, destacando Verilator, así como despliegue físico en FPGAs y ASICs, dando resultado a implementaciones como HEEPocrates o X-TRELA \cite{xheepInfoASIC}. A modo de resumen, se puede decir que X-HEEP es una plataforma de prototipado y simulación a nivel de \ac{SoC} RISC-V con capacidad de ir desde simulación RTL hasta emulación en FPGA y implementación en ASIC. Sin embargo, aunque se ha hablado sobre X-HEEP, lo cierto es que, en realidad, se hará uso de una extensión de X-HEEP llamado \ac{GR-HEEP} \cite{grheepInfo}, realizada por la Universidad de Bolonia, y que pretente proporcionar una plataforma más completa y preconfigurada para el uso de periféricos y aceleradores externos, como el desarrollado en este proyecto. Las diferencias entre uno y otro se presentan en \ref{tbl:difsXheepGrheep}.
+
+\begin{table}[h]
+\centering
+  \begin{tabular}{|l|p{7cm}|p{6cm}|}
+    \hline
+    \textbf{Aspecto} & \textbf{X-HEEP} & \textbf{GR-HEEP} \\
+    \hline
+    \textbf{Naturaleza} & Plataforma base minimalista & Extensión preconfigurada de X-HEEP \\
+    \hline
+    \textbf{Desarrollador} & EPFL ESL Lab & VISI Lab, Universidad de Bologna \\
+    \hline
+    \textbf{Repositorio} & \texttt{esl-epfl/x-heep} & \texttt{visi-lab/GR-HEEP} \\
+    \hline
+    \textbf{Propósito} & Exploración de aceleradores de ultra-baja potencia & Plataforma genérica para prototipado rápido \\
+    \hline
+    \textbf{Complejidad} & Diseño minimalista y esencial & Más complejo con periféricos adicionales \\
+    \hline
+    \textbf{Extensibilidad} & Diseñado para extensión desde cero & Pre-extendido pero aún modificable \\
+    \hline
+    \textbf{Configuración} & Mediante \texttt{mcu-gen} y archivos JSON & Hereda de X-HEEP con configuraciones adicionales \\
+    \hline
+    \textbf{Periféricos} & Básicos, orientados a investigación & Amplia gama (UART, I2C, SPI, etc.) \\
+    \hline
+    \textbf{Caso de uso} & Investigación y desarrollo personalizado & Aplicaciones prácticas e integración rápida \\
+    \hline
+  \end{tabular}
+\caption{Comparación entre X-HEEP y GR-HEEP}
+\label{tbl:difsXheepGrheep}
+\end{table}
+
+En lo que respecta a su arquitectura, el diseño modular de GR-HEEP, al igual que el de X-HEEP, está dividido en distintos dominios de energía (CPU, periféricos, memoria, always-on), optimizando el consumo y permitiendo habilitar/deshabilitar componentes según necesidad. Emplea cores del OpenHW Group como CVE2, CV32E40P(X), todos RISC-V de 32 bits estilo Harvard y sin cache, ideales para escenarios ultra-low-power y RTOS integrados \cite{xheepDocs}. Finalmente, en la figura \ref{fig:xheepArch} se presenta un diagrama de la arquitectura de X-HEEP, sobre la que se basa GR-HEEP en cuestión.
 
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=11cm]{figures/xheepArch.png}
-  \caption{Arquitectura de X-HEEP. Fuente: \cite{xheepInfo}}
+  \caption{Arquitectura de X-HEEP, sobre la que se basa GR-HEEP. Fuente: \cite{xheepInfo}}
   \label{fig:xheepArch}
 \end{figure}
-
-
 
 \subsubsection{Verilog}
 Creado en 1984 por Phil Moorby y Prabhu Goel en Gateway Design Automation, su diseño buscaba una sintaxis familiar a programadores en C, lo que contribuyó a su rápida adopción. Fue estandarizado por primera vez como IEEE 1364-1995 (“Verilog-95”), seguido por revisiones en 2001 y 2005. En 2009, Verilog fue fusionado dentro de SystemVerilog bajo el estándar IEEE 1800-2009 y actualmente forma parte del estándar unificado IEEE 1800-2023. \cite{verilogEstandar}  Verilog ocupa un lugar central en el diseño digital moderno debido a su equilibrio entre legibilidad, flexibilidad y potencia. Fue originalmente un lenguaje propietario en los años 80, diseñado para modelado de hardware, y en la década de los 90 se abrió al dominio público a través de Open Verilog International (OVI), que lo llevó a estandarización del \ac{IEEE} \cite{verilogHistoria}. Su adopción global y la abundancia de herramientas de simulación y síntesis compatibles lo han consolidado como uno de los pilares del diseño digital moderno. En \ref{lst:verilogEjemplo} puede verse un ejemplo de un sumador desarrollado en Verilog.

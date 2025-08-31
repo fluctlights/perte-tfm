@@ -55,6 +55,7 @@
 \newacro{FPGA}[\AC@hyperlink{FPGA}{FPGA}]{Field Programmable Gate Array}
 \newacro{FSM}[\AC@hyperlink{FSM}{FSM}]{Finite State Machine}
 \newacro{GCC}[\AC@hyperlink{GCC}{GCC}]{GNU Compiler Collection}
+\newacro{GR-HEEP}[\AC@hyperlink{GR-HEEP}{GR-HEEP}]{Generic Rich HEEP}
 \newacro{HDL}[\AC@hyperlink{HDL}{HDL}]{Hardware Description Languages}
 \newacro{HLS}[\AC@hyperlink{HLS}{HLS}]{High-Level Synthesis}
 \newacro{IA}[\AC@hyperlink{IA}{IA}]{Inteligencia Artifical}
@@ -74,18 +75,21 @@
 \newacro{TFM}[\AC@hyperlink{TFM}{TFM}]{Trabajo Fin de Máster}
 \newacro{UUT}[\AC@hyperlink{UUT}{UUT}]{Unit Under Test}
 \newacro{VHDL}[\AC@hyperlink{VHDL}{VHDL}]{Very High Speed Integrated Circuit Hardware Description Language}
+\newacro{X-AIF}[\AC@hyperlink{X-AIF}{X-AIF}]{eXtendible Accelerator InterFace}
 \newacro{X-HEEP}[\AC@hyperlink{X-HEEP}{X-HEEP}]{eXtendable Heterogeneous Energy-Efficient Platform}
 \HyPL@Entry{18<</S/R>>}
 \@writefile{@@@}{\chapterbegin }
 \citation{xheepLogo}
 \citation{chipFoto}
 \citation{nexysFoto}
+\citation{infoHandshakeAXI}
 \citation{xheepInfo}
 \citation{freeRTOSLogo}
+\citation{documentoPractica5}
 \@writefile{@@@}{\chapterbegin }
 \citation{nvidiaRISCV}
 \citation{machetti2024xheep}
-\HyPL@Entry{21<</S/D>>}
+\HyPL@Entry{24<</S/D>>}
 \@writefile{toc}{\contentsline {chapter}{\numberline {1}Introducción}{1}{chapter.1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
@@ -247,6 +251,10 @@
 \citation{infoTop}
 \citation{infoWrapper}
 \acronymused{IP}
+\newlabel{st:topModule}{{2.1.4}{13}{Conceptos clave}{table.caption.35}{}}
+\newlabel{st:topModule@cref}{{[subsection][4][2,1]2.1.4}{[1][13][]13}}
+\newlabel{st:wrapper}{{2.1.4}{13}{Conceptos clave}{table.caption.35}{}}
+\newlabel{st:wrapper@cref}{{[subsection][4][2,1]2.1.4}{[1][13][]13}}
 \citation{infoWrapper}
 \citation{infoBlockDesign}
 \citation{infoBlockDesign}
@@ -255,6 +263,8 @@
 \newlabel{acro:AXI}{{2.1.4}{14}{Conceptos clave}{section*.36}{}}
 \newlabel{acro:AXI@cref}{{[subsection][4][2,1]2.1.4}{[1][14][]14}}
 \acronymused{AXI}
+\newlabel{st:testbench}{{2.1.4}{14}{Conceptos clave}{figure.caption.37}{}}
+\newlabel{st:testbench@cref}{{[subsection][4][2,1]2.1.4}{[1][14][]14}}
 \AC@undonewlabel{acro:DUT}
 \newlabel{acro:DUT}{{2.1.4}{14}{Conceptos clave}{section*.38}{}}
 \newlabel{acro:DUT@cref}{{[subsection][4][2,1]2.1.4}{[1][14][]14}}
@@ -263,214 +273,309 @@
 \newlabel{acro:UUT}{{2.1.4}{14}{Conceptos clave}{section*.39}{}}
 \newlabel{acro:UUT@cref}{{[subsection][4][2,1]2.1.4}{[1][14][]14}}
 \acronymused{UUT}
+\citation{arm-doc}
+\citation{infoHandshakeAXI}
+\citation{amd-hls}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Block Design del diseño realizado en Vivado\relax }}{15}{figure.caption.37}\protected@file@percent }
+\newlabel{fig:bdVivado}{{2.3}{15}{Block Design del diseño realizado en Vivado\relax }{figure.caption.37}{}}
+\newlabel{fig:bdVivado@cref}{{[figure][3][2]2.3}{[1][14][]15}}
+\newlabel{st:axiStream}{{2.1.4}{15}{Conceptos clave}{figure.caption.37}{}}
+\newlabel{st:axiStream@cref}{{[subsection][4][2,1]2.1.4}{[1][15][]15}}
+\acronymused{AXI}
+\citation{infoHandshakeAXI}
+\citation{infoOBI}
+\citation{openhw-docs}
 \citation{machetti2024xheep}
 \citation{xheepInfo}
 \citation{xheepInfoASIC}
 \citation{grheepInfo}
-\citation{xheepDocs}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.3}{\ignorespaces Block Design del diseño realizado en Vivado\relax }}{15}{figure.caption.37}\protected@file@percent }
-\newlabel{fig:bdVivado}{{2.3}{15}{Block Design del diseño realizado en Vivado\relax }{figure.caption.37}{}}
-\newlabel{fig:bdVivado@cref}{{[figure][3][2]2.3}{[1][14][]15}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}Herramientas utilizadas}{15}{subsection.2.1.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{X-HEEP}{15}{section*.40}\protected@file@percent }
-\newlabel{st:xheep}{{2.1.5}{15}{X-HEEP}{section*.40}{}}
-\newlabel{st:xheep@cref}{{[subsection][5][2,1]2.1.5}{[1][15][]15}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Handshake básico del protocolo AXI. Fuente: \cite  {infoHandshakeAXI}\relax }}{16}{figure.caption.40}\protected@file@percent }
+\newlabel{fig:handshakeAXI}{{2.4}{16}{Handshake básico del protocolo AXI. Fuente: \cite {infoHandshakeAXI}\relax }{figure.caption.40}{}}
+\newlabel{fig:handshakeAXI@cref}{{[figure][4][2]2.4}{[1][16][]16}}
+\newlabel{st:obi}{{2.1.4}{16}{Conceptos clave}{figure.caption.40}{}}
+\newlabel{st:obi@cref}{{[subsection][4][2,1]2.1.4}{[1][16][]16}}
+\AC@undonewlabel{acro:OBI}
+\newlabel{acro:OBI}{{2.1.4}{16}{Conceptos clave}{section*.41}{}}
+\newlabel{acro:OBI@cref}{{[subsection][4][2,1]2.1.4}{[1][16][]16}}
+\acronymused{OBI}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1.5}Herramientas utilizadas}{16}{subsection.2.1.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{X-HEEP y GR-HEEP}{16}{section*.43}\protected@file@percent }
+\newlabel{st:xheep}{{2.1.5}{16}{X-HEEP y GR-HEEP}{section*.43}{}}
+\newlabel{st:xheep@cref}{{[subsection][5][2,1]2.1.5}{[1][16][]16}}
 \acronymused{X-HEEP}
 \acronymused{EPFL}
 \AC@undonewlabel{acro:MCU}
-\newlabel{acro:MCU}{{2.1.5}{15}{X-HEEP}{section*.41}{}}
-\newlabel{acro:MCU@cref}{{[subsection][5][2,1]2.1.5}{[1][15][]15}}
+\newlabel{acro:MCU}{{2.1.5}{16}{X-HEEP y GR-HEEP}{section*.44}{}}
+\newlabel{acro:MCU@cref}{{[subsection][5][2,1]2.1.5}{[1][16][]16}}
 \acronymused{MCU}
-\AC@undonewlabel{acro:SoC}
-\newlabel{acro:SoC}{{2.1.5}{15}{X-HEEP}{section*.42}{}}
-\newlabel{acro:SoC@cref}{{[subsection][5][2,1]2.1.5}{[1][15][]15}}
-\acronymused{SoC}
+\citation{xheepDocs}
 \citation{xheepInfo}
 \citation{verilogEstandar}
 \citation{verilogHistoria}
-\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Dominios del SoC X-HEEP\relax }}{16}{table.caption.43}\protected@file@percent }
-\newlabel{tab:dominios_xheep_texto}{{2.4}{16}{Dominios del SoC X-HEEP\relax }{table.caption.43}{}}
-\newlabel{tab:dominios_xheep_texto@cref}{{[table][4][2]2.4}{[1][16][]16}}
-\newlabel{tbl:xheepArch}{{2.4}{16}{Dominios del SoC X-HEEP\relax }{table.caption.43}{}}
-\newlabel{tbl:xheepArch@cref}{{[table][4][2]2.4}{[1][16][]16}}
-\@writefile{toc}{\contentsline {subsubsection}{Verilog}{16}{section*.45}\protected@file@percent }
-\AC@undonewlabel{acro:IEEE}
-\newlabel{acro:IEEE}{{2.1.5}{16}{Verilog}{section*.46}{}}
-\newlabel{acro:IEEE@cref}{{[subsection][5][2,1]2.1.5}{[1][16][]16}}
+\@writefile{lot}{\contentsline {table}{\numberline {2.4}{\ignorespaces Comparación entre AXI-Stream y OBI\relax }}{17}{table.caption.42}\protected@file@percent }
+\newlabel{tbl:diferenciasAxiObi}{{2.4}{17}{Comparación entre AXI-Stream y OBI\relax }{table.caption.42}{}}
+\newlabel{tbl:diferenciasAxiObi@cref}{{[table][4][2]2.4}{[1][16][]17}}
+\AC@undonewlabel{acro:SoC}
+\newlabel{acro:SoC}{{2.1.5}{17}{X-HEEP y GR-HEEP}{section*.45}{}}
+\newlabel{acro:SoC@cref}{{[subsection][5][2,1]2.1.5}{[1][16][]17}}
+\acronymused{SoC}
+\AC@undonewlabel{acro:GR-HEEP}
+\newlabel{acro:GR-HEEP}{{2.1.5}{17}{X-HEEP y GR-HEEP}{section*.46}{}}
+\newlabel{acro:GR-HEEP@cref}{{[subsection][5][2,1]2.1.5}{[1][16][]17}}
+\acronymused{GR-HEEP}
+\@writefile{lot}{\contentsline {table}{\numberline {2.5}{\ignorespaces Comparación entre X-HEEP y GR-HEEP\relax }}{18}{table.caption.47}\protected@file@percent }
+\newlabel{tbl:difsXheepGrheep}{{2.5}{18}{Comparación entre X-HEEP y GR-HEEP\relax }{table.caption.47}{}}
+\newlabel{tbl:difsXheepGrheep@cref}{{[table][5][2]2.5}{[1][17][]18}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Arquitectura de X-HEEP, sobre la que se basa GR-HEEP. Fuente: \cite  {xheepInfo}\relax }}{18}{figure.caption.48}\protected@file@percent }
+\newlabel{fig:xheepArch}{{2.5}{18}{Arquitectura de X-HEEP, sobre la que se basa GR-HEEP. Fuente: \cite {xheepInfo}\relax }{figure.caption.48}{}}
+\newlabel{fig:xheepArch@cref}{{[figure][5][2]2.5}{[1][17][]18}}
+\@writefile{toc}{\contentsline {subsubsection}{Verilog}{18}{section*.49}\protected@file@percent }
 \citation{rtosInfo}
 \citation{rtosInfo_2}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.4}{\ignorespaces Arquitectura de X-HEEP. Fuente: \cite  {xheepInfo}\relax }}{17}{figure.caption.44}\protected@file@percent }
-\newlabel{fig:xheepArch}{{2.4}{17}{Arquitectura de X-HEEP. Fuente: \cite {xheepInfo}\relax }{figure.caption.44}{}}
-\newlabel{fig:xheepArch@cref}{{[figure][4][2]2.4}{[1][16][]17}}
-\acronymused{IEEE}
-\newlabel{lst:verilogEjemplo}{{2.1}{17}{Código fuente en Verilog de un sumador}{lstlisting.2.1}{}}
-\newlabel{lst:verilogEjemplo@cref}{{[lstlisting][1][2]2.1}{[1][17][]17}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2.1}Código fuente en Verilog de un sumador}{17}{lstlisting.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{FreeRTOS}{17}{section*.47}\protected@file@percent }
-\newlabel{st:freertos}{{2.1.5}{17}{FreeRTOS}{section*.47}{}}
-\newlabel{st:freertos@cref}{{[subsection][5][2,1]2.1.5}{[1][17][]17}}
-\AC@undonewlabel{acro:RTOS}
-\newlabel{acro:RTOS}{{2.1.5}{17}{FreeRTOS}{section*.48}{}}
-\newlabel{acro:RTOS@cref}{{[subsection][5][2,1]2.1.5}{[1][17][]17}}
-\acronymused{RTOS}
 \citation{zephyrInfo}
 \citation{freeRTOSInfo}
 \citation{soporteRISCVFreeRTOS}
+\AC@undonewlabel{acro:IEEE}
+\newlabel{acro:IEEE}{{2.1.5}{19}{Verilog}{section*.50}{}}
+\newlabel{acro:IEEE@cref}{{[subsection][5][2,1]2.1.5}{[1][17][]19}}
+\acronymused{IEEE}
+\newlabel{lst:verilogEjemplo}{{2.1}{19}{Código fuente en Verilog de un sumador}{lstlisting.2.1}{}}
+\newlabel{lst:verilogEjemplo@cref}{{[lstlisting][1][2]2.1}{[1][19][]19}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2.1}Código fuente en Verilog de un sumador}{19}{lstlisting.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{FreeRTOS}{19}{section*.51}\protected@file@percent }
+\newlabel{st:freertos}{{2.1.5}{19}{FreeRTOS}{section*.51}{}}
+\newlabel{st:freertos@cref}{{[subsection][5][2,1]2.1.5}{[1][19][]19}}
+\AC@undonewlabel{acro:RTOS}
+\newlabel{acro:RTOS}{{2.1.5}{19}{FreeRTOS}{section*.52}{}}
+\newlabel{acro:RTOS@cref}{{[subsection][5][2,1]2.1.5}{[1][19][]19}}
+\acronymused{RTOS}
 \citation{freeRTOSLogo}
 \citation{vivadoInfo}
 \citation{vivadoHistoria_1}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.5}{\ignorespaces Logo de FreeRTOS. Fuente: \cite  {freeRTOSLogo}\relax }}{18}{figure.caption.49}\protected@file@percent }
-\newlabel{fig:logoFreeRTOS}{{2.5}{18}{Logo de FreeRTOS. Fuente: \cite {freeRTOSLogo}\relax }{figure.caption.49}{}}
-\newlabel{fig:logoFreeRTOS@cref}{{[figure][5][2]2.5}{[1][18][]18}}
-\@writefile{toc}{\contentsline {subsubsection}{Vivado Design Suite}{18}{section*.50}\protected@file@percent }
-\newlabel{st:vivado}{{2.1.5}{18}{Vivado Design Suite}{section*.50}{}}
-\newlabel{st:vivado@cref}{{[subsection][5][2,1]2.1.5}{[1][18][]18}}
 \citation{vivadoRazones}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Logo de FreeRTOS. Fuente: \cite  {freeRTOSLogo}\relax }}{20}{figure.caption.53}\protected@file@percent }
+\newlabel{fig:logoFreeRTOS}{{2.6}{20}{Logo de FreeRTOS. Fuente: \cite {freeRTOSLogo}\relax }{figure.caption.53}{}}
+\newlabel{fig:logoFreeRTOS@cref}{{[figure][6][2]2.6}{[1][20][]20}}
+\@writefile{toc}{\contentsline {subsubsection}{Vivado Design Suite}{20}{section*.54}\protected@file@percent }
+\newlabel{st:vivado}{{2.1.5}{20}{Vivado Design Suite}{section*.54}{}}
+\newlabel{st:vivado@cref}{{[subsection][5][2,1]2.1.5}{[1][20][]20}}
 \citation{vitisHLSInfo}
 \citation{vitisHLSDocs}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Proyecto abierto\relax }}{21}{figure.caption.55}\protected@file@percent }
+\newlabel{fig:proyectoVivado}{{2.7}{21}{Proyecto abierto\relax }{figure.caption.55}{}}
+\newlabel{fig:proyectoVivado@cref}{{[figure][7][2]2.7}{[1][21][]21}}
 \citation{vitisVivadoRelacion}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.6}{\ignorespaces Proyecto abierto\relax }}{20}{figure.caption.51}\protected@file@percent }
-\newlabel{fig:proyectoVivado}{{2.6}{20}{Proyecto abierto\relax }{figure.caption.51}{}}
-\newlabel{fig:proyectoVivado@cref}{{[figure][6][2]2.6}{[1][19][]20}}
-\@writefile{toc}{\contentsline {subsubsection}{Vitis HLS}{20}{section*.52}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Vitis HLS}{22}{section*.56}\protected@file@percent }
 \acronymused{HLS}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.7}{\ignorespaces Proyecto abierto\relax }}{21}{figure.caption.53}\protected@file@percent }
-\newlabel{fig:proyectoHLS}{{2.7}{21}{Proyecto abierto\relax }{figure.caption.53}{}}
-\newlabel{fig:proyectoHLS@cref}{{[figure][7][2]2.7}{[1][20][]21}}
-\@writefile{toc}{\contentsline {subsubsection}{EdaPlayground}{21}{section*.54}\protected@file@percent }
-\newlabel{st:edaplayground}{{2.1.5}{21}{EdaPlayground}{section*.54}{}}
-\newlabel{st:edaplayground@cref}{{[subsection][5][2,1]2.1.5}{[1][20][]21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Proyecto abierto\relax }}{22}{figure.caption.57}\protected@file@percent }
+\newlabel{fig:proyectoHLS}{{2.8}{22}{Proyecto abierto\relax }{figure.caption.57}{}}
+\newlabel{fig:proyectoHLS@cref}{{[figure][8][2]2.8}{[1][22][]22}}
+\@writefile{toc}{\contentsline {subsubsection}{EdaPlayground}{23}{section*.58}\protected@file@percent }
+\newlabel{st:edaplayground}{{2.1.5}{23}{EdaPlayground}{section*.58}{}}
+\newlabel{st:edaplayground@cref}{{[subsection][5][2,1]2.1.5}{[1][22][]23}}
 \AC@undonewlabel{acro:IDE}
-\newlabel{acro:IDE}{{2.1.5}{21}{EdaPlayground}{section*.55}{}}
-\newlabel{acro:IDE@cref}{{[subsection][5][2,1]2.1.5}{[1][21][]21}}
+\newlabel{acro:IDE}{{2.1.5}{23}{EdaPlayground}{section*.59}{}}
+\newlabel{acro:IDE@cref}{{[subsection][5][2,1]2.1.5}{[1][23][]23}}
 \acronymused{IDE}
-\@writefile{toc}{\contentsline {subsubsection}{GTKwave}{21}{section*.56}\protected@file@percent }
-\newlabel{st:gtkwave}{{2.1.5}{21}{GTKwave}{section*.56}{}}
-\newlabel{st:gtkwave@cref}{{[subsection][5][2,1]2.1.5}{[1][21][]21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2.8}{\ignorespaces Logo de GTKWave\relax }}{22}{figure.caption.57}\protected@file@percent }
-\newlabel{fig:gtkwaveLogo}{{2.8}{22}{Logo de GTKWave\relax }{figure.caption.57}{}}
-\newlabel{fig:gtkwaveLogo@cref}{{[figure][8][2]2.8}{[1][22][]22}}
+\@writefile{toc}{\contentsline {subsubsection}{GTKwave}{23}{section*.60}\protected@file@percent }
+\newlabel{st:gtkwave}{{2.1.5}{23}{GTKwave}{section*.60}{}}
+\newlabel{st:gtkwave@cref}{{[subsection][5][2,1]2.1.5}{[1][23][]23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2.9}{\ignorespaces Logo de GTKWave\relax }}{24}{figure.caption.61}\protected@file@percent }
+\newlabel{fig:gtkwaveLogo}{{2.9}{24}{Logo de GTKWave\relax }{figure.caption.61}{}}
+\newlabel{fig:gtkwaveLogo@cref}{{[figure][9][2]2.9}{[1][23][]24}}
 \citation{metodologiaRAE}
 \citation{libro-PUD}
 \citation{PUD-2}
-\@writefile{toc}{\contentsline {chapter}{\numberline {3}Diseño de la solución}{23}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {3}Diseño de la solución}{25}{chapter.3}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {xchapter}{Diseño de la solución}{23}{chapter.3}\protected@file@percent }
-\@writefile{lot}{\contentsline {xchapter}{Diseño de la solución}{23}{chapter.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3.1}Metodología seguida}{23}{section.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Procesos Unificados de Desarrollo}{23}{subsection.3.1.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {xchapter}{Diseño de la solución}{25}{chapter.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {xchapter}{Diseño de la solución}{25}{chapter.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3.1}Metodología seguida}{25}{section.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.1}Procesos Unificados de Desarrollo}{25}{subsection.3.1.1}\protected@file@percent }
 \AC@undonewlabel{acro:PUD}
-\newlabel{acro:PUD}{{3.1.1}{24}{Procesos Unificados de Desarrollo}{section*.58}{}}
-\newlabel{acro:PUD@cref}{{[subsection][1][3,1]3.1.1}{[1][23][]24}}
+\newlabel{acro:PUD}{{3.1.1}{26}{Procesos Unificados de Desarrollo}{section*.62}{}}
+\newlabel{acro:PUD@cref}{{[subsection][1][3,1]3.1.1}{[1][25][]26}}
 \acronymused{PUD}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Iteraciones realizadas}{25}{subsection.3.1.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Iteraciones identificadas en el proyecto\relax }}{25}{table.caption.59}\protected@file@percent }
-\newlabel{tbl:cicloIteraciones}{{3.1}{25}{Iteraciones identificadas en el proyecto\relax }{table.caption.59}{}}
-\newlabel{tbl:cicloIteraciones@cref}{{[table][1][3]3.1}{[1][24][]25}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Gantt\relax }}{25}{figure.caption.60}\protected@file@percent }
-\newlabel{fig:gantt}{{3.1}{25}{Diagrama de Gantt\relax }{figure.caption.60}{}}
-\newlabel{fig:gantt@cref}{{[figure][1][3]3.1}{[1][25][]25}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.2}Análisis de requisitos}{25}{section.3.2}\protected@file@percent }
-\newlabel{sec:requisitos}{{3.2}{25}{Análisis de requisitos}{section.3.2}{}}
-\newlabel{sec:requisitos@cref}{{[section][2][3]3.2}{[1][25][]25}}
-\@writefile{toc}{\contentsline {section}{\numberline {3.3}Arquitectura de la solución}{26}{section.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Componentes funcionales}{26}{subsection.3.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Interfaces utilizadas}{26}{subsection.3.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1.2}Iteraciones realizadas}{27}{subsection.3.1.2}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3.1}{\ignorespaces Iteraciones identificadas en el proyecto\relax }}{27}{table.caption.63}\protected@file@percent }
+\newlabel{tbl:cicloIteraciones}{{3.1}{27}{Iteraciones identificadas en el proyecto\relax }{table.caption.63}{}}
+\newlabel{tbl:cicloIteraciones@cref}{{[table][1][3]3.1}{[1][26][]27}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama de Gantt\relax }}{27}{figure.caption.64}\protected@file@percent }
+\newlabel{fig:gantt}{{3.1}{27}{Diagrama de Gantt\relax }{figure.caption.64}{}}
+\newlabel{fig:gantt@cref}{{[figure][1][3]3.1}{[1][27][]27}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.2}Análisis de requisitos}{27}{section.3.2}\protected@file@percent }
+\newlabel{sec:requisitos}{{3.2}{27}{Análisis de requisitos}{section.3.2}{}}
+\newlabel{sec:requisitos@cref}{{[section][2][3]3.2}{[1][27][]27}}
+\@writefile{toc}{\contentsline {section}{\numberline {3.3}Arquitectura de la solución}{28}{section.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.1}Componentes funcionales}{28}{subsection.3.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.2}Interfaces utilizadas}{28}{subsection.3.3.2}\protected@file@percent }
 \acronymused{AXI}
 \citation{infoOBI}
 \citation{vitisHLSInfo}
 \citation{makeInfo}
 \citation{gccRISCVInfo}
 \citation{vscodeInfo}
-\AC@undonewlabel{acro:OBI}
-\newlabel{acro:OBI}{{3.3.2}{27}{Interfaces utilizadas}{section*.61}{}}
-\newlabel{acro:OBI@cref}{{[subsection][2][3,3]3.3.2}{[1][27][]27}}
 \acronymused{OBI}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Componentes técnicos}{27}{subsection.3.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.3}Componentes técnicos}{29}{subsection.3.3.3}\protected@file@percent }
 \AC@undonewlabel{acro:GCC}
-\newlabel{acro:GCC}{{3.3.3}{27}{Componentes técnicos}{section*.62}{}}
-\newlabel{acro:GCC@cref}{{[subsection][3][3,3]3.3.3}{[1][27][]27}}
+\newlabel{acro:GCC}{{3.3.3}{29}{Componentes técnicos}{section*.65}{}}
+\newlabel{acro:GCC@cref}{{[subsection][3][3,3]3.3.3}{[1][29][]29}}
 \acronymused{GCC}
 \acronymused{IDE}
 \AC@undonewlabel{acro:DVCS}
-\newlabel{acro:DVCS}{{3.3.3}{27}{Componentes técnicos}{section*.63}{}}
-\newlabel{acro:DVCS@cref}{{[subsection][3][3,3]3.3.3}{[1][27][]27}}
+\newlabel{acro:DVCS}{{3.3.3}{29}{Componentes técnicos}{section*.66}{}}
+\newlabel{acro:DVCS@cref}{{[subsection][3][3,3]3.3.3}{[1][29][]29}}
 \acronymused{DVCS}
 \citation{grheepInfo}
 \AC@undonewlabel{acro:MS}
-\newlabel{acro:MS}{{3.3.3}{28}{Componentes técnicos}{section*.64}{}}
-\newlabel{acro:MS@cref}{{[subsection][3][3,3]3.3.3}{[1][28][]28}}
+\newlabel{acro:MS}{{3.3.3}{30}{Componentes técnicos}{section*.67}{}}
+\newlabel{acro:MS@cref}{{[subsection][3][3,3]3.3.3}{[1][30][]30}}
 \acronymused{MS}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Implementación e infraestructura}{28}{subsection.3.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {4}Resultados}{29}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3.4}Implementación e infraestructura}{30}{subsection.3.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {4}Resultados}{31}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {xchapter}{Resultados}{29}{chapter.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {xchapter}{Resultados}{29}{chapter.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4.1}Iteraciones}{29}{section.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.1}Iteración 1 - Modelo del sistema}{29}{subsection.4.1.1}\protected@file@percent }
-\newlabel{res:iteracion1}{{4.1.1}{29}{Iteración 1 - Modelo del sistema}{subsection.4.1.1}{}}
-\newlabel{res:iteracion1@cref}{{[subsection][1][4,1]4.1.1}{[1][29][]29}}
+\@writefile{lof}{\contentsline {xchapter}{Resultados}{31}{chapter.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {xchapter}{Resultados}{31}{chapter.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.1}Iteración 1 - Modelo del sistema}{31}{section.4.1}\protected@file@percent }
+\newlabel{res:iteracion1}{{4.1}{31}{Iteración 1 - Modelo del sistema}{section.4.1}{}}
+\newlabel{res:iteracion1@cref}{{[section][1][4]4.1}{[1][31][]31}}
 \acronymused{FIFO}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.2}Iteración 2 - Desarrollo del diseño hardware}{30}{subsection.4.1.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Diseño original}{30}{section*.65}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Diseño final}{31}{section*.66}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Digrama de bloques final\relax }}{32}{figure.caption.67}\protected@file@percent }
-\newlabel{fig:disenoFinal}{{4.1}{32}{Digrama de bloques final\relax }{figure.caption.67}{}}
-\newlabel{fig:disenoFinal@cref}{{[figure][1][4]4.1}{[1][32][]32}}
-\newlabel{tbl:senalesDiseno}{{\caption@xref {tbl:senalesDiseno}{ on input line 111}}{33}{Diseño final}{table.caption.68}{}}
-\newlabel{tbl:senalesDiseno@cref}{{[subsection][2][4,1]4.1.2}{[1][32][]33}}
-\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Principales señales del diseño\relax }}{33}{table.caption.68}\protected@file@percent }
-\newlabel{it2:codigoRTL}{{4.1.2}{33}{Diseño final}{table.caption.68}{}}
-\newlabel{it2:codigoRTL@cref}{{[subsection][2][4,1]4.1.2}{[1][33][]33}}
-\newlabel{lst:codigoHLS}{{4.1}{33}{Código fuente en C/C++ del acelerador reverso de bits}{lstlisting.4.1}{}}
-\newlabel{lst:codigoHLS@cref}{{[lstlisting][1][4]4.1}{[1][33][]33}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}Código fuente en C/C++ del acelerador reverso de bits}{33}{lstlisting.4.1}\protected@file@percent }
-\newlabel{lst:verilogFifo2axis}{{4.2}{35}{Código fuente de la cola FIFO conversora a AXI-Stream}{lstlisting.4.2}{}}
-\newlabel{lst:verilogFifo2axis@cref}{{[lstlisting][2][4]4.2}{[1][35][]35}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.2}Código fuente de la cola FIFO conversora a AXI-Stream}{35}{lstlisting.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.2}Iteración 2 - Desarrollo del diseño hardware}{32}{section.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.1}Diseño inicial}{33}{subsection.4.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2.2}Diseño final}{34}{subsection.4.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Descripción funcional}{34}{section*.68}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Señales principales}{35}{section*.69}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {4.1}{\ignorespaces Principales señales del diseño\relax }}{35}{table.caption.70}\protected@file@percent }
+\newlabel{tbl:senalesDiseno}{{4.1}{35}{Principales señales del diseño\relax }{table.caption.70}{}}
+\newlabel{tbl:senalesDiseno@cref}{{[table][1][4]4.1}{[1][35][]35}}
+\@writefile{toc}{\contentsline {subsubsection}{Módulo Top}{35}{section*.71}\protected@file@percent }
+\newlabel{lst:topModule}{{4.1}{36}{Código fuente del módulo Top}{lstlisting.4.1}{}}
+\newlabel{lst:topModule@cref}{{[lstlisting][1][4]4.1}{[1][36][]36}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.1}Código fuente del módulo Top}{36}{lstlisting.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Código C/C++ del acelerador}{38}{section*.73}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.1}{\ignorespaces Digrama de bloques en Vivado\relax }}{39}{figure.caption.72}\protected@file@percent }
+\newlabel{fig:disenoFinal}{{4.1}{39}{Digrama de bloques en Vivado\relax }{figure.caption.72}{}}
+\newlabel{fig:disenoFinal@cref}{{[figure][1][4]4.1}{[1][38][]39}}
+\newlabel{lst:codigoHLS}{{4.2}{39}{Código fuente en C/C++ del acelerador reverso de bits}{lstlisting.4.2}{}}
+\newlabel{lst:codigoHLS@cref}{{[lstlisting][2][4]4.2}{[1][38][]39}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.2}Código fuente en C/C++ del acelerador reverso de bits}{39}{lstlisting.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Código RTL desarrollado}{41}{section*.74}\protected@file@percent }
+\newlabel{lst:verilogFifo2axis}{{4.3}{41}{Código fuente de la cola FIFO conversora a AXI-Stream}{lstlisting.4.3}{}}
+\newlabel{lst:verilogFifo2axis@cref}{{[lstlisting][3][4]4.3}{[1][41][]41}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.3}Código fuente de la cola FIFO conversora a AXI-Stream}{41}{lstlisting.4.3}\protected@file@percent }
 \acronymused{FSM}
-\newlabel{lst:verilogAxis2fifo}{{4.3}{39}{Código fuente en Verilog del módulo conversor de AXI al formato de datos origen}{lstlisting.4.3}{}}
-\newlabel{lst:verilogAxis2fifo@cref}{{[lstlisting][3][4]4.3}{[1][39][]39}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.3}Código fuente en Verilog del módulo conversor de AXI al formato de datos origen}{39}{lstlisting.4.3}\protected@file@percent }
-\newlabel{lst:verilogAccel}{{4.4}{42}{Definición del módulo y puertos}{lstlisting.4.4}{}}
-\newlabel{lst:verilogAccel@cref}{{[lstlisting][4][4]4.4}{[1][42][]42}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.4}Definición del módulo y puertos}{42}{lstlisting.4.4}\protected@file@percent }
+\newlabel{lst:verilogAxis2fifo}{{4.4}{44}{Código fuente en Verilog del módulo conversor de AXI al formato de datos origen}{lstlisting.4.4}{}}
+\newlabel{lst:verilogAxis2fifo@cref}{{[lstlisting][4][4]4.4}{[1][44][]44}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.4}Código fuente en Verilog del módulo conversor de AXI al formato de datos origen}{44}{lstlisting.4.4}\protected@file@percent }
+\newlabel{lst:verilogAccel}{{4.5}{47}{Fragmentos relevantes del acelerador}{lstlisting.4.5}{}}
+\newlabel{lst:verilogAccel@cref}{{[lstlisting][5][4]4.5}{[1][47][]47}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.5}Fragmentos relevantes del acelerador}{47}{lstlisting.4.5}\protected@file@percent }
 \AC@undonewlabel{acro:FFT}
-\newlabel{acro:FFT}{{4.1.2}{44}{Diseño final}{section*.69}{}}
-\newlabel{acro:FFT@cref}{{[subsection][2][4,1]4.1.2}{[1][44][]44}}
+\newlabel{acro:FFT}{{4.2.2}{49}{Código RTL desarrollado}{section*.75}{}}
+\newlabel{acro:FFT@cref}{{[subsection][2][4,2]4.2.2}{[1][49][]49}}
 \acronymused{FFT}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.3}Iteración 3 - Ejecución de simulaciones funcionales}{44}{subsection.4.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Simulaciones en Vivado}{44}{section*.70}\protected@file@percent }
-\newlabel{lst:testbenchVivado}{{4.5}{44}{Código fuente del testtbench para simular en Vivado}{lstlisting.4.5}{}}
-\newlabel{lst:testbenchVivado@cref}{{[lstlisting][5][4]4.5}{[1][44][]44}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.5}Código fuente del testtbench para simular en Vivado}{44}{lstlisting.4.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Simulación de Vivado vista con su visor integrado\relax }}{47}{figure.caption.71}\protected@file@percent }
-\newlabel{fig:simVivado}{{4.2}{47}{Simulación de Vivado vista con su visor integrado\relax }{figure.caption.71}{}}
-\newlabel{fig:simVivado@cref}{{[figure][2][4]4.2}{[1][47][]47}}
-\@writefile{toc}{\contentsline {subsubsection}{Simulaciones en EdaPlayground}{47}{section*.72}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Simulación de EdaPlayground vista con GTKWave\relax }}{48}{figure.caption.73}\protected@file@percent }
-\newlabel{fig:simEdaPlayground}{{4.3}{48}{Simulación de EdaPlayground vista con GTKWave\relax }{figure.caption.73}{}}
-\newlabel{fig:simEdaPlayground@cref}{{[figure][3][4]4.3}{[1][48][]48}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.4}Iteración 4 - Integración del diseño en X-HEEP}{48}{subsection.4.1.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.5}Iteración 5 - Ejecución del diseño en X-HEEP sobre FreeRTOS}{48}{subsection.4.1.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1.6}Iteración 6 - Comparativa de resultados frente a versión software}{48}{subsection.4.1.6}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusiones y trabajo futuro}{49}{chapter.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.3}Iteración 3 - Ejecución de simulaciones funcionales}{49}{section.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3.1}Testbench desarrollado}{50}{subsection.4.3.1}\protected@file@percent }
+\newlabel{lst:testbench}{{4.6}{50}{Código fuente del testbench}{lstlisting.4.6}{}}
+\newlabel{lst:testbench@cref}{{[lstlisting][6][4]4.6}{[1][50][]50}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.6}Código fuente del testbench}{50}{lstlisting.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Simulaciones en Vivado}{52}{section*.76}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.2}{\ignorespaces Simulación de Vivado vista con su visor integrado\relax }}{52}{figure.caption.77}\protected@file@percent }
+\newlabel{fig:simVivado}{{4.2}{52}{Simulación de Vivado vista con su visor integrado\relax }{figure.caption.77}{}}
+\newlabel{fig:simVivado@cref}{{[figure][2][4]4.2}{[1][52][]52}}
+\@writefile{toc}{\contentsline {subsubsection}{Simulaciones en EdaPlayground}{52}{section*.78}\protected@file@percent }
+\citation{documentoPractica5}
+\citation{documentoPractica5}
+\citation{machetti2024xheep}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.3}{\ignorespaces Simulación de EdaPlayground vista con GTKWave\relax }}{53}{figure.caption.79}\protected@file@percent }
+\newlabel{fig:simEdaPlayground}{{4.3}{53}{Simulación de EdaPlayground vista con GTKWave\relax }{figure.caption.79}{}}
+\newlabel{fig:simEdaPlayground@cref}{{[figure][3][4]4.3}{[1][53][]53}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.4}Iteración 4 - Integración del diseño en GR-HEEP}{53}{section.4.4}\protected@file@percent }
+\AC@undonewlabel{acro:X-AIF}
+\newlabel{acro:X-AIF}{{4.4}{53}{Iteración 4 - Integración del diseño en GR-HEEP}{section*.81}{}}
+\newlabel{acro:X-AIF@cref}{{[section][4][4]4.4}{[1][53][]53}}
+\acronymused{X-AIF}
+\acronymused{OBI}
+\citation{simple-cnt}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.4}{\ignorespaces Arquitectura de GR-HEEP integrando un acelerador (5) Fuente: \cite  {documentoPractica5}\relax }}{54}{figure.caption.80}\protected@file@percent }
+\newlabel{fig:aceleradorXAIF}{{4.4}{54}{Arquitectura de GR-HEEP integrando un acelerador (5) Fuente: \cite {documentoPractica5}\relax }{figure.caption.80}{}}
+\newlabel{fig:aceleradorXAIF@cref}{{[figure][4][4]4.4}{[1][53][]54}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.1}Importación de los archivos del diseño}{54}{subsection.4.4.1}\protected@file@percent }
+\citation{simple-cnt}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.5}{\ignorespaces Importando diseño en la plataforma\relax }}{55}{figure.caption.82}\protected@file@percent }
+\newlabel{fig:importandoDiseno}{{4.5}{55}{Importando diseño en la plataforma\relax }{figure.caption.82}{}}
+\newlabel{fig:importandoDiseno@cref}{{[figure][5][4]4.5}{[1][55][]55}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.2}Conexionado físico del diseño}{55}{subsection.4.4.2}\protected@file@percent }
+\citation{simple-cnt}
+\citation{documentoPractica5}
+\citation{regtoolInfo}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.6}{\ignorespaces Concepto del diseño a integrar en la plataforma\relax }}{56}{figure.caption.83}\protected@file@percent }
+\newlabel{fig:conceptoDisenoIntegracion}{{4.6}{56}{Concepto del diseño a integrar en la plataforma\relax }{figure.caption.83}{}}
+\newlabel{fig:conceptoDisenoIntegracion@cref}{{[figure][6][4]4.6}{[1][56][]56}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.3}Definición de los registros expuestos}{56}{subsection.4.4.3}\protected@file@percent }
+\newlabel{lst:definicionRegistros}{{4.7}{57}{Archivo de definición de registros}{lstlisting.4.7}{}}
+\newlabel{lst:definicionRegistros@cref}{{[lstlisting][7][4]4.7}{[1][57][]57}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.7}Archivo de definición de registros}{57}{lstlisting.4.7}\protected@file@percent }
+\citation{simple-cnt}
+\newlabel{lst:wrapperControladorRegistros}{{4.8}{59}{Código fuente del testbench}{lstlisting.4.8}{}}
+\newlabel{lst:wrapperControladorRegistros@cref}{{[lstlisting][8][4]4.8}{[1][59][]59}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.8}Código fuente del testbench}{59}{lstlisting.4.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.4}Desarrollo de un \emph  {driver} para los registros}{61}{subsection.4.4.4}\protected@file@percent }
+\newlabel{lst:driverRegistros}{{4.9}{61}{Código fuente del controlador de bit reversal}{lstlisting.4.9}{}}
+\newlabel{lst:driverRegistros@cref}{{[lstlisting][9][4]4.9}{[1][61][]61}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.9}Código fuente del controlador de bit reversal}{61}{lstlisting.4.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4.5}Compilación completa del sistema}{65}{subsection.4.4.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4.5}Iteración 5 - Ejecución del diseño en GR-HEEP sobre FreeRTOS}{65}{section.4.5}\protected@file@percent }
+\citation{timer-sdk}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.1}Ejecución \textit  {baremetal}}{66}{subsection.4.5.1}\protected@file@percent }
+\newlabel{lst:codigoBaremetal}{{4.10}{66}{Código fuente de la versión \textit {baremetal}}{lstlisting.4.10}{}}
+\newlabel{lst:codigoBaremetal@cref}{{[lstlisting][10][4]4.10}{[1][66][]66}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.10}Código fuente de la versión \textit  {baremetal}}{66}{lstlisting.4.10}\protected@file@percent }
+\citation{xheepFreeRTOS}
+\citation{documentoPractica5}
+\@writefile{lof}{\contentsline {figure}{\numberline {4.7}{\ignorespaces Resultado de la ejecución \textit  {baremetal}\relax }}{69}{figure.caption.84}\protected@file@percent }
+\newlabel{fig:resultadoBaremetal}{{4.7}{69}{Resultado de la ejecución \textit {baremetal}\relax }{figure.caption.84}{}}
+\newlabel{fig:resultadoBaremetal@cref}{{[figure][7][4]4.7}{[1][68][]69}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5.2}Ejecución sobre FreeRTOS}{69}{subsection.4.5.2}\protected@file@percent }
+\newlabel{lst:codigoFreeRTOS}{{4.11}{69}{Código fuente de la versión FreeRTOS}{lstlisting.4.11}{}}
+\newlabel{lst:codigoFreeRTOS@cref}{{[lstlisting][11][4]4.11}{[1][69][]69}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4.11}Código fuente de la versión FreeRTOS}{69}{lstlisting.4.11}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4.8}{\ignorespaces Resultado de la ejecución sobre FreeRTOS\relax }}{74}{figure.caption.85}\protected@file@percent }
+\newlabel{fig:resultadoFreeRTOS}{{4.8}{74}{Resultado de la ejecución sobre FreeRTOS\relax }{figure.caption.85}{}}
+\newlabel{fig:resultadoFreeRTOS@cref}{{[figure][8][4]4.8}{[1][74][]74}}
+\@writefile{toc}{\contentsline {section}{\numberline {4.6}Iteración 6 - Comparativa de resultados frente a versión software}{74}{section.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {5}Conclusiones y trabajo futuro}{75}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {xchapter}{Conclusiones y trabajo futuro}{49}{chapter.5}\protected@file@percent }
-\@writefile{lot}{\contentsline {xchapter}{Conclusiones y trabajo futuro}{49}{chapter.5}\protected@file@percent }
-\newlabel{cap:conclusiones}{{5}{49}{Conclusiones y trabajo futuro}{chapter.5}{}}
-\newlabel{cap:conclusiones@cref}{{[chapter][5][]5}{[1][49][]49}}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}Líneas de trabajo futuro}{49}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {A}Apéndice A}{51}{appendix.Alph1}\protected@file@percent }
+\@writefile{lof}{\contentsline {xchapter}{Conclusiones y trabajo futuro}{75}{chapter.5}\protected@file@percent }
+\@writefile{lot}{\contentsline {xchapter}{Conclusiones y trabajo futuro}{75}{chapter.5}\protected@file@percent }
+\newlabel{cap:conclusiones}{{5}{75}{Conclusiones y trabajo futuro}{chapter.5}{}}
+\newlabel{cap:conclusiones@cref}{{[chapter][5][]5}{[1][75][]75}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Líneas de trabajo futuro}{75}{section.5.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {A}Anexo A}{77}{appendix.Alph1}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{lof}{\contentsline {xchapter}{Apéndice A}{51}{appendix.Alph1}\protected@file@percent }
-\@writefile{lot}{\contentsline {xchapter}{Apéndice A}{51}{appendix.Alph1}\protected@file@percent }
-\newlabel{appendix:appendixA}{{A}{51}{Apéndice A}{appendix.Alph1}{}}
-\newlabel{appendix:appendixA@cref}{{[appendix][1][2147483647]A}{[1][51][]51}}
+\@writefile{lof}{\contentsline {xchapter}{Anexo A}{77}{appendix.Alph1}\protected@file@percent }
+\@writefile{lot}{\contentsline {xchapter}{Anexo A}{77}{appendix.Alph1}\protected@file@percent }
+\newlabel{appendix:appendixA}{{A}{77}{Anexo A}{appendix.Alph1}{}}
+\newlabel{appendix:appendixA@cref}{{[appendix][1][2147483647]A}{[1][77][]77}}
+\@writefile{toc}{\contentsline {section}{\numberline {A.1}Código RTL de la primera versión del diseño}{77}{section.Alph1.1}\protected@file@percent }
+\newlabel{sct:rtlPrimeraVersion}{{A.1}{77}{Código RTL de la primera versión del diseño}{section.Alph1.1}{}}
+\newlabel{sct:rtlPrimeraVersion@cref}{{[subappendix][1][2147483647,1]A.1}{[1][77][]77}}
+\newlabel{lst:legacyFifoIn}{{A.1}{77}{Código fuente de la cola FIFO de entrada de datos}{lstlisting.Alph1.1}{}}
+\newlabel{lst:legacyFifoIn@cref}{{[lstlisting][1][2147483647,1]A.1}{[1][77][]77}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.1}Código fuente de la cola FIFO de entrada de datos}{77}{lstlisting.Alph1.1}\protected@file@percent }
+\newlabel{lst:legacyFifo2axis}{{A.2}{79}{Código fuente de la cola FIFO conversora a AXI-Stream}{lstlisting.Alph1.2}{}}
+\newlabel{lst:legacyFifo2axis@cref}{{[lstlisting][2][2147483647,1]A.2}{[1][79][]79}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.2}Código fuente de la cola FIFO conversora a AXI-Stream}{79}{lstlisting.Alph1.2}\protected@file@percent }
+\newlabel{lst:legacyAxis2fifo}{{A.3}{82}{Código fuente de la cola FIFO conversora a formato original}{lstlisting.Alph1.3}{}}
+\newlabel{lst:legacyAxis2fifo@cref}{{[lstlisting][3][2147483647,1]A.3}{[1][82][]82}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.3}Código fuente de la cola FIFO conversora a formato original}{82}{lstlisting.Alph1.3}\protected@file@percent }
+\newlabel{lst:legacyFifoOut}{{A.4}{84}{Código fuente de la cola FIFO de salida de datos}{lstlisting.Alph1.4}{}}
+\newlabel{lst:legacyFifoOut@cref}{{[lstlisting][4][2147483647,1]A.4}{[1][84][]84}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {A.4}Código fuente de la cola FIFO de salida de datos}{84}{lstlisting.Alph1.4}\protected@file@percent }
 \bibstyle{alpha}
 \bibdata{bibliography}
 \bibcite{PUD-2}{AF15}
@@ -479,34 +584,44 @@
 \bibcite{vitisHLSDocs}{AMD25b}
 \bibcite{vivadoInfo}{AMD25c}
 \bibcite{amdACAP}{AMD25d}
+\bibcite{amd-hls}{AMD25e}
+\bibcite{arm-doc}{ARM23}
 \bibcite{soporteRISCVFreeRTOS}{Auf19}
+\@writefile{@@@}{\chapterbegin }
 \bibcite{moduloIP}{Awa22}
 \bibcite{infoTop}{Chi22}
 \bibcite{freeRTOSLogo}{Com25}
-\@writefile{@@@}{\chapterbegin }
 \bibcite{resetTechniques}{Cor21}
 \bibcite{xheepInfo}{EE24}
 \bibcite{xheepInfoASIC}{EE25a}
 \bibcite{xheepDocs}{EE25b}
 \bibcite{infoHLS}{Eng22}
-\bibcite{xheepLogo}{EPF25}
+\bibcite{xheepLogo}{EPF25a}
+\bibcite{xheepFreeRTOS}{EPF25b}
+\bibcite{timer-sdk}{EPF25c}
 \bibcite{metodologiaRAE}{Esp}
 \bibcite{europaRISCV}{Eur24}
 \bibcite{infoWrapper}{For06}
 \bibcite{gccRISCVInfo}{Fou25}
 \bibcite{freeRTOSInfo}{Fre25}
 \bibcite{infoOBI}{Gro21}
+\bibcite{openhw-docs}{Gro23}
 \bibcite{harris2021digital}{HH21}
 \bibcite{verilogEstandar}{IEE01}
 \bibcite{riscvInfo}{Int21}
 \bibcite{moduloRTL}{ISD23}
 \bibcite{libro-PUD}{Jac00}
+\bibcite{infoHandshakeAXI}{Jen22}
 \bibcite{disenoHW}{Jim23}
 \bibcite{vivadoRazones}{Mic14}
 \bibcite{vivadoHistoria_1}{Mic24}
+\bibcite{vscodeInfo}{Mic25}
 \bibcite{maxfield2004design}{MK04}
 \bibcite{machetti2024xheep}{MSM{$^{+}$}24}
+\bibcite{regtoolInfo}{Ope25}
 \bibcite{zephyrInfo}{Pro25}
+\bibcite{documentoPractica5}{Qui25a}
+\bibcite{simple-cnt}{Qui25b}
 \bibcite{compraXilinx}{Ray22}
 \bibcite{verilogHistoria}{Rea20}
 \bibcite{metodologiaFernando}{Rin24}
@@ -525,4 +640,4 @@
 \bibcite{infoBlockDesign}{Xil23}
 \bibcite{nvidiaRISCV}{�A25}
 \global\mtcsecondpartfalse
-\gdef \@abspage@last{78}
+\gdef \@abspage@last{116}

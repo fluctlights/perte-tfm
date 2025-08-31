@@ -49,6 +49,23 @@ AMD.
   2025.
 \newblock Accedido: 11-08-2025.
 
+\bibitem[AMD25e]{amd-hls}
+AMD.
+\newblock Vitis high-level synthesis user guide (ug1399): How axi4-stream
+  works.
+\newblock Recurso web:
+  \url{https://docs.amd.com/r/en-US/ug1399-vitis-hls/How-AXI4-Stream-Works},
+  2025.
+\newblock Accedido: 25-08-2025.
+
+\bibitem[ARM23]{arm-doc}
+ARM.
+\newblock Amba axi and ace protocol specification.
+\newblock Recurso web:
+  \url{https://documentation-service.arm.com/static/64819f1516f0f201aa6b963c},
+  2023.
+\newblock Accedido: 25-08-2025.
+
 \bibitem[Auf19]{soporteRISCVFreeRTOS}
 Jean-Luc Aufranc.
 \newblock Freertos kernel now supports risc-v architecture.
@@ -114,13 +131,30 @@ Semiconductor Engineering.
   2022.
 \newblock Accedido: 14-08-2025.
 
-\bibitem[EPF25]{xheepLogo}
+\bibitem[EPF25a]{xheepLogo}
 EPFL.
 \newblock Logo de x-heep.
 \newblock Recurso web:
   \url{https://github.com/esl-epfl/x-heep/blob/main/docs/source/images/x-heep-outline.png},
   2025.
 \newblock Accedido: 10-08-2025.
+
+\bibitem[EPF25b]{xheepFreeRTOS}
+EPFL.
+\newblock Source code of blinky over freertos.
+\newblock Recurso web:
+  \url{https://github.com/esl-epfl/x-heep/blob/main/sw/applications/example_freertos_blinky/main.c},
+  2025.
+\newblock Código de referencia FreeRTOS Blinky en X-HEEP. Accedido:
+  25-08-2025.
+
+\bibitem[EPF25c]{timer-sdk}
+EPFL.
+\newblock Source code of timer sdk.
+\newblock Recurso web:
+  \url{https://github.com/esl-epfl/x-heep/blob/main/sw/applications/example_timer_sdk/main.c},
+  2025.
+\newblock Código de referencia del timer en X-HEEP. Accedido: 20-08-2025.
 
 \bibitem[Esp]{metodologiaRAE}
 Real~Academia Española.
@@ -163,7 +197,15 @@ OpenHW Group.
 \newblock Recurso web:
   \url{https://raw.githubusercontent.com/openhwgroup/obi/188c87089975a59c56338949f5c187c1f8841332/OBI-v1.2.pdf},
   2021.
-\newblock Documento PDF. Accedido: 18-08-2025.
+\newblock Documento PDF. Accedido: 29-08-2025.
+
+\bibitem[Gro23]{openhw-docs}
+OpenHW Group.
+\newblock Cv32e20/cv32e40* user manual.
+\newblock Recurso web:
+  \url{https://docs.openhwgroup.org/projects/cve2-user-manual/en/latest/01_specification/index.html},
+  2023.
+\newblock Accedido: 25-08-2025.
 
 \bibitem[HH21]{harris2021digital}
 S.~Harris and D.~Harris.
@@ -195,6 +237,14 @@ Rumbaugh Jacobson, Booch.
 \newblock Addison Wesley, second edition, July 2000.
 \newblock {ISBN}: 978-8478290369.
 
+\bibitem[Jen22]{infoHandshakeAXI}
+Jonas~Julian Jensen.
+\newblock How the axi-style ready/valid handshake works.
+\newblock Recurso web:
+  \url{https://vhdlwhiz.com/how-the-axi-style-ready-valid-handshake-works/},
+  2022.
+\newblock Accedido: 25-08-2025.
+
 \bibitem[Jim23]{disenoHW}
 Ormarys Jimenez.
 \newblock ¿qué es diseño de software y hardware?
@@ -220,6 +270,12 @@ Microchip.
   2024.
 \newblock Accedido: 14-08-2025.
 
+\bibitem[Mic25]{vscodeInfo}
+Microsoft.
+\newblock Download visual studio code.
+\newblock Recurso web: \url{https://code.visualstudio.com/download}, 2025.
+\newblock Página de descarga de Visual Studio Code. Accedido: 18-08-2025.
+
 \bibitem[MK04]{maxfield2004design}
 C.~Maxfield and I.~Kerszenbaum.
 \newblock {\em The design warrior's guide to FPGAs}.
@@ -232,11 +288,34 @@ Simone Machetti, Pasquale~Davide Schiavone, Thomas~Christoph Müller, Miguel
   microcontroller for the exploration of ultra-low-power edge accelerators,
   2024.
 
+\bibitem[Ope25]{regtoolInfo}
+OpenTitan.
+\newblock Register generator reggen and regtool.
+\newblock Recurso web:
+  \url{https://opentitan.org/book/util/reggen/doc/setup_and_use.html#register-generator-reggen-and-regtool},
+  2025.
+\newblock Uso de reggen y regtool. Accedido: 20-08-2025.
+
 \bibitem[Pro25]{zephyrInfo}
 Zephyr Project.
 \newblock Página web de zephyr.
 \newblock Recurso web: \url{https://www.zephyrproject.org/}, 2025.
 \newblock Accedido: 10-08-2025.
+
+\bibitem[Qui25a]{documentoPractica5}
+David~Mallasén Quintana.
+\newblock Adding a simple counter peripheral through the x-aif.
+\newblock Recurso web:
+  \url{https://campusvirtual.uclm.es/pluginfile.php/1069108/mod_resource/content/5/Memoria_caso_practico_5_XAIF.pdf},
+  03 2025.
+\newblock Documento PDF de la práctica 5. Accedido: 15-08-2025.
+
+\bibitem[Qui25b]{simple-cnt}
+David~Mallasén Quintana.
+\newblock Simple counter module.
+\newblock Recurso web:
+  \url{https://github.com/Integrated-Systems-Architecture/simple_cnt}, 2025.
+\newblock Repositorio de contador integrado en GR-HEEP. Accedido: 15-08-2025.
 
 \bibitem[Ray22]{compraXilinx}
 Adrián Raya.

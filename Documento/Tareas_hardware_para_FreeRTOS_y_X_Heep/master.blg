@@ -12,46 +12,44 @@ A level-1 auxiliary file: preamble/abstractSpanish.aux
 A level-1 auxiliary file: preamble/abstractEnglish.aux
 The style file: alpha.bst
 Database file #1: bibliography.bib
-Warning--I didn't find a database entry for "vscodeInfo"
-You've used 50 entries,
+You've used 60 entries,
             2543 wiz_defined-function locations,
-            848 strings with 14469 characters,
-and the built_in function-call counts, 14183 in all, are:
-= -- 1413
-> -- 460
-< -- 46
-+ -- 131
-- -- 123
-* -- 616
-:= -- 2301
-add.period$ -- 194
-call.type$ -- 50
-change.case$ -- 254
-chr.to.int$ -- 46
-cite$ -- 50
-duplicate$ -- 570
-empty$ -- 1253
-format.name$ -- 213
-if$ -- 3001
-int.to.chr$ -- 5
+            893 strings with 16416 characters,
+and the built_in function-call counts, 16947 in all, are:
+= -- 1693
+> -- 540
+< -- 56
++ -- 155
+- -- 143
+* -- 728
+:= -- 2741
+add.period$ -- 234
+call.type$ -- 60
+change.case$ -- 304
+chr.to.int$ -- 52
+cite$ -- 60
+duplicate$ -- 680
+empty$ -- 1503
+format.name$ -- 253
+if$ -- 3591
+int.to.chr$ -- 9
 int.to.str$ -- 0
 missing$ -- 9
-newline$ -- 298
-num.names$ -- 150
-pop$ -- 445
+newline$ -- 358
+num.names$ -- 180
+pop$ -- 535
 preamble$ -- 1
-purify$ -- 307
+purify$ -- 367
 quote$ -- 0
-skip$ -- 503
+skip$ -- 600
 stack$ -- 0
-substring$ -- 369
-swap$ -- 50
-text.length$ -- 46
-text.prefix$ -- 41
+substring$ -- 439
+swap$ -- 60
+text.length$ -- 56
+text.prefix$ -- 51
 top$ -- 0
-type$ -- 384
+type$ -- 464
 warning$ -- 0
-while$ -- 105
-width$ -- 57
-write$ -- 692
-(There was 1 warning)
+while$ -- 125
+width$ -- 68
+write$ -- 832

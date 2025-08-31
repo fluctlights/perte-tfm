@@ -1,5 +1,435 @@
-\chapter{Apéndice A}
+\chapter{Anexo A}
 \label{appendix:appendixA}
 \parindent=16mm    
+En este Anexo se presenta código desarrollado de menor relevancia que el presentado en las diferentes secciones del documento.
 
-Este es un ejemplo de Apéndice.
+\section{Código RTL de la primera versión del diseño}
+\label{sct:rtlPrimeraVersion}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente de la cola FIFO de entrada de datos},showstringspaces=false,label=lst:legacyFifoIn]
+module fifo_in (
+    input  wire        clk,
+    input  wire        rst,        // Synchronous reset
+    input  wire        wr_en,
+    input  wire        rd_en,      // External read request
+    input  wire [31:0] din,
+    output reg  [31:0] dout,
+    output wire        full,
+    output wire        empty,
+    output reg         data_ready  // Indicates 4 words available
+);
+
+    // Parameters
+    localparam DEPTH = 4;
+    localparam ADDR_WIDTH = $clog2(DEPTH);
+    localparam THRESHOLD = 4; // 4 words!
+    
+    // FSM state encoding
+    localparam IDLE = 2'b00;
+    localparam READ = 2'b01;
+    localparam WAIT = 2'b10;
+    reg [1:0] state;
+
+    // Memory
+    reg [31:0] mem [0:DEPTH-1];
+    reg [ADDR_WIDTH-1:0] rd_ptr = 0;
+    reg [ADDR_WIDTH-1:0] wr_ptr = 0;
+
+    // Flags
+    wire can_read;
+    wire logic_wr_en;
+    integer i;
+    reg [3:0] fifo_data_count;
+    
+    assign full       = (fifo_data_count == DEPTH);
+    assign empty      = (fifo_data_count == 0);
+    assign can_read   = (rd_en && data_ready);
+    assign logic_wr_en = (wr_en && !full && (din !== {32{1'bx}}));
+
+    always @(posedge clk or posedge rst) begin
+        
+        if (rst) begin
+            state <= IDLE;
+            wr_ptr <= 0;
+            rd_ptr <= 0;
+            fifo_data_count  <= 0;
+            
+        end else begin
+            case (state)
+                IDLE: begin
+                    
+                    if(logic_wr_en) begin
+                        mem[wr_ptr] = din;
+                        wr_ptr = wr_ptr + 1;
+                        fifo_data_count = fifo_data_count + 1;
+                    
+                        if (fifo_data_count >= 4) begin 
+                            data_ready <= 1;
+                            state <= READ;
+                        end
+                    end 
+                end
+                
+                READ: begin
+                    if (can_read) begin  // REMEMBER: can_read  = (rd_en && data_ready);
+                        
+                        dout <= mem[rd_ptr];
+                        rd_ptr <= rd_ptr + 1;
+                        
+                        if (rd_ptr == THRESHOLD) begin
+                            state <= WAIT;
+                        end
+
+                    end else begin
+                        dout <= {32{1'bX}};
+                        data_ready <= 0;
+                    end
+                end
+
+                WAIT: begin
+                    fifo_data_count <= 0;
+                    wr_ptr <= 0;
+                    rd_ptr <= 0;
+                            
+                    // Set all bits to X into the internal memory FIFO
+                    for (i = 0; i < THRESHOLD; i = i+1) begin
+                        mem[i] <= {32{1'bX}}; 
+                    end
+                    
+                    state <= IDLE;
+                end
+
+                default: begin
+                    state <= IDLE;
+                end
+            endcase
+        end
+    end
+endmodule
+\end{lstlisting}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente de la cola FIFO conversora a AXI-Stream},showstringspaces=false,label=lst:legacyFifo2axis]
+module fifo2axis #(
+    parameter DATA_WIDTH = 32,
+    parameter THRESHOLD = 4,
+    parameter DEPTH = 10
+)(
+    input  wire        clk,
+    input  wire        rst,
+
+    // FIFO interface
+    input  wire [31:0] fifo_data,
+    input  wire        data_ready,
+
+    // AXI Stream master
+    output reg [31:0]  s_axis_tdata,
+    output reg         s_axis_tvalid,
+    input  wire        s_axis_tready,
+    output wire        start_hls,
+    input wire         s_axis_tlast
+);
+
+    // States
+    localparam IDLE       = 3'd0,
+               READ_FIFO  = 3'd1,
+               WAIT_START = 3'd2,
+               SEND       = 3'd3,
+               DONE       = 3'd4;
+
+    reg [2:0] state, next_state;
+
+    // Internal buffer
+    reg [31:0] buffer [0:3];
+    reg [1:0]  buffer_index;
+    reg [1:0]  send_index;
+    reg start_hls_module;
+    
+    // When RESET signal is 0 and module starts, also start the HLS module
+    assign start_hls = ~rst; 
+
+    // FSM Sequential
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            state <= IDLE;
+            buffer_index <= 2'd0;
+            send_index <= 2'd0;
+            s_axis_tvalid <= 0;
+            s_axis_tdata  <= 32'd0;
+            
+        end else begin
+            state = next_state;
+            
+            case (state)
+                IDLE: begin
+                    if (data_ready) begin
+                        next_state <= READ_FIFO;
+                    end else begin
+                    	next_state <= IDLE;
+                        buffer_index <= 0;
+                    end
+                end
+               
+                READ_FIFO: begin
+                    buffer[buffer_index] <= fifo_data;
+                    
+                    if (buffer_index == 2'd3) begin
+                        next_state <= WAIT_START;
+                    end else begin
+                        buffer_index <= buffer_index + 1;
+                        next_state <= READ_FIFO;
+                    end
+                end
+
+                WAIT_START: begin
+                    if (s_axis_tready) begin
+                        send_index <= 0;
+                        next_state <= SEND;
+                    end else begin
+                        next_state <= WAIT_START;
+                    end
+                end
+                
+                SEND: begin
+                    
+                    #5; //wait a bit for AXISTREAM MODULE
+                    
+                    if (s_axis_tready) begin
+                        s_axis_tdata  <= buffer[send_index];
+                        s_axis_tvalid <= 1;
+                        #10
+                        s_axis_tvalid <= 0;
+                        
+                        if (send_index == 2'd3) begin
+                            next_state = DONE;
+                        end else begin
+                            send_index <= send_index + 1;
+                            next_state <= SEND;
+                        end
+
+                    end else begin
+                        next_state <= SEND;
+                    end
+
+                end
+                
+                
+                DONE: begin
+                    if (s_axis_tlast) begin
+                        s_axis_tdata = {32{1'bx}};
+                        next_state <= IDLE;
+                    end else begin
+                        next_state <= DONE;
+                    end
+                end
+                
+                default: begin
+                    next_state <= IDLE;
+                end
+            endcase
+        end
+    end
+
+endmodule
+\end{lstlisting}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente de la cola FIFO conversora a formato original},showstringspaces=false,label=lst:legacyAxis2fifo]
+module axis2fifo #
+(
+    parameter DATA_WIDTH = 32,
+    parameter THRESHOLD = 4,
+    parameter DEPTH = 10
+)(
+    input  wire        clk,
+    input  wire        rst,
+
+    // AXI Stream master
+    input  wire [31:0] s_axis_tdata,
+    input  wire        last,
+
+    // To FIFO
+    output reg [31:0]  dout,
+    output reg         done
+);
+
+    // States
+    localparam IDLE         = 3'd0,
+               READ_STREAM  = 3'd1,
+               SEND_OUTSIDE = 3'd2,
+               DONE         = 3'd4;
+
+    reg [2:0] state, next_state;
+	integer i;
+    // Internal buffer
+    reg [31:0] buffer [0:3];
+    reg [1:0]  buffer_index;
+
+    always @(posedge clk or posedge rst) begin
+        if (rst) begin
+            state <= IDLE;
+            buffer_index <= 2'd0;
+            i <= 0;
+            done <= 0;
+            
+        end else begin
+            state = next_state;
+            
+            case (state)
+                IDLE: begin
+                    
+                    if (s_axis_tdata !== {32{1'bx}} && s_axis_tdata !== {32{1'b0}}) begin
+                        buffer[buffer_index] <= s_axis_tdata;
+                        buffer_index <= buffer_index + 1;
+                        next_state <= READ_STREAM;
+                    end else begin
+                        next_state <= IDLE;
+                    end
+                    
+                end
+        
+            	READ_STREAM: begin
+                    if(last == 1'b0) begin
+                        buffer[buffer_index] <= s_axis_tdata;
+                        buffer_index <= buffer_index + 1;
+                        next_state <= READ_STREAM;
+                        
+                    end else if (last == 1'b1) begin
+                        buffer[buffer_index] <= s_axis_tdata;
+                        buffer_index <= 0;
+                        next_state <= SEND_OUTSIDE;
+                        done <= 1;
+                        
+                    end else begin
+                        next_state <= READ_STREAM;
+                    end
+                end
+                
+                SEND_OUTSIDE: begin
+                    dout <= buffer[buffer_index];
+                    
+                    if (buffer_index == THRESHOLD -1) begin
+                        next_state <= DONE;
+                        done <= 0;
+                    end else begin
+				        buffer_index <= buffer_index + 1;
+                    end
+                end
+                
+                DONE: begin
+                    // Set output to X, all data transfered
+                    dout <= {32{1'bX}};
+                    
+                    // Set all bits to X into the internal memory FIFO
+                    for (i = 0; i < THRESHOLD; i = i+1) begin
+                        buffer[i] <= {32{1'bX}}; 
+                    end
+                end
+
+                default: begin
+                    next_state <= IDLE;
+                end
+            endcase
+        end
+    end
+
+endmodule
+\end{lstlisting}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente de la cola FIFO de salida de datos},showstringspaces=false,label=lst:legacyFifoOut]
+module fifo_out (
+    input  wire          clk,
+    input  wire          rst,        // Synchronous reset
+    input  wire   [31:0] din,
+    input  wire   data_ready,  // Indicates 4 words available
+    output wire         full,
+    output wire        empty,
+    output reg   [31:0] dout
+    
+);
+
+    // Parameters
+    localparam DEPTH = 4;
+    localparam ADDR_WIDTH = $clog2(DEPTH);
+    localparam THRESHOLD = 4; // 4 words!
+    
+    // FSM state encoding
+    localparam IDLE = 2'b00;
+    localparam READ = 2'b01;
+    localparam WAIT = 2'b10;
+    reg [1:0] state;
+
+    // Memory
+    reg [31:0] mem [0:DEPTH-1];
+    reg [ADDR_WIDTH-1:0] rd_ptr = 0;
+    reg [ADDR_WIDTH-1:0] wr_ptr = 0;
+
+    // Flags
+    reg can_read;
+    integer i;
+    reg [3:0] fifo_data_count;
+    
+    assign full        = (fifo_data_count == DEPTH);
+    assign empty       = (fifo_data_count == 0);
+
+    always @(posedge clk or posedge rst) begin
+        
+        if (rst) begin
+            state <= IDLE;
+            wr_ptr <= 0;
+            rd_ptr <= 0;
+            fifo_data_count  <= 0;
+            can_read <= 0;
+            
+        end else begin
+            case (state)
+                IDLE: begin
+                    
+                    if(data_ready) begin
+                        mem[wr_ptr] <= din;
+                        wr_ptr <= wr_ptr + 1;
+                        fifo_data_count <= fifo_data_count + 1;
+                    
+                        if (fifo_data_count >= THRESHOLD) begin 
+                            fifo_data_count <= 0;
+                            can_read <= 1;
+                            state <= READ;
+                        end
+                        
+                    end 
+                end
+                
+                READ: begin
+                    if (can_read) begin
+                        
+                        dout <= mem[rd_ptr];
+                        rd_ptr <= rd_ptr + 1;
+                        
+                        if (rd_ptr == THRESHOLD) begin
+                            state <= WAIT;
+                        end
+
+                    end else begin
+                        dout <= {32{1'bX}};
+                    end
+                end
+
+                WAIT: begin
+                    fifo_data_count <= 0;
+                    wr_ptr <= 0;
+                    rd_ptr <= 0;
+                            
+                    // Set all bits to X into the internal memory FIFO
+                    for (i = 0; i < THRESHOLD; i = i+1) begin
+                        mem[i] <= {32{1'bX}}; 
+                    end
+                    
+                    state <= IDLE;
+                end
+
+                default: begin
+                    state <= IDLE;
+                end
+            endcase
+        end
+    end
+endmodule
+\end{lstlisting}

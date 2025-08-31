@@ -47,12 +47,9 @@ module bitreversal_obi (
     if (!rst_ni) begin
       obi_rvalid_q <= 1'b0;
       obi_rdata_q  <= 32'b0;
-    end else if (done_flag_o) begin
-      obi_rvalid_q <= reg_req_valid;    // lectura válida cuando done este listo
-      obi_rdata_q  <= reg_rsp_o.rdata;  // respuesta de los registros
-    end else begin
-      obi_rvalid_q <= 1'b0;  // esperar
-      obi_rdata_q  <= 32'b0;
+    end else begin			// cuando cualquier registro mapeado este activo
+      obi_rvalid_q <= reg_req_valid;    // request del registro en cuestion a VALIDO
+      obi_rdata_q  <= reg_rsp_o.rdata;  // valor de respuesta del registro en cuestion
     end
   end
 
