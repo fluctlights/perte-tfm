@@ -16,7 +16,7 @@ Cada carpeta corresponde a una subparte del proyecto:
 	- **_execution_logs_:** dump de la salida y la waveform `.vcd` de las ejecuciones en GR-HEEP
 - **Documento:** archivos LaTeX del proyecto y el PDF generado tras la compilación
 - **GR-HEEP-connect-bus:** archivos de la plataforma GR-HEEP (fork de X-HEEP).
-- **simulation_legacy:** archivos antiguos de la primera versión planteada para simular en Vivado
+- **Simulaciones:** primeras versiones realizadas para simular en Vivado y EdaPlayground
 - **tfm_freertos:** códigos y proyectos en Vivado y EdaPlayground de las simulaciones funcionales
 
 ## Referencias para apuntar
