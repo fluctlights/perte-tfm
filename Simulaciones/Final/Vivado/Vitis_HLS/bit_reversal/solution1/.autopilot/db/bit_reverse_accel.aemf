@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdfg:DBCdfg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cdfg="http://www.autoesl.com/DBCdfg" timeStamp="1754346371112">
+  <ports id="1" name="s_axis_V_data_V" type="PortType" originalName="s_axis" coreId="3621216858" bitwidth="32">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="2" name="s_axis_V_keep_V" type="PortType" originalName="s_axis" coreId="639657324" bitwidth="4">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="3" name="s_axis_V_strb_V" type="PortType" originalName="s_axis" coreId="2037591857" bitwidth="4">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="4" name="s_axis_V_last_V" type="PortType" originalName="s_axis" coreId="1701344288" bitwidth="1">
+    <dataOutputObjs>read</dataOutputObjs>
+  </ports>
+  <ports id="5" name="m_axis_V_data_V" type="PortType" originalName="m_axis" coreId="1702129263" bitwidth="32" direction="DirOut">
+    <dataInputObjs>write</dataInputObjs>
+  </ports>
+  <ports id="6" name="m_axis_V_keep_V" type="PortType" originalName="m_axis" coreId="1966088236" bitwidth="4" direction="DirOut">
+    <dataInputObjs>write</dataInputObjs>
+  </ports>
+  <ports id="7" name="m_axis_V_strb_V" type="PortType" originalName="m_axis" coreId="539119430" bitwidth="4" direction="DirOut">
+    <dataInputObjs>write</dataInputObjs>
+  </ports>
+  <ports id="8" name="m_axis_V_last_V" type="PortType" originalName="m_axis" coreId="1701344105" bitwidth="1" direction="DirOut">
+    <dataInputObjs>write</dataInputObjs>
+  </ports>
+  <edges id="48" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@blocks.0/@node_objs.1"/>
+  <edges id="49" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.0/@node_objs.2"/>
+  <edges id="50" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="51" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.1"/>
+  <edges id="54" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.2"/>
+  <edges id="57" source_obj="//@regions.0/@basic_blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="58" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="59" edge_type="CtrlEdge" source_obj="//@blocks.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.3"/>
+  <edges id="62" source_obj="//@ports.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="63" source_obj="//@ports.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="64" source_obj="//@ports.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="65" source_obj="//@ports.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.0"/>
+  <edges id="66" source_obj="//@regions.0/@basic_blocks.1/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.1"/>
+  <edges id="69" source_obj="//@regions.0/@basic_blocks.1/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.2"/>
+  <edges id="74" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.3"/>
+  <edges id="79" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@ports.4"/>
+  <edges id="80" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@ports.5"/>
+  <edges id="81" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@ports.6"/>
+  <edges id="82" source_obj="//@regions.0/@basic_blocks.1/@node_objs.4" sink_obj="//@ports.7"/>
+  <edges id="83" source_obj="//@regions.0/@basic_blocks.1/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.4"/>
+  <edges id="87" source_obj="//@regions.0/@basic_blocks.1/@node_objs.3" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.4"/>
+  <edges id="88" source_obj="//@regions.0/@basic_blocks.0/@node_objs.2" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <edges id="89" source_obj="//@blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <edges id="90" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.6"/>
+  <edges id="200" edge_type="CtrlEdge" source_obj="//@blocks.0" sink_obj="//@regions.0/@basic_blocks.0"/>
+  <edges id="201" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@blocks.1"/>
+  <edges id="202" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.0" sink_obj="//@regions.0/@basic_blocks.1"/>
+  <edges id="203" edge_type="CtrlEdge" source_obj="//@regions.0/@basic_blocks.1" sink_obj="//@regions.0/@basic_blocks.0" is_back_edge="1"/>
+  <edges id="204" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.0/@node_objs.0"/>
+  <edges id="205" edge_type="VirtEdge" source_obj="//@blocks.0/@node_objs.1" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <edges id="206" edge_type="VirtEdge" source_obj="//@regions.0/@basic_blocks.0/@node_objs.0" sink_obj="//@regions.0/@basic_blocks.1/@node_objs.5"/>
+  <blocks id="25" name="entry" type="BlockType">
+    <controlOutputObjs>for.inc</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="9" name="i" lineNumber="25" originalName="i" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="0" contextFuncName="bit_reverse_accel" bitwidth="3" opcode="alloca" m_display="0" m_topoIndex="1" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+      <dataOutputObjs>store</dataOutputObjs>
+      <dataOutputObjs>load</dataOutputObjs>
+      <dataOutputObjs>store</dataOutputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="23" name="i_write_ln25" lineNumber="25" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="0" contextFuncName="bit_reverse_accel" opcode="store" m_display="0" m_delay="1.32" m_topoIndex="2" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+      <dataInputObjs>alloca</dataInputObjs>
+      <constName>empty</constName>
+    </node_objs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="24" name="br_ln25" lineNumber="25" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="0" contextFuncName="bit_reverse_accel" opcode="br" m_display="0" m_topoIndex="3" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+      <controlInputObjs>for.inc</controlInputObjs>
+    </node_objs>
+    <fileValidLineNumbers fileName="bit_reversal/Diseno/bit_reversal_accel.cpp">
+      <validLinenumbers>25</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <blocks id="43" name="for.end" type="BlockType">
+    <controlInputObjs>for.inc</controlInputObjs>
+    <controlOutputObjs>br</controlOutputObjs>
+    <node_objs xsi:type="cdfg:CdfgNode" id="42" name="_ln36" lineNumber="36" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="390602176" contextFuncName="bit_reverse_accel" opcode="ret" nodeLabel="1.0" m_display="0" m_topoIndex="14" m_clusterGroupNumber="-1">
+      <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="36" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+    </node_objs>
+    <fileValidLineNumbers fileName="bit_reversal/Diseno/bit_reversal_accel.cpp">
+      <validLinenumbers>36</validLinenumbers>
+    </fileValidLineNumbers>
+  </blocks>
+  <regions anchor_node="-1" region_type="8" interval="1" typeName="Pipeline" iiViolation="" id="119" pipe_depth="3" RegionName="VITIS_LOOP_25_1">
+    <basic_blocks id="30" name="for.inc" type="BlockType">
+      <controlInputObjs>entry</controlInputObjs>
+      <controlInputObjs>for.inc.split</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>for.end</controlOutputObjs>
+      <controlOutputObjs>for.inc.split</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="26" name="i_1" lineNumber="25" originalName="i" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="0" contextFuncName="bit_reverse_accel" bitwidth="3" opcode="load" m_display="0" m_topoIndex="4" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>alloca</dataInputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+        <dataOutputObjs>add</dataOutputObjs>
+        <dataOutputObjs>icmp</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="27" name="icmp_ln25" lineNumber="25" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." rtlName="icmp_ln25_fu_114_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="bit_reverse_accel" bitwidth="1" opcode="icmp" m_display="0" m_delay="1.34" m_topoIndex="5" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>br</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="28" name="i_2" lineNumber="25" originalName="i" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." rtlName="i_2_fu_120_p2" coreName="Adder" implIndex="fabric" control="no" opType="add" coreId="1" contextFuncName="bit_reverse_accel" bitwidth="3" opcode="add" m_display="0" m_delay="1.34" m_topoIndex="6" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>store</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="29" name="br_ln25" lineNumber="25" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="0" contextFuncName="bit_reverse_accel" opcode="br" m_display="0" m_topoIndex="7" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>icmp</dataInputObjs>
+        <controlInputObjs>for.inc.split</controlInputObjs>
+        <controlInputObjs>for.end</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="bit_reversal/Diseno/bit_reversal_accel.cpp">
+        <validLinenumbers>25</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+    <basic_blocks id="41" name="for.inc.split" type="BlockType">
+      <controlInputObjs>for.inc</controlInputObjs>
+      <controlOutputObjs>br</controlOutputObjs>
+      <controlOutputObjs>for.inc</controlOutputObjs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="34" name="empty" lineNumber="27" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreName="axis" implIndex="axi4stream" control="no" opType="adapter" coreId="115" contextFuncName="bit_reverse_accel" bitwidth="41" opcode="read" m_display="0" m_delay="1.0" m_topoIndex="8" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="27" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>s_axis_V_data_V</dataInputObjs>
+        <dataInputObjs>s_axis_V_keep_V</dataInputObjs>
+        <dataInputObjs>s_axis_V_strb_V</dataInputObjs>
+        <dataInputObjs>s_axis_V_last_V</dataInputObjs>
+        <dataOutputObjs>extractvalue</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="35" name="input_word_data" lineNumber="27" originalName="input_word.data" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="1869098784" contextFuncName="bit_reverse_accel" bitwidth="32" opcode="extractvalue" m_display="0" m_topoIndex="9" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="27" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>read</dataInputObjs>
+        <dataOutputObjs>partselect</dataOutputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="36" name="reversed" lineNumber="9" originalName="reversed" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." rtlName="reversed_fu_130_p4" coreId="1043276322" contextFuncName="reverse_bits" bitwidth="32" opcode="partselect" m_display="0" m_topoIndex="10" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="29" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="9" fileDirectory="/home/fluctlights/HlsProjects" functionName="reverse_bits"/>
+        <dataInputObjs>extractvalue</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="37" name="output_word_last" lineNumber="32" originalName="output_word.last" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." rtlName="output_word_last_fu_140_p2" coreName="Cmp" implIndex="auto" control="no" opType="icmp" coreId="9" contextFuncName="bit_reverse_accel" bitwidth="1" opcode="icmp" m_display="0" m_delay="1.34" m_topoIndex="11" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="32" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>load</dataInputObjs>
+        <dataOutputObjs>write</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="38" name="m_axis_V_data_V_write_ln34" lineNumber="34" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreName="axis" implIndex="axi4stream" control="no" opType="adapter" coreId="115" contextFuncName="bit_reverse_accel" opcode="write" nodeLabel="1.0" nodeLatency="1" m_display="0" m_delay="1.0" m_topoIndex="13" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="34" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>partselect</dataInputObjs>
+        <dataInputObjs>icmp</dataInputObjs>
+        <dataOutputObjs>m_axis_V_data_V</dataOutputObjs>
+        <dataOutputObjs>m_axis_V_keep_V</dataOutputObjs>
+        <dataOutputObjs>m_axis_V_strb_V</dataOutputObjs>
+        <dataOutputObjs>m_axis_V_last_V</dataOutputObjs>
+        <constName>empty</constName>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="39" name="i_write_ln25" lineNumber="25" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="1769239916" contextFuncName="bit_reverse_accel" opcode="store" m_display="0" m_delay="1.32" m_topoIndex="12" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <dataInputObjs>add</dataInputObjs>
+        <dataInputObjs>alloca</dataInputObjs>
+      </node_objs>
+      <node_objs xsi:type="cdfg:CdfgNode" id="40" name="br_ln25" lineNumber="25" fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" fileDirectory="../." coreId="1986359903" contextFuncName="bit_reverse_accel" opcode="br" nodeLabel="2.0" m_display="0" m_topoIndex="15" m_clusterGroupNumber="-1">
+        <inlineStackInfo fileName="bit_reversal/Diseno/bit_reversal_accel.cpp" linenumber="25" fileDirectory="/home/fluctlights/HlsProjects" functionName="bit_reverse_accel"/>
+        <controlInputObjs>for.inc</controlInputObjs>
+      </node_objs>
+      <fileValidLineNumbers fileName="bit_reversal/Diseno/bit_reversal_accel.cpp">
+        <validLinenumbers>27</validLinenumbers>
+        <validLinenumbers>9</validLinenumbers>
+        <validLinenumbers>32</validLinenumbers>
+        <validLinenumbers>34</validLinenumbers>
+        <validLinenumbers>25</validLinenumbers>
+        <validLinenumbers>29</validLinenumbers>
+      </fileValidLineNumbers>
+    </basic_blocks>
+  </regions>
+  <ScheduleInfo time="0"/>
+  <ScheduleInfo time="1"/>
+  <ScheduleInfo time="2"/>
+  <regnodes realName="output_word_last_reg_167">
+    <nodeIds>37</nodeIds>
+  </regnodes>
+  <regnodes realName="reversed_reg_162">
+    <nodeIds>36</nodeIds>
+  </regnodes>
+  <regnodes realName="i_reg_151">
+    <nodeIds>9</nodeIds>
+  </regnodes>
+  <regnodes realName="icmp_ln25_reg_158">
+    <nodeIds>27</nodeIds>
+  </regnodes>
+  <expressionNodes realName="output_word_last_fu_140">
+    <nodeIds>37</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="icmp_ln25_fu_114">
+    <nodeIds>27</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="input_word_data_fu_126">
+    <nodeIds>35</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_2_fu_120">
+    <nodeIds>28</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="i_fu_72">
+    <nodeIds>9</nodeIds>
+  </expressionNodes>
+  <expressionNodes realName="reversed_fu_130">
+    <nodeIds>36</nodeIds>
+  </expressionNodes>
+  <ioNodes realName="store_ln25_store_fu_146">
+    <nodeIds>39</nodeIds>
+  </ioNodes>
+  <ioNodes realName="empty_read_fu_76">
+    <nodeIds>34</nodeIds>
+  </ioNodes>
+  <ioNodes realName="i_1_load_fu_111">
+    <nodeIds>26</nodeIds>
+  </ioNodes>
+  <ioNodes realName="grp_write_fu_88">
+    <nodeIds>38</nodeIds>
+  </ioNodes>
+  <ioNodes realName="store_ln25_store_fu_106">
+    <nodeIds>23</nodeIds>
+  </ioNodes>
+  <ioPorts name="m_axis_V_data_V">
+    <contents name="write">
+      <nodeIds>38</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="m_axis_V_keep_V">
+    <contents name="write">
+      <nodeIds>38</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="m_axis_V_last_V">
+    <contents name="write">
+      <nodeIds>38</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="m_axis_V_strb_V">
+    <contents name="write">
+      <nodeIds>38</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="s_axis_V_data_V">
+    <contents name="read">
+      <nodeIds>34</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="s_axis_V_keep_V">
+    <contents name="read">
+      <nodeIds>34</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="s_axis_V_last_V">
+    <contents name="read">
+      <nodeIds>34</nodeIds>
+    </contents>
+  </ioPorts>
+  <ioPorts name="s_axis_V_strb_V">
+    <contents name="read">
+      <nodeIds>34</nodeIds>
+    </contents>
+  </ioPorts>
+  <fsm>
+    <states id="1">
+      <operations id="9" stage="1" latency="1"/>
+      <operations id="10" stage="1" latency="1"/>
+      <operations id="11" stage="1" latency="1"/>
+      <operations id="12" stage="1" latency="1"/>
+      <operations id="13" stage="1" latency="1"/>
+      <operations id="14" stage="1" latency="1"/>
+      <operations id="15" stage="1" latency="1"/>
+      <operations id="16" stage="1" latency="1"/>
+      <operations id="17" stage="1" latency="1"/>
+      <operations id="18" stage="1" latency="1"/>
+      <operations id="19" stage="1" latency="1"/>
+      <operations id="20" stage="1" latency="1"/>
+      <operations id="21" stage="1" latency="1"/>
+      <operations id="22" stage="1" latency="1"/>
+      <operations id="23" stage="1" latency="1"/>
+      <operations id="24" stage="1" latency="1"/>
+      <operations id="26" stage="1" latency="1"/>
+      <operations id="27" stage="1" latency="1"/>
+      <operations id="28" stage="1" latency="1"/>
+      <operations id="29" stage="1" latency="1"/>
+      <operations id="34" stage="1" latency="1"/>
+      <operations id="35" stage="1" latency="1"/>
+      <operations id="36" stage="1" latency="1"/>
+      <operations id="37" stage="1" latency="1"/>
+      <operations id="39" stage="1" latency="1"/>
+    </states>
+    <states id="2">
+      <operations id="38" stage="2" latency="2"/>
+      <operations id="42" stage="1" latency="1"/>
+    </states>
+    <states id="3">
+      <operations id="31" stage="1" latency="1"/>
+      <operations id="32" stage="1" latency="1"/>
+      <operations id="33" stage="1" latency="1"/>
+      <operations id="38" stage="1" latency="2"/>
+      <operations id="40" stage="1" latency="1"/>
+    </states>
+    <transitions inState="2" outState="3">
+      <condition id="-1"/>
+    </transitions>
+    <transitions inState="1" outState="2">
+      <condition id="-1"/>
+    </transitions>
+  </fsm>
+  <CFGRegionsRoot>
+    <cfgRegions mId="1" mTag="bit_reverse_accel" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1" mMinLatency="7" mMaxLatency="7">
+      <subRegions>2</subRegions>
+      <subRegions>3</subRegions>
+      <subRegions>4</subRegions>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="2" mTag="Entry" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>25</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="3" mTag="VITIS_LOOP_25_1" mII="1" mDepth="3" mMinTripCount="4" mMaxTripCount="4" mMinLatency="5" mMaxLatency="5" mType="1">
+      <basicBlocks>30</basicBlocks>
+      <basicBlocks>41</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+    <cfgRegions mId="4" mTag="Return" mII="-1" mDepth="-1" mMinTripCount="-1" mMaxTripCount="-1">
+      <basicBlocks>43</basicBlocks>
+      <mDfPipe/>
+    </cfgRegions>
+  </CFGRegionsRoot>
+</cdfg:DBCdfg>

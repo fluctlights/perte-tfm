@@ -1,0 +1,15 @@
+INFO: [SIM 2] *************** CSIM start ***************
+INFO: [SIM 4] CSIM will launch GCC as the compiler.
+   Compiling ../../../Diseno/bit_reversal_accel.cpp in debug mode
+   Generating csim.exe
+Original: 1
+Original: 2
+Original: 3
+Original: 4
+Reversed: 80000000
+Reversed: 40000000
+Reversed: c0000000
+Reversed: 20000000
+INFO [HLS SIM]: The maximum depth reached by any hls::stream() instance in the design is 4
+INFO: [SIM 1] CSim done with 0 errors.
+INFO: [SIM 3] *************** CSIM finish ***************

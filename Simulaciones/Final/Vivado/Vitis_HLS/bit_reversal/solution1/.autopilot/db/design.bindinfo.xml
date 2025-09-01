@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindInfo>
+	<BindNode BINDTYPE="op" DISPLAY="bind_op icmp" ID="" IMPL="auto" LATENCY="0" OPTYPE="icmp" PRAGMA="" RTLNAME="icmp_ln25_fu_114_p2" SOURCE="bit_reversal/Diseno/bit_reversal_accel.cpp:25" VARIABLE="icmp_ln25" MODULE="bit_reverse_accel" LOOP="VITIS_LOOP_25_1" BUNDLEDNAME="" DSP="0" BRAM="0" URAM="0" USAGE="" STORAGESUBTYPE="" STORAGESIZE=""/>
+	<BindNode BINDTYPE="op" DISPLAY="bind_op add" ID="" IMPL="fabric" LATENCY="0" OPTYPE="add" PRAGMA="" RTLNAME="i_2_fu_120_p2" SOURCE="bit_reversal/Diseno/bit_reversal_accel.cpp:25" VARIABLE="i_2" MODULE="bit_reverse_accel" LOOP="VITIS_LOOP_25_1" BUNDLEDNAME="" DSP="0" BRAM="0" URAM="0" USAGE="" STORAGESUBTYPE="" STORAGESIZE=""/>
+	<BindNode BINDTYPE="op" DISPLAY="bind_op icmp" ID="" IMPL="auto" LATENCY="0" OPTYPE="icmp" PRAGMA="" RTLNAME="output_word_last_fu_140_p2" SOURCE="bit_reversal/Diseno/bit_reversal_accel.cpp:32" VARIABLE="output_word_last" MODULE="bit_reverse_accel" LOOP="VITIS_LOOP_25_1" BUNDLEDNAME="" DSP="0" BRAM="0" URAM="0" USAGE="" STORAGESUBTYPE="" STORAGESIZE=""/>
+</BindInfo>

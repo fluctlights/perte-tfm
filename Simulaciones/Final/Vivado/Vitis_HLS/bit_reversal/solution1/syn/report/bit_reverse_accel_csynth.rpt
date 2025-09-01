@@ -1,0 +1,159 @@
+
+
+================================================================
+== Vitis HLS Report for 'bit_reverse_accel'
+================================================================
+* Date:           Tue Aug  5 00:26:11 2025
+
+* Version:        2023.2 (Build 4023990 on Oct 11 2023)
+* Project:        bit_reversal
+* Solution:       solution1 (Vivado IP Flow Target)
+* Product family: artix7
+* Target device:  xc7a200t-fbg676-2
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  3.995 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        7|        7|  70.000 ns|  70.000 ns|    8|    8|       no|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                   |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |     Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_25_1  |        5|        5|         3|          1|          1|     4|       yes|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+--------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |   LUT  | URAM|
++-----------------+---------+-----+--------+--------+-----+
+|DSP              |        -|    -|       -|       -|    -|
+|Expression       |        -|    -|       0|      47|    -|
+|FIFO             |        -|    -|       -|       -|    -|
+|Instance         |        -|    -|       -|       -|    -|
+|Memory           |        -|    -|       -|       -|    -|
+|Multiplexer      |        -|    -|       -|      54|    -|
+|Register         |        -|    -|      41|       -|    -|
++-----------------+---------+-----+--------+--------+-----+
+|Total            |        0|    0|      41|     101|    0|
++-----------------+---------+-----+--------+--------+-----+
+|Available        |      730|  740|  269200|  134600|    0|
++-----------------+---------+-----+--------+--------+-----+
+|Utilization (%)  |        0|    0|      ~0|      ~0|    0|
++-----------------+---------+-----+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +----------------------------------+----------+----+---+----+------------+------------+
+    |           Variable Name          | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +----------------------------------+----------+----+---+----+------------+------------+
+    |i_2_fu_120_p2                     |         +|   0|  0|  11|           3|           1|
+    |ap_block_state1_pp0_stage0_iter0  |       and|   0|  0|   2|           1|           1|
+    |ap_condition_121                  |       and|   0|  0|   2|           1|           1|
+    |icmp_ln25_fu_114_p2               |      icmp|   0|  0|  13|           3|           4|
+    |output_word_last_fu_140_p2        |      icmp|   0|  0|  11|           3|           2|
+    |ap_block_pp0_stage0_01001         |        or|   0|  0|   2|           1|           1|
+    |ap_block_pp0_stage0_11001         |        or|   0|  0|   2|           1|           1|
+    |ap_block_state2_pp0_stage0_iter1  |        or|   0|  0|   2|           1|           1|
+    |ap_enable_pp0                     |       xor|   0|  0|   2|           1|           2|
+    +----------------------------------+----------+----+---+----+------------+------------+
+    |Total                             |          |   0|  0|  47|          15|          14|
+    +----------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_sig_allocacmp_i_1     |   9|          2|    3|          6|
+    |i_fu_72                  |   9|          2|    3|          6|
+    |m_axis_TDATA_blk_n       |   9|          2|    1|          2|
+    |s_axis_TDATA_blk_n       |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  54|         12|   10|         20|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +----------------------------------+----+----+-----+-----------+
+    |               Name               | FF | LUT| Bits| Const Bits|
+    +----------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                         |   1|   0|    1|          0|
+    |ap_done_reg                       |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1           |   1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter2           |   1|   0|    1|          0|
+    |ap_loop_exit_ready_pp0_iter1_reg  |   1|   0|    1|          0|
+    |i_fu_72                           |   3|   0|    3|          0|
+    |output_word_last_reg_167          |   1|   0|    1|          0|
+    |reversed_reg_162                  |  32|   0|   32|          0|
+    +----------------------------------+----+----+-----+-----------+
+    |Total                             |  41|   0|   41|          0|
+    +----------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------+-----+-----+------------+-------------------+--------------+
+|   RTL Ports   | Dir | Bits|  Protocol  |   Source Object   |    C Type    |
++---------------+-----+-----+------------+-------------------+--------------+
+|ap_clk         |   in|    1|  ap_ctrl_hs|  bit_reverse_accel|  return value|
+|ap_rst_n       |   in|    1|  ap_ctrl_hs|  bit_reverse_accel|  return value|
+|ap_start       |   in|    1|  ap_ctrl_hs|  bit_reverse_accel|  return value|
+|ap_done        |  out|    1|  ap_ctrl_hs|  bit_reverse_accel|  return value|
+|ap_idle        |  out|    1|  ap_ctrl_hs|  bit_reverse_accel|  return value|
+|ap_ready       |  out|    1|  ap_ctrl_hs|  bit_reverse_accel|  return value|
+|s_axis_TVALID  |   in|    1|        axis|    s_axis_V_last_V|       pointer|
+|s_axis_TREADY  |  out|    1|        axis|    s_axis_V_last_V|       pointer|
+|s_axis_TLAST   |   in|    1|        axis|    s_axis_V_last_V|       pointer|
+|m_axis_TREADY  |   in|    1|        axis|    m_axis_V_last_V|       pointer|
+|m_axis_TVALID  |  out|    1|        axis|    m_axis_V_last_V|       pointer|
+|m_axis_TLAST   |  out|    1|        axis|    m_axis_V_last_V|       pointer|
+|s_axis_TDATA   |   in|   32|        axis|    s_axis_V_data_V|       pointer|
+|s_axis_TKEEP   |   in|    4|        axis|    s_axis_V_keep_V|       pointer|
+|s_axis_TSTRB   |   in|    4|        axis|    s_axis_V_strb_V|       pointer|
+|m_axis_TDATA   |  out|   32|        axis|    m_axis_V_data_V|       pointer|
+|m_axis_TKEEP   |  out|    4|        axis|    m_axis_V_keep_V|       pointer|
+|m_axis_TSTRB   |  out|    4|        axis|    m_axis_V_strb_V|       pointer|
++---------------+-----+-----+------------+-------------------+--------------+
+

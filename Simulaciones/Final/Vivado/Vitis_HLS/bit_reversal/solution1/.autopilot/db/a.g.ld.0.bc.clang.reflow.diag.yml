@@ -1,0 +1,45 @@
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 7, 
+                   Column: 18 }
+Function:        _Z12reverse_bits7ap_uintILi32EE
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_7_1
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 4, 
+                   Column: 0 }
+Function:        _Z12reverse_bits7ap_uintILi32EE
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_7_1
+  - String:          ''' ('
+  - LoopLoc:         'bit_reversal/Diseno/bit_reversal_accel.cpp:7:18'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          reverse_bits
+  - String:          ''' completely with a factor of '
+  - Factor:          '32'
+...
+--- !Passed
+Pass:            reflow-auto-inline-performance-driven
+Name:            AutoInlinePerf
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 29, 
+                   Column: 32 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Automatically inlining function '''
+  - Callee:          'reverse_bits(ap_uint<32>)'
+    DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, 
+                       Line: 4, Column: 0 }
+  - String:          ''' to improve effectiveness of pipeline pragma in function '''
+  - Caller:          'bit_reverse_accel(hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul, (unsigned char)56, false>, 0>&, hls::stream<hls::axis<ap_uint<32>, 0ul, 0ul, 0ul, (unsigned char)56, false>, 0>&)'
+    DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, 
+                       Line: 16, Column: 0 }
+  - String:          ''''
+...

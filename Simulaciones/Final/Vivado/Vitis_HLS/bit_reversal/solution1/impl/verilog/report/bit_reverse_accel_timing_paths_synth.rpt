@@ -1,0 +1,507 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2023.2 (lin64) Build 4029153 Fri Oct 13 20:13:54 MDT 2023
+| Date         : Tue Aug  5 00:32:41 2025
+| Host         : ubuntu running 64-bit Ubuntu 22.04.5 LTS
+| Command      : report_timing -max_paths 10 -file ./report/bit_reverse_accel_timing_paths_synth.rpt
+| Design       : bd_0_wrapper
+| Device       : 7a200t-fbg676
+| Speed File   : -2  PRODUCTION 1.23 2018-06-13
+| Design State : Synthesized
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/ap_loop_exit_ready_pp0_iter1_reg_reg/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/ap_loop_exit_ready_pp0_iter1_reg_reg/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/ap_loop_exit_ready_pp0_iter1_reg_reg/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/ap_loop_exit_ready_pp0_iter1_reg_reg
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[0]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[0]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[0]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[0]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[10]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[10]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[10]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[10]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[11]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[11]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[11]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[11]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[12]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[12]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[12]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[12]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[13]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[13]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[13]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[13]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[14]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[14]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[14]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[14]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[15]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[15]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[15]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[15]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[16]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[16]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[16]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[16]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+Slack (MET) :             7.383ns  (required time - arrival time)
+  Source:                 bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            bd_0_i/hls_inst/inst/reversed_reg_162_reg[17]/CE
+                            (rising edge-triggered cell FDRE clocked by ap_clk  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Path Group:             ap_clk
+  Path Type:              Setup (Max at Slow Process Corner)
+  Requirement:            10.000ns  (ap_clk rise@10.000ns - ap_clk rise@0.000ns)
+  Data Path Delay:        2.377ns  (logic 0.719ns (30.248%)  route 1.658ns (69.752%))
+  Logic Levels:           2  (LUT4=1 LUT6=1)
+  Clock Path Skew:        -0.039ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    0.748ns = ( 10.748 - 10.000 ) 
+    Source Clock Delay      (SCD):    0.787ns
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.035ns  ((TSJ^2 + TIJ^2)^1/2 + DJ) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Total Input Jitter      (TIJ):    0.000ns
+    Discrete Jitter          (DJ):    0.000ns
+    Phase Error              (PE):    0.000ns
+
+    Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------
+                         (clock ap_clk rise edge)     0.000     0.000 r  
+                                                      0.000     0.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.787     0.787    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/C
+  -------------------------------------------------------------------    -------------------
+                         FDRE (Prop_fdre_C_Q)         0.379     1.166 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]/Q
+                         net (fo=11, unplaced)        0.825     1.991    bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/B_V_data_1_state_reg[0]_0
+                         LUT6 (Prop_lut6_I0_O)        0.232     2.223 f  bd_0_i/hls_inst/inst/regslice_both_m_axis_V_data_V_U/ap_ready_INST_0_i_1/O
+                         net (fo=12, unplaced)        0.395     2.618    bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/i_fu_72_reg[0]
+                         LUT4 (Prop_lut4_I3_O)        0.108     2.726 r  bd_0_i/hls_inst/inst/regslice_both_s_axis_V_data_V_U/reversed_reg_162[31]_i_1/O
+                         net (fo=33, unplaced)        0.438     3.164    bd_0_i/hls_inst/inst/ap_block_pp0_stage0_subdone
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[17]/CE
+  -------------------------------------------------------------------    -------------------
+
+                         (clock ap_clk rise edge)    10.000    10.000 r  
+                                                      0.000    10.000 r  ap_clk (IN)
+                         net (fo=181, unset)          0.748    10.748    bd_0_i/hls_inst/inst/ap_clk
+                         FDRE                                         r  bd_0_i/hls_inst/inst/reversed_reg_162_reg[17]/C
+                         clock pessimism              0.000    10.748    
+                         clock uncertainty           -0.035    10.712    
+                         FDRE (Setup_fdre_C_CE)      -0.165    10.547    bd_0_i/hls_inst/inst/reversed_reg_162_reg[17]
+  -------------------------------------------------------------------
+                         required time                         10.547    
+                         arrival time                          -3.164    
+  -------------------------------------------------------------------
+                         slack                                  7.383    
+
+
+
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<autopilotfilemapping:AutoPilotFileMapping xmlns:autopilotfilemapping="www.autoesl.com/autopilotfilemapping">
+  <source>
+    <originFiles name="bit_reversal_accel.cpp" path="/home/fluctlights/HlsProjects/bit_reversal/Diseno/bit_reversal_accel.cpp"/>
+    <originFiles name="bit_reversal_accel.h" path="/home/fluctlights/HlsProjects/bit_reversal/Diseno/bit_reversal_accel.h"/>
+  </source>
+  <testbench>
+    <originFiles name="testbench.cpp" path="/home/fluctlights/HlsProjects/bit_reversal/Testbench/testbench.cpp"/>
+  </testbench>
+</autopilotfilemapping:AutoPilotFileMapping>

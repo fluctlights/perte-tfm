@@ -1,0 +1,9 @@
+{
+	"version": "1.0",
+	"modules": {
+		"bit_reverse_accel": {
+			"proto_instances": {
+			}
+		}
+	}
+}

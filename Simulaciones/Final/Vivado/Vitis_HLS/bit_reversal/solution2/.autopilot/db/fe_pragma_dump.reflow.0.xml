@@ -1,0 +1,25 @@
+<pragmas>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_bit_ref<32, false>::operator=(unsigned long long)" off="0" region="0" recursive="0"/>
+<pragma file="/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_common.h" line="523" pragmaType="inline" parentfunction="_ZN8ssdm_intILi1ELb0EEC2EDq1_j" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_bit_ref<32, false>::operator bool() const" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_bit_ref<32, false>::ap_bit_ref(ap_int_base<32, false>*, int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<1, false>::ap_int_base(bool)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_id_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_last_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_strb_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_uint<1>::ap_uint(bool)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="write" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_data_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_keep_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_int_base<32, false>::operator[](int)" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_user_ptr" off="0" region="0" recursive="0"/>
+<pragma file="bit_reversal/Diseno/bit_reversal_accel.cpp" line="10" pragmaType="pipeline" parentfunction="bit_reverse_accel" off="0" ii="3" style=""/>
+<pragma file="bit_reversal/Diseno/bit_reversal_accel.cpp" line="21" pragmaType="unroll" parentfunction="bit_reverse_accel" factor="-1" skip_exit_check="0"/>
+<pragma file="bit_reversal/Diseno/bit_reversal_accel.cpp" line="7" pragmaType="interface" parentfunction="bit_reverse_accel" mode="axis" port="s_axis" register="0" register_mode="both" name="" depth="-1"/>
+<pragma file="bit_reversal/Diseno/bit_reversal_accel.cpp" line="8" pragmaType="interface" parentfunction="bit_reverse_accel" mode="axis" port="m_axis" register="0" register_mode="both" name="" depth="-1"/>
+<pragma file="bit_reversal/Diseno/bit_reversal_accel.cpp" line="9" pragmaType="interface" parentfunction="bit_reverse_accel" mode="ap_ctrl_none" port="return" name=""/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="read" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="get_dest_ptr" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="checkOverflowBaseC" off="0" region="0" recursive="0"/>
+<pragma file="" line="0" pragmaType="inline" parentfunction="ap_bit_ref<32, false>::operator=(ap_bit_ref<32, false> const&)" off="0" region="0" recursive="0"/>
+</pragmas>

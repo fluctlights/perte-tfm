@@ -1,0 +1,91 @@
+
+
+================================================================
+== Synthesis Summary Report of 'bit_reverse_accel'
+================================================================
++ General Information: 
+    * Date:           Mon Sep  1 14:20:31 2025
+    * Version:        2023.2 (Build 4023990 on Oct 11 2023)
+    * Project:        bit_reversal
+    * Solution:       solution2 (Vivado IP Flow Target)
+    * Product family: artix7
+    * Target device:  xc7a100t-csg324-3
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +---------------------+------+------+---------+--------+----------+---------+------+----------+------+----+---------+----------+-----+
+    |       Modules       | Issue|      | Latency | Latency| Iteration|         | Trip |          |      |    |         |          |     |
+    |       & Loops       | Type | Slack| (cycles)|  (ns)  |  Latency | Interval| Count| Pipelined| BRAM | DSP|    FF   |    LUT   | URAM|
+    +---------------------+------+------+---------+--------+----------+---------+------+----------+------+----+---------+----------+-----+
+    |+ bit_reverse_accel  |    II|  5.30|        4|  40.000|         -|        4|     -|       yes|     -|   -|  5 (~0%)|  74 (~0%)|    -|
+    +---------------------+------+------+---------+--------+----------+---------+------+----------+------+----+---------+----------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* AXIS
++-----------+-----------+---------------+-------+-------+-------+--------+-------+--------+
+| Interface | Direction | Register Mode | TDATA | TKEEP | TLAST | TREADY | TSTRB | TVALID |
++-----------+-----------+---------------+-------+-------+-------+--------+-------+--------+
+| m_axis    | out       | both          | 32    | 4     | 1     | 1      | 4     | 1      |
+| s_axis    | in        | both          | 32    | 4     | 1     | 1      | 4     | 1      |
++-----------+-----------+---------------+-------+-------+-------+--------+-------+--------+
+
+* TOP LEVEL CONTROL
++-----------+--------------+----------+
+| Interface | Type         | Ports    |
++-----------+--------------+----------+
+| ap_clk    | clock        | ap_clk   |
+| ap_rst_n  | reset        | ap_rst_n |
+| ap_ctrl   | ap_ctrl_none |          |
++-----------+--------------+----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+---------------------------------------------------------+
+| Argument | Direction | Datatype                                                |
++----------+-----------+---------------------------------------------------------+
+| s_axis   | in        | stream<hls::axis<ap_uint<32>, 0, 0, 0, '8', false>, 0>& |
+| m_axis   | out       | stream<hls::axis<ap_uint<32>, 0, 0, 0, '8', false>, 0>& |
++----------+-----------+---------------------------------------------------------+
+
+* SW-to-HW Mapping
++----------+--------------+-----------+
+| Argument | HW Interface | HW Type   |
++----------+--------------+-----------+
+| s_axis   | s_axis       | interface |
+| m_axis   | m_axis       | interface |
++----------+--------------+-----------+
+
+
+================================================================
+== Bind Op Report
+================================================================
+  No bind op info in design
+
+================================================================
+== Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+--------------------------+---------------------------------------------------------------------------+
+| Type      | Options                  | Location                                                                  |
++-----------+--------------------------+---------------------------------------------------------------------------+
+| interface | axis port=s_axis         | bit_reversal/Diseno/bit_reversal_accel.cpp:7 in bit_reverse_accel, s_axis |
+| interface | axis port=m_axis         | bit_reversal/Diseno/bit_reversal_accel.cpp:8 in bit_reverse_accel, m_axis |
+| interface | ap_ctrl_none port=return | bit_reversal/Diseno/bit_reversal_accel.cpp:9 in bit_reverse_accel, return |
+| pipeline  | II=3                     | bit_reversal/Diseno/bit_reversal_accel.cpp:10 in bit_reverse_accel        |
+| unroll    |                          | bit_reversal/Diseno/bit_reversal_accel.cpp:21 in bit_reverse_accel        |
++-----------+--------------------------+---------------------------------------------------------------------------+
+
+

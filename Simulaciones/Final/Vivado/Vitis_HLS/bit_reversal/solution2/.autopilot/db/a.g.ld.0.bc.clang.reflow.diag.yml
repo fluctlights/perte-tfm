@@ -1,0 +1,107 @@
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 17, 
+                   Column: 22 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_17_1
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-infer-unroll
+Name:            ImplicitUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 20, 
+                   Column: 26 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Loop '''
+  - LoopName:        VITIS_LOOP_20_2
+  - String:          ''' is marked as complete unroll implied by the pipeline pragma'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 5, 
+                   Column: 0 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_17_1
+  - String:          ''' ('
+  - LoopLoc:         'bit_reversal/Diseno/bit_reversal_accel.cpp:17:22'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          bit_reverse_accel
+  - String:          ''' completely with a factor of '
+  - Factor:          '4'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 5, 
+                   Column: 0 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_20_2
+  - String:          ''' ('
+  - LoopLoc:         'bit_reversal/Diseno/bit_reversal_accel.cpp:20:26'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          bit_reverse_accel
+  - String:          ''' completely with a factor of '
+  - Factor:          '32'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 5, 
+                   Column: 0 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_20_2
+  - String:          ''' ('
+  - LoopLoc:         'bit_reversal/Diseno/bit_reversal_accel.cpp:20:26'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          bit_reverse_accel
+  - String:          ''' completely with a factor of '
+  - Factor:          '32'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 5, 
+                   Column: 0 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_20_2
+  - String:          ''' ('
+  - LoopLoc:         'bit_reversal/Diseno/bit_reversal_accel.cpp:20:26'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          bit_reverse_accel
+  - String:          ''' completely with a factor of '
+  - Factor:          '32'
+...
+--- !Passed
+Pass:            reflow-pragma-loop-unroll
+Name:            PragmaFullyUnroll
+DebugLoc:        { File: bit_reversal/Diseno/bit_reversal_accel.cpp, Line: 5, 
+                   Column: 0 }
+Function:        _Z17bit_reverse_accelRN3hls6streamINS_4axisI7ap_uintILi32EELm0ELm0ELm0ELh56ELb0EEELi0EEES6_
+Args:            
+  - String:          'Unrolling loop '''
+  - LoopName:        VITIS_LOOP_20_2
+  - String:          ''' ('
+  - LoopLoc:         'bit_reversal/Diseno/bit_reversal_accel.cpp:20:26'
+  - String:          ') '
+  - String:          'in function '''
+  - String:          bit_reverse_accel
+  - String:          ''' completely with a factor of '
+  - Factor:          '32'
+...

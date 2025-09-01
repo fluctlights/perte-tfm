@@ -1,0 +1,180 @@
+
+
+================================================================
+== Vitis HLS Report for 'bit_reverse_accel'
+================================================================
+* Date:           Mon Sep  1 14:20:31 2025
+
+* Version:        2023.2 (Build 4023990 on Oct 11 2023)
+* Project:        bit_reversal
+* Solution:       solution2 (Vivado IP Flow Target)
+* Product family: artix7
+* Target device:  xc7a100t-csg324-3
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  2.000 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |  Latency (cycles) |   Latency (absolute)  |  Interval | Pipeline|
+    |   min   |   max   |    min    |    max    | min | max |   Type  |
+    +---------+---------+-----------+-----------+-----+-----+---------+
+    |        4|        4|  40.000 ns|  40.000 ns|    4|    4|      yes|
+    +---------+---------+-----------+-----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        N/A
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 1
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 0
+IsPipeline: 1
+IsRtlPipelined: 1
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 4, depth = 5
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 5
+* Pipeline : 1
+  Pipeline-0 : II = 4, D = 5, States = { 1 2 3 4 5 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 2.00>
+ST_1 : Operation 6 [1/1] (1.00ns)   --->   "%empty = read i41 @_ssdm_op_Read.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %s_axis_V_data_V, i4 %s_axis_V_keep_V, i4 %s_axis_V_strb_V, i1 %s_axis_V_last_V" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 6 'read' 'empty' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%input_word_data = extractvalue i41 %empty" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 7 'extractvalue' 'input_word_data' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%reversed = partselect i32 @_ssdm_op_PartSelect.i32.i32.i32.i32, i32 %input_word_data, i32 31, i32 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:22]   --->   Operation 8 'partselect' 'reversed' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [2/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed, i4 0, i4 0, i1 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 9 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+
+State 2 <SV = 1> <Delay = 2.00>
+ST_2 : Operation 10 [1/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed, i4 0, i4 0, i1 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 10 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_2 : Operation 11 [1/1] (1.00ns)   --->   "%empty_10 = read i41 @_ssdm_op_Read.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %s_axis_V_data_V, i4 %s_axis_V_keep_V, i4 %s_axis_V_strb_V, i1 %s_axis_V_last_V" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 11 'read' 'empty_10' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_2 : Operation 12 [1/1] (0.00ns)   --->   "%input_word_data_1 = extractvalue i41 %empty_10" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 12 'extractvalue' 'input_word_data_1' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 13 [1/1] (0.00ns)   --->   "%reversed_1 = partselect i32 @_ssdm_op_PartSelect.i32.i32.i32.i32, i32 %input_word_data_1, i32 31, i32 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:22]   --->   Operation 13 'partselect' 'reversed_1' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 14 [2/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed_1, i4 0, i4 0, i1 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 14 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+
+State 3 <SV = 2> <Delay = 2.00>
+ST_3 : Operation 15 [1/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed_1, i4 0, i4 0, i1 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 15 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_3 : Operation 16 [1/1] (1.00ns)   --->   "%empty_11 = read i41 @_ssdm_op_Read.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %s_axis_V_data_V, i4 %s_axis_V_keep_V, i4 %s_axis_V_strb_V, i1 %s_axis_V_last_V" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 16 'read' 'empty_11' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_3 : Operation 17 [1/1] (0.00ns)   --->   "%input_word_data_2 = extractvalue i41 %empty_11" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 17 'extractvalue' 'input_word_data_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 18 [1/1] (0.00ns)   --->   "%reversed_2 = partselect i32 @_ssdm_op_PartSelect.i32.i32.i32.i32, i32 %input_word_data_2, i32 31, i32 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:22]   --->   Operation 18 'partselect' 'reversed_2' <Predicate = true> <Delay = 0.00>
+ST_3 : Operation 19 [2/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed_2, i4 0, i4 0, i1 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 19 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+
+State 4 <SV = 3> <Delay = 2.00>
+ST_4 : Operation 20 [1/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed_2, i4 0, i4 0, i1 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 20 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_4 : Operation 21 [1/1] (1.00ns)   --->   "%empty_12 = read i41 @_ssdm_op_Read.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %s_axis_V_data_V, i4 %s_axis_V_keep_V, i4 %s_axis_V_strb_V, i1 %s_axis_V_last_V" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 21 'read' 'empty_12' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_4 : Operation 22 [1/1] (0.00ns)   --->   "%input_word_data_3 = extractvalue i41 %empty_12" [bit_reversal/Diseno/bit_reversal_accel.cpp:18]   --->   Operation 22 'extractvalue' 'input_word_data_3' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 23 [1/1] (0.00ns)   --->   "%reversed_3 = partselect i32 @_ssdm_op_PartSelect.i32.i32.i32.i32, i32 %input_word_data_3, i32 31, i32 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:22]   --->   Operation 23 'partselect' 'reversed_3' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 24 [2/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed_3, i4 0, i4 0, i1 1" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 24 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+
+State 5 <SV = 4> <Delay = 1.00>
+ST_5 : Operation 25 [1/1] (0.00ns)   --->   "%specpipeline_ln10 = specpipeline void @_ssdm_op_SpecPipeline, i32 3, i32 0, i32 0, i32 0, void @empty_1" [bit_reversal/Diseno/bit_reversal_accel.cpp:10]   --->   Operation 25 'specpipeline' 'specpipeline_ln10' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 26 [1/1] (0.00ns)   --->   "%spectopmodule_ln4 = spectopmodule void @_ssdm_op_SpecTopModule, void @empty_4" [bit_reversal/Diseno/bit_reversal_accel.cpp:4]   --->   Operation 26 'spectopmodule' 'spectopmodule_ln4' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 27 [1/1] (0.00ns)   --->   "%specinterface_ln4 = specinterface void @_ssdm_op_SpecInterface, i32 0, void @empty_5, i32 0, i32 0, void @empty_1, i32 0, i32 0, void @empty_1, void @empty_1, void @empty_1, i32 0, i32 0, i32 0, i32 0, void @empty_1, void @empty_1, i32 4294967295, i32 0" [bit_reversal/Diseno/bit_reversal_accel.cpp:4]   --->   Operation 27 'specinterface' 'specinterface_ln4' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 28 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %s_axis_V_data_V, i4 %s_axis_V_keep_V, i4 %s_axis_V_strb_V, i1 %s_axis_V_last_V, void @empty, i32 1, i32 1, void @empty_0, i32 0, i32 0, void @empty_1, void @empty_1, void @empty_1, i32 0, i32 0, i32 0, i32 0, void @empty_1, void @empty_1, i32 4294967295, i32 0"   --->   Operation 28 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 29 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %s_axis_V_data_V"   --->   Operation 29 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 30 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i4 %s_axis_V_keep_V"   --->   Operation 30 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 31 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i4 %s_axis_V_strb_V"   --->   Operation 31 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 32 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i1 %s_axis_V_last_V"   --->   Operation 32 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 33 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, void @empty, i32 1, i32 1, void @empty_0, i32 0, i32 0, void @empty_1, void @empty_1, void @empty_1, i32 0, i32 0, i32 0, i32 0, void @empty_1, void @empty_1, i32 4294967295, i32 0"   --->   Operation 33 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 34 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i32 %m_axis_V_data_V"   --->   Operation 34 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 35 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i4 %m_axis_V_keep_V"   --->   Operation 35 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 36 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i4 %m_axis_V_strb_V"   --->   Operation 36 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 37 [1/1] (0.00ns)   --->   "%specbitsmap_ln0 = specbitsmap void @_ssdm_op_SpecBitsMap, i1 %m_axis_V_last_V"   --->   Operation 37 'specbitsmap' 'specbitsmap_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 38 [1/2] (1.00ns)   --->   "%write_ln27 = write void @_ssdm_op_Write.axis.volatile.i32P0A.i4P0A.i4P0A.i1P0A, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 %m_axis_V_last_V, i32 %reversed_3, i4 0, i4 0, i1 1" [bit_reversal/Diseno/bit_reversal_accel.cpp:27]   --->   Operation 38 'write' 'write_ln27' <Predicate = true> <Delay = 1.00> <CoreInst = "axis">   --->   Core 115 'axis' <Latency = 0> <II = 1> <Delay = 1.00> <Adapter> <Opcode : >
+ST_5 : Operation 39 [1/1] (0.00ns)   --->   "%specaxissidechannel_ln29 = specaxissidechannel void @_ssdm_op_SpecAXISSideChannel, i32 %m_axis_V_data_V, i4 %m_axis_V_keep_V, i4 %m_axis_V_strb_V, i1 0, i1 %m_axis_V_last_V, i1 0, i1 0, void @empty_2" [bit_reversal/Diseno/bit_reversal_accel.cpp:29]   --->   Operation 39 'specaxissidechannel' 'specaxissidechannel_ln29' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 40 [1/1] (0.00ns)   --->   "%specaxissidechannel_ln29 = specaxissidechannel void @_ssdm_op_SpecAXISSideChannel, i32 %s_axis_V_data_V, i4 %s_axis_V_keep_V, i4 %s_axis_V_strb_V, i1 0, i1 %s_axis_V_last_V, i1 0, i1 0, void @empty_3" [bit_reversal/Diseno/bit_reversal_accel.cpp:29]   --->   Operation 40 'specaxissidechannel' 'specaxissidechannel_ln29' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 41 [1/1] (0.00ns)   --->   "%ret_ln29 = ret" [bit_reversal/Diseno/bit_reversal_accel.cpp:29]   --->   Operation 41 'ret' 'ret_ln29' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10.000ns, clock uncertainty: 2.700ns.
+
+ <State 1>: 2.000ns
+The critical path consists of the following:
+	axis read operation ('empty', bit_reversal/Diseno/bit_reversal_accel.cpp:18) on port 's_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:18) [22]  (1.000 ns)
+	axis write operation ('write_ln27', bit_reversal/Diseno/bit_reversal_accel.cpp:27) on port 'm_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:27) [25]  (1.000 ns)
+
+ <State 2>: 2.000ns
+The critical path consists of the following:
+	axis read operation ('empty_10', bit_reversal/Diseno/bit_reversal_accel.cpp:18) on port 's_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:18) [26]  (1.000 ns)
+	axis write operation ('write_ln27', bit_reversal/Diseno/bit_reversal_accel.cpp:27) on port 'm_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:27) [29]  (1.000 ns)
+
+ <State 3>: 2.000ns
+The critical path consists of the following:
+	axis read operation ('empty_11', bit_reversal/Diseno/bit_reversal_accel.cpp:18) on port 's_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:18) [30]  (1.000 ns)
+	axis write operation ('write_ln27', bit_reversal/Diseno/bit_reversal_accel.cpp:27) on port 'm_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:27) [33]  (1.000 ns)
+
+ <State 4>: 2.000ns
+The critical path consists of the following:
+	axis read operation ('empty_12', bit_reversal/Diseno/bit_reversal_accel.cpp:18) on port 's_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:18) [34]  (1.000 ns)
+	axis write operation ('write_ln27', bit_reversal/Diseno/bit_reversal_accel.cpp:27) on port 'm_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:27) [37]  (1.000 ns)
+
+ <State 5>: 1.000ns
+The critical path consists of the following:
+	axis write operation ('write_ln27', bit_reversal/Diseno/bit_reversal_accel.cpp:27) on port 'm_axis_V_data_V' (bit_reversal/Diseno/bit_reversal_accel.cpp:27) [37]  (1.000 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

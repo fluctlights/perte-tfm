@@ -1,0 +1,36 @@
+<xilinx:hls_fe_msgs>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/fluctlights/HlsProjects/bit_reversal/solution2/csynth.tcl:18:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=bit_reverse_accel" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="/home/fluctlights/HlsProjects/bit_reversal/solution2/directives.tcl:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaContext="directive" ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaOptions="name=bit_reverse_accel" ARG_PragmaType="top" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:7:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=s_axis" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:8:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaOptions="axis port=m_axis" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:9:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaOptions="ap_ctrl_none port=return" ARG_PragmaType="interface" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:10:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaOptions="II=3" ARG_PragmaType="pipeline" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_VERBOSE_DUMP" msg_id="207-5471" msg_severity="WARNING" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:21:9" msg_body="HLS pragma dump">
+        <args ARG_PragmaFunction="bit_reverse_accel" ARG_PragmaIsValid="1" ARG_PragmaType="unroll" ClangWarningOption="dump-hls-pragmas"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:17:22" msg_body="Loop 'VITIS_LOOP_17_1' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_17_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-291" msg_severity="INFO" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:20:26" msg_body="Loop 'VITIS_LOOP_20_2' is marked as complete unroll implied by the pipeline pragma">
+        <args LoopName="VITIS_LOOP_20_2"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:5:0" msg_body="Unrolling loop 'VITIS_LOOP_17_1' (bit_reversal/Diseno/bit_reversal_accel.cpp:17:22) in function 'bit_reverse_accel' completely with a factor of 4">
+        <args Factor="4" LoopLoc="bit_reversal/Diseno/bit_reversal_accel.cpp:17:22" LoopName="VITIS_LOOP_17_1"/>
+    </msg>
+    <msg msg_groups="PRAGMA_UNROLL" msg_id="214-186" msg_severity="INFO" msg_loc="bit_reversal/Diseno/bit_reversal_accel.cpp:5:0" msg_body="Unrolling loop 'VITIS_LOOP_20_2' (bit_reversal/Diseno/bit_reversal_accel.cpp:20:26) in function 'bit_reverse_accel' completely with a factor of 32">
+        <args Factor="32" LoopLoc="bit_reversal/Diseno/bit_reversal_accel.cpp:20:26" LoopName="VITIS_LOOP_20_2"/>
+    </msg>
+</xilinx:hls_fe_msgs>
+

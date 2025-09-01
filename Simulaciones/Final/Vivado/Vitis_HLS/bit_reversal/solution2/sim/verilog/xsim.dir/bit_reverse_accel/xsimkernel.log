@@ -1,0 +1,7 @@
+Running: xsim.dir/bit_reverse_accel/xsimk -simmode gui -wdb bit_reverse_accel.wdb -simrunnum 0 -socket 51961
+Design successfully loaded
+Design Loading Memory Usage: 22984 KB (Peak: 23132 KB)
+Design Loading CPU Usage: 0 ms
+Simulation completed
+Simulation Memory Usage: 105688 KB (Peak: 162252 KB)
+Simulation CPU Usage: 0 ms

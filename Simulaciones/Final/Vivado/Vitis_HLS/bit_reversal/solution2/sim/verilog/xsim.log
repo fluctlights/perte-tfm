@@ -1,0 +1,30 @@
+#-----------------------------------------------------------
+# xsim v2023.2 (64-bit)
+# SW Build 4029153 on Fri Oct 13 20:13:54 MDT 2023
+# IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
+# SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+# Start of session at: Mon Sep  1 14:21:05 2025
+# Process ID: 878297
+# Current directory: /home/fluctlights/HlsProjects/bit_reversal/solution2/sim/verilog
+# Command line: xsim -mode tcl -source {xsim.dir/bit_reverse_accel/xsim_script.tcl}
+# Log file: /home/fluctlights/HlsProjects/bit_reversal/solution2/sim/verilog/xsim.log
+# Journal file: /home/fluctlights/HlsProjects/bit_reversal/solution2/sim/verilog/xsim.jou
+# Running On: ubuntu, OS: Linux, CPU Frequency: 3402.593 MHz, CPU Physical cores: 4, Host memory: 16570 MB
+#-----------------------------------------------------------
+source xsim.dir/bit_reverse_accel/xsim_script.tcl
+# xsim {bit_reverse_accel} -autoloadwcfg -tclbatch {bit_reverse_accel.tcl}
+Time resolution is 1 ps
+source bit_reverse_accel.tcl
+## run all
+////////////////////////////////////////////////////////////////////////////////////
+// Inter-Transaction Progress: Completed Transaction / Total Transaction
+// Intra-Transaction Progress: Measured Latency / Latency Estimation * 100%
+//
+// RTL Simulation : "Inter-Transaction Progress" ["Intra-Transaction Progress"] @ "Simulation Time"
+////////////////////////////////////////////////////////////////////////////////////
+// RTL Simulation : 0 / 1 [0.00%] @ "125000"
+// RTL Simulation : 1 / 1 [100.00%] @ "195000"
+////////////////////////////////////////////////////////////////////////////////////
+$finish called at time : 255 ns : File "/home/fluctlights/HlsProjects/bit_reversal/solution2/sim/verilog/bit_reverse_accel.autotb.v" Line 250
+## quit
+INFO: [Common 17-206] Exiting xsim at Mon Sep  1 14:21:08 2025...

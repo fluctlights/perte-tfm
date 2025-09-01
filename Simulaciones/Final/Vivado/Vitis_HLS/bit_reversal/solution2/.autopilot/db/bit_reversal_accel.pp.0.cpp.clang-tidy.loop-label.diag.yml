@@ -1,0 +1,67 @@
+---
+MainSourceFile:  /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1207_1:  '
+    FileOffset:      1207
+    FilePath:        "/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_int_base.h"
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          61552
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1207_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_676_1:  '
+    FileOffset:      676
+    FilePath:        "/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_int_ref.h"
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          290500
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_676_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_690_1:  '
+    FileOffset:      690
+    FilePath:        "/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_int_ref.h"
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          290964
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_690_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_704_1:  '
+    FileOffset:      704
+    FilePath:        "/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_int_ref.h"
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          291429
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_704_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1247_1:  '
+    FileOffset:      1247
+    FilePath:        "/home/fluctlights/Escritorio/PERTE/Diseño_de_Circuitos/Xilinx/Vitis_HLS/2023.2/common/technology/autopilot/etc/ap_fixed_base.h"
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          576741
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1247_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_17_1:  '
+    FileOffset:      17
+    FilePath:        /home/fluctlights/HlsProjects/bit_reversal/Diseno/bit_reversal_accel.cpp
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          1039704
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_17_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_20_2:  '
+    FileOffset:      20
+    FilePath:        /home/fluctlights/HlsProjects/bit_reversal/Diseno/bit_reversal_accel.cpp
+    Replacements:    
+      - FilePath:        /home/fluctlights/HlsProjects/bit_reversal/solution2/.autopilot/db/bit_reversal_accel.pp.0.cpp
+        Offset:          1039775
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_20_2: '
+...

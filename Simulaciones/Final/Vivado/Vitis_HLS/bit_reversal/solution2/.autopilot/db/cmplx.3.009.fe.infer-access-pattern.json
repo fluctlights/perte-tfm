@@ -1,0 +1,17 @@
+{
+  "0": {
+    "basicblocks": 1,
+    "calls": "",
+    "file": "bit_reversal_accel.cpp",
+    "fileloc": 4,
+    "instructions": 402,
+    "loads": {
+      "L": 16
+    },
+    "name": "bit_reverse_accel",
+    "stores": {
+      "L": 28
+    },
+    "total_instructions": 454
+  }
+}
