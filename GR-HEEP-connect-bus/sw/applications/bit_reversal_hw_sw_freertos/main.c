@@ -1,18 +1,3 @@
-
-
-/****************************************************************************/
-/**                                                                        **/
-/*                             MODULES USED                                 */
-/**                                                                        **/
-/****************************************************************************/
-
-/* FreeRTOS kernel includes */
-#include <FreeRTOS.h>
-#include <task.h>
-#include <queue.h>
-#include "semphr.h"
-
-/* c stdlib */
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -20,7 +5,6 @@
 #include <unistd.h>
 #include <assert.h>
 
-/* X-HEEP related includes */
 #include "csr.h"
 #include "hart.h"
 #include "handler.h"
@@ -32,6 +16,12 @@
 #include "fast_intr_ctrl.h"
 #include "ext_irq.h"
 #include "timer_sdk.h"
+
+/* FreeRTOS kernel includes */
+#include <FreeRTOS.h>
+#include <task.h>
+#include <queue.h>
+#include "semphr.h"
 
 /* HW Design includes */
 #include "bitreversal.h"

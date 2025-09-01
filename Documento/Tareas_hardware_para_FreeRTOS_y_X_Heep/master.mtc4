@@ -1,23 +1,23 @@
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.1}Iteración 1 - Modelo del sistema}{\reset@font\mtcSfont 31}{section.4.1}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.2}Iteración 2 - Desarrollo del diseño hardware}{\reset@font\mtcSfont 32}{section.4.2}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.2.1}Diseño inicial}{\reset@font\mtcSSfont 33}{subsection.4.2.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.2.2}Diseño final}{\reset@font\mtcSSfont 34}{subsection.4.2.2}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Descripción funcional}{\reset@font\mtcSSSfont 34}{section*.68}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.2.1}Diseño inicial}{\reset@font\mtcSSfont 32}{subsection.4.2.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.2.2}Diseño final}{\reset@font\mtcSSfont 33}{subsection.4.2.2}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Descripción funcional}{\reset@font\mtcSSSfont 33}{section*.68}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Señales principales}{\reset@font\mtcSSSfont 35}{section*.69}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Módulo Top}{\reset@font\mtcSSSfont 35}{section*.71}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Código C/C++ del acelerador}{\reset@font\mtcSSSfont 38}{section*.73}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Código RTL desarrollado}{\reset@font\mtcSSSfont 41}{section*.74}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Código RTL desarrollado}{\reset@font\mtcSSSfont 40}{section*.74}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.3}Iteración 3 - Ejecución de simulaciones funcionales}{\reset@font\mtcSfont 49}{section.4.3}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.3.1}Testbench desarrollado}{\reset@font\mtcSSfont 50}{subsection.4.3.1}}
-{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Simulaciones en Vivado}{\reset@font\mtcSSSfont 52}{section*.76}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.3.1}Testbench desarrollado}{\reset@font\mtcSSfont 49}{subsection.4.3.1}}
+{\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Simulaciones en Vivado}{\reset@font\mtcSSSfont 51}{section*.76}}
 {\reset@font\mtcSSSfont\mtc@string\contentsline{subsubsection}{\noexpand \leavevmode Simulaciones en EdaPlayground}{\reset@font\mtcSSSfont 52}{section*.78}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.4}Iteración 4 - Integración del diseño en GR-HEEP}{\reset@font\mtcSfont 53}{section.4.4}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.1}Importación de los archivos del diseño}{\reset@font\mtcSSfont 54}{subsection.4.4.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.2}Conexionado físico del diseño}{\reset@font\mtcSSfont 55}{subsection.4.4.2}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.2}Conexionado físico del diseño}{\reset@font\mtcSSfont 54}{subsection.4.4.2}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.3}Definición de los registros expuestos}{\reset@font\mtcSSfont 56}{subsection.4.4.3}}
 {\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.4}Desarrollo de un \emph {driver} para los registros}{\reset@font\mtcSSfont 61}{subsection.4.4.4}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.5}Compilación completa del sistema}{\reset@font\mtcSSfont 65}{subsection.4.4.5}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.4.5}Compilación completa del sistema}{\reset@font\mtcSSfont 64}{subsection.4.4.5}}
 {\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.5}Iteración 5 - Ejecución del diseño en GR-HEEP sobre FreeRTOS}{\reset@font\mtcSfont 65}{section.4.5}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.5.1}Ejecución \textit {baremetal}}{\reset@font\mtcSSfont 66}{subsection.4.5.1}}
-{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.5.2}Ejecución sobre FreeRTOS}{\reset@font\mtcSSfont 69}{subsection.4.5.2}}
-{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.6}Iteración 6 - Comparativa de resultados frente a versión software}{\reset@font\mtcSfont 74}{section.4.6}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.5.1}Ejecución \textit {baremetal}}{\reset@font\mtcSSfont 65}{subsection.4.5.1}}
+{\reset@font\mtcSSfont\mtc@string\contentsline{subsection}{\noexpand \leavevmode \numberline {4.5.2}Ejecución sobre FreeRTOS}{\reset@font\mtcSSfont 68}{subsection.4.5.2}}
+{\reset@font\mtcSfont\mtc@string\contentsline{section}{\noexpand \leavevmode \numberline {4.6}Iteración 6 - Comparativa de resultados frente a versión software}{\reset@font\mtcSfont 73}{section.4.6}}

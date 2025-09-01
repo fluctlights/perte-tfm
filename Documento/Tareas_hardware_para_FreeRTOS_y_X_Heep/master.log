@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.8.9)  31 AUG 2025 19:06
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2025.8.9)  1 SEP 2025 13:56
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1496,19 +1496,13 @@ Underfull \vbox (badness 7133) has occurred while \output is active []
 
  [1
 
-])
-\tf@toc=\write9
-\openout9 = `master.toc'.
-
-
-Underfull \vbox (badness 2582) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 127.
-LaTeX Info: Redefining \% on input line 127.
-Package cleveref Info: loaded `spanish' language definitions on input line 127.
-LaTeX Info: Redefining \. on input line 127.
-LaTeX Info: Redefining \% on input line 127.
-Package cleveref Info: loaded `spanish' language definitions on input line 127.
+]
+LaTeX Info: Redefining \. on input line 59.
+LaTeX Info: Redefining \% on input line 59.
+Package cleveref Info: loaded `spanish' language definitions on input line 59.
+LaTeX Info: Redefining \. on input line 59.
+LaTeX Info: Redefining \% on input line 59.
+Package cleveref Info: loaded `spanish' language definitions on input line 59.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1517,7 +1511,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-3.21004pt}.
 
-[2]
+[2])
+\tf@toc=\write9
+\openout9 = `master.toc'.
+
 LaTeX Info: Redefining \. on input line 127.
 LaTeX Info: Redefining \% on input line 127.
 Package cleveref Info: loaded `spanish' language definitions on input line 127.
@@ -1586,20 +1583,20 @@ File: figures/RISC-V-logo-square.svg.png Graphic file (type bmp)
 File: figures/x-heep-outline.png Graphic file (type bmp)
 <figures/x-heep-outline.png>
 Package acronym Info: Label `acro:RTL' newly defined as it shall be overridden
-although it is yet undefined on input line 36.
+although it is yet undefined on input line 35.
 Package acronym Info: Label `acro:HDL' newly defined as it shall be overridden
-although it is yet undefined on input line 36.
+although it is yet undefined on input line 35.
 Package acronym Info: Label `acro:VHDL' newly defined as it shall be overridden
-although it is yet undefined on input line 36.
+although it is yet undefined on input line 35.
 Package acronym Info: Label `acro:HLS' newly defined as it shall be overridden
-although it is yet undefined on input line 36.
+although it is yet undefined on input line 35.
 Package acronym Info: Label `acro:IP' newly defined as it shall be overridden
-although it is yet undefined on input line 36.
+although it is yet undefined on input line 35.
 Package acronym Info: Label `acro:CAD' newly defined as it shall be overridden
-although it is yet undefined on input line 38.
-LaTeX Info: Redefining \. on input line 39.
-LaTeX Info: Redefining \% on input line 39.
-Package cleveref Info: loaded `spanish' language definitions on input line 39.
+although it is yet undefined on input line 37.
+LaTeX Info: Redefining \. on input line 38.
+LaTeX Info: Redefining \% on input line 38.
+Package cleveref Info: loaded `spanish' language definitions on input line 38.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1624,36 +1621,33 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 ]
 Capítulo 2.
-\openout5 = `master.mtc'.
-
-\openout5 = `master.mtc'.
-
-(./master.mtc2)
 \tmpht=\dimen367
- (./chapter2/sectionTemplate.tex
 Package acronym Info: Label `acro:ISA' newly defined as it shall be overridden
-although it is yet undefined on input line 5.
+although it is yet undefined on input line 9.
 Package acronym Info: Label `acro:IoT' newly defined as it shall be overridden
-although it is yet undefined on input line 5.
- [5]
+although it is yet undefined on input line 9.
 File: figures/chip.png Graphic file (type bmp)
 <figures/chip.png>
 Package acronym Info: Label `acro:FIFO' newly defined as it shall be overridden
-although it is yet undefined on input line 18.
+although it is yet undefined on input line 22.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5]
 Package acronym Info: Label `acro:ASIC' newly defined as it shall be overridden
-although it is yet undefined on input line 32.
+although it is yet undefined on input line 36.
 Package acronym Info: Label `acro:ACAP' newly defined as it shall be overridden
-although it is yet undefined on input line 32.
+although it is yet undefined on input line 36.
 Package acronym Info: Label `acro:IA' newly defined as it shall be overridden
-although it is yet undefined on input line 32.
+although it is yet undefined on input line 36.
 Package acronym Info: Label `acro:DSP' newly defined as it shall be overridden
-although it is yet undefined on input line 32.
-LaTeX Info: Redefining \. on input line 33.
-LaTeX Info: Redefining \% on input line 33.
-Package cleveref Info: loaded `spanish' language definitions on input line 33.
-LaTeX Info: Redefining \. on input line 33.
-LaTeX Info: Redefining \% on input line 33.
-Package cleveref Info: loaded `spanish' language definitions on input line 33.
+although it is yet undefined on input line 36.
+LaTeX Info: Redefining \. on input line 37.
+LaTeX Info: Redefining \% on input line 37.
+Package cleveref Info: loaded `spanish' language definitions on input line 37.
+LaTeX Info: Redefining \. on input line 37.
+LaTeX Info: Redefining \% on input line 37.
+Package cleveref Info: loaded `spanish' language definitions on input line 37.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1665,15 +1659,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [6]
 File: figures/nexysFoto.png Graphic file (type bmp)
 <figures/nexysFoto.png>
-
-Underfull \vbox (badness 7504) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 46.
-LaTeX Info: Redefining \% on input line 46.
-Package cleveref Info: loaded `spanish' language definitions on input line 46.
-LaTeX Info: Redefining \. on input line 46.
-LaTeX Info: Redefining \% on input line 46.
-Package cleveref Info: loaded `spanish' language definitions on input line 46.
+LaTeX Info: Redefining \. on input line 54.
+LaTeX Info: Redefining \% on input line 54.
+Package cleveref Info: loaded `spanish' language definitions on input line 54.
+LaTeX Info: Redefining \. on input line 54.
+LaTeX Info: Redefining \% on input line 54.
+Package cleveref Info: loaded `spanish' language definitions on input line 54.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1683,16 +1674,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [7]
-Overfull \hbox (23.37355pt too wide) in paragraph at lines 54--66
+Overfull \hbox (23.37355pt too wide) in paragraph at lines 58--70
  [][] 
  []
 
-LaTeX Info: Redefining \. on input line 73.
-LaTeX Info: Redefining \% on input line 73.
-Package cleveref Info: loaded `spanish' language definitions on input line 73.
-LaTeX Info: Redefining \. on input line 73.
-LaTeX Info: Redefining \% on input line 73.
-Package cleveref Info: loaded `spanish' language definitions on input line 73.
+Package acronym Info: Label `acro:FSM' newly defined as it shall be overridden
+although it is yet undefined on input line 77.
+LaTeX Info: Redefining \. on input line 80.
+LaTeX Info: Redefining \% on input line 80.
+Package cleveref Info: loaded `spanish' language definitions on input line 80.
+LaTeX Info: Redefining \. on input line 80.
+LaTeX Info: Redefining \% on input line 80.
+Package cleveref Info: loaded `spanish' language definitions on input line 80.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1701,16 +1694,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [8]
-Package acronym Info: Label `acro:FSM' newly defined as it shall be overridden
-although it is yet undefined on input line 73.
 Package acronym Info: Label `acro:EDA' newly defined as it shall be overridden
-although it is yet undefined on input line 88.
-LaTeX Info: Redefining \. on input line 103.
-LaTeX Info: Redefining \% on input line 103.
-Package cleveref Info: loaded `spanish' language definitions on input line 103.
-LaTeX Info: Redefining \. on input line 103.
-LaTeX Info: Redefining \% on input line 103.
-Package cleveref Info: loaded `spanish' language definitions on input line 103.
+although it is yet undefined on input line 92.
+LaTeX Info: Redefining \. on input line 117.
+LaTeX Info: Redefining \% on input line 117.
+Package cleveref Info: loaded `spanish' language definitions on input line 117.
+LaTeX Info: Redefining \. on input line 117.
+LaTeX Info: Redefining \% on input line 117.
+Package cleveref Info: loaded `spanish' language definitions on input line 117.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1723,12 +1714,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-LaTeX Info: Redefining \. on input line 142.
-LaTeX Info: Redefining \% on input line 142.
-Package cleveref Info: loaded `spanish' language definitions on input line 142.
-LaTeX Info: Redefining \. on input line 142.
-LaTeX Info: Redefining \% on input line 142.
-Package cleveref Info: loaded `spanish' language definitions on input line 142.
+LaTeX Info: Redefining \. on input line 155.
+LaTeX Info: Redefining \% on input line 155.
+Package cleveref Info: loaded `spanish' language definitions on input line 155.
+LaTeX Info: Redefining \. on input line 155.
+LaTeX Info: Redefining \% on input line 155.
+Package cleveref Info: loaded `spanish' language definitions on input line 155.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1737,12 +1728,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [10]
-LaTeX Info: Redefining \. on input line 152.
-LaTeX Info: Redefining \% on input line 152.
-Package cleveref Info: loaded `spanish' language definitions on input line 152.
-LaTeX Info: Redefining \. on input line 152.
-LaTeX Info: Redefining \% on input line 152.
-Package cleveref Info: loaded `spanish' language definitions on input line 152.
+LaTeX Info: Redefining \. on input line 164.
+LaTeX Info: Redefining \% on input line 164.
+Package cleveref Info: loaded `spanish' language definitions on input line 164.
+LaTeX Info: Redefining \. on input line 164.
+LaTeX Info: Redefining \% on input line 164.
+Package cleveref Info: loaded `spanish' language definitions on input line 164.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1752,12 +1743,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [11]
-LaTeX Info: Redefining \. on input line 172.
-LaTeX Info: Redefining \% on input line 172.
-Package cleveref Info: loaded `spanish' language definitions on input line 172.
-LaTeX Info: Redefining \. on input line 172.
-LaTeX Info: Redefining \% on input line 172.
-Package cleveref Info: loaded `spanish' language definitions on input line 172.
+Underfull \vbox (badness 1789) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 178.
+LaTeX Info: Redefining \% on input line 178.
+Package cleveref Info: loaded `spanish' language definitions on input line 178.
+LaTeX Info: Redefining \. on input line 178.
+LaTeX Info: Redefining \% on input line 178.
+Package cleveref Info: loaded `spanish' language definitions on input line 178.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1767,12 +1760,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [12]
-LaTeX Info: Redefining \. on input line 192.
-LaTeX Info: Redefining \% on input line 192.
-Package cleveref Info: loaded `spanish' language definitions on input line 192.
-LaTeX Info: Redefining \. on input line 192.
-LaTeX Info: Redefining \% on input line 192.
-Package cleveref Info: loaded `spanish' language definitions on input line 192.
+LaTeX Info: Redefining \. on input line 198.
+LaTeX Info: Redefining \% on input line 198.
+Package cleveref Info: loaded `spanish' language definitions on input line 198.
+LaTeX Info: Redefining \. on input line 198.
+LaTeX Info: Redefining \% on input line 198.
+Package cleveref Info: loaded `spanish' language definitions on input line 198.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1783,19 +1776,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [13]
 Package acronym Info: Label `acro:AXI' newly defined as it shall be overridden
-although it is yet undefined on input line 200.
+although it is yet undefined on input line 204.
 File: figures/vivadoBD.png Graphic file (type bmp)
 <figures/vivadoBD.png>
 Package acronym Info: Label `acro:DUT' newly defined as it shall be overridden
-although it is yet undefined on input line 219.
+although it is yet undefined on input line 223.
 Package acronym Info: Label `acro:UUT' newly defined as it shall be overridden
-although it is yet undefined on input line 219.
-LaTeX Info: Redefining \. on input line 220.
-LaTeX Info: Redefining \% on input line 220.
-Package cleveref Info: loaded `spanish' language definitions on input line 220.
-LaTeX Info: Redefining \. on input line 220.
-LaTeX Info: Redefining \% on input line 220.
-Package cleveref Info: loaded `spanish' language definitions on input line 220.
+although it is yet undefined on input line 223.
+LaTeX Info: Redefining \. on input line 224.
+LaTeX Info: Redefining \% on input line 224.
+Package cleveref Info: loaded `spanish' language definitions on input line 224.
+LaTeX Info: Redefining \. on input line 224.
+LaTeX Info: Redefining \% on input line 224.
+Package cleveref Info: loaded `spanish' language definitions on input line 224.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1805,12 +1798,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [14]
-LaTeX Info: Redefining \. on input line 238.
-LaTeX Info: Redefining \% on input line 238.
-Package cleveref Info: loaded `spanish' language definitions on input line 238.
-LaTeX Info: Redefining \. on input line 238.
-LaTeX Info: Redefining \% on input line 238.
-Package cleveref Info: loaded `spanish' language definitions on input line 238.
+File: figures/handshakeAXI.png Graphic file (type bmp)
+<figures/handshakeAXI.png>
+Package acronym Info: Label `acro:OBI' newly defined as it shall be overridden
+although it is yet undefined on input line 257.
+LaTeX Info: Redefining \. on input line 259.
+LaTeX Info: Redefining \% on input line 259.
+Package cleveref Info: loaded `spanish' language definitions on input line 259.
+LaTeX Info: Redefining \. on input line 259.
+LaTeX Info: Redefining \% on input line 259.
+Package cleveref Info: loaded `spanish' language definitions on input line 259.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1820,27 +1817,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [15]
-File: figures/handshakeAXI.png Graphic file (type bmp)
-<figures/handshakeAXI.png>
-Package acronym Info: Label `acro:OBI' newly defined as it shall be overridden
-although it is yet undefined on input line 253.
-
-Underfull \hbox (badness 10000) in paragraph at lines 265--266
+Underfull \hbox (badness 10000) in paragraph at lines 269--270
 []|\TU/lmr/m/n/12 Transacciones direccionadas
  []
 
 
-Underfull \hbox (badness 1436) in paragraph at lines 269--270
+Underfull \hbox (badness 1436) in paragraph at lines 273--274
 \TU/lmr/m/n/12 lectura/escritura, tamaño de
  []
 
 
-Underfull \hbox (badness 3895) in paragraph at lines 271--271
+Underfull \hbox (badness 3895) in paragraph at lines 275--275
 []|\TU/lmr/m/n/12 Simple, diseñado solo para
  []
 
 
-Overfull \hbox (23.37355pt too wide) in paragraph at lines 261--278
+Overfull \hbox (23.37355pt too wide) in paragraph at lines 265--282
  [][] 
  []
 
@@ -1848,17 +1840,22 @@ Overfull \hbox (23.37355pt too wide) in paragraph at lines 261--278
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 Package acronym Info: Label `acro:MCU' newly defined as it shall be overridden
-although it is yet undefined on input line 287.
+although it is yet undefined on input line 291.
 Package acronym Info: Label `acro:SoC' newly defined as it shall be overridden
-although it is yet undefined on input line 287.
+although it is yet undefined on input line 291.
 Package acronym Info: Label `acro:GR-HEEP' newly defined as it shall be overridden
-although it is yet undefined on input line 287.
-LaTeX Info: Redefining \. on input line 288.
-LaTeX Info: Redefining \% on input line 288.
-Package cleveref Info: loaded `spanish' language definitions on input line 288.
-LaTeX Info: Redefining \. on input line 288.
-LaTeX Info: Redefining \% on input line 288.
-Package cleveref Info: loaded `spanish' language definitions on input line 288.
+although it is yet undefined on input line 291.
+
+Overfull \hbox (50.78004pt too wide) in paragraph at lines 295--318
+ [][] 
+ []
+
+LaTeX Info: Redefining \. on input line 320.
+LaTeX Info: Redefining \% on input line 320.
+Package cleveref Info: loaded `spanish' language definitions on input line 320.
+LaTeX Info: Redefining \. on input line 320.
+LaTeX Info: Redefining \% on input line 320.
+Package cleveref Info: loaded `spanish' language definitions on input line 320.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1867,27 +1864,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [16]
-Overfull \hbox (50.78004pt too wide) in paragraph at lines 291--314
- [][] 
- []
-
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 File: figures/xheepArch.png Graphic file (type bmp)
 <figures/xheepArch.png>
 Package acronym Info: Label `acro:IEEE' newly defined as it shall be overridden
-although it is yet undefined on input line 328.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 329.
-LaTeX Info: Redefining \% on input line 329.
-Package cleveref Info: loaded `spanish' language definitions on input line 329.
-LaTeX Info: Redefining \. on input line 329.
-LaTeX Info: Redefining \% on input line 329.
-Package cleveref Info: loaded `spanish' language definitions on input line 329.
-
+although it is yet undefined on input line 332.
+LaTeX Info: Redefining \. on input line 333.
+LaTeX Info: Redefining \% on input line 333.
+Package cleveref Info: loaded `spanish' language definitions on input line 333.
+LaTeX Info: Redefining \. on input line 333.
+LaTeX Info: Redefining \% on input line 333.
+Package cleveref Info: loaded `spanish' language definitions on input line 333.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1896,12 +1885,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [17]
-LaTeX Info: Redefining \. on input line 329.
-LaTeX Info: Redefining \% on input line 329.
-Package cleveref Info: loaded `spanish' language definitions on input line 329.
-LaTeX Info: Redefining \. on input line 329.
-LaTeX Info: Redefining \% on input line 329.
-Package cleveref Info: loaded `spanish' language definitions on input line 329.
+Underfull \vbox (badness 3557) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 333.
+LaTeX Info: Redefining \% on input line 333.
+Package cleveref Info: loaded `spanish' language definitions on input line 333.
+LaTeX Info: Redefining \. on input line 333.
+LaTeX Info: Redefining \% on input line 333.
+Package cleveref Info: loaded `spanish' language definitions on input line 333.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1917,17 +1908,17 @@ File: lstlang2.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2020/03/24 1.8d listings language file
 )
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 330.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 334.
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 331.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 335.
 Package acronym Info: Label `acro:RTOS' newly defined as it shall be overridden
-although it is yet undefined on input line 347.
-LaTeX Info: Redefining \. on input line 350.
-LaTeX Info: Redefining \% on input line 350.
-Package cleveref Info: loaded `spanish' language definitions on input line 350.
-LaTeX Info: Redefining \. on input line 350.
-LaTeX Info: Redefining \% on input line 350.
-Package cleveref Info: loaded `spanish' language definitions on input line 350.
+although it is yet undefined on input line 351.
+LaTeX Info: Redefining \. on input line 359.
+LaTeX Info: Redefining \% on input line 359.
+Package cleveref Info: loaded `spanish' language definitions on input line 359.
+LaTeX Info: Redefining \. on input line 359.
+LaTeX Info: Redefining \% on input line 359.
+Package cleveref Info: loaded `spanish' language definitions on input line 359.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1939,12 +1930,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [19]
 File: figures/Logo_freeRTOS.png Graphic file (type bmp)
 <figures/Logo_freeRTOS.png>
-LaTeX Info: Redefining \. on input line 379.
-LaTeX Info: Redefining \% on input line 379.
-Package cleveref Info: loaded `spanish' language definitions on input line 379.
-LaTeX Info: Redefining \. on input line 379.
-LaTeX Info: Redefining \% on input line 379.
-Package cleveref Info: loaded `spanish' language definitions on input line 379.
+LaTeX Info: Redefining \. on input line 386.
+LaTeX Info: Redefining \% on input line 386.
+Package cleveref Info: loaded `spanish' language definitions on input line 386.
+LaTeX Info: Redefining \. on input line 386.
+LaTeX Info: Redefining \% on input line 386.
+Package cleveref Info: loaded `spanish' language definitions on input line 386.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1956,12 +1947,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [20]
 File: figures/proyectoVivado.png Graphic file (type bmp)
 <figures/proyectoVivado.png>
-LaTeX Info: Redefining \. on input line 400.
-LaTeX Info: Redefining \% on input line 400.
-Package cleveref Info: loaded `spanish' language definitions on input line 400.
-LaTeX Info: Redefining \. on input line 400.
-LaTeX Info: Redefining \% on input line 400.
-Package cleveref Info: loaded `spanish' language definitions on input line 400.
+LaTeX Info: Redefining \. on input line 404.
+LaTeX Info: Redefining \% on input line 404.
+Package cleveref Info: loaded `spanish' language definitions on input line 404.
+LaTeX Info: Redefining \. on input line 404.
+LaTeX Info: Redefining \% on input line 404.
+Package cleveref Info: loaded `spanish' language definitions on input line 404.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1973,15 +1964,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [21]
 File: figures/proyectoHLS.png Graphic file (type bmp)
 <figures/proyectoHLS.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 415.
-LaTeX Info: Redefining \% on input line 415.
-Package cleveref Info: loaded `spanish' language definitions on input line 415.
-LaTeX Info: Redefining \. on input line 415.
-LaTeX Info: Redefining \% on input line 415.
-Package cleveref Info: loaded `spanish' language definitions on input line 415.
+LaTeX Info: Redefining \. on input line 419.
+LaTeX Info: Redefining \% on input line 419.
+Package cleveref Info: loaded `spanish' language definitions on input line 419.
+LaTeX Info: Redefining \. on input line 419.
+LaTeX Info: Redefining \% on input line 419.
+Package cleveref Info: loaded `spanish' language definitions on input line 419.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1992,10 +1980,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [22]
 Package acronym Info: Label `acro:IDE' newly defined as it shall be overridden
-although it is yet undefined on input line 416.
+although it is yet undefined on input line 420.
 File: figures/gtkwaveLogo.png Graphic file (type bmp)
 <figures/gtkwaveLogo.png>
-)) (./chapter3/chapterTemplate.tex
+) (./chapter3/chapterTemplate.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package cleveref Info: loaded `spanish' language definitions on input line 1.
@@ -2010,50 +1998,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[23]
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-Package cleveref Info: loaded `spanish' language definitions on input line 1.
-LaTeX Info: Redefining \. on input line 1.
-LaTeX Info: Redefining \% on input line 1.
-Package cleveref Info: loaded `spanish' language definitions on input line 1.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[24]
-Capítulo 3.
-\openout5 = `master.mtc'.
-
-\openout5 = `master.mtc'.
-
-(./master.mtc3)
-\tmpht=\dimen368
- (./chapter3/sectionTemplate.tex
-Package acronym Info: Label `acro:PUD' newly defined as it shall be overridden
-although it is yet undefined on input line 5.
- [25
+[23] [24
 
 ]
-LaTeX Info: Redefining \. on input line 48.
-LaTeX Info: Redefining \% on input line 48.
-Package cleveref Info: loaded `spanish' language definitions on input line 48.
-LaTeX Info: Redefining \. on input line 48.
-LaTeX Info: Redefining \% on input line 48.
-Package cleveref Info: loaded `spanish' language definitions on input line 48.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[26]
+Capítulo 3.
+\tmpht=\dimen368
+Package acronym Info: Label `acro:PUD' newly defined as it shall be overridden
+although it is yet undefined on input line 11.
+[25]
 File: figures/gantt.png Graphic file (type bmp)
 <figures/gantt.png>
 LaTeX Info: Redefining \. on input line 67.
@@ -2070,13 +2022,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
+[26]
+LaTeX Info: Redefining \. on input line 80.
+LaTeX Info: Redefining \% on input line 80.
+Package cleveref Info: loaded `spanish' language definitions on input line 80.
+LaTeX Info: Redefining \. on input line 80.
+LaTeX Info: Redefining \% on input line 80.
+Package cleveref Info: loaded `spanish' language definitions on input line 80.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
 [27]
-LaTeX Info: Redefining \. on input line 90.
-LaTeX Info: Redefining \% on input line 90.
-Package cleveref Info: loaded `spanish' language definitions on input line 90.
-LaTeX Info: Redefining \. on input line 90.
-LaTeX Info: Redefining \% on input line 90.
-Package cleveref Info: loaded `spanish' language definitions on input line 90.
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
+Package cleveref Info: loaded `spanish' language definitions on input line 99.
+LaTeX Info: Redefining \. on input line 99.
+LaTeX Info: Redefining \% on input line 99.
+Package cleveref Info: loaded `spanish' language definitions on input line 99.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2087,15 +2054,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [28]
 Package acronym Info: Label `acro:GCC' newly defined as it shall be overridden
-although it is yet undefined on input line 107.
+although it is yet undefined on input line 109.
 Package acronym Info: Label `acro:DVCS' newly defined as it shall be overridden
-although it is yet undefined on input line 114.
-LaTeX Info: Redefining \. on input line 116.
-LaTeX Info: Redefining \% on input line 116.
-Package cleveref Info: loaded `spanish' language definitions on input line 116.
-LaTeX Info: Redefining \. on input line 116.
-LaTeX Info: Redefining \% on input line 116.
-Package cleveref Info: loaded `spanish' language definitions on input line 116.
+although it is yet undefined on input line 116.
+LaTeX Info: Redefining \. on input line 127.
+LaTeX Info: Redefining \% on input line 127.
+Package cleveref Info: loaded `spanish' language definitions on input line 127.
+LaTeX Info: Redefining \. on input line 127.
+LaTeX Info: Redefining \% on input line 127.
+Package cleveref Info: loaded `spanish' language definitions on input line 127.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2106,8 +2073,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [29]
 Package acronym Info: Label `acro:MS' newly defined as it shall be overridden
-although it is yet undefined on input line 126.
-)) (./chapter4/chapterTemplate.tex
+although it is yet undefined on input line 128.
+) (./chapter4/chapterTemplate.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package cleveref Info: loaded `spanish' language definitions on input line 1.
@@ -2124,21 +2091,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [30]
 Capítulo 4.
-\openout5 = `master.mtc'.
-
-\openout5 = `master.mtc'.
-
-(./master.mtc4)
 \tmpht=\dimen369
- (./chapter4/sectionTemplate.tex [31
+[31
 
 ]
-LaTeX Info: Redefining \. on input line 25.
-LaTeX Info: Redefining \% on input line 25.
-Package cleveref Info: loaded `spanish' language definitions on input line 25.
-LaTeX Info: Redefining \. on input line 25.
-LaTeX Info: Redefining \% on input line 25.
-Package cleveref Info: loaded `spanish' language definitions on input line 25.
+LaTeX Info: Redefining \. on input line 36.
+LaTeX Info: Redefining \% on input line 36.
+Package cleveref Info: loaded `spanish' language definitions on input line 36.
+LaTeX Info: Redefining \. on input line 36.
+LaTeX Info: Redefining \% on input line 36.
+Package cleveref Info: loaded `spanish' language definitions on input line 36.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2148,12 +2110,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [32]
-LaTeX Info: Redefining \. on input line 48.
-LaTeX Info: Redefining \% on input line 48.
-Package cleveref Info: loaded `spanish' language definitions on input line 48.
-LaTeX Info: Redefining \. on input line 48.
-LaTeX Info: Redefining \% on input line 48.
-Package cleveref Info: loaded `spanish' language definitions on input line 48.
+LaTeX Info: Redefining \. on input line 58.
+LaTeX Info: Redefining \% on input line 58.
+Package cleveref Info: loaded `spanish' language definitions on input line 58.
+LaTeX Info: Redefining \. on input line 58.
+LaTeX Info: Redefining \% on input line 58.
+Package cleveref Info: loaded `spanish' language definitions on input line 58.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2163,12 +2125,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [33]
-LaTeX Info: Redefining \. on input line 64.
-LaTeX Info: Redefining \% on input line 64.
-Package cleveref Info: loaded `spanish' language definitions on input line 64.
-LaTeX Info: Redefining \. on input line 64.
-LaTeX Info: Redefining \% on input line 64.
-Package cleveref Info: loaded `spanish' language definitions on input line 64.
+LaTeX Info: Redefining \. on input line 126.
+LaTeX Info: Redefining \% on input line 126.
+Package cleveref Info: loaded `spanish' language definitions on input line 126.
+LaTeX Info: Redefining \. on input line 126.
+LaTeX Info: Redefining \% on input line 126.
+Package cleveref Info: loaded `spanish' language definitions on input line 126.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2178,12 +2140,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [34]
-LaTeX Info: Redefining \. on input line 125.
-LaTeX Info: Redefining \% on input line 125.
-Package cleveref Info: loaded `spanish' language definitions on input line 125.
-LaTeX Info: Redefining \. on input line 125.
-LaTeX Info: Redefining \% on input line 125.
-Package cleveref Info: loaded `spanish' language definitions on input line 125.
+LaTeX Info: Redefining \. on input line 141.
+LaTeX Info: Redefining \% on input line 141.
+Package cleveref Info: loaded `spanish' language definitions on input line 141.
+LaTeX Info: Redefining \. on input line 141.
+LaTeX Info: Redefining \% on input line 141.
+Package cleveref Info: loaded `spanish' language definitions on input line 141.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2193,12 +2155,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [35]
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
-Package cleveref Info: loaded `spanish' language definitions on input line 167.
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
-Package cleveref Info: loaded `spanish' language definitions on input line 167.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 187.
+LaTeX Info: Redefining \% on input line 187.
+Package cleveref Info: loaded `spanish' language definitions on input line 187.
+LaTeX Info: Redefining \. on input line 187.
+LaTeX Info: Redefining \% on input line 187.
+Package cleveref Info: loaded `spanish' language definitions on input line 187.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2210,12 +2174,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [36]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 212.
-LaTeX Info: Redefining \% on input line 212.
-Package cleveref Info: loaded `spanish' language definitions on input line 212.
-LaTeX Info: Redefining \. on input line 212.
-LaTeX Info: Redefining \% on input line 212.
-Package cleveref Info: loaded `spanish' language definitions on input line 212.
+LaTeX Info: Redefining \. on input line 223.
+LaTeX Info: Redefining \% on input line 223.
+Package cleveref Info: loaded `spanish' language definitions on input line 223.
+LaTeX Info: Redefining \. on input line 223.
+LaTeX Info: Redefining \% on input line 223.
+Package cleveref Info: loaded `spanish' language definitions on input line 223.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2232,12 +2196,12 @@ File: lstlang1.sty 2020/03/24 1.8d listings language file
 ) (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
 )
-LaTeX Info: Redefining \. on input line 232.
-LaTeX Info: Redefining \% on input line 232.
-Package cleveref Info: loaded `spanish' language definitions on input line 232.
-LaTeX Info: Redefining \. on input line 232.
-LaTeX Info: Redefining \% on input line 232.
-Package cleveref Info: loaded `spanish' language definitions on input line 232.
+LaTeX Info: Redefining \. on input line 239.
+LaTeX Info: Redefining \% on input line 239.
+Package cleveref Info: loaded `spanish' language definitions on input line 239.
+LaTeX Info: Redefining \. on input line 239.
+LaTeX Info: Redefining \% on input line 239.
+Package cleveref Info: loaded `spanish' language definitions on input line 239.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2247,14 +2211,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [38]
-Underfull \vbox (badness 6842) has occurred while \output is active []
+Underfull \vbox (badness 2573) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 266.
-LaTeX Info: Redefining \% on input line 266.
-Package cleveref Info: loaded `spanish' language definitions on input line 266.
-LaTeX Info: Redefining \. on input line 266.
-LaTeX Info: Redefining \% on input line 266.
-Package cleveref Info: loaded `spanish' language definitions on input line 266.
+LaTeX Info: Redefining \. on input line 283.
+LaTeX Info: Redefining \% on input line 283.
+Package cleveref Info: loaded `spanish' language definitions on input line 283.
+LaTeX Info: Redefining \. on input line 283.
+LaTeX Info: Redefining \% on input line 283.
+Package cleveref Info: loaded `spanish' language definitions on input line 283.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2264,14 +2228,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [39]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 287.
-LaTeX Info: Redefining \% on input line 287.
-Package cleveref Info: loaded `spanish' language definitions on input line 287.
-LaTeX Info: Redefining \. on input line 287.
-LaTeX Info: Redefining \% on input line 287.
-Package cleveref Info: loaded `spanish' language definitions on input line 287.
+LaTeX Info: Redefining \. on input line 304.
+LaTeX Info: Redefining \% on input line 304.
+Package cleveref Info: loaded `spanish' language definitions on input line 304.
+LaTeX Info: Redefining \. on input line 304.
+LaTeX Info: Redefining \% on input line 304.
+Package cleveref Info: loaded `spanish' language definitions on input line 304.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2281,14 +2243,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [40]
-Underfull \vbox (badness 6542) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 327.
-LaTeX Info: Redefining \% on input line 327.
-Package cleveref Info: loaded `spanish' language definitions on input line 327.
-LaTeX Info: Redefining \. on input line 327.
-LaTeX Info: Redefining \% on input line 327.
-Package cleveref Info: loaded `spanish' language definitions on input line 327.
+LaTeX Info: Redefining \. on input line 349.
+LaTeX Info: Redefining \% on input line 349.
+Package cleveref Info: loaded `spanish' language definitions on input line 349.
+LaTeX Info: Redefining \. on input line 349.
+LaTeX Info: Redefining \% on input line 349.
+Package cleveref Info: loaded `spanish' language definitions on input line 349.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2300,12 +2262,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [41]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 375.
-LaTeX Info: Redefining \% on input line 375.
-Package cleveref Info: loaded `spanish' language definitions on input line 375.
-LaTeX Info: Redefining \. on input line 375.
-LaTeX Info: Redefining \% on input line 375.
-Package cleveref Info: loaded `spanish' language definitions on input line 375.
+LaTeX Info: Redefining \. on input line 395.
+LaTeX Info: Redefining \% on input line 395.
+Package cleveref Info: loaded `spanish' language definitions on input line 395.
+LaTeX Info: Redefining \. on input line 395.
+LaTeX Info: Redefining \% on input line 395.
+Package cleveref Info: loaded `spanish' language definitions on input line 395.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2315,13 +2277,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [42]
-LaTeX Info: Redefining \. on input line 413.
-LaTeX Info: Redefining \% on input line 413.
-Package cleveref Info: loaded `spanish' language definitions on input line 413.
-LaTeX Info: Redefining \. on input line 413.
-LaTeX Info: Redefining \% on input line 413.
-Package cleveref Info: loaded `spanish' language definitions on input line 413.
+Overfull \hbox (10.64893pt too wide) in paragraph at lines 421--422
+\TU/lmr/m/n/12 (\TU/lmtt/m/n/12 s_axis_tready \TU/lmr/m/n/12 en 1), se coloca el dato en \TU/lmtt/m/n/12 s_axis_tdata\TU/lmr/m/n/12 , se activa \TU/lmtt/m/n/12 s_axis_tvalid
+ []
 
+LaTeX Info: Redefining \. on input line 422.
+LaTeX Info: Redefining \% on input line 422.
+Package cleveref Info: loaded `spanish' language definitions on input line 422.
+LaTeX Info: Redefining \. on input line 422.
+LaTeX Info: Redefining \% on input line 422.
+Package cleveref Info: loaded `spanish' language definitions on input line 422.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2330,16 +2295,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [43]
-Overfull \hbox (10.64893pt too wide) in paragraph at lines 415--416
-\TU/lmr/m/n/12 (\TU/lmtt/m/n/12 s_axis_tready \TU/lmr/m/n/12 en 1), se coloca el dato en \TU/lmtt/m/n/12 s_axis_tdata\TU/lmr/m/n/12 , se activa \TU/lmtt/m/n/12 s_axis_tvalid
- []
+LaTeX Info: Redefining \. on input line 458.
+LaTeX Info: Redefining \% on input line 458.
+Package cleveref Info: loaded `spanish' language definitions on input line 458.
+LaTeX Info: Redefining \. on input line 458.
+LaTeX Info: Redefining \% on input line 458.
+Package cleveref Info: loaded `spanish' language definitions on input line 458.
 
-LaTeX Info: Redefining \. on input line 439.
-LaTeX Info: Redefining \% on input line 439.
-Package cleveref Info: loaded `spanish' language definitions on input line 439.
-LaTeX Info: Redefining \. on input line 439.
-LaTeX Info: Redefining \% on input line 439.
-Package cleveref Info: loaded `spanish' language definitions on input line 439.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2350,12 +2312,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [44]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 484.
-LaTeX Info: Redefining \% on input line 484.
-Package cleveref Info: loaded `spanish' language definitions on input line 484.
-LaTeX Info: Redefining \. on input line 484.
-LaTeX Info: Redefining \% on input line 484.
-Package cleveref Info: loaded `spanish' language definitions on input line 484.
+LaTeX Info: Redefining \. on input line 505.
+LaTeX Info: Redefining \% on input line 505.
+Package cleveref Info: loaded `spanish' language definitions on input line 505.
+LaTeX Info: Redefining \. on input line 505.
+LaTeX Info: Redefining \% on input line 505.
+Package cleveref Info: loaded `spanish' language definitions on input line 505.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2365,14 +2327,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [45]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 530.
-LaTeX Info: Redefining \% on input line 530.
-Package cleveref Info: loaded `spanish' language definitions on input line 530.
-LaTeX Info: Redefining \. on input line 530.
-LaTeX Info: Redefining \% on input line 530.
-Package cleveref Info: loaded `spanish' language definitions on input line 530.
+LaTeX Info: Redefining \. on input line 542.
+LaTeX Info: Redefining \% on input line 542.
+Package cleveref Info: loaded `spanish' language definitions on input line 542.
+LaTeX Info: Redefining \. on input line 542.
+LaTeX Info: Redefining \% on input line 542.
+Package cleveref Info: loaded `spanish' language definitions on input line 542.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2382,12 +2342,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [46]
-LaTeX Info: Redefining \. on input line 547.
-LaTeX Info: Redefining \% on input line 547.
-Package cleveref Info: loaded `spanish' language definitions on input line 547.
-LaTeX Info: Redefining \. on input line 547.
-LaTeX Info: Redefining \% on input line 547.
-Package cleveref Info: loaded `spanish' language definitions on input line 547.
+LaTeX Info: Redefining \. on input line 569.
+LaTeX Info: Redefining \% on input line 569.
+Package cleveref Info: loaded `spanish' language definitions on input line 569.
+LaTeX Info: Redefining \. on input line 569.
+LaTeX Info: Redefining \% on input line 569.
+Package cleveref Info: loaded `spanish' language definitions on input line 569.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2397,12 +2357,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [47]
-LaTeX Info: Redefining \. on input line 591.
-LaTeX Info: Redefining \% on input line 591.
-Package cleveref Info: loaded `spanish' language definitions on input line 591.
-LaTeX Info: Redefining \. on input line 591.
-LaTeX Info: Redefining \% on input line 591.
-Package cleveref Info: loaded `spanish' language definitions on input line 591.
+LaTeX Info: Redefining \. on input line 607.
+LaTeX Info: Redefining \% on input line 607.
+Package cleveref Info: loaded `spanish' language definitions on input line 607.
+LaTeX Info: Redefining \. on input line 607.
+LaTeX Info: Redefining \% on input line 607.
+Package cleveref Info: loaded `spanish' language definitions on input line 607.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2413,13 +2373,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [48]
 Package acronym Info: Label `acro:FFT' newly defined as it shall be overridden
-although it is yet undefined on input line 609.
-LaTeX Info: Redefining \. on input line 618.
-LaTeX Info: Redefining \% on input line 618.
-Package cleveref Info: loaded `spanish' language definitions on input line 618.
-LaTeX Info: Redefining \. on input line 618.
-LaTeX Info: Redefining \% on input line 618.
-Package cleveref Info: loaded `spanish' language definitions on input line 618.
+although it is yet undefined on input line 615.
+LaTeX Info: Redefining \. on input line 633.
+LaTeX Info: Redefining \% on input line 633.
+Package cleveref Info: loaded `spanish' language definitions on input line 633.
+LaTeX Info: Redefining \. on input line 633.
+LaTeX Info: Redefining \% on input line 633.
+Package cleveref Info: loaded `spanish' language definitions on input line 633.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2429,14 +2389,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [49]
-Underfull \vbox (badness 4608) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 657.
-LaTeX Info: Redefining \% on input line 657.
-Package cleveref Info: loaded `spanish' language definitions on input line 657.
-LaTeX Info: Redefining \. on input line 657.
-LaTeX Info: Redefining \% on input line 657.
-Package cleveref Info: loaded `spanish' language definitions on input line 657.
+LaTeX Info: Redefining \. on input line 677.
+LaTeX Info: Redefining \% on input line 677.
+Package cleveref Info: loaded `spanish' language definitions on input line 677.
+LaTeX Info: Redefining \. on input line 677.
+LaTeX Info: Redefining \% on input line 677.
+Package cleveref Info: loaded `spanish' language definitions on input line 677.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2446,14 +2406,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [50]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 693.
-LaTeX Info: Redefining \% on input line 693.
-Package cleveref Info: loaded `spanish' language definitions on input line 693.
-LaTeX Info: Redefining \. on input line 693.
-LaTeX Info: Redefining \% on input line 693.
-Package cleveref Info: loaded `spanish' language definitions on input line 693.
+File: figures/simVivado.png Graphic file (type bmp)
+<figures/simVivado.png>
+LaTeX Info: Redefining \. on input line 708.
+LaTeX Info: Redefining \% on input line 708.
+Package cleveref Info: loaded `spanish' language definitions on input line 708.
+LaTeX Info: Redefining \. on input line 708.
+LaTeX Info: Redefining \% on input line 708.
+Package cleveref Info: loaded `spanish' language definitions on input line 708.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2463,15 +2423,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [51]
-File: figures/simVivado.png Graphic file (type bmp)
-<figures/simVivado.png>
-LaTeX Info: Redefining \. on input line 709.
-LaTeX Info: Redefining \% on input line 709.
-Package cleveref Info: loaded `spanish' language definitions on input line 709.
-LaTeX Info: Redefining \. on input line 709.
-LaTeX Info: Redefining \% on input line 709.
-Package cleveref Info: loaded `spanish' language definitions on input line 709.
+File: figures/simEdaPlayground.png Graphic file (type bmp)
+<figures/simEdaPlayground.png>
 
+Overfull \hbox (14.22134pt too wide) in paragraph at lines 718--719
+ [][] 
+ []
+
+LaTeX Info: Redefining \. on input line 727.
+LaTeX Info: Redefining \% on input line 727.
+Package cleveref Info: loaded `spanish' language definitions on input line 727.
+LaTeX Info: Redefining \. on input line 727.
+LaTeX Info: Redefining \% on input line 727.
+Package cleveref Info: loaded `spanish' language definitions on input line 727.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2480,23 +2444,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [52]
-File: figures/simEdaPlayground.png Graphic file (type bmp)
-<figures/simEdaPlayground.png>
-
-Overfull \hbox (14.22134pt too wide) in paragraph at lines 712--713
- [][] 
- []
-
 File: figures/aceleradorXAIF.png Graphic file (type bmp)
 <figures/aceleradorXAIF.png>
 Package acronym Info: Label `acro:X-AIF' newly defined as it shall be overridden
-although it is yet undefined on input line 729.
-LaTeX Info: Redefining \. on input line 734.
-LaTeX Info: Redefining \% on input line 734.
-Package cleveref Info: loaded `spanish' language definitions on input line 734.
-LaTeX Info: Redefining \. on input line 734.
-LaTeX Info: Redefining \% on input line 734.
-Package cleveref Info: loaded `spanish' language definitions on input line 734.
+although it is yet undefined on input line 735.
+LaTeX Info: Redefining \. on input line 740.
+LaTeX Info: Redefining \% on input line 740.
+Package cleveref Info: loaded `spanish' language definitions on input line 740.
+LaTeX Info: Redefining \. on input line 740.
+LaTeX Info: Redefining \% on input line 740.
+Package cleveref Info: loaded `spanish' language definitions on input line 740.
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2505,12 +2463,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [53]
-LaTeX Info: Redefining \. on input line 750.
-LaTeX Info: Redefining \% on input line 750.
-Package cleveref Info: loaded `spanish' language definitions on input line 750.
-LaTeX Info: Redefining \. on input line 750.
-LaTeX Info: Redefining \% on input line 750.
-Package cleveref Info: loaded `spanish' language definitions on input line 750.
+File: figures/importandoDiseno.png Graphic file (type bmp)
+<figures/importandoDiseno.png>
+LaTeX Info: Redefining \. on input line 769.
+LaTeX Info: Redefining \% on input line 769.
+Package cleveref Info: loaded `spanish' language definitions on input line 769.
+LaTeX Info: Redefining \. on input line 769.
+LaTeX Info: Redefining \% on input line 769.
+Package cleveref Info: loaded `spanish' language definitions on input line 769.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2520,14 +2480,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [54]
-File: figures/importandoDiseno.png Graphic file (type bmp)
-<figures/importandoDiseno.png>
-LaTeX Info: Redefining \. on input line 766.
-LaTeX Info: Redefining \% on input line 766.
-Package cleveref Info: loaded `spanish' language definitions on input line 766.
-LaTeX Info: Redefining \. on input line 766.
-LaTeX Info: Redefining \% on input line 766.
-Package cleveref Info: loaded `spanish' language definitions on input line 766.
+File: figures/conceptoDisenoIntegracion.png Graphic file (type bmp)
+<figures/conceptoDisenoIntegracion.png>
+LaTeX Info: Redefining \. on input line 789.
+LaTeX Info: Redefining \% on input line 789.
+Package cleveref Info: loaded `spanish' language definitions on input line 789.
+LaTeX Info: Redefining \. on input line 789.
+LaTeX Info: Redefining \% on input line 789.
+Package cleveref Info: loaded `spanish' language definitions on input line 789.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2537,14 +2497,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [55]
-File: figures/conceptoDisenoIntegracion.png Graphic file (type bmp)
-<figures/conceptoDisenoIntegracion.png>
-LaTeX Info: Redefining \. on input line 790.
-LaTeX Info: Redefining \% on input line 790.
-Package cleveref Info: loaded `spanish' language definitions on input line 790.
-LaTeX Info: Redefining \. on input line 790.
-LaTeX Info: Redefining \% on input line 790.
-Package cleveref Info: loaded `spanish' language definitions on input line 790.
+LaTeX Info: Redefining \. on input line 808.
+LaTeX Info: Redefining \% on input line 808.
+Package cleveref Info: loaded `spanish' language definitions on input line 808.
+LaTeX Info: Redefining \. on input line 808.
+LaTeX Info: Redefining \% on input line 808.
+Package cleveref Info: loaded `spanish' language definitions on input line 808.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2556,12 +2514,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [56]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 829.
-LaTeX Info: Redefining \% on input line 829.
-Package cleveref Info: loaded `spanish' language definitions on input line 829.
-LaTeX Info: Redefining \. on input line 829.
-LaTeX Info: Redefining \% on input line 829.
-Package cleveref Info: loaded `spanish' language definitions on input line 829.
+LaTeX Info: Redefining \. on input line 851.
+LaTeX Info: Redefining \% on input line 851.
+Package cleveref Info: loaded `spanish' language definitions on input line 851.
+LaTeX Info: Redefining \. on input line 851.
+LaTeX Info: Redefining \% on input line 851.
+Package cleveref Info: loaded `spanish' language definitions on input line 851.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2573,12 +2531,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [57]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 870.
-LaTeX Info: Redefining \% on input line 870.
-Package cleveref Info: loaded `spanish' language definitions on input line 870.
-LaTeX Info: Redefining \. on input line 870.
-LaTeX Info: Redefining \% on input line 870.
-Package cleveref Info: loaded `spanish' language definitions on input line 870.
+LaTeX Info: Redefining \. on input line 894.
+LaTeX Info: Redefining \% on input line 894.
+Package cleveref Info: loaded `spanish' language definitions on input line 894.
+LaTeX Info: Redefining \. on input line 894.
+LaTeX Info: Redefining \% on input line 894.
+Package cleveref Info: loaded `spanish' language definitions on input line 894.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2588,12 +2546,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [58]
-LaTeX Info: Redefining \. on input line 913.
-LaTeX Info: Redefining \% on input line 913.
-Package cleveref Info: loaded `spanish' language definitions on input line 913.
-LaTeX Info: Redefining \. on input line 913.
-LaTeX Info: Redefining \% on input line 913.
-Package cleveref Info: loaded `spanish' language definitions on input line 913.
+LaTeX Info: Redefining \. on input line 935.
+LaTeX Info: Redefining \% on input line 935.
+Package cleveref Info: loaded `spanish' language definitions on input line 935.
+LaTeX Info: Redefining \. on input line 935.
+LaTeX Info: Redefining \% on input line 935.
+Package cleveref Info: loaded `spanish' language definitions on input line 935.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2605,12 +2563,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [59]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 959.
-LaTeX Info: Redefining \% on input line 959.
-Package cleveref Info: loaded `spanish' language definitions on input line 959.
-LaTeX Info: Redefining \. on input line 959.
-LaTeX Info: Redefining \% on input line 959.
-Package cleveref Info: loaded `spanish' language definitions on input line 959.
+LaTeX Info: Redefining \. on input line 982.
+LaTeX Info: Redefining \% on input line 982.
+Package cleveref Info: loaded `spanish' language definitions on input line 982.
+LaTeX Info: Redefining \. on input line 982.
+LaTeX Info: Redefining \% on input line 982.
+Package cleveref Info: loaded `spanish' language definitions on input line 982.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2620,12 +2578,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [60]
-LaTeX Info: Redefining \. on input line 991.
-LaTeX Info: Redefining \% on input line 991.
-Package cleveref Info: loaded `spanish' language definitions on input line 991.
-LaTeX Info: Redefining \. on input line 991.
-LaTeX Info: Redefining \% on input line 991.
-Package cleveref Info: loaded `spanish' language definitions on input line 991.
+LaTeX Info: Redefining \. on input line 1011.
+LaTeX Info: Redefining \% on input line 1011.
+Package cleveref Info: loaded `spanish' language definitions on input line 1011.
+LaTeX Info: Redefining \. on input line 1011.
+LaTeX Info: Redefining \% on input line 1011.
+Package cleveref Info: loaded `spanish' language definitions on input line 1011.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2637,12 +2595,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [61]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1028.
-LaTeX Info: Redefining \% on input line 1028.
-Package cleveref Info: loaded `spanish' language definitions on input line 1028.
-LaTeX Info: Redefining \. on input line 1028.
-LaTeX Info: Redefining \% on input line 1028.
-Package cleveref Info: loaded `spanish' language definitions on input line 1028.
+LaTeX Info: Redefining \. on input line 1048.
+LaTeX Info: Redefining \% on input line 1048.
+Package cleveref Info: loaded `spanish' language definitions on input line 1048.
+LaTeX Info: Redefining \. on input line 1048.
+LaTeX Info: Redefining \% on input line 1048.
+Package cleveref Info: loaded `spanish' language definitions on input line 1048.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2654,12 +2612,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [62]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1066.
-LaTeX Info: Redefining \% on input line 1066.
-Package cleveref Info: loaded `spanish' language definitions on input line 1066.
-LaTeX Info: Redefining \. on input line 1066.
-LaTeX Info: Redefining \% on input line 1066.
-Package cleveref Info: loaded `spanish' language definitions on input line 1066.
+LaTeX Info: Redefining \. on input line 1086.
+LaTeX Info: Redefining \% on input line 1086.
+Package cleveref Info: loaded `spanish' language definitions on input line 1086.
+LaTeX Info: Redefining \. on input line 1086.
+LaTeX Info: Redefining \% on input line 1086.
+Package cleveref Info: loaded `spanish' language definitions on input line 1086.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2670,13 +2628,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [63]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1086.
-LaTeX Info: Redefining \. on input line 1098.
-LaTeX Info: Redefining \% on input line 1098.
-Package cleveref Info: loaded `spanish' language definitions on input line 1098.
-LaTeX Info: Redefining \. on input line 1098.
-LaTeX Info: Redefining \% on input line 1098.
-Package cleveref Info: loaded `spanish' language definitions on input line 1098.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 1092.
+LaTeX Info: Redefining \. on input line 1109.
+LaTeX Info: Redefining \% on input line 1109.
+Package cleveref Info: loaded `spanish' language definitions on input line 1109.
+LaTeX Info: Redefining \. on input line 1109.
+LaTeX Info: Redefining \% on input line 1109.
+Package cleveref Info: loaded `spanish' language definitions on input line 1109.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2686,14 +2644,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [64]
-Underfull \vbox (badness 2600) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1113.
-LaTeX Info: Redefining \% on input line 1113.
-Package cleveref Info: loaded `spanish' language definitions on input line 1113.
-LaTeX Info: Redefining \. on input line 1113.
-LaTeX Info: Redefining \% on input line 1113.
-Package cleveref Info: loaded `spanish' language definitions on input line 1113.
+LaTeX Info: Redefining \. on input line 1123.
+LaTeX Info: Redefining \% on input line 1123.
+Package cleveref Info: loaded `spanish' language definitions on input line 1123.
+LaTeX Info: Redefining \. on input line 1123.
+LaTeX Info: Redefining \% on input line 1123.
+Package cleveref Info: loaded `spanish' language definitions on input line 1123.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2703,14 +2659,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [65]
-Underfull \vbox (badness 4416) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1139.
-LaTeX Info: Redefining \% on input line 1139.
-Package cleveref Info: loaded `spanish' language definitions on input line 1139.
-LaTeX Info: Redefining \. on input line 1139.
-LaTeX Info: Redefining \% on input line 1139.
-Package cleveref Info: loaded `spanish' language definitions on input line 1139.
+LaTeX Info: Redefining \. on input line 1163.
+LaTeX Info: Redefining \% on input line 1163.
+Package cleveref Info: loaded `spanish' language definitions on input line 1163.
+LaTeX Info: Redefining \. on input line 1163.
+LaTeX Info: Redefining \% on input line 1163.
+Package cleveref Info: loaded `spanish' language definitions on input line 1163.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2722,12 +2676,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [66]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1180.
-LaTeX Info: Redefining \% on input line 1180.
-Package cleveref Info: loaded `spanish' language definitions on input line 1180.
-LaTeX Info: Redefining \. on input line 1180.
-LaTeX Info: Redefining \% on input line 1180.
-Package cleveref Info: loaded `spanish' language definitions on input line 1180.
+LaTeX Info: Redefining \. on input line 1205.
+LaTeX Info: Redefining \% on input line 1205.
+Package cleveref Info: loaded `spanish' language definitions on input line 1205.
+LaTeX Info: Redefining \. on input line 1205.
+LaTeX Info: Redefining \% on input line 1205.
+Package cleveref Info: loaded `spanish' language definitions on input line 1205.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2739,15 +2693,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [67]
 File: figures/resultadoBaremetal.png Graphic file (type bmp)
 <figures/resultadoBaremetal.png>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 1230.
-LaTeX Info: Redefining \% on input line 1230.
-Package cleveref Info: loaded `spanish' language definitions on input line 1230.
-LaTeX Info: Redefining \. on input line 1230.
-LaTeX Info: Redefining \% on input line 1230.
-Package cleveref Info: loaded `spanish' language definitions on input line 1230.
+LaTeX Info: Redefining \. on input line 1238.
+LaTeX Info: Redefining \% on input line 1238.
+Package cleveref Info: loaded `spanish' language definitions on input line 1238.
+LaTeX Info: Redefining \. on input line 1238.
+LaTeX Info: Redefining \% on input line 1238.
+Package cleveref Info: loaded `spanish' language definitions on input line 1238.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2757,12 +2708,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [68]
-LaTeX Info: Redefining \. on input line 1251.
-LaTeX Info: Redefining \% on input line 1251.
-Package cleveref Info: loaded `spanish' language definitions on input line 1251.
-LaTeX Info: Redefining \. on input line 1251.
-LaTeX Info: Redefining \% on input line 1251.
-Package cleveref Info: loaded `spanish' language definitions on input line 1251.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 1277.
+LaTeX Info: Redefining \% on input line 1277.
+Package cleveref Info: loaded `spanish' language definitions on input line 1277.
+LaTeX Info: Redefining \. on input line 1277.
+LaTeX Info: Redefining \% on input line 1277.
+Package cleveref Info: loaded `spanish' language definitions on input line 1277.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2774,12 +2727,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1293.
-LaTeX Info: Redefining \% on input line 1293.
-Package cleveref Info: loaded `spanish' language definitions on input line 1293.
-LaTeX Info: Redefining \. on input line 1293.
-LaTeX Info: Redefining \% on input line 1293.
-Package cleveref Info: loaded `spanish' language definitions on input line 1293.
+LaTeX Info: Redefining \. on input line 1317.
+LaTeX Info: Redefining \% on input line 1317.
+Package cleveref Info: loaded `spanish' language definitions on input line 1317.
+LaTeX Info: Redefining \. on input line 1317.
+LaTeX Info: Redefining \% on input line 1317.
+Package cleveref Info: loaded `spanish' language definitions on input line 1317.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2791,12 +2744,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [70]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1335.
-LaTeX Info: Redefining \% on input line 1335.
-Package cleveref Info: loaded `spanish' language definitions on input line 1335.
-LaTeX Info: Redefining \. on input line 1335.
-LaTeX Info: Redefining \% on input line 1335.
-Package cleveref Info: loaded `spanish' language definitions on input line 1335.
+LaTeX Info: Redefining \. on input line 1361.
+LaTeX Info: Redefining \% on input line 1361.
+Package cleveref Info: loaded `spanish' language definitions on input line 1361.
+LaTeX Info: Redefining \. on input line 1361.
+LaTeX Info: Redefining \% on input line 1361.
+Package cleveref Info: loaded `spanish' language definitions on input line 1361.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2808,12 +2761,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [71]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 1378.
-LaTeX Info: Redefining \% on input line 1378.
-Package cleveref Info: loaded `spanish' language definitions on input line 1378.
-LaTeX Info: Redefining \. on input line 1378.
-LaTeX Info: Redefining \% on input line 1378.
-Package cleveref Info: loaded `spanish' language definitions on input line 1378.
+LaTeX Info: Redefining \. on input line 1402.
+LaTeX Info: Redefining \% on input line 1402.
+Package cleveref Info: loaded `spanish' language definitions on input line 1402.
+LaTeX Info: Redefining \. on input line 1402.
+LaTeX Info: Redefining \% on input line 1402.
+Package cleveref Info: loaded `spanish' language definitions on input line 1402.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2823,12 +2776,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [72]
-LaTeX Info: Redefining \. on input line 1415.
-LaTeX Info: Redefining \% on input line 1415.
-Package cleveref Info: loaded `spanish' language definitions on input line 1415.
-LaTeX Info: Redefining \. on input line 1415.
-LaTeX Info: Redefining \% on input line 1415.
-Package cleveref Info: loaded `spanish' language definitions on input line 1415.
+File: figures/resultadoFreeRTOS.png Graphic file (type bmp)
+<figures/resultadoFreeRTOS.png>
+LaTeX Info: Redefining \. on input line 1431.
+LaTeX Info: Redefining \% on input line 1431.
+Package cleveref Info: loaded `spanish' language definitions on input line 1431.
+LaTeX Info: Redefining \. on input line 1431.
+LaTeX Info: Redefining \% on input line 1431.
+Package cleveref Info: loaded `spanish' language definitions on input line 1431.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2837,10 +2792,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[73]
-File: figures/resultadoFreeRTOS.png Graphic file (type bmp)
-<figures/resultadoFreeRTOS.png>
-)) (./chapter5/chapterTemplate.tex
+[73]) (./chapter5/chapterTemplate.tex
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
 Package cleveref Info: loaded `spanish' language definitions on input line 1.
@@ -2857,59 +2809,54 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [74]
 Capítulo 5.
-\openout5 = `master.mtc'.
-
-\openout5 = `master.mtc'.
-
-(./master.mtc5)
 \tmpht=\dimen370
- (./chapter5/sectionTemplate.tex)) (./appendix1/appendixTemplate.tex [75
+[75
 
-] [76
+]
+Package acronym Info: Label `acro:UVM' newly defined as it shall be overridden
+although it is yet undefined on input line 29.
+LaTeX Info: Redefining \. on input line 40.
+LaTeX Info: Redefining \% on input line 40.
+Package cleveref Info: loaded `spanish' language definitions on input line 40.
+LaTeX Info: Redefining \. on input line 40.
+LaTeX Info: Redefining \% on input line 40.
+Package cleveref Info: loaded `spanish' language definitions on input line 40.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[76]) (./appendix1/appendixTemplate.tex
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+Package cleveref Info: loaded `spanish' language definitions on input line 1.
+LaTeX Info: Redefining \. on input line 1.
+LaTeX Info: Redefining \% on input line 1.
+Package cleveref Info: loaded `spanish' language definitions on input line 1.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[77] [78
 
 ]
 Apéndice A.
-[77]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 76.
-LaTeX Info: Redefining \% on input line 76.
-Package cleveref Info: loaded `spanish' language definitions on input line 76.
-LaTeX Info: Redefining \. on input line 76.
-LaTeX Info: Redefining \% on input line 76.
-Package cleveref Info: loaded `spanish' language definitions on input line 76.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[78]
-LaTeX Info: Redefining \. on input line 121.
-LaTeX Info: Redefining \% on input line 121.
-Package cleveref Info: loaded `spanish' language definitions on input line 121.
-LaTeX Info: Redefining \. on input line 121.
-LaTeX Info: Redefining \% on input line 121.
-Package cleveref Info: loaded `spanish' language definitions on input line 121.
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
 [79]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
-Package cleveref Info: loaded `spanish' language definitions on input line 167.
-LaTeX Info: Redefining \. on input line 167.
-LaTeX Info: Redefining \% on input line 167.
-Package cleveref Info: loaded `spanish' language definitions on input line 167.
+LaTeX Info: Redefining \. on input line 76.
+LaTeX Info: Redefining \% on input line 76.
+Package cleveref Info: loaded `spanish' language definitions on input line 76.
+LaTeX Info: Redefining \. on input line 76.
+LaTeX Info: Redefining \% on input line 76.
+Package cleveref Info: loaded `spanish' language definitions on input line 76.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2919,14 +2866,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [80]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 216.
-LaTeX Info: Redefining \% on input line 216.
-Package cleveref Info: loaded `spanish' language definitions on input line 216.
-LaTeX Info: Redefining \. on input line 216.
-LaTeX Info: Redefining \% on input line 216.
-Package cleveref Info: loaded `spanish' language definitions on input line 216.
+LaTeX Info: Redefining \. on input line 121.
+LaTeX Info: Redefining \% on input line 121.
+Package cleveref Info: loaded `spanish' language definitions on input line 121.
+LaTeX Info: Redefining \. on input line 121.
+LaTeX Info: Redefining \% on input line 121.
+Package cleveref Info: loaded `spanish' language definitions on input line 121.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2936,12 +2881,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [81]
-LaTeX Info: Redefining \. on input line 260.
-LaTeX Info: Redefining \% on input line 260.
-Package cleveref Info: loaded `spanish' language definitions on input line 260.
-LaTeX Info: Redefining \. on input line 260.
-LaTeX Info: Redefining \% on input line 260.
-Package cleveref Info: loaded `spanish' language definitions on input line 260.
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 167.
+LaTeX Info: Redefining \% on input line 167.
+Package cleveref Info: loaded `spanish' language definitions on input line 167.
+LaTeX Info: Redefining \. on input line 167.
+LaTeX Info: Redefining \% on input line 167.
+Package cleveref Info: loaded `spanish' language definitions on input line 167.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2953,12 +2900,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [82]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-LaTeX Info: Redefining \. on input line 306.
-LaTeX Info: Redefining \% on input line 306.
-Package cleveref Info: loaded `spanish' language definitions on input line 306.
-LaTeX Info: Redefining \. on input line 306.
-LaTeX Info: Redefining \% on input line 306.
-Package cleveref Info: loaded `spanish' language definitions on input line 306.
+LaTeX Info: Redefining \. on input line 216.
+LaTeX Info: Redefining \% on input line 216.
+Package cleveref Info: loaded `spanish' language definitions on input line 216.
+LaTeX Info: Redefining \. on input line 216.
+LaTeX Info: Redefining \% on input line 216.
+Package cleveref Info: loaded `spanish' language definitions on input line 216.
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -2968,6 +2915,38 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [83]
+LaTeX Info: Redefining \. on input line 260.
+LaTeX Info: Redefining \% on input line 260.
+Package cleveref Info: loaded `spanish' language definitions on input line 260.
+LaTeX Info: Redefining \. on input line 260.
+LaTeX Info: Redefining \% on input line 260.
+Package cleveref Info: loaded `spanish' language definitions on input line 260.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[84]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+LaTeX Info: Redefining \. on input line 306.
+LaTeX Info: Redefining \% on input line 306.
+Package cleveref Info: loaded `spanish' language definitions on input line 306.
+LaTeX Info: Redefining \. on input line 306.
+LaTeX Info: Redefining \% on input line 306.
+Package cleveref Info: loaded `spanish' language definitions on input line 306.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[85]
 LaTeX Info: Redefining \. on input line 351.
 LaTeX Info: Redefining \% on input line 351.
 Package cleveref Info: loaded `spanish' language definitions on input line 351.
@@ -2982,7 +2961,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[84]
+[86]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 LaTeX Info: Redefining \. on input line 398.
@@ -2999,7 +2978,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[85])
+[87])
 LaTeX Info: Redefining \. on input line 179.
 LaTeX Info: Redefining \% on input line 179.
 Package cleveref Info: loaded `spanish' language definitions on input line 179.
@@ -3014,7 +2993,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[86] (./master.bbl
+[88] (./master.bbl
 Underfull \hbox (badness 10000) in paragraph at lines 13--19
 [][][][][][][][][] [] [][][][][][][][][][][][][][][][][][][] [] [][][][][][][][][][][] [] [][][][][][][][][][][][][][][][][][][] []
  []
@@ -3059,7 +3038,7 @@ Underfull \hbox (badness 3701) in paragraph at lines 70--75
 \TU/lmr/m/n/12 ture.  Recurso web: [][]$[][][][][] [] [] [] [][][] [] [][][][][][][][][][][][][] [] [][][] [] [][][][] [] [][] [] [][] []
  []
 
-[87
+[89
 
 ]
 Underfull \hbox (badness 5359) in paragraph at lines 77--83
@@ -3109,7 +3088,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[88]
+[90]
 Underfull \hbox (badness 1052) in paragraph at lines 166--172
 []\TU/lmr/m/n/12 Comisión Europea.  Propuesta de modificación del reglamento (ue)
  []
@@ -3187,7 +3166,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[89]
+[91]
 Underfull \hbox (badness 10000) in paragraph at lines 266--272
 [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]$[][]\TU/lmr/m/n/12 ,
  []
@@ -3235,7 +3214,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[90]
+[92]
 Underfull \hbox (badness 10000) in paragraph at lines 337--343
 [] [] [][][][][][][][][][][][][][][][][][] [] [][][][][][][][][][] [] [][][] [] [][][][][][][][] [] [][][][][][][][] [] [][][][][][] []
  []
@@ -3323,7 +3302,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[91]
+[93]
 Underfull \hbox (badness 10000) in paragraph at lines 398--404
 [][][] [] [][][][][][] [] [] [] [][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] []
  []
@@ -3430,21 +3409,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[92] (./master.aux (./preamble/cover.aux)
+[94] (./master.aux (./preamble/cover.aux)
 LaTeX Info: Redefining \. on input line 30.
 LaTeX Info: Redefining \% on input line 30.
 Package cleveref Info: loaded `spanish' language definitions on input line 30.
  (./preamble/titleCover.aux) (./preamble/internalCover.aux) (./preamble/copyleft.aux) (./preamble/rating.aux) (./preamble/thanks.aux) (./preamble/dedication.aux) (./preamble/abstractSpanish.aux) (./preamble/abstractEnglish.aux))
 Package rerunfilecheck Info: File `master.out' has not changed.
-(rerunfilecheck)             Checksum: B1650BE185F1BAB78831967D80A1526F;7885.
+(rerunfilecheck)             Checksum: B67A5E62C8FD7E6F24B3B810AC01D9EF;8640.
  ) 
 Here is how much of TeX's memory you used:
- 49627 strings out of 476191
- 1024212 string characters out of 5812073
- 1930160 words of memory out of 5000000
- 69147 multiletter control sequences out of 15000+600000
- 480040 words of font info for 101 fonts, out of 8000000 for 9000
+ 49603 strings out of 476191
+ 1023516 string characters out of 5812073
+ 1895650 words of memory out of 5000000
+ 69141 multiletter control sequences out of 15000+600000
+ 480032 words of font info for 100 fonts, out of 8000000 for 9000
  1349 hyphenation exceptions out of 8191
- 106i,12n,113p,2927b,2354s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 106i,12n,113p,2927b,2331s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on master.xdv (116 pages, 2519680 bytes).
+Output written on master.xdv (118 pages, 2605568 bytes).

@@ -1,5 +1,5 @@
 \chapter{Introducción}
-
+\label{ch:introduccion}
 \vspace{-0.5cm}
 
 \begin{flushright}
@@ -12,7 +12,6 @@
 \parindent=16mm
 
 \CAPstart{L}{os}~ \ac{FPGA} son dispositivos de hardware reconfigurables que permiten implementar circuitos digitales personalizados sin necesidad de fabricar un chip desde cero. Están compuestos por una matriz de bloques lógicos programables y una red de interconexiones que puede configurarse para realizar prácticamente cualquier función lógica. En la actualidad, l. Esto desemboca en que todas las fases necesarias en la realización del diseño tienen que estar optimizadas para no sufrir contratiempos inesperados. Esta flexibilidad los convierte en una herramienta fundamental tanto en investigación como en desarrollo industrial, ya que permiten probar y optimizar arquitecturas antes de su producción física, en un mercado cada vez más competitivo, donde las nuevas arquitecturas de \textit{hardware} son lanzadas al mercado anualmente, a veces incluso reduciéndose este valor a la mitad. A diferencia de un microprocesador fijo, un FPGA puede adaptarse a distintos algoritmos, interfaces y arquitecturas, lo que lo hace ideal para prototipado rápido, procesamiento de señales, aplicaciones de alta velocidad y desarrollo de procesadores personalizados como los basados en \ac{RISC-V}. Esta arquitectura ha emergido como una alternativa abierta y flexible frente a arquitecturas propietarias como \ac{ARM}, especialmente en el desarrollo sobre FPGAs. Mientras que ARM ofrece núcleos muy optimizados pero bajo licencia y con limitaciones en la personalización, RISC-V permite a los diseñadores modificar y extender la arquitectura según las necesidades específicas del proyecto. En entornos de FPGA, esta apertura es especialmente valiosa, ya que facilita la experimentación con extensiones personalizadas, la integración con periféricos específicos y la adaptación a aplicaciones concretas. Además, la creciente comunidad y ecosistema de herramientas libres en torno a RISC-V reduce barreras de entrada y fomenta la innovación, donde la experimentación y la optimización del procesador forman parte del objetivo principal. RISC-V es aún una arquitectura en proceso de adaptación a nivel global. A pesar de ello, son muchas las empresas que están realizando la transición hacia esta arquitectura, como la conocida Nvidia \cite{nvidiaRISCV}, anunciando hace un mes que CUDA tendrá soporte a RISC-V. Sin embargo, no son solo las empresas las que participan en su desarrollo: actualmente, hay gran cantidad de proyectos sobre esta arquitectura, como es el simulador de núcleos RISC-V: el proyeto \ac{X-HEEP} \cite{machetti2024xheep} desarrollado por el \ac{EPFL} en Lausanne, Suiza. Será precisamente este simulador el empleado en este \ac{TFM} para realizar validaciones y mediciones de rendimiento sobre el diseño \textit{hardware} realizado.
-
 
 \begin{figure}[!ht]
     \centering

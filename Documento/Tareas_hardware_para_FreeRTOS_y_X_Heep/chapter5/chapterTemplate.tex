@@ -1,16 +1,45 @@
 \chapter{Conclusiones y trabajo futuro}
 \label{cap:conclusiones}
 
-\vspace{-0.5cm}
+\vspace{-30pt}
 
-\begin{flushright}
-  \emph{\guillemotleft Cita o lo que quieras\guillemotright}\\ \textbf{Author}
-\end{flushright}
-\hyphenation{}
-\grayMinitoc
+\CAPstart{E}{n}~este capítulo se abordan las competencias adquiridas y se evalúan el cumplimiento de los requisitos o problemas que han impedido alcanzarlos, además de una valoración crítica del proyecto.
 
-\parindent=16mm
+\section{Competencias adquiridas}
+\begin{itemize}
+    \item \textit{Capacidad de diseñar, depurar y programar sistemas integrados multiprocesador complejos.} \\
+    Esta competencia se ha desarrollado gracias a la integración de un acelerador hardware dentro de la plataforma X-HEEP/GR-HEEP, basada en la arquitectura RISC-V. El trabajo requirió comprender y aplicar metodologías de diseño para SoCs heterogéneos, abordando la interconexión entre múltiples procesadores, periféricos y módulos hardware en un entorno de gran complejidad.
 
-\CAPstart{R}{esume}~los principales hallazgos y cómo responden a tus objetivos. Analiza si se han cumplido y si han existido limitaciones o problemas que han impedido alcanzar las metas planteadas inicialmente.
+    \item \textit{Capacidad de generar el middleware y software de sistemas integrados adaptados a su arquitectura.} \\
+    El proyecto incluye la creación de drivers y la adaptación del diseño hardware para su correcta gestión a través de FreeRTOS. Esta labor permitió asegurar la comunicación entre el hardware acelerador y el sistema operativo en tiempo real, constituyendo un ejemplo claro de integración hardware-software en sistemas embebidos.
 
-\input{chapter5/sectionTemplate}
+    \item \textit{Capacidad de verificar y testear circuitos integrados utilizando diferentes tecnologías y herramientas.} \\
+    Se ha adquirido experiencia en la verificación del diseño mediante el uso de diversas herramientas (Vivado, Vitis HLS, EDAPlayground, GTKWave). Asimismo, se realizaron simulaciones funcionales, pruebas de integración, y ejecuciones comparativas de rendimiento frente a versiones software, lo que permite garantizar la validez y eficiencia del sistema implementado.
+\end{itemize}
+
+\section{Revisión de los objetivos}
+A continuación, se detallan los objetivos planteados en \ref{sec:objetivos} y cómo han sido cumplidos en el desarrollo del mismo:
+
+\begin{itemize}
+    \item Para el objetivo principal, la \emph{ implementación e integración en X-HEEP/GR-HEEP de un acelerador AXI-Stream en hardware}: se considera \textbf{cumplido}, habiéndose empleado además herramientas EDA, gracias al desarrollo en C/C++ cuyo protocolo de comunicaciones fuera AXI, posteriormente portado a Verilog haciendo uso de la herramienta Vitis HLS, el cual fue integrado a su vez en el flujo de diseño de Vivado para generar, mediante un Block Design con el acelerador y dos colas FIFO, de entrada y salida de datos respectivamente, un diseño hardware capaz de ser integrado en la arquitectura RISC-V, utilizando para ello la plataforma X-HEEP/GR-HEEP, conectándose el diseño desarrollado al bus de la misma, como periférico.
+    
+    \item Para el objetivo parcial: el \emph{desarrollo de drivers que permitan la comunicación hardware-software},
+    también se considera \textbf{cumplido}, ya que se ha implementado y validado un driver específico que es capaz de leer y escribir en los registros del diseño integrado, facilitando la interacción entre el diseño contenedor del acelerador en cuestión y del software desarrollado para la ejecución en \textit{baremetal} como en FreeRTOS.
+    
+    \item Para el objetivo parcial: la \emph{validación del diseño mediante simulaciones y ejecuciones}, se considera parcialmente cumplido, debido a que, si bien se han desarrollado simulaciones y ejecuciones utilizando diversas herramientas como Vivado, Vitis HLS, EDAPlayground, GTKWave o Verilator, no se ha llegado a realizar una verificación extensiva del diseño, empleando metodologías como \ac{UVM}, debido a la falta de tiempo.
+    
+    \item Para el objetivo parcial: la \emph{comparativa de rendimiento con la versión software del algoritmo}, se da por \textbf{cumplido} por haberse realizado una evaluación experimental comparando el tiempo de ejecución del algoritmo en software con la versión acelerada en hardware, además de dar justificación a los resultados obtenidos.
+\end{itemize}
+
+\section{Valoración crítica del proyecto}
+\subsection{Líneas de trabajo futuro}
+Como posibles extensiones futuras a este proyecto se puede destacar, entre otras:
+
+\begin{itemize}
+  \item \emph{El uso de metodologías de verificación}, como UVM, que permitan validar el diseño y realizar un estudio de todos los escenarios posibles a nivel de código, lo que se conoce como \textit{code coverage}
+  \item \emph{La reutilización de IPs ya existentes en Vivado}: en este trabajo no se llegó a realizar debido a que se consideró más interesante desarrollar todo desde cero, ya que eso involucra un mayor uso de lenguajes HDL como Verilog, estudiados en este máster.
+  \item \emph{Potenciales reducciones de la lógica de control}: debido a que se buscaba lograr la funcionalidad, y no tanto, la eficiencia, la lógica de control tiene un considerable margen de reducción, algo que, por falta de tiempo, no se ha podido realizar.
+\end{itemize}
+
+\subsection{Valoración personal}
+El haber realizado este TFM me ha aportado más de lo que creía en un principio, destacando el potencial de la síntesis de alto nivel de aceleradores procedentes de la herramienta Vitis HLS, el uso de los Block Design en Vivado para generar un diseño hardware completo con módulos RTL de todo tipo. También me ha resultado muy interesante la capacidad de X-HEEP/GR-HEEP para la integración del diseño, donde, aún teniendo ciertas nociones gracias a varias sesiones prácticas del máster, he aprendido bastante más de lo esperado. Quiero mencionar a David Mallasén Quintana, quien me ha ayudado mucho vía correo electrónico en esta problemática. En definitiva, este proyecto me ha permitido crecer en conocimientos que, en otro contexto, me habría sido más difícil, si no imposible, de aprender.

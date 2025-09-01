@@ -1,15 +1,1440 @@
 \chapter{Resultados}
 
-\vspace{-0.5cm}
-
-\begin{flushright}
-  \emph{\guillemotleft Cita o lo que quieras\guillemotright}\\ \textbf{Author}
-\end{flushright}
-\hyphenation{}
-\grayMinitoc
-
-\parindent=16mm
+\vspace{-30pt}
 
 \CAPstart{E}{n}~ el siguiente capítulo se detallarán los desarrollos y se presentarán los resultados. Para una mejor comprensión, se dividirá en diversas secciones, una por cada una de las iteraciones realizadas en este trabajo.
 
-\input{chapter4/sectionTemplate}
+\section{Iteración 1 - Modelo del sistema}
+\label{res:iteracion1}
+Esta iteración se centra en la descripción del problema planteado y en la elección de las herramientas a utilizar para el desarrollo de un diseño \textit{hardware} capaz de cumplir con los objetivos expuestos en \ref{sec:objetivos}. En este punto, se ha analizado en detalle el conjunto de dichos objetivos, además de realizar diversas preguntas, para entender mejor la problemática.
+
+Con el objetivo de cumplir dichos objetivos, se pretende desarrollar un diseño \textit{hardware} capaz de realizar una operación concreta, siendo, en el contexto de este trabajo, el reverso de bits de un número entero de 32 bits. Para ello, se ha optado por un esquema basado en colas \ac{FIFO}, de las cuales ya se detalló tanto su concepto como sus ventajas en \ref{st:colasFifo}. La idea es, por tanto, hacer sencillo el paso de datos al acelerador, así como la recepción de los resultados. Las colas FIFO, al tener memoria interna, proporcionan un mecanismo sencillo y relativamente seguro de transmisión.
+
+Para realizar este diseño, es necesario realizarlo en base a una metodología. En el contexto de este trabajo, se ha optado por alinear el esfuerzo a las metodologías basadas en herramientas EDA, ello implicando el uso de programas software que estén adecuados al flujo de este tipo de metodologías. Por ello, se ha optado por seleccionar Vitis HLS y Vivado como programas para el diseño de este hardware. Ambas son herramientas de la misma compañía, Xilinx, lo que repercute en, teóricamente, una mejor integración entre ellas, lo que agiliza el desarrollo. Además, han sido presentadas en el máster, lo que las hace más fáciles de utilizar que herramientas de la competencia, como las de la empresa Cadence. Para pruebas, ya con un SoC simulado, se ha optado por el uso de X-HEEP, que permite la creación de núcleos RISC-V de múltiples tipos, así como simulaciones a nivel \textit{hardware} gracias a Verilator, y con soporte para FreeRTOS, lo que proporciona flexibilidad a la hora de realizar cualquier tipo de despliegue.
+
+Por tanto, a modo de resumen, el resultado de esta iteración ha sido:
+
+\begin{enumerate}
+    \item Se han analizado los objetivos
+    \item Se ha proporcionado un marco de trabajo para el desarrollo técnico del proyecto
+    \item Se ha dado respuesta a cómo comunicarse a la entrada y a la salida del módulo acelerador
+    \item Se han seleccionado e instalado las herramientas a utilizar tras valorar diversas opciones
+\end{enumerate}
+
+\section{Iteración 2 - Desarrollo del diseño hardware}
+
+En esta fase se ha realizado el esquema correspondiente al un diseño hardware que sea capaz de satisfacer los objetivos y cumplir con el problema planteado. Si bien se estudiaron varios mecanismos, tal y como se expone en \ref{res:iteracion1}, se ha optado finalmente por un esquema basado en colas FIFO. 
+
+\subsection{Diseño inicial}
+
+Para lograr el diseño final, han sido necesario un refinamiento del planteamiento inicial. Originalmente, se ideó un esquema de 4 módulos más el acelerador por separado. El código de éstos se presenta en \ref{sct:rtlPrimeraVersion}, a excepción del acelerador, pues este no cambió. Los módulos desarrollados en esta primera versión fueron los siguientes:
+
+\begin{enumerate}
+    \item \textbf{Cola FIFO de entrada}: cuyo objetivo es guardar datos para, llegados a un \textit{threshold}, comenzar a mandarlos al siguiente. Mediante una señal de escritura, se escriben los datos. A partir de entonces, es posible leerlos por la salida.
+    \item \textbf{Cola FIFO de conversión a AXI-Stream}: este módulo se comunica con el acelerador con señales AXI-Stream de entrada. Recibe los datos guardados por el módulo anterior, y, recibidos todos (ese \textit{threshold}) el módulo activa las señales AXI-Stream para mandar los datos al módulo acelerador
+    \item \textbf{Acelerador generado con Vitis HLS}: este módulo se basa en el protocolo AXI-Stream, de forma que, al activarse las señales de su entrada, comienza a recibir los datos y a procesarlos uno a uno hacia el siguiente módulo y activa señales de salida.
+    \item \textbf{Cola FIFO de conversión AXI al formato de origen}: este módulo se comunica con el acelerador con señales AXI-Stream de salida. Recibe los resultados y, al activarse sus entradas AXI-Stream, comienza a mandarlos al siguiente.
+    \item \textbf{Cola FIFO de salida}: este módulo obtiene los datos resultado del módulo conversos de AXI-Stream a datos puros. Una vez recibidos todos, los devuelve por su salida de datos.
+\end{enumerate}
+
+Este esquema no ha sido el definitivo, entre otras, por las siguientes razones:
+
+\begin{itemize}
+    \item \textbf{Demasiados componentes para la tarea a realizar}: se puede agruparlos sin aumentar en exceso la lógica de control del diseño global.
+    \item \textbf{Inicialización del acelerador inconsistente}: no se tiene lógica alguna para activar el módulo HLS, activándose ésta al inicio, siendo necesario un tiempo extra para un correcto funcionamiento.
+    \item \textbf{Falta de señales de control}: solo se devuelven los datos del acelerador, sin tener señales de control ni de estado que indiquen información acerca de la ejecución, lo que hace difícil la depuración en caso de fallo.
+    \item \textbf{Presencia de código no sintetizable}: en el primer diseño se enfocó a pruebas de comportamiento en Vivado, no se realizó fase de síntesis, y en el código hay presente partes no sintetizables, algo problemático para las siguientes fases de desarrollo.
+\end{itemize}
+
+\subsection{Diseño final}
+\subsubsection{Descripción funcional}
+Finalmente se ha optimizado el diseño original, añadiendo señalizaciones de control y estado, y reduciendo a tres el número de módulos, que son:
+
+\begin{enumerate}
+    \item \textbf{Cola FIFO de conversión de datos a AXI-Stream}: este módulo se comunica con el acelerador con señales AXI-Stream de entrada. Una vez que la señal de \emph{reset} deja de estar activa, se activa la señal de control \emph{start\_accel}, que activa el módulo acelerador. Los datos fluyen de la siguiente forma: 
+    
+    \begin{itemize}
+        \item Con la activación de la señal de control \emph{write}, el módulo controla el guardado de datos, que están recibiéndose desde su señal de entrada \emph{din, }en una variable interna llamada \textit{buffer}, que contiene los datos a enviar al acelerador. Con todos los datos recibidos, llegados al \textit{threshold}, en este contexto, puesto para 4 valores, el módulo espera a que el acelerador esté dispuesto a recibir datos, algo que sucederá cuando la entrada de esta cola, llamada \emph{s\_axis\_tready} se active. 
+        
+        \item Ante este hecho, el módulo mete datos en la salida, llamada \emph{s\_axis\_tdata}, y activa la salida \emph{s\_axis\_tvalid}, señal que, una vez detectada por el acelerador, hace que éste mire su entrada de datos, y los procese. 
+        
+        \item Cuando todos los datos han sido enviados (se alcanzó el \textit{threshold}) el módulo se espera a que se active su entrada \emph{s\_axis\_tready}, marcando que el acelerador mandó todos los resultados. En este punto, se borra el contenido de salida de datos \emph{s\_axis\_tdata} y el módulo se queda en estado de espera.
+    \end{itemize}
+
+    \item \textbf{Acelerador generado con Vitis HLS}: este módulo emplea en el protocolo AXI-Stream para comunicarse; ya inicializado gracias a la señal \emph{start\_accel} del módulo anterior, que pone a su señal \emph{ap\_rst\_n} a 1 para comenzar. Una vez se comienza a los datos por su entrada \emph{s\_axis\_TDATA} son validados con la señal \emph{s\_axis\_TVALID}, comienza a procesarlos y los manda hacia el siguiente módulo metiendo los datos por su salida \emph{m\_axis\_TDATA} y validando el resultado con \emph{s\_axis\_TVALID}. Cuando se alcance el último elemento, se activa la señal \emph{s\_axis\_TLAST}, para que los módulos de entrada y de salida de datos sepan que han llegado al final de la transmisión de datos. 
+    
+    \item \textbf{Cola FIFO de conversión AXI-Stream al formato de origen}: este módulo se comunica con el acelerador con señales AXI-Stream de salida. Los datos fluyen de la siguiente forma:
+    
+    \begin{itemize}
+        \item Con la activación de su señal de control \emph{valid\_result}, el módulo controla el guardado de los datos recibidos por su otra señal \emph{result\_data} en una variable interna llamada \textit{buffer}. Para recibir el dato, se activa la señal de salida \emph{ready\_for\_results}, que indica al acelerador que puede enviar como tal los datos resultado en cuestión.
+        
+        \item Cuando se activa la señal de entrada \emph{last\_result}, significa que se va a procesar el último resultado. En cuanto ésto sucede, se guarda como siempre en \emph{buffer}, se vuelve a poner \emph{ready\_for\_results} a 0, y se activa la señal de control \emph{done}, que indica que los resultados ya están disponibles para leer.
+        
+        \item Llegados a este punto, el módulo se mantiene a la espera de recibir una petición de lectura a través de su señal de entrada \emph{read}. De esta forma, al activarse dicha señal, se mete el valor leído de \emph{buffer} por la señal de salida \emph{dout}.
+
+    \end{itemize}
+\end{enumerate}
+
+\subsubsection{Señales principales}
+Se presentan en \ref{tbl:senalesDiseno} las señales más importantes del diseño hardware realizado en este trabajo. 
+
+\begin{table}[H]
+    \centering
+    \resizebox{10cm}{!} {
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Señal} & \textbf{Descripción} \\
+            \hline
+            clk & Señal de reloj principal del sistema. \\
+            \hline
+            reset / rst & Señal de reset (activa en alto), reinicia el diseño. \\
+            \hline
+            din\_i[31:0] & Entrada de datos de 32 bits hacia el sistema. \\
+            \hline
+            write\_i & Permite escritura de un dato de 32 bits en la cola de entrada. \\
+            \hline
+            start\_flag\_i & Señal de inicio para habilitar el envío de datos. \\
+            \hline
+            fifo\_data[31:0] & Datos provenientes del FIFO hacia el bus AXI-Stream. \\
+            \hline
+            s\_axis\_tdata[31:0] & Bus de datos de entrada (AXI-Stream). \\
+            \hline
+            s\_axis\_tvalid & Indica que los datos en \emph{s\_axis\_tdata} son válidos. \\
+            \hline
+            s\_axis\_tready & Señal de "ready" del esclavo, indica que puede aceptar datos. \\
+            \hline
+            s\_axis\_tlast & Indica la última transferencia de un paquete AXI-Stream. \\
+            \hline
+            m\_axis\_tdata[31:0] & Bus de datos de salida (AXI-Stream). \\
+            \hline
+            m\_axis\_tlast & Señal de fin de paquete de datos en la salida. \\
+            \hline
+            done\_flag\_o & Señal que indica finalización del procesamiento. \\
+            \hline
+            dout\_o[31:0] & Datos de salida del sistema (32 bits). \\
+            \hline
+            read\_i & Permite la lectura de un resultado de 32 bits en la cola de salida. \\
+            \hline
+            ap\_clk & Reloj para el acelerador HLS. \\
+            \hline
+            ap\_rst\_n & Reset del acelerador HLS (activo en bajo). \\
+            \hline
+        \end{tabular}
+    }
+    \caption{Principales señales del diseño}
+    \label{tbl:senalesDiseno}
+\end{table}
+
+\subsubsection{Módulo Top}
+Los módulos presentados son instanciados a través de un módulo adicional, que será el \emph{módulo Top}, concepto explicado en \ref{st:topModule}. A partir de aquí, se puede agregar lógica adicional que no proceda integrar en otro lado. En este contexto, se ha insertado en el módulo Top la lógica destinada al correcto guardado y correcta lectura de los datos: esto es así porque, si bien en las simulaciones no se valora esta problemática, pues los cambios de las señales se realizan a nivel de ciclo. Sin embargo, en posteriores fases el diseño estará integrado en una plataforma como es GR-HEEP (X-HEEP), y las señales de control del diseño no se manejarán a nivel de ciclo, sino que habrá retardos, los cuales habrá que gestionar  para asegurar el correcto funcionamiento del mismo. 
+
+Gracias al concepto de Block Design, generar un módulo Top es sencillo al menos, en la herramienta Vivado, con el IP Integrator. El código relativo al módulo Top se presenta en \ref{lst:topModule}.
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente del módulo Top},showstringspaces=false,label=lst:topModule]
+module bitreversal (
+    input [31:0] din_i,
+    output logic done_flag_o,
+    output logic [31:0] dout_o,
+    input logic start_flag_i,
+    input logic clk,
+    input logic read_i,
+    input logic write_i,
+    input logic rst_ni
+);
+
+  reg internal_rst    = 1;    // reset signal for design_1
+  reg [1:0] rst_cnt   = 0;    // counter for reset delay
+
+  reg internal_read   = 0;    // read signal for design_1
+  reg already_read    = 0;	  // check if reading has ocurred
+  reg [1:0] read_cnt  = 0;    // counter for readings
+  
+  reg internal_write  = 0;    // write signal for design_1
+  reg already_written = 0;	  // check if writing has ocurred
+  reg [1:0] write_cnt = 0;    // counter for writings
+  
+  
+  design_1 design_1_i
+    (.clk(clk),
+    .din_i(din_i),
+    .done_flag_o(done_flag_o),
+    .dout_o(dout_o),
+    .read_i(internal_read),
+    .reset(internal_rst),
+    .start_flag_i(start_flag_i),
+    .write_i(internal_write)
+    );
+
+  always_ff @(posedge clk) begin
+    
+    if (internal_rst) begin
+      if (rst_cnt < 3) begin  //3 cycles
+      	rst_cnt = rst_cnt + 1;
+      end else begin
+      	read_cnt = 0;
+    	rst_cnt = 0;
+        internal_rst = 0;
+      end
+    end else if (done_flag_o) begin
+      
+      if(!internal_read && read_i && !already_read) begin
+        internal_read = 1;
+
+      end else if (internal_read && read_i && !already_read) begin
+        internal_read = 0;
+        already_read = 1;
+
+        if (read_cnt < 3) begin
+          read_cnt = read_cnt + 1;
+        end else begin
+          read_cnt = 0;
+          internal_rst = 1;
+        end
+      end else if (!internal_read && !read_i && already_read) begin
+        already_read = 0;
+      end
+      
+    end else if (write_i) begin
+      if(!internal_write && !already_written) begin
+        internal_write = 1;
+      
+      end else if (internal_write && !already_written) begin
+      	internal_write = 0;
+        already_written = 1;
+
+        if (write_cnt < 3) begin
+          write_cnt = write_cnt + 1;
+        end else begin
+          write_cnt = 0;
+        end
+      end
+      
+    end else if (!write_i) begin
+      already_written = 0;
+    end
+
+  end
+endmodule
+\end{lstlisting}
+
+El módulo Top posee una serie de entradas: \emph{din\_i} (32 bits), que es el puerto de entrada de datos; \emph{start\_flag\_i}, la señal que inicia dicho procesamiento; \emph{clk}, la señal de reloj del sistema; \emph{read\_i} y \emph{write\_i}, que son señales externas para controlar la lectura y la escritura de datos, respectivamente; y \emph{rst\_ni}, una señal de reset activa en bajo que no se utiliza directamente, y que se mantiene para facilitar la integración con GR-HEEP. Por otro lado, las salidas del módulo incluyen: \emph{done\_flag\_o}, que indica cuando el procesamiento ha finalizado, y \emph{dout\_o} (32 bits), puerto de salida de los datos procesados.
+
+Se instancia \emph{design\_1}, que corresponde al RTL generado por Vivado tras realizar el Block Design, con todas las señales mencionadas. Como puede verse, en los campos de \emph{read}, \emph{write}, y \emph{reset}, no se utilizan directamente \emph{read\_i}, \emph{write\_i}, \emph{rst\_ni}. Esto es, porque se ha desarrollado la lógica de control de estas señales para dentro del diseño como tal, de forma que se puedan gestionar correctamente lecturas y escrituras, así como no permitir que la señal de reset se pueda activar o desactivar desde fuera, sino que sea un proceso interno. La lógica de control del sistema se ejecuta en cada flanco positivo del reloj, siguiendo una secuencia precisa para cada operación. Inicialmente, al activarse el \emph{reset} interno, se mantiene la señal \emph{internal\_rst} en alto durante tres ciclos de reloj, utilizando el contador \emph{rst\_cnt}; transcurrido este tiempo,  se desactiva y se inicia el diseño. 
+
+Por otro lado, la lógica de procesamiento completado gestiona las operaciones de lectura cuando la señal \emph{done\_flag\_o} está activa. En este estado, si la señal de lectura externa \emph{read\_i} se activa y los datos no han sido leídos previamente (\emph{already\_read} a 0), se habilita la señal de lectura interna \emph{internal\_read}. En el siguiente ciclo de reloj, esta señal interna se desactiva y se marca la operación como completada. Después de que se han realizado todas las lecturas (en este contexto, 4), se resetea. Las operaciones de escritura se gestionan de manera similar: cuando la señal \emph{write\_i} está activa, se habilita una escritura interna (\emph{internal\_write}) por un solo ciclo, así hasta que sucedan todas las escrituras posibles (en este contexto, 4). Finalmente, la lógica también se encarga de resetear los flags de estado (\emph{already\_read} y \emph{already\_written}) tan pronto como las señales externas correspondientes \emph{read\_i} y \emph{write\_i} se desactivan.
+
+Finalmente, el Block Design en la herramienta Vivado, con cada módulo integrado se presenta en \ref{fig:disenoFinal}. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width=12cm]{figures/disenoFinal.png}
+    \caption{Digrama de bloques en Vivado}
+    \label{fig:disenoFinal}
+\end{figure}
+
+\subsubsection{Código C/C++ del acelerador}
+El código relativo al acelerador del reverso de bits en C/C++ empleado para HLS se presenta en esta sección.
+
+\begin{lstlisting}[language=c,frame=single,caption={Código fuente en C/C++ del acelerador reverso de bits},showstringspaces=false,label=lst:codigoHLS]
+#ifndef BIT_REVERSAL_ACCEL_H
+#define BIT_REVERSAL_ACCEL_H
+
+#include <hls_stream.h>
+#include <ap_int.h>
+#include <ap_axi_sdata.h>
+
+// AXI Stream width: 32 bits of data, no side channels
+typedef ap_axiu<32, 0, 0, 0> axis_t;
+
+void bit_reverse_accel(hls::stream<axis_t>& s_axis,
+                       hls::stream<axis_t>& m_axis);
+
+#endif
+// Top function
+void bit_reverse_accel(hls::stream<axis_t>& s_axis,
+						hls::stream<axis_t>& m_axis) {
+
+#pragma HLS INTERFACE axis port=s_axis
+#pragma HLS INTERFACE axis port=m_axis
+#pragma HLS INTERFACE ap_ctrl_none port=return
+#pragma HLS PIPELINE II=3
+
+    axis_t input_word, output_word;
+    ap_uint<32> reversed;
+    int i,j = 0;
+
+    // Read 4 words
+    for (i = 0; i < 4; i++) {
+        input_word = s_axis.read();
+
+        for (j = 0; j < 32; j++) {
+#pragma HLS UNROLL
+			reversed[31 - j] = input_word.data[j];
+		}
+
+        output_word.data = reversed;
+        output_word.last = (i == 3);         // signal last word in the stream
+        m_axis.write(output_word);
+    }
+}
+\end{lstlisting}
+
+En \ref{lst:codigoHLS} se presenta el \texttt{bit\_reverse\_accel}, que implementa un acelerador de hardware para realizar una inversión de bits (\emph{bit-reversal}) sobre palabras de 32 bits, utilizando la interfaz AXI Stream. La función toma como entrada un flujo (\emph{stream}) de datos de tipo \texttt{axis\_t}, y produce un flujo de salida del mismo tipo. El tipo \texttt{axis\_t} se define como una estructura AXI Stream de 32 bits (\texttt{ap\_axiu<32,0,0,0>}), sin canales adicionales (como \texttt{keep}, \texttt{id}, \texttt{dest}, etc.).
+
+La función es decorada con directivas específicas para Vitis HLS. En particular, las interfaces \texttt{s\_axis} y \texttt{m\_axis} se definen como puertos AXI4-Stream mediante la directiva \texttt{\#pragma HLS INTERFACE axis}, lo que permite que el acelerador se comunique directamente con otros módulos de hardware o con un procesador. También se usa \texttt{\#pragma HLS INTERFACE ap\_ctrl\_none port=return}, lo cual indica que no hay control explícito de inicio o fin (es decir, no se utilizan señales como \texttt{ap\_start} ni \texttt{ap\_done}), y la función opera de forma continua. Además, se emplea la directiva \texttt{\#pragma HLS PIPELINE II=3}, solicitando un \emph{Initiation Interval (II)} de 3 ciclos de reloj, permitiendo así procesar un nuevo dato cada 3 ciclos. Si bien, podría hacerse en uno solo, a modo de prueba, se ha decidido dejarlo así.
+
+Dentro del cuerpo de la función, se procesan 4 palabras de 32 bits. En cada iteración del bucle principal (\texttt{for (i = 0; i < 4; i++)}), se lee una palabra del stream de entrada, y se aplica un bucle anidado que recorre los 32 bits de la palabra, invirtiendo su orden. Esta operación se realiza bit a bit: el bit en la posición \texttt{j} del dato de entrada se coloca en la posición \texttt{31 - j} de la variable \texttt{reversed}, logrando así la inversión. Este bucle está completamente desenrollado con la directiva \texttt{\#pragma HLS UNROLL}, permitiendo que todos los bits se procesen en paralelo, en un solo ciclo.
+
+Una vez calculada la palabra invertida, se empaqueta en una nueva estructura \texttt{output\_word}, incluyendo el campo \texttt{last}. Este campo indica si la palabra es la última del flujo, lo cual ocurre cuando \texttt{i == 3}. Finalmente, el dato transformado se escribe en el flujo de salida \texttt{m\_axis}.
+
+\subsubsection{Código RTL desarrollado}
+El código relativo a cada uno de los módulos RTL se presenta en esta sección.
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente de la cola FIFO conversora a AXI-Stream},showstringspaces=false,label=lst:verilogFifo2axis]
+module fifo2axis #(
+  parameter DATA_WIDTH = 32,
+  parameter THRESHOLD = 4,
+  parameter DEPTH = 4
+) (
+  input wire clk,
+  input wire rst,
+
+  // FIFO interface
+  input wire [31:0] din,
+  input wire        start,
+  input wire        write,
+
+  // AXI Stream master
+  output reg  [31:0] s_axis_tdata,
+  output reg         s_axis_tvalid,
+  input  wire        s_axis_tready,
+  output wire        start_accel,
+  input  wire        s_axis_tlast
+);
+
+  // States
+  localparam IDLE = 3'd0, WRITE_FIFO = 3'd1, WAIT_START = 3'd2, SEND = 3'd3, DONE = 3'd4;
+  reg [2:0] state, next_state;
+
+  // Internal buffer
+  reg [31:0] buffer           [0:3];
+  reg [ 1:0] buffer_index;
+  reg [ 1:0] send_index;
+  
+  // When RESET signal is 0 and module starts, also start the HLS module
+  assign start_accel = ~rst;
+  
+  // FSM Sequential
+  always @(posedge clk or posedge rst) begin
+    if (rst) begin
+      state         = IDLE;
+      buffer_index  <= 2'd0;
+      send_index    <= 2'd0;
+      s_axis_tvalid <= 0;
+      s_axis_tdata  <= {32{1'bx}};
+    end else begin
+      state = next_state;
+
+      case (state)
+        IDLE: begin
+          s_axis_tvalid <= 0;
+          if (start) begin
+            next_state = WRITE_FIFO;
+          end else begin
+            buffer_index <= 0;
+            next_state   = IDLE;
+          end
+        end
+
+        WRITE_FIFO: begin
+          s_axis_tvalid <= 0;
+          if (write) begin
+            buffer[buffer_index] <= din;
+            
+            if (buffer_index == (THRESHOLD-1)) begin
+                next_state = WAIT_START;
+            end else begin
+                buffer_index <= buffer_index + 1;
+                next_state   = WRITE_FIFO;
+            end
+            
+          end else begin
+             next_state   = WRITE_FIFO;
+          end
+        end
+
+        WAIT_START: begin
+          s_axis_tvalid <= 0;
+          if (s_axis_tready) begin
+            send_index <= 0;
+            next_state = SEND;
+          end else begin
+            next_state = WAIT_START;
+          end
+        end
+
+        SEND: begin
+          if (s_axis_tready) begin
+            s_axis_tdata  <= buffer[send_index];
+            s_axis_tvalid <= 1;
+
+            if (send_index == 2'd3) begin
+              next_state = DONE;
+            end else begin
+              send_index <= send_index + 1;
+              next_state = SEND;
+            end
+
+          end else begin
+            s_axis_tvalid <= 1; // Keep valid high while waiting for ready
+            next_state = SEND;
+          end
+        end
+
+        DONE: begin
+          s_axis_tvalid <= 0;
+          if (s_axis_tlast) begin
+            s_axis_tdata <= {32{1'bx}};
+            next_state = IDLE;
+          end else begin
+            next_state = DONE;
+          end
+        end
+
+        default: begin
+          s_axis_tvalid <= 0;
+          next_state = IDLE;
+        end
+      endcase
+    end
+  end
+
+endmodule
+\end{lstlisting}
+
+En \ref{lst:verilogFifo2axis} se presenta un módulo en Verilog llamado fifo2axis, correspondiente a la cola FIFO de conversión a AXI-Stream. Está parametrizado por el ancho de datos DATA\_WIDTH a 32 bits, además de un umbral y la profundidad del buffer interno DEPTH, fijos a 4. El módulo se sincroniza con una señal de reloj clk y un reinicio asincrónico activo alto rst, el cual pasado un mínimo de tiempo, se pone a 0. Internamente, el módulo utiliza una \ac{FSM} que gestiona cinco estados: IDLE, WRITE\_FIFO, WAIT\_START, SEND y DONE. 
+
+\begin{itemize}
+    \item Estado \emph{IDLE}: En este estado, la señal \texttt{s\_axis\_tvalid} se mantiene inactiva (\emph{0}). Si la señal de \emph{start} se activa, la máquina transiciona al estado \emph{WRITE\_FIFO}. De lo contrario, el índice del buffer (\emph{buffer\_index}) se reinicia y permanece en \emph{IDLE}, actuando como un estado de espera inicial.
+    \item Estado \emph{WRITE\_FIFO}: La máquina espera a que la señal \emph{write} se active para escribir el dato de entrada (\emph{din}) en el buffer. Cuando se escribe, si el buffer alcanza su capacidad máxima (\emph{THRESHOLD-1}), avanza al estado \emph{WAIT\_START}; de lo contrario, incrementa el índice y permanece aquí. La señal \texttt{s\_axis\_tvalid} sigue inactiva.
+    \item Estado \emph{WAIT\_START}: Se desactiva \texttt{s\_axis\_tvalid} y se espera a que la señal \texttt{s\_axis\_tready} (receptor listo) se active. Cuando esto ocurre, se reinicia el índice de envío (\emph{send\_index}) y se pasa al estado \emph{SEND}. Este estado sincroniza el inicio de la transmisión.
+    \item Estado \emph{SEND}: Se envían los datos del buffer. Cuando el receptor está listo (\texttt{s\_axis\_tready} en 1), se coloca el dato en \texttt{s\_axis\_tdata}, se activa \texttt{s\_axis\_tvalid} y se incrementa el índice. Si se envían todos los datos, se pasa a \emph{DONE}; si el receptor no está listo, se mantiene \texttt{s\_axis\_tvalid} activo y se espera en este estado.
+    \item Estado \emph{DONE}: Se desactiva \texttt{s\_axis\_tvalid} y se espera la señal de fin de transmisión (\texttt{s\_axis\_tlast}). Cuando esta llega, se borran los datos (\texttt{s\_axis\_tdata}) y se retorna al estado \emph{IDLE} para una finalización limpia.
+    \item Estado \emph{default}: Cubre cualquier estado no definido, reiniciando la máquina a \emph{IDLE} y desactivando \texttt{s\_axis\_tvalid}, garantizando un comportamiento seguro y predecible.
+\end{itemize}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente en Verilog del módulo conversor de AXI al formato de datos origen},showstringspaces=false,label=lst:verilogAxis2fifo]
+module axis2fifo #(
+  parameter DATA_WIDTH = 32,
+  parameter THRESHOLD  = 4,
+  parameter DEPTH      = 10
+) (
+  input  wire clk,
+  input  wire rst,
+
+  // AXI Stream master
+  input  wire [31:0] result_data,
+  input  wire        last,
+  input  wire	     valid_result,
+  output  reg	     ready_for_results,
+
+  // To FIFO
+  output reg  [31:0] dout,
+  output reg         done,
+  
+  input wire 		 read
+);
+
+  // States
+  localparam IDLE        = 3'd0,
+             READ_STREAM = 3'd1,
+             SEND_OUTSIDE= 3'd2,
+             DONE        = 3'd4;
+
+  reg [2:0] state, next_state;
+  integer   i;
+
+  // Internal buffer
+  reg [31:0] buffer [0:3];
+  reg [1:0]  buffer_index;
+
+  always @(posedge clk or posedge rst) begin
+    if (rst) begin
+      state              = IDLE;
+      buffer_index      <= 2'd0;
+      done              <= 0;
+      ready_for_results <= 0;
+
+    end else begin
+      state = next_state;
+
+      case (state)
+        IDLE: begin
+          ready_for_results <= 1;
+          
+          if (valid_result) begin
+            
+            //First value entered! We have to read it!
+            buffer[buffer_index] <= result_data;
+            buffer_index         <= buffer_index + 1;
+            next_state           = READ_STREAM;
+            
+          end else begin
+            next_state = IDLE;
+          end
+        end
+
+        READ_STREAM: begin
+          
+          if (last == 1'b0) begin
+            buffer[buffer_index] <= result_data;
+            buffer_index         <= buffer_index + 1;
+            next_state            = READ_STREAM;
+
+          end else if (last == 1'b1) begin
+            buffer[buffer_index] <= result_data;
+            buffer_index         <= 0;
+            next_state            = SEND_OUTSIDE;
+
+          end else begin
+            next_state = READ_STREAM;
+          end
+          
+        end
+
+        SEND_OUTSIDE: begin
+          done <= 1;
+          
+          if (read) begin
+            dout <= buffer[buffer_index];
+
+            if (buffer_index == (THRESHOLD-1)) begin 
+              next_state = DONE;
+            end else begin
+              buffer_index <= buffer_index + 1;
+            end
+            
+          end else begin
+          	next_state = SEND_OUTSIDE;
+          end
+        end
+
+        DONE: begin
+          dout              <= {32{1'bX}};
+          done              <= 0;
+	      ready_for_results <= 0;
+          next_state         = IDLE;
+        end
+
+        default: next_state = IDLE;
+        
+      endcase
+    end
+  end
+
+endmodule
+\end{lstlisting}
+
+En \ref{lst:verilogAxis2fifo} se presenta el código fuente del módulo \texttt{axis2fifo}, que hace la función de conversor del protocolo AXI al formato original de envío de los datos. Este módulo es complementario al módulo \texttt{fifo2axis}, ya que permite recibir datos serializados de un acelerador o componente AXI y almacenarlos temporalmente en un buffer interno antes de enviarlos como los datos originales, pero con el resultado de revertir bits. El diseño está parametrizado mediante DATA\_WIDTH a 32 bits, THRESHOLD (cantidad de palabras a procesar, 4) y DEPTH, definido a  10, aunque este último no se usa explícitamente, es únicamente el límite del buffer implementado. La lógica del módulo está controlada por una FSM con cuatro estados: IDLE, READ\_STREAM, SEND\_OUTSIDE y DONE.
+
+\begin{itemize}
+    \item Estado \emph{IDLE}: En este estado, la señal \texttt{ready\_for\_results} se mantiene activa (\emph{1}). Si la señal \emph{valid\_result} está activa, se almacena el primer valor de \emph{result\_data} en el buffer, se incrementa el índice \emph{buffer\_index} y se transiciona al estado \emph{READ\_STREAM}. De lo contrario, la máquina permanece en \emph{IDLE}, esperando por datos válidos.
+    \item Estado \emph{READ\_STREAM}: Se continúa leyendo el flujo de datos. Si la señal \emph{last} es \emph{0} (no es el último dato), se almacena \emph{result\_data} en el buffer y se incrementa \emph{buffer\_index}, permaneciendo en este estado. Si \emph{last} es \emph{1} (último dato), se almacena el dato, se reinicia \emph{buffer\_index} a \emph{0} y se transiciona al estado \emph{SEND\_OUTSIDE}. Este estado garantiza la lectura completa del flujo de entrada.
+    \item Estado \emph{SEND\_OUTSIDE}: Se activa la señal \emph{done} (\emph{1}) para indicar que los datos están listos para ser leídos externamente. Cuando la señal \emph{read} está activa, se envía el dato actual del buffer a la salida \emph{dout}. Si se alcanza el final del buffer (\emph{THRESHOLD-1}), se transiciona al estado \emph{DONE}; de lo contrario, se incrementa \emph{buffer\_index} para continuar enviando datos. Si \emph{read} no está activo, se permanece en este estado.
+    \item Estado \emph{DONE}: Se realiza la limpieza final: la salida \emph{dout} se establece a valores indefinidos (\texttt{\{32\{1'bX\}\}}), se desactivan las señales \emph{done} y \texttt{ready\_for\_results} (\emph{0}), y se transiciona al estado \emph{IDLE}. Este estado asegura una finalización ordenada del proceso.
+    \item Estado \emph{default}: Cubre cualquier estado no definido, forzando una transición al estado \emph{IDLE} para mantener un comportamiento robusto y predecible.
+\end{itemize}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Fragmentos relevantes del acelerador}, showstringspaces=false,label=lst:verilogAccel]
+module bit_reverse_accel (
+    ap_clk,
+    ap_rst_n,
+    s_axis_TDATA,
+    s_axis_TVALID,
+    s_axis_TREADY,
+    s_axis_TKEEP,
+    s_axis_TSTRB,
+    s_axis_TLAST,
+    m_axis_TDATA,
+    m_axis_TVALID,
+    m_axis_TREADY,
+    m_axis_TKEEP,
+    m_axis_TSTRB,
+    m_axis_TLAST
+);
+
+//...
+
+parameter ap_ST_fsm_pp0_stage0 = 4'd1;
+parameter ap_ST_fsm_pp0_stage1 = 4'd2;
+parameter ap_ST_fsm_pp0_stage2 = 4'd4;
+parameter ap_ST_fsm_pp0_stage3 = 4'd8;
+
+(* fsm_encoding = "none" *) reg [3:0] ap_CS_fsm;
+
+//...
+
+reg ap_rst_n_inv;
+reg s_axis_TDATA_blk_n;
+reg m_axis_TDATA_blk_n;
+reg ap_enable_reg_pp0_iter1;
+
+//...
+
+assign m_axis_TDATA = { 
+    s_axis_TDATA[0],  s_axis_TDATA[1],  s_axis_TDATA[2],  s_axis_TDATA[3],
+    s_axis_TDATA[4],  s_axis_TDATA[5],  s_axis_TDATA[6],  s_axis_TDATA[7],
+    ...
+    s_axis_TDATA[31]
+};
+
+//...
+
+\end{lstlisting}
+
+En \ref{lst:verilogAccel} se presenta de forma resumida el código fuente generado por Vitis HLS de la función top del acelerador reverso de bits. Este módulo organiza la inversión de bits como un bloque \textit{pipeline} con interfaz AXI-Stream, listo para integrarse en un sistema mayor. La estructura del código refleja las fases típicas de un diseño de hardware acelerado: interfaz, FSM, control de flujo y operación principal.
+Se ha dividido en diversas partes separadas por puntos cada uno de los apartados más importantes.
+
+En la primera parte se definen los puertos del módulo:
+
+\begin{itemize}
+  \item \texttt{ap\_clk} y \texttt{ap\_rst\_n} son reloj y reset.
+  \item Las señales \texttt{s\_axis\_*} representan la entrada AXI-Stream.
+  \item Las señales \texttt{m\_axis\_*} representan la salida AXI-Stream.
+\end{itemize}
+
+En la segunda parte, se define la máquina de estados presente en el módulo, a juicio de la herramienta Vitis HLS; El diseño está dividido en cuatro etapas de \textit{pipeline}, representadas como estados de la FSM. Esto permite procesar varios datos en paralelo, aprovechando el flujo continuo que ofrece AXI-Stream.
+
+En la tercera parte, se definen las señales de control internas al módulo; estas señales sirven para manejar el control del flujo de datos:
+\begin{itemize}
+  \item \texttt{ap\_rst\_n\_inv} es el reset invertido.
+  \item \texttt{s\_axis\_TDATA\_blk\_n} y \texttt{m\_axis\_TDATA\_blk\_n} indican bloqueo de entrada y salida.
+  \item \texttt{ap\_enable\_reg\_pp0\_iter1} habilita la siguiente iteración en el pipeline.
+\end{itemize}
+
+En la úiltima parte, se implementa la inversión de bits: el valor de entrada de 32 bits (\texttt{s\_axis\_TDATA}) se reordena de manera que el bit menos significativo pase a ser el más significativo, y viceversa. Este patrón es muy usado en algoritmos como la \ac{FFT}, por ejemplo.
+
+
+\section{Iteración 3 - Ejecución de simulaciones funcionales}
+En esta sección se detallarán las simulaciones realizadas sobre el diseño. Para realizar estas pruebas, ha sido necesario el desarrollo de un archivo de \emph{testbench}, concepto explicado en \ref{st:testbench}. La ejecución de las simulaciones puede dividirse en dos apartados, las realizadas con Vivado y las realizadas con EdaPlayground, una aplicación web, del cual se habló en \ref{st:edaplayground}.
+
+\subsection{Testbench desarrollado}
+El banco de pruebas desarrollado para realizar las simulaciones, tanto en Vivado como en EdaPlayground, se presenta en \ref{lst:testbench}
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente del testbench},showstringspaces=false,label=lst:testbench]
+`timescale 1 ns / 1 ps
+
+module tb_bitreversal;
+
+    // Señales de testbench
+    reg  clk            = 1;
+    reg  reset          = 1;
+    reg  start_flag_i   = 0;
+    reg  [31:0] din_i   = {32{1'bX}};
+    reg  read_i         = 0;       // read result from fifo
+    reg  write_i        = 0;       // push data into fifo
+    wire [31:0] dout_o;            // output data
+    wire done_flag_o;              // checks results available
+    integer i;
+
+  // Instancia del diseño
+    bitreversal dut (
+        .clk(clk),
+        .din_i(din_i),
+        .done_flag_o(done_flag_o),
+        .dout_o(dout_o),
+        .read_i(read_i),
+        .reset(reset),
+        .start_flag_i(start_flag_i),
+        .write_i(write_i)
+    );
+
+    // Reloj
+    always #5 clk = ~clk;
+
+    initial begin
+      	$dumpvars(0, tb_bitreversal); //debug waves on edaplayground
+      	$monitor("t=%0t din=%h dout=%h done=%b", $time, din_i, dout_o, done_flag_o);
+        #10 //1 cycle
+        start_flag_i = 1;
+        reset = 0;
+        #10;
+
+        // WRITING PROCESS
+        for (i = 0; i < 4; i = i + 1) begin
+            @(posedge clk);
+            din_i = $random;
+            @(posedge clk);
+            write_i = 1;
+          	#50;
+            @(posedge clk);
+            write_i = 0;
+        end
+
+        // WAIT TO FINISH PROCESSING
+        wait(done_flag_o); 
+        
+        // WRITING PROCESS
+        for (i = 0; i < 4; i = i + 1) begin
+          	#10;
+            @(posedge clk);
+            read_i = 1;
+          	#300;
+            @(posedge clk);
+            read_i = 0;
+        end
+        
+        // WAIT TO FINISH RESULTS TRANSFER
+        wait(!done_flag_o); 
+        #100 $finish;
+     end
+    
+endmodule
+\end{lstlisting}
+
+Este testbench valida el funcionamiento del módulo Top del diseño, llamado bitreversal, mediante una secuencia de operaciones sencillas. Tras inicializar las señales y generar el reloj, comienza desactivando el reset y activando la señal de inicio \emph{start\_flag\_i}. A continuación, se escriben cuatro valores aleatorios en el módulo por la señal de entrada \emph{din}, controlando la escritura mediante pulsos de la señal \emph{write\_i}. Escritos todos los datos, se espera a que el módulo termine el procesamiento interno monitoreando la señal \emph{done\_flag\_o}. Cuando finalmente está a 1, los resultados están listos y procede a leerlos mediante cuatro operaciones de lectura controladas por pulsos de \emph{read\_i}, y leyendo los datos resultado a través de la señal de salida \emph{dout\_o}. Finalmente, espera a que la señal \emph{done\_flag\_o} se desactive, algo que sucede cuando todos los resultados han sido leídos, espera 10 ciclos, y termina la simulación. 
+
+\subsubsection{Simulaciones en Vivado}
+La herramienta Vivado, ya detallada previamente en \ref{st:vivado}, se ha empleado para realizar además simulaciones sobre el diseño, el cual fue creado dentro de esta herramienta. El diagrama de onda resultado se presenta en la figura \ref{fig:simVivado}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=15cm, height=2cm]{figures/simVivado.png}
+  \caption{Simulación de Vivado vista con su visor integrado}
+  \label{fig:simVivado}
+\end{figure}
+
+El comportamiento es acorde al esperado; La simulación comienza con la señal de reloj (\texttt{clk}) oscilando de manera regular. Después, el \texttt{reset} se desactiva, permitiendo que el módulo comience a operar. Simultáneamente, la señal \texttt{start\_flag\_i} se activa, indicando que el proceso debe iniciar.  se pulsa varias veces. Conforme avanza el tiempo, se introducen valores de datos aleatorios (por ejemplo, \texttt{12153524}) en la entrada \texttt{din\_i}, escribiéndose realmente estos valores en el búfer interno del módulo al subir \texttt{write\_i}. Después de completar la fase de escritura, el módulo procesa los datos, lo que lleva cierto tiempo en ciclos.
+
+Cuando La señal \texttt{done\_flag\_o} finalmente se activa, el procesamiento ha terminado y los resultados están listos. Una vez que \texttt{done\_flag\_o} está en alto,se leen datos, uno por cada pulso de la señal \texttt{read\_i}. Con cada operación, los datos procesados aparecen en la salida \texttt{dout\_o}, mostrando valores como \texttt{24aca848}, el resultado de aplicar la inversa de bits a la entrada \texttt{12153524}, concretamente. Cuando se han leído todos los datos, \texttt{done\_flag\_o} se pone a 0, indicando que la transferencia se ha completado. Después, el módulo vuelve a un estado inactivo y todas las señales se estabilizan.
+
+\subsubsection{Simulaciones en EdaPlayground}
+La herramienta web colaborativa EdaPlayground también ha sido empleada para realizar pruebas sobre el diseño desarrollado. El programa desarrollado para realizar las simulaciones en EdaPlayground es idéntico al de Vivado, presentado en \ref{lst:testbench}, salvo por la introducción de \emph{\$dumpvars(0, tb\_bitreversal);} al inicio de la ejecución del testbench. En este trabajo, para realizar esta simulación, se ha empleado el simulador Siemens QuestaSim 2024.3, proporcionado gratuitamente por EdaPlayground.
+
+Al igual que en Vivado, se ha realizado una simulación en EdaPlayground. EdaPlayground incluye un visor de onda propio, EPWave, pero es poco intuitivo si el tiempo de simulación es elevado. Por ello, se han descargado los resultados de la web, para poder ver el diagrama de onda en la aplicación de escritorio GTKwave, ya mencionada en \ref{st:gtkwave}. El resultado se presenta en la figura \ref{fig:simEdaPlayground}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=16cm, height=2.2cm]{figures/simEdaPlayground.png}
+  \caption{Simulación de EdaPlayground vista con GTKWave}
+  \label{fig:simEdaPlayground}
+\end{figure}
+
+Como puede apreciarse, el comportamiento es equivalente al obtenido con Vivado, los valores introducidos son los mismos, así como los resultados obtenidos. Esto sucede por no haber invertido tiempo en la randomización de valores para realizar las pruebas, pues se ha hecho uso de la directiva \$random a secas, de forma que el número aleatorio será el mismo en todas las ejecuciones y determinado por el compilador.
+
+\section{Iteración 4 - Integración del diseño en GR-HEEP}
+En esta sección se detalla el proceso de integración del diseño final dentro de la plataforma GR-HEEP, como una forma más conveniente para realizar la adición de periféricos aceleradores, tal y como se expuso en \ref{st:xheep}. Como referencias, se ha tomado principalmente una asignatura del máster, Aceleradores de dominio específico, concretamente la Práctica 5, impartida por David Mallasén \cite{documentoPractica5}. Para poder realizar esta integración es necesario entender dónde va a estar nuestro diseño dentro del sistema al completo. Para ello, se presenta en \ref{fig:aceleradorXAIF} un esquema aclarativo de la ubicación del acelerador dentro del conjunto global.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=11cm]{figures/aceleradorXAIF.png}
+  \caption{Arquitectura de GR-HEEP integrando un acelerador (5) Fuente: \cite{documentoPractica5}}
+  \label{fig:aceleradorXAIF}
+\end{figure}
+
+Como puede observarse, el acelerador está representado por el número 5, estando conectado al bus del sistema y al dominio de perféricos (tanto externos como \textit{always-on}) mediante \ac{X-AIF}. X-AIF es una interfaz hardware diseñada específicamente para la plataforma X-HEEP que permite integrar aceleradores y periféricos personalizados de manera modular y estandarizada \cite{machetti2024xheep}. Al contrario que el diseño hardware que se ha desarrollado en este trabajo, X-AIF utiliza el protocolo \ac{OBI}, detallado en \ref{st:obi}, para realizar todas las comunicaciones de la plataforma, lo que aporta ventajas importantes, como la facilidad para extender el sistema base con aceleradores multipropósito sin tener que rediseñar la arquitectura del sistema, o un enfoque hacia la gestión de energía (\textit{power domain}) para aplicaciones de ultra bajo consumo, si bien en este proyecto esto último queda fuera de contexto. 
+
+Para poder integrar el diseño en la plataforma, es necesario seguir una serie de pasos generales:
+
+\begin{enumerate}
+    \item Importación de los archivos del diseño
+    \item Conexionado físico del diseño
+    \item Definición de los registros expuestos
+    \item Desarrollo de un \emph{driver} para los registros
+    \item Compilación completa del sistema
+\end{enumerate}
+
+\subsection{Importación de los archivos del diseño}
+En este paso se importan los archivos RTL del diseño desarrollado en la plataforma. En este contexto, hay dos formas posibles de hacerlo:
+
+\begin{enumerate}
+    \item Manualmente: creación de un árbol de directorios como el del siguiente repositorio GitHub \emph{simple-cnt} \cite{simple-cnt}
+    \item Automáticamente: uso de la herramienta \emph{vendor} de OpenTitan, integrada en la plataforma.
+\end{enumerate}
+
+Si bien se llegó a emplear la forma automática en el máster, en este proyecto se ha empleado la forma manual, por simpleza, y por ser la primera versión del diseño: en escenarios colaborativos y con control de versiones, la opción automática cobra mayor importancia. Los archivos deben estar presentes dentro de la carpeta de la plataforma, en la ruta \emph{hw\\vendor}, algo que la heramienta \emph{vendor} hace automáticamente. El resultado de aplicar este paso se muestra en la figura \ref{fig:importandoDiseno}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=14cm, height=9cm]{figures/importandoDiseno.png}
+  \caption{Importando diseño en la plataforma}
+  \label{fig:importandoDiseno}
+\end{figure}
+
+Dentro de esta carpeta, se han realizado cambios en el archivo \emph{.core} base: se ha renombrado el archivo al nombre del diseño, en este contexto, \emph{bitreversal}. Dentro de él, se han cambiado los archivos RTL a tener en cuenta para la compilación, síntesis, y simulación del diseño en la plataforma y el campo \emph{name} para poder hacer referencia a éste en el resto de ficheros.
+
+\subsection{Conexionado físico del diseño}
+En este paso se detalla los aspectos a tener en cuenta para conectar a nivel físico el diseño desarrollado con la plataforma, integrando el acelerador en el bus del sistema como un periférico más, utilizando la interfaz XAIF, la cual trabaja sobre el protocolo OBI.
+
+Para este proceso, es necesario tener en cuenta dos aspectos fundamentales:
+\begin{enumerate}
+    \item Al tener que adecuarse al protocolo OBI,  es necesario realizar un \textit{wrapper} (explicado en \ref{st:wrapper}) que "hable" el protocolo OBI. El repositorio tomado como referencia \cite{simple-cnt} viene con este fichero ya creado, y no es necesario hacer más cambios que el propio nombre del archivo y del módulo, modificados a \emph{bitreversal\_obi}.
+
+    \item Para que el sistema sea capaz de interactuar con el diseño, es necesario exponer las entradas y salidas definidas en el mismo por medio de registros con un tamaño adecuado para cada uno. Esto implica la creación de un controlador de estos registros de entrada y de salida. Este archivo también está incluido en la referencia \cite{simple-cnt}, y ha sido modificado para adaptarse a los registros del diseño. Esto se explica en detalle en pasos posteriores.
+\end{enumerate}
+ 
+Por lo tanto, el diseño a integrar, a nivel conceptual, será el presentado en \ref{fig:conceptoDisenoIntegracion}.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=9cm]{figures/conceptoDisenoIntegracion.png}
+  \caption{Concepto del diseño a integrar en la plataforma}
+  \label{fig:conceptoDisenoIntegracion}
+\end{figure}
+
+Por último, para que la plataforma sea capaz de reconocer el diseño y los registros de entrada y salida, es necesario realizar a su vez, una serie de pasos, en los archivos de la carpeta raíz de GR-HEEP \cite{documentoPractica5}:
+
+\begin{enumerate}[noitemsep]
+    \item Asignar direcciones base y tamaño en el mapa de memoria \emph{gr-heep-cfg.hjson}, en \emph{config/}
+    \item Instanciar diseño como periférico en la plantilla \emph{gr\_heep\_peripherals.sv.tpl}, en \emph{hw/peripherals/}.
+\end{enumerate}
+
+\subsection{Definición de los registros expuestos}
+Los registros consituyen en GR-HEEP la forma de introducir y obtener información del diseño integrado. Por tanto, para que los programas desarrollados sobre la plataforma sean capaces de interactuar con el diseño integrado dentro de la misma, es necesario representar de alguna forma los registros que se emplearán para dicho propósito. 
+
+Afortunadamente, este proceso se hace semi-automáticamente gracias a la herramienta \emph{regtool} de OpenTitan \cite{regtoolInfo}. En los archivos de referencia se incluye un \textit{script} que hace uso de esta herramienta y automatiza el proceso. Esta utilidad genera, a partir de un archivo de definición de registros \emph{.hjson}, los esqueletos en lenguaje HDL como Verilog de las especificaciones de cada registro definido dentro de dicho archivo, además de un archivo de cabeceras \emph{.h} que contiene las macros de las direcciones mapeadas en memoria de cada uno de los registros. Esto último es posible gracias a los cambios realizados en \emph{gr-heep-cfg.hjson}. En el listado \ref{lst:definicionRegistros} se muestra el fichero de definición de registros desarrollado para este trabajo.
+
+\begin{lstlisting}[language=json,frame=single,caption={Archivo de definición de registros},showstringspaces=false,label=lst:definicionRegistros]
+{
+    name: "bitreversal_control",
+    clock_primary: "clk_i",
+    reset_primary: "rst_ni",
+    bus_interfaces: [
+        {
+            protocol: "reg_iface",
+            direction: "device"
+        }
+    ],
+    regwidth: "32",
+    registers: [
+        {
+            name: "DIN",
+            desc: "Operando de entrada",
+            fields: [
+                {
+                    bits: "31:0",
+                    name: "DIN",
+                    desc: "Operando de entrada.",
+                    swaccess: "rw",
+                    hwaccess: "hro",
+                    resval: "0"
+                }
+            ]
+        },
+        {
+            name: "START",
+            desc: "Control de inicio de la operación",
+            fields: [
+                {
+                    bits: "0",
+                    name: "START",
+                    desc: "Escribir 1 para iniciar la operación. Permanece en 1 hasta que el software escriba 0.",
+                    swaccess: "rw",
+                    hwaccess: "hro",
+                    resval: "0"
+                }
+            ]
+        },
+        {
+            name: "READ",
+            desc: "Permite obtener dato resultado, por cada activacion",
+            fields: [
+                {
+                    bits: "0",
+                    name: "READ",
+                    desc: "Escribir 1 para iniciar la operación, escribir 0 para parar",
+                    swaccess: "rw",
+                    hwaccess: "hro",
+                    resval: "0"
+                }
+            ]
+        },
+	    {
+            name: "WRITE",
+            desc: "Permite encolar un dato en la FIFO, por cada activacion",
+            fields: [
+                {
+                    bits: "0",
+                    name: "WRITE",
+                    desc: "Escribir 1 para iniciar la operación, escribir 0 para parar",
+                    swaccess: "rw",
+                    hwaccess: "hro",
+                    resval: "0"
+                }
+            ]
+        },
+        {
+            name: "DONE",
+            desc: "Estado de la operación",
+            fields: [
+                {
+                    bits: "0",
+                    name: "DONE",
+                    desc: "Se pone en 1 cuando el resultado está disponible. Se borra al leerlo o escribiendo 1.",
+                    swaccess: "rw1c",
+                    hwaccess: "hwo",
+                    resval: "0"
+                }
+            ]
+        },
+        {
+            name: "DOUT",
+            desc: "Resultado de la operación",
+            fields: [
+                {
+                    bits: "31:0",
+                    name: "DOUT",
+                    desc: "Resultado del cálculo (32 bits).",
+                    swaccess: "ro",
+                    hwaccess: "hwo"
+                }
+            ]
+        }
+    ]
+}
+\end{lstlisting}
+
+Una vez generados los archivos, es necesario crear el \emph{wrapper} que instancia los esqueletos Verilog generados. En este trabajo, se ha adaptado el archivo ya existente en el repositorio de referencia \cite{simple-cnt}, siendo el resultado final presentado en el listado \ref{lst:wrapperControladorRegistros}.
+
+\begin{lstlisting}[language=verilog,frame=single,caption={Código fuente del testbench},showstringspaces=false,label=lst:wrapperControladorRegistros]
+module bitreversal_control_reg (
+  input  logic clk_i,
+  input  logic rst_ni,
+
+  // Interfaz de registros
+  input  bitreversal_reg_pkg::reg_req_t  req_i,
+  output bitreversal_reg_pkg::reg_resp_t rsp_o,
+
+  // Señales del hardware
+  input  logic        done_i,
+  input  logic [31:0] dout_i,
+
+  output logic        start_o,
+  output logic        read_o,
+  output logic        write_o,
+  output logic [31:0] din_o
+);
+
+  // Señales internas
+  bitreversal_control_reg_pkg::bitreversal_control_reg2hw_t reg2hw;
+  bitreversal_control_reg_pkg::bitreversal_control_hw2reg_t hw2reg;
+
+  // -------------------------
+  // Señales escritas por HW
+  // -------------------------
+
+  // DONE (rw1c/hwo): HW sets, SW clears
+  assign hw2reg.done.d  = done_i;
+  assign hw2reg.done.de = 1'b1;
+
+  // DOUT (ro/hwo): resultado de hardware
+  assign hw2reg.dout.d  = dout_i;
+  assign hw2reg.dout.de = 1'b1;
+
+  // ----------------------------------------------
+  // Instancia del toplevel de registros generado
+  // ----------------------------------------------
+  bitreversal_control_reg_top #(
+    .reg_req_t(bitreversal_reg_pkg::reg_req_t),
+    .reg_rsp_t(bitreversal_reg_pkg::reg_resp_t)
+  ) i_bitreversal_control_reg_top (
+    .clk_i    (clk_i),
+    .rst_ni   (rst_ni),
+    .reg_req_i(req_i),
+    .reg_rsp_o(rsp_o),
+    .reg2hw   (reg2hw),
+    .hw2reg   (hw2reg),
+    .devmode_i(1'b0)
+  );
+
+  // --------------------------------------------------------
+  // SW Signals - Sticky Mode for simplicity
+  // --------------------------------------------------------
+
+  // -----------------------------------------------------------
+  // START (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.din.* (RTL never clears it!)
+  // -----------------------------------------------------------
+  assign din_o   = reg2hw.din.q;
+  
+  // -----------------------------------------------------------
+  // START (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.start.* (RTL never clears it!)
+  // -----------------------------------------------------------
+  
+  assign start_o = reg2hw.start.q;
+  // -----------------------------------------------------------
+  // READ (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.read.* (RTL never clears it!)
+  // -----------------------------------------------------------
+  assign read_o  = reg2hw.read.q;
+  
+  // -----------------------------------------------------------
+  // WRITE (rw/hro): SW controlled, no HW override
+  // --> no assignment to hw2reg.read.* (RTL never clears it!)
+  // -----------------------------------------------------------
+  assign write_o  = reg2hw.write.q;
+
+endmodule
+\end{lstlisting}
+
+En este fichero se asignan las funcionalidades que tendrán cada uno de los registros, así como la instanciación del módulo Top del controlador. En este contexto, las salidas del diseño serán las entradas para el controlador y viceversa: la nomenclatura \emph{\_i} y \emph{\_o} es correcta en este caso.
+
+\subsection{Desarrollo de un \emph{driver} para los registros}
+Tras la definición e integración de los registros en la plataforma, es posible desarrollar programas que hagan uso de esos registros, siendo la forma de interacción con el \textit{hardware}. Esto se puede hacer de dos formas:
+
+\begin{itemize}
+    \item Programar los accesos de lectura y de escritura a los registros directamente en el código de pruebas
+    \item Desarrollar un \textit{driver}, el cual pueda ser incluido en todos los programas que hagan uso del diseño
+\end{itemize}
+
+La opción segunda ha sido la elegida en este trabajo. Por tanto, es necesario desarrollar un \emph{driver}, capaz de acceder a los registros para introducir u obtener valores y así interactuar con el diseño. Este \emph{driver} deberá alojarse en la carpeta \emph{sw/external/lib/drivers}. En el listado \ref{lst:driverRegistros} se presenta el código en cuestión.
+
+\begin{lstlisting}[language=C,frame=single,caption={Código fuente del controlador de bit reversal},showstringspaces=false,label=lst:driverRegistros]
+#include <stdint.h>
+
+#include "bitreversal.h"
+#include "bitreversal_control_reg.h"
+#include "csr.h"
+#include "gr_heep.h"
+#include "rv_plic.h"
+
+/**
+ * @brief Write an input operand into DIN
+ * 
+ * @param value The 32-bit input value.
+ */
+void bitrev_write_val(uint32_t value) {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DIN_REG_OFFSET) = value;
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 1U; //activate write
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 0U; //deactivate write
+}
+
+/**
+ * @brief Read back the last input operand (DIN).
+ */
+uint32_t bitrev_get_input() {
+    return *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DIN_REG_OFFSET);
+}
+
+/**
+ * @brief Start the operation (set START=1).
+ */
+void bitrev_start() {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_START_REG_OFFSET) |= 
+        (1u << BITREVERSAL_CONTROL_START_START_BIT);
+}
+
+/**
+ * @brief Stop the operation (set START=0).
+ */
+void bitrev_stop() {
+    *(volatile uint32_t *)(BIT_REVERSAL_START_ADDRESS + BITREVERSAL_CONTROL_START_REG_OFFSET) &= 
+        ~(1u << BITREVERSAL_CONTROL_START_START_BIT);
+}
+
+/**
+ * @brief Starts a READ then clears it to make the result available in DOUT.
+ */
+void bitrev_trigger_read() {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 1U;
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 0U;
+}
+
+/**
+ * @brief Starts a WRITE then clears it to make the result available in DOUT.
+ */
+void bitrev_trigger_write() {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 1U;
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 0U;
+}
+
+/**
+ * @brief Check if DONE flag is set.
+ */
+uint8_t bitrev_is_done() {
+    return ((*(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DONE_REG_OFFSET)) >> 
+            BITREVERSAL_CONTROL_DONE_DONE_BIT) & 0x1;
+}
+
+/**
+ * @brief Clear DONE flag (write-1-clear).
+ */
+inline void bitrev_clear_done() {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DONE_REG_OFFSET) = 
+        (1u << BITREVERSAL_CONTROL_DONE_DONE_BIT);
+}
+
+/**
+ * @brief Get the result of the computation.
+ */
+uint32_t bitrev_get_output() {
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 1U;
+    uint32_t val = *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DOUT_REG_OFFSET);
+    *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 0U;
+    return val;
+}
+
+/**
+ * @brief Polling until DONE=1, then clear it.
+ */
+inline void bitrev_wait_done() {
+    while (!bitrev_is_done()) {
+        ; // busy-wait
+    }
+    bitrev_clear_done();
+}
+\end{lstlisting}
+
+Las funciones clave, presentadas en el listado, son las siguientes:
+
+\begin{itemize}
+    \item \textbf{\texttt{uint32\_t bitrev\_get\_output()}}\\
+    Esta función obtiene el resultado de la operación de bit-reversal. Primero activa la señal \texttt{READ} escribiendo un 1 en el registro correspondiente, luego lee el valor del registro \texttt{DOUT} que contiene el resultado y finalmente desactiva la señal \texttt{READ} escribiendo un 0. Devuelve el resultado leído como un entero de 32 bits.
+    \item \textbf{\texttt{uint8\_t bitrev\_is\_done()}}\\
+    Esta función verifica si la operación de bit-reversal ha finalizado. Para ello, lee el valor del registro \texttt{DONE}, extrae el bit correspondiente y devuelve 1 si la operación está completa o 0 si aún está en proceso.
+    \item \textbf{\texttt{void bitrev\_start()}}\\
+    Esta función inicia la operación de bit-reversal. Escribe un 1 en el bit \texttt{START} del registro de control, lo que provoca que el módulo hardware comience a procesar el valor almacenado previamente en el registro de entrada \texttt{DIN}.
+    \item \textbf{\texttt{void bitrev\_write\_val(uint32\_t value)}}\\
+    Esta función escribe un valor de entrada en el periférico. Primero escribe el valor dado en el registro \texttt{DIN}, luego activa la señal \texttt{WRITE} escribiendo un 1 para indicar que el dato está listo para ser procesado, y finalmente desactiva dicha señal escribiendo un 0.
+\end{itemize}
+
+\subsection{Compilación completa del sistema}
+La fase de compilación en X-HEEP/GR-HEEP es un proceso automatizado que combina FuseSoC para la gestión de dependencias RTL y Verilator para la simulación del sistema completo. Esta fase es crítica para verificar la correcta integración de, en este contexto, el diseño desarrollado. FuseSoC lee los archivos .core (ej: peripherals.core, x-heep.core) para resolver la jerarquía de módulos RTL, actuando como un gestor de paquetes para código RTL, similar a lo que pip o npm son para software. Por otro lado, Verilator es el simulador que permite verificar el diseño hardware que se está integrando, realizando técnicas de \textit{linting} y síntesis, entre otros. 
+
+Finalmente, para poder compilar la plataforma es necesario el uso de dos comandos:
+
+\begin{enumerate}
+    \item \emph{\textbf{make gr-heep-gen}}: procesa las plantillas \emph{.tpl} y configuraciones \emph{.hjson} para producir el sistema final con las especificaciones deseadas, configurables y variadas, pudiéndose ver las opciones con el comando \emph{make gr-heep-gen help}.
+    \item \emph{\textbf{make verilator-build}}: compila el diseño RTL utilizando Verilator, asegurando que no hay fallos, y genera un ejecutable que luego puede ser usado para simular el sistema con el diseño y definiciones de registros ya integradas, si todo es correcto.
+\end{enumerate}
+
+En caso de éxito tras ejecutar estos dos comandos, el sistema generado tendrá finalmente integrado el diseño y los registros serán posibles de acceder programáticamente.
+
+\section{Iteración 5 - Ejecución del diseño en GR-HEEP sobre FreeRTOS}
+Tras la correcta integración del diseño en la plataforma, es posible la realización de programas en lenguajes de alto nivel (C/C++) que interactúen con el diseño por medio de los registros expuestos. El objetivo de esta iteración es el integrar el sistema operativo de tiempo real FreeRTOS, ya expuesto en \ref{st:freertos}, si bien, por simpleza, se han hecho programas más simples para verificar funcionalidad y correcta comunicación con el diseño y registros. 
+
+\subsection{Ejecución \textit{baremetal}}
+Antes de utilizar FreeRTOS, se realizaron pruebas sin sistema operativo alguno, tan solo código C y el \emph{driver} desarrollado para trabajar con el diseño. Para poder ejecutar este programa, es necesario compilarlo. GR-HEEP, al igual que X-HEEP, incorpora un compilador RISCV, el cual es invocado con el comando \emph{make app}. A este comando hay que pasarle más parámetros, quedando el comando final \emph{make app PROJECT=<nombre\_programa> TARGET=sim}, donde se define la aplicación a compilar (cuyos archivos deben estar en \emph{sw/applications}) y el modo de ejecución, en este contexto, simulación, utilizándose el binario generado por Verilator al compilar la plataforma.
+
+Una vez realizado el comando, en caso de éxito, es posible ejecutarlo con el comando \emph{make verilator-run}. En este momento, el programa está ejecutándose en la plataforma. Además, a modo de depuración, supervisa la salida estándar y generando el diagrama de onda, para poder interpretar qué ocurre en todo momento. También hay que decir que existe una forma más directa de construir del diseño RTL con Verilator y ejecutar el programa C (asumiéndose previamente compilado): con el comando \emph{make verilator-sim} es posible realizar esto. 
+
+En el listado \ref{lst:codigoBaremetal} se muestra el código desarrollado para medir el número de ciclos empleado para ejecutar el reverso de bits utilizando el diseño integrado, y el número de ciclos para ejecutar una versión \textit{software}, utilizando los \textit{timers} de X-HEEP \cite{timer-sdk}. 
+
+\begin{lstlisting}[language=C,frame=single,caption={Código fuente de la versión \textit{baremetal}},showstringspaces=false,label=lst:codigoBaremetal]
+#include <stdio.h>
+#include <stdint.h>
+#include <stdlib.h>
+#include <time.h>  
+#include "core_v_mini_mcu.h"
+#include "fast_intr_ctrl.h"
+#include "bitreversal.h"
+#include "ext_irq.h"
+#include "csr.h"
+#include "timer_sdk.h"
+#include "x-heep.h"
+#include "soc_ctrl.h"
+
+/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - SOFTWARE //
+/////////////////////////////////////////////////////////////
+static inline uint32_t reverseBits_SW() {
+    uint32_t timer_cycles;
+    // Input array of 4 random numbers
+    uint32_t nums[4] = {(rand() % 255), (rand() % 255), (rand() % 255), (rand() % 255)};
+    uint32_t reversed[4];  // Array to store reversed numbers
+
+    // Get current Frequency
+    soc_ctrl_t soc_ctrl;
+    soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
+    uint32_t freq_hz = soc_ctrl_get_frequency(&soc_ctrl);
+
+    timer_cycles_init();         // Init the timer SDK for clock cycles
+    timer_start();               // Start counting the time
+    
+    // SOFTWARE BIT REVERSAL
+    for (size_t i = 0; i < 4; i++) {
+        uint32_t num = nums[i];
+        uint32_t reversed_num = 0;
+        
+        for (int j = 0; j < 32; j++) {
+            reversed_num <<= 1;        // Shift left
+            reversed_num |= (num & 1); // Get the last bit of num and set it in reversed_num
+            num >>= 1;                 // Shift num right
+        }
+        reversed[i] = reversed_num;    // Store the reversed number
+    } 
+
+    timer_cycles = timer_stop();
+    printf("SW Input: {0x%08X, 0x%08X, 0x%08X, 0x%08X}\n", 
+        nums[0],nums[1],nums[2],nums[3]);
+    printf("SW Reversed: {0x%08X, 0x%08X, 0x%08X, 0x%08X}\n", 
+        reversed[0],reversed[1],reversed[2],reversed[3]);
+    return timer_cycles;
+}
+
+/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - SOFTWARE //
+/////////////////////////////////////////////////////////////
+static inline uint32_t reverseBits_HW() {
+	
+    uint32_t timer_cycles;
+    // Input array of 4 random numbers
+    uint32_t nums[4] = {(rand() % 255), (rand() % 255), (rand() % 255), (rand() % 255)};
+    uint32_t reversed[4];  // Array to store reversed numbers
+
+    // Get current Frequency
+    soc_ctrl_t soc_ctrl;
+    soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
+    uint32_t freq_hz = soc_ctrl_get_frequency(&soc_ctrl);
+
+    timer_cycles_init();         // Init the timer SDK for clock cycles
+    timer_start();               // Start counting the time
+
+    // HARDWARE BIT REVERSAL
+    bitrev_start();
+
+    for (size_t i = 0; i < 4; i++) {
+        bitrev_write_val(nums[i]);
+    }
+
+    // Wait until done flag is 1 (polling)
+    while (!bitrev_is_done());
+
+    for (size_t i = 0; i < 4; i++) {
+        reversed[i] = bitrev_get_output();     // Get result
+    }
+
+    timer_cycles = timer_stop();
+    printf("HW Input: {0x%08X, 0x%08X, 0x%08X, 0x%08X}\n", 
+        nums[0],nums[1],nums[2],nums[3]);
+    printf("HW Reversed: {0x%08X, 0x%08X, 0x%08X, 0x%08X}\n", 
+        reversed[0],reversed[1],reversed[2],reversed[3]);
+    return timer_cycles;
+}
+
+int main() {
+    uint32_t sw_cycles, hw_cycles;
+    sw_cycles = reverseBits_SW();
+    hw_cycles = reverseBits_HW();
+    printf("SW Cycles: %d\n", sw_cycles);
+    printf("HW Cycles: %d\n", hw_cycles);
+}
+\end{lstlisting}
+
+El objetivo del programa no es otro que hacer las versiones \textit{hardware} y \textit{software} del reverso de bits, e imprimir el número de ciclos requerido por cada una; en \ref{fig:resultadoBaremetal} se presenta el resultado.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=13cm]{figures/resultadoBaremetal.png}
+  \caption{Resultado de la ejecución \textit{baremetal}}
+  \label{fig:resultadoBaremetal}
+\end{figure}
+
+\subsection{Ejecución sobre FreeRTOS}
+Para utilizar el sistema operativo de tiempo real FreeRTOS, detallado en \ref{st:freertos}, se ha seguido la documentación disponible \cite{xheepFreeRTOS}, que, en resumen, es, realizar la compilación del ejemplo \textit{example\_blinky\_freertos}, que contiene las cabeceras necesarias y la base para poder hacer uso del sistema operativo. De esta forma, se generan los ficheros de cabeceras utilizados por FreeRTOS en la compilación, y así poder hacer uso del mismo dentro del programa desarrollado. A la hora de desarrollar el programa que hará la ejecución del reverso de bits con el diseño \textit{hardware} y la versión \textit{software}, tendrán que agregarse estas cabeceras también.
+
+Como nota adicional, se ha tenido que aumentar el número de bancos de memoria del sistema a 4; si no se realiza este paso, al realizar la compilación del programa se obtienen errores relativos al desbordamiento del \textit{heap}. Esto puede hacerse tanto al ejecutar \emph{make gr-heep-gen} agregando \emph{MEMORY\_BANKS=4} o cambiando a 4 el valor del campo \emph{code\_and\_data} del fichero \emph{config/mcu-gen-system.hjson} \cite{documentoPractica5}. El código desarrollado se presenta en el listado \ref{lst:codigoFreeRTOS}
+
+\begin{lstlisting}[language=C,frame=single,caption={Código fuente de la versión FreeRTOS},showstringspaces=false,label=lst:codigoFreeRTOS]
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <time.h>   
+#include <unistd.h>
+#include <assert.h>
+
+#include "csr.h"
+#include "hart.h"
+#include "handler.h"
+#include "core_v_mini_mcu.h"
+#include "rv_timer.h"
+#include "soc_ctrl.h"
+#include "gpio.h"
+#include "x-heep.h"
+#include "fast_intr_ctrl.h"
+#include "ext_irq.h"
+#include "timer_sdk.h"
+
+/* FreeRTOS kernel includes */
+#include <FreeRTOS.h>
+#include <task.h>
+#include <queue.h>
+#include "semphr.h"
+
+/* HW Design includes */
+#include "bitreversal.h"
+
+// Hooks required by FreeRTOS config (empty implementations)
+void vApplicationTickHook(void) {}
+void vApplicationIdleHook(void) {}
+void vApplicationMallocFailedHook(void) { for(;;); }
+void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
+    (void)xTask; (void)pcTaskName; for(;;);
+}
+
+/* Allocate heap to special section. Note that we have no references in the
+ * whole program to this variable (since its just here to allocate space in the
+ * section for our heap), so when using LTO it will be removed. We force it to
+ * stay with the "used" attribute
+ */
+__attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
+
+// Data structure for messages (can be the same for both directions or different)
+typedef struct {
+    int type;
+    uint32_t cycles;             // number of cycles
+    uint32_t data[4];            // 32bit set of 4 numbers
+} Packet_t;
+
+// Queue handler
+static QueueHandle_t xQueue = NULL;
+
+/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - SOFTWARE //
+/////////////////////////////////////////////////////////////
+Packet_t reverseBits_SW(Packet_t received);
+Packet_t reverseBits_HW(Packet_t received);
+
+Packet_t reverseBits_SW(Packet_t received) {
+    
+    Packet_t result;
+    result.type = received.type;
+    
+    // Get current Frequency
+    soc_ctrl_t soc_ctrl;
+    soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
+    uint32_t freq_hz = soc_ctrl_get_frequency(&soc_ctrl);
+
+    timer_cycles_init();         // Init the timer SDK for clock cycles
+    timer_start();               // Start counting the time
+    
+    // SOFTWARE BIT REVERSAL
+    for (int i = 0; i < 4; i++) {
+        uint32_t num = received.data[i];
+        uint32_t reversed_num = 0;
+        
+        for (int j = 0; j < 32; j++) {
+            reversed_num <<= 1;             // Shift left
+            reversed_num |= (num & 1);      // Get the last bit of num and set it in reversed_num
+            num >>= 1;                      // Shift num right
+        }
+        result.data[i] = reversed_num;        // Store the reversed number
+    } 
+
+    result.cycles = timer_stop();
+
+    return result;
+}
+
+/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - HARDWARE //
+/////////////////////////////////////////////////////////////
+
+Packet_t reverseBits_HW(Packet_t received) {
+	
+    Packet_t result;
+    result.type = received.type;
+
+    // Get current Frequency
+    soc_ctrl_t soc_ctrl;
+    soc_ctrl.base_addr = mmio_region_from_addr((uintptr_t)SOC_CTRL_START_ADDRESS);
+    uint32_t freq_hz = soc_ctrl_get_frequency(&soc_ctrl);
+
+    timer_cycles_init();         // Init the timer SDK for clock cycles
+    timer_start();               // Start counting the time
+
+    // HARDWARE BIT REVERSAL
+    bitrev_start();
+
+    for (int i = 0; i < 4; i++) {
+        bitrev_write_val(received.data[i]);
+    }   
+    
+    // Wait until done flag is 1 (polling)
+    while (!bitrev_is_done());
+
+    for (int i = 0; i < 4; i++) {
+        result.data[i] = bitrev_get_output();     // Get result
+    }
+
+    result.cycles = timer_stop();
+    return result;
+}
+
+void vSenderTask(void *pvParameters)
+{
+    Packet_t input;
+
+    // Send a message to the receiver
+    for (int i = 0; i < 3; i++)
+    {
+        // Initial values
+        input.type = rand() % 2;
+        input.cycles = 0; //init cycle number
+        input.data[0] = (rand() % 255);
+        input.data[1] = (rand() % 255);
+        input.data[2] = (rand() % 255);
+        input.data[3] = (rand() % 255);
+        printf("Sent: {0x%08X, 0x%08X, 0x%08X, 0x%08X}\n", input.data[0],input.data[1],input.data[2],input.data[3]);
+        if (xQueueSend(xQueue, &input, portMAX_DELAY) == pdPASS);
+    }
+}
+void vReceiverTask(void *pvParameters)
+{
+    Packet_t received;
+    Packet_t result;
+    char o; //store operation type
+
+    for (int i = 0; i < 3; i++)
+    {
+        // Receive a message from sender
+        if (xQueueReceive(xQueue, &received, portMAX_DELAY) == pdPASS)
+        {
+            if (received.type == 0) {
+                o = 'H'; 
+                result = reverseBits_HW(received);
+            }else {
+                o = 'S'; 
+                result = reverseBits_SW(received);
+            }
+            printf("Processed: type %c, input %d: {0x%08X, 0x%08X, 0x%08X, 0x%08X}, cycles:%d\n", o, i, result.data[0],result.data[1],result.data[2],result.data[3], result.cycles);
+        }
+    }
+}
+
+int main() {
+
+    xQueue = xQueueCreate(3, sizeof(Packet_t));
+
+    if (xQueue != NULL)
+    {
+        xTaskCreate(vSenderTask, "Sender",  300, NULL, 3, NULL);
+        xTaskCreate(vReceiverTask,  "Receiver", 300, NULL, 3, NULL);
+        vTaskStartScheduler();
+    }
+    for (;;);
+}
+\end{lstlisting}
+
+En el código, se crean dos tareas: \emph{vSenderTask}, que envía los datos de entrada por la cola \emph{xQueue}, pidiendo que el reverso de bits sea por hardware (representado por 0), y software (representado por 1). Estos datos son recibidos por una segunda tarea, \emph{vReceiverTask}, que está a la escucha de \emph{xQueue} y que realiza el reverso de bits de una u otra forma. Una vez enviados 3 conjuntos de valores por parte de \emph{vSenderTask}, \emph{vReceiverTask} procede a generar el resultado para cada uno, obtiene el número de ciclos empleados para realizar la operación, y muestra el resultado por salida estándar. En \ref{fig:resultadoFreeRTOS} se muestra el resultado fruto de la ejecución de este programa.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=11cm]{figures/resultadoFreeRTOS.png}
+  \caption{Resultado de la ejecución sobre FreeRTOS}
+  \label{fig:resultadoFreeRTOS}
+\end{figure}
+
+\section{Iteración 6 - Comparativa de resultados frente a versión software}
+Como ya se mencionó en la iteración anterior, los programas desarrollados \ref{lst:codigoBaremetal} y \ref{lst:codigoFreeRTOS} realizan un conteo de ciclos en las versiones hardware y software. En todo momento se aprecia que la relación de aceleración entre software y hardware se mantiene constante en ambos escenarios, en torno a un factor de cinco veces. Esto confirma que el diseño del acelerador hardware es correcto y eficiente, si bien, este disño se encuentra en una primera versión y hay un considerable margen de mejora.
+
+Sin embargo, tal y como se observa en los resultados mostrados en las figuras \ref{fig:resultadoBaremetal} y \ref{fig:resultadoFreeRTOS}, se puede apreciar unos valores que difieren, en cierta medida de lo lógico: la versión \textit{baremetal} debería ser más rápida en todo momento que la versión FreeRTOS. Algo que, en este contexto, no sucede. Esta problemática puede deberse a ciertos factores, entre otros:
+
+\begin{itemize}
+    \item En primer lugar, aunque en ambos programas se utiliza el mismo mecanismo de conteo de ciclos proporcionado por el timer-sdk de X-HEEP, el estado previo del periférico no es el mismo: en \textit{baremetal}, el temporizador se inicializa y arranca \emph{desde cero} en cada función de medición, lo cual introduce una latencia adicional asociada a la primera configuración y habilitación del hardware. Sin embargo, en FreeRTOS, el kernel ya mantiene el temporizador activo para el control de ticks y planificación de tareas, por lo que las llamadas a \emph{timer\_cycles\_init()} y \emph{timer\_start()} recaen sobre un periférico ya en funcionamiento, reduciendo el coste de inicialización.
+
+    \item En segundo lugar, debe considerarse el efecto de las librerías y la memoria. En \textit{baremetal}, las funciones como \emph{rand()} y \emph{printf()} se utilizan por primera vez en las rutinas de prueba, lo que implica un mayor número de accesos a memoria y posibles penalizaciones de cache en su primera ejecución. En FreeRTOS, en cambio, antes de llegar a la tarea de medición, ya se han ejecutado varias operaciones que utilizan estas mismas librerías y estructuras, de manera que ya las inicializó, lo que reduce el coste en ciclos durante la medición.
+
+    \item Por último, el modelo de simulación con Verilator puede influir. En \textit{baremetal}, las mediciones se realizan inmediatamente después del arranque del sistema, en un estado inicial en el que las configuraciones de periféricos todavía incurren en costes adicionales. En FreeRTOS, por el contrario, el simulador ya ha ejecutado múltiples ciclos asociados al arranque del kernel, la creación de tareas y la comunicación mediante colas, de forma que al momento de realizar la medición el sistema está más estabilizado y los tiempos reportados son menores. Esto se puede observar en que el tiempo de ejecutar simulaciones sobre FreeeRTOS aumenta de forma desproporcional frente a \textit{baremetal}.
+\end{itemize}
