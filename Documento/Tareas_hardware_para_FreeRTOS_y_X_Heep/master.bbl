@@ -109,14 +109,7 @@ ESL-EPFL.
 \newblock Recurso web: \url{https://github.com/esl-epfl/x-heep}, 2024.
 \newblock Repositorio GitHub. Accedido: 13-08-2025.
 
-\bibitem[EE25a]{xheepInfoASIC}
-ESL-EPFL.
-\newblock X-heep asic implementations.
-\newblock Recurso web:
-  \url{https://x-heep.readthedocs.io/en/latest/ASIC/asic.html}, 2025.
-\newblock Accedido: 13-08-2025.
-
-\bibitem[EE25b]{xheepDocs}
+\bibitem[EE25]{xheepDocs}
 ESL-EPFL.
 \newblock X-heep documentation.
 \newblock Recurso web:
@@ -310,21 +303,20 @@ David~Mallasén Quintana.
   03 2025.
 \newblock Documento PDF de la práctica 5. Accedido: 15-08-2025.
 
-\bibitem[Qui25b]{simple-cnt}
+\bibitem[Qui25b]{grHeepRepo}
+David~Mallasén Quintana.
+\newblock Gr-heep connect bus branch.
+\newblock Recurso web:
+  \url{https://github.com/davidmallasen/GR-HEEP/tree/connect-bus}, 03 2025.
+\newblock Rama de GR-HEEP para integración del acelerador. Accedido:
+  15-08-2025.
+
+\bibitem[Qui25c]{simple-cnt}
 David~Mallasén Quintana.
 \newblock Simple counter module.
 \newblock Recurso web:
   \url{https://github.com/Integrated-Systems-Architecture/simple_cnt}, 2025.
 \newblock Repositorio de contador integrado en GR-HEEP. Accedido: 15-08-2025.
-
-\bibitem[Ray22]{compraXilinx}
-Adrián Raya.
-\newblock Amd completa la mayor adquisición del sector de los semiconductores
-  con la compra de xilinx.
-\newblock Recurso web:
-  \url{https://www.eleconomista.es/tecnologia/noticias/11619399/02/22/AMD-completa-la-mayor-adquisicion-del-sector-de-los-semiconductores-con-la-compra-de-Xilinx.html},
-  03 2022.
-\newblock elEconomista. Accedido: 09-08-2025.
 
 \bibitem[Rea20]{verilogHistoria}
 RealDigital.
@@ -437,13 +429,5 @@ Xilinx.
   \url{https://docs.amd.com/r/2023.2-English/ug896-vivado-ip/IP-Integrator},
   2023.
 \newblock Accedido: 16-08-2025.
-
-\bibitem[�A25]{nvidiaRISCV}
-Ángel Aller.
-\newblock Nvidia cuda soportará la arquitectura risc-v, ¿se viene una
-  revolución?
-\newblock Recurso web:
-  \url{https://www.profesionalreview.com/2025/07/21/nvidia-cuda-risc-v/}, 2025.
-\newblock Accedido: 10-08-2025.
 
 \end{thebibliography}

@@ -12,44 +12,44 @@ A level-1 auxiliary file: preamble/abstractSpanish.aux
 A level-1 auxiliary file: preamble/abstractEnglish.aux
 The style file: alpha.bst
 Database file #1: bibliography.bib
-You've used 60 entries,
+You've used 58 entries,
             2543 wiz_defined-function locations,
-            893 strings with 16416 characters,
-and the built_in function-call counts, 16947 in all, are:
-= -- 1693
-> -- 540
-< -- 56
-+ -- 155
-- -- 143
-* -- 728
-:= -- 2741
-add.period$ -- 234
-call.type$ -- 60
-change.case$ -- 304
-chr.to.int$ -- 52
-cite$ -- 60
-duplicate$ -- 680
-empty$ -- 1503
-format.name$ -- 253
-if$ -- 3591
+            882 strings with 15931 characters,
+and the built_in function-call counts, 16397 in all, are:
+= -- 1637
+> -- 524
+< -- 54
++ -- 151
+- -- 139
+* -- 706
+:= -- 2650
+add.period$ -- 226
+call.type$ -- 58
+change.case$ -- 294
+chr.to.int$ -- 50
+cite$ -- 58
+duplicate$ -- 658
+empty$ -- 1453
+format.name$ -- 247
+if$ -- 3473
 int.to.chr$ -- 9
 int.to.str$ -- 0
 missing$ -- 9
-newline$ -- 358
-num.names$ -- 180
-pop$ -- 535
+newline$ -- 346
+num.names$ -- 174
+pop$ -- 519
 preamble$ -- 1
-purify$ -- 367
+purify$ -- 355
 quote$ -- 0
-skip$ -- 600
+skip$ -- 580
 stack$ -- 0
-substring$ -- 439
-swap$ -- 60
-text.length$ -- 56
+substring$ -- 425
+swap$ -- 58
+text.length$ -- 54
 text.prefix$ -- 51
 top$ -- 0
-type$ -- 464
+type$ -- 448
 warning$ -- 0
-while$ -- 125
-width$ -- 68
-write$ -- 832
+while$ -- 121
+width$ -- 65
+write$ -- 804

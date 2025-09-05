@@ -8,13 +8,13 @@
 \label{res:iteracion1}
 Esta iteración se centra en la descripción del problema planteado y en la elección de las herramientas a utilizar para el desarrollo de un diseño \textit{hardware} capaz de cumplir con los objetivos expuestos en \ref{sec:objetivos}. En este punto, se ha analizado en detalle el conjunto de dichos objetivos, además de realizar diversas preguntas, para entender mejor la problemática.
 
-Con el objetivo de cumplir dichos objetivos, se pretende desarrollar un diseño \textit{hardware} capaz de realizar una operación concreta, siendo, en el contexto de este trabajo, el reverso de bits de un número entero de 32 bits. Para ello, se ha optado por un esquema basado en colas \ac{FIFO}, de las cuales ya se detalló tanto su concepto como sus ventajas en \ref{st:colasFifo}. La idea es, por tanto, hacer sencillo el paso de datos al acelerador, así como la recepción de los resultados. Las colas FIFO, al tener memoria interna, proporcionan un mecanismo sencillo y relativamente seguro de transmisión.
+Con el objetivo de cumplir dichos objetivos, se pretende desarrollar un diseño \textit{hardware} capaz de realizar una operación concreta, siendo, en el contexto de este trabajo, el reverso de bits de un número entero de 32 bits. Para ello, se ha optado por un esquema basado en colas \ac{FIFO}. La idea es, por tanto, hacer sencillo el paso de datos al acelerador, así como la recepción de los resultados. Las colas FIFO, al tener memoria interna, proporcionan un mecanismo sencillo y relativamente seguro de transmisión.
 
 Para realizar este diseño, es necesario realizarlo en base a una metodología. En el contexto de este trabajo, se ha optado por alinear el esfuerzo a las metodologías basadas en herramientas EDA, ello implicando el uso de programas software que estén adecuados al flujo de este tipo de metodologías. Por ello, se ha optado por seleccionar Vitis HLS y Vivado como programas para el diseño de este hardware. Ambas son herramientas de la misma compañía, Xilinx, lo que repercute en, teóricamente, una mejor integración entre ellas, lo que agiliza el desarrollo. Además, han sido presentadas en el máster, lo que las hace más fáciles de utilizar que herramientas de la competencia, como las de la empresa Cadence. Para pruebas, ya con un SoC simulado, se ha optado por el uso de X-HEEP, que permite la creación de núcleos RISC-V de múltiples tipos, así como simulaciones a nivel \textit{hardware} gracias a Verilator, y con soporte para FreeRTOS, lo que proporciona flexibilidad a la hora de realizar cualquier tipo de despliegue.
 
 Por tanto, a modo de resumen, el resultado de esta iteración ha sido:
 
-\begin{enumerate}
+\begin{enumerate}[noitemsep]
     \item Se han analizado los objetivos
     \item Se ha proporcionado un marco de trabajo para el desarrollo técnico del proyecto
     \item Se ha dado respuesta a cómo comunicarse a la entrada y a la salida del módulo acelerador
@@ -23,7 +23,7 @@ Por tanto, a modo de resumen, el resultado de esta iteración ha sido:
 
 \section{Iteración 2 - Desarrollo del diseño hardware}
 
-En esta fase se ha realizado el esquema correspondiente al un diseño hardware que sea capaz de satisfacer los objetivos y cumplir con el problema planteado. Si bien se estudiaron varios mecanismos, tal y como se expone en \ref{res:iteracion1}, se ha optado finalmente por un esquema basado en colas FIFO. 
+En esta fase se ha realizado el esquema correspondiente al un diseño hardware que sea capaz de satisfacer los objetivos y cumplir con el problema planteado. Si bien se estudiaron varios mecanismos, tal y como se expone en \ref{res:iteracion1}, se ha optado por un esquema basado en colas FIFO. 
 
 \subsection{Diseño inicial}
 
@@ -152,7 +152,6 @@ module bitreversal (
   reg internal_write  = 0;    // write signal for design_1
   reg already_written = 0;	  // check if writing has ocurred
   reg [1:0] write_cnt = 0;    // counter for writings
-  
   
   design_1 design_1_i
     (.clk(clk),
@@ -732,9 +731,17 @@ En esta sección se detalla el proceso de integración del diseño final dentro 
   \label{fig:aceleradorXAIF}
 \end{figure}
 
-Como puede observarse, el acelerador está representado por el número 5, estando conectado al bus del sistema y al dominio de perféricos (tanto externos como \textit{always-on}) mediante \ac{X-AIF}. X-AIF es una interfaz hardware diseñada específicamente para la plataforma X-HEEP que permite integrar aceleradores y periféricos personalizados de manera modular y estandarizada \cite{machetti2024xheep}. Al contrario que el diseño hardware que se ha desarrollado en este trabajo, X-AIF utiliza el protocolo \ac{OBI}, detallado en \ref{st:obi}, para realizar todas las comunicaciones de la plataforma, lo que aporta ventajas importantes, como la facilidad para extender el sistema base con aceleradores multipropósito sin tener que rediseñar la arquitectura del sistema, o un enfoque hacia la gestión de energía (\textit{power domain}) para aplicaciones de ultra bajo consumo, si bien en este proyecto esto último queda fuera de contexto. 
+Como puede observarse, el acelerador está representado por el número 5, estando conectado al bus del sistema y al dominio de perféricos (tanto externos como \textit{always-on}) mediante \ac{X-AIF}. X-AIF es una interfaz hardware diseñada específicamente para la plataforma X-HEEP que permite integrar aceleradores y periféricos personalizados de manera modular y estandarizada \cite{machetti2024xheep}. Al contrario que el diseño hardware que se ha desarrollado en este trabajo, X-AIF utiliza el protocolo \ac{OBI}, basado en el esquema \emph{request-response}, detallado en \ref{st:obi}, para realizar todas las comunicaciones de la plataforma, lo que aporta ventajas importantes, como la facilidad para extender el sistema base con aceleradores multipropósito sin tener que rediseñar la arquitectura del sistema, o un enfoque hacia la gestión de energía (\textit{power domain}) para aplicaciones de ultra bajo consumo, si bien en este proyecto esto último queda fuera de contexto. Una muestra a mayor detalle, incluso con las señales más relevantes, se presenta en \ref{fig:integracionHW}. Como aclaración, las flechas representan el flujo de datos, y la señal correspondiente que se encarga de llevarlos. Más concretamente, una \textit{request} es la combinación de un dato y una dirección; por ello, se pone una flecha hacia Addr, la cual está definida gracias a la generación automática de registros para el diseño, explicada en pasos posteriores, y luego otra hacia hacia los registros, representando que se mira la dirección, y si es válida, se escribe un dato en el registro oportuno, lo que desencadenará eventos dentro del diseño, como la escritura de valores, el comienzo de envío de datos, recepción, o lectura de los resultados. De esta forma, la tarea hardware desarrollada se ejecutará.
 
-Para poder integrar el diseño en la plataforma, es necesario seguir una serie de pasos generales:
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=13cm, width=11cm]{figures/integracionHW.png}
+  \caption{Diagrama de conexión entre X-HEEP y el acelerador a través de las FIFOs y buses}
+  \label{fig:integracionHW}
+\end{figure}
+
+
+Finalmente, para poder integrar el diseño en la plataforma, es necesario seguir una serie de pasos generales:
 
 \begin{enumerate}
     \item Importación de los archivos del diseño
@@ -743,6 +750,8 @@ Para poder integrar el diseño en la plataforma, es necesario seguir una serie d
     \item Desarrollo de un \emph{driver} para los registros
     \item Compilación completa del sistema
 \end{enumerate}
+
+Estos pasos serán detallados en posteriores secciones. Una vez completadas, el diseño estará integrado en la plataforma.
 
 \subsection{Importación de los archivos del diseño}
 En este paso se importan los archivos RTL del diseño desarrollado en la plataforma. En este contexto, hay dos formas posibles de hacerlo:
@@ -922,11 +931,9 @@ module bitreversal_control_reg (
   // -------------------------
   // Señales escritas por HW
   // -------------------------
-
   // DONE (rw1c/hwo): HW sets, SW clears
   assign hw2reg.done.d  = done_i;
   assign hw2reg.done.de = 1'b1;
-
   // DOUT (ro/hwo): resultado de hardware
   assign hw2reg.dout.d  = dout_i;
   assign hw2reg.dout.de = 1'b1;
@@ -949,30 +956,12 @@ module bitreversal_control_reg (
 
   // --------------------------------------------------------
   // SW Signals - Sticky Mode for simplicity
-  // --------------------------------------------------------
-
-  // -----------------------------------------------------------
-  // START (rw/hro): SW controlled, no HW override
+  // (rw/hro): SW controlled, no HW override
   // --> no assignment to hw2reg.din.* (RTL never clears it!)
   // -----------------------------------------------------------
   assign din_o   = reg2hw.din.q;
-  
-  // -----------------------------------------------------------
-  // START (rw/hro): SW controlled, no HW override
-  // --> no assignment to hw2reg.start.* (RTL never clears it!)
-  // -----------------------------------------------------------
-  
   assign start_o = reg2hw.start.q;
-  // -----------------------------------------------------------
-  // READ (rw/hro): SW controlled, no HW override
-  // --> no assignment to hw2reg.read.* (RTL never clears it!)
-  // -----------------------------------------------------------
   assign read_o  = reg2hw.read.q;
-  
-  // -----------------------------------------------------------
-  // WRITE (rw/hro): SW controlled, no HW override
-  // --> no assignment to hw2reg.read.* (RTL never clears it!)
-  // -----------------------------------------------------------
   assign write_o  = reg2hw.write.q;
 
 endmodule
@@ -999,75 +988,47 @@ La opción segunda ha sido la elegida en este trabajo. Por tanto, es necesario d
 #include "gr_heep.h"
 #include "rv_plic.h"
 
-/**
- * @brief Write an input operand into DIN
- * 
- * @param value The 32-bit input value.
- */
+
 void bitrev_write_val(uint32_t value) {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DIN_REG_OFFSET) = value;
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 1U; //activate write
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 0U; //deactivate write
 }
 
-/**
- * @brief Read back the last input operand (DIN).
- */
 uint32_t bitrev_get_input() {
     return *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DIN_REG_OFFSET);
 }
 
-/**
- * @brief Start the operation (set START=1).
- */
 void bitrev_start() {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_START_REG_OFFSET) |= 
         (1u << BITREVERSAL_CONTROL_START_START_BIT);
 }
 
-/**
- * @brief Stop the operation (set START=0).
- */
 void bitrev_stop() {
     *(volatile uint32_t *)(BIT_REVERSAL_START_ADDRESS + BITREVERSAL_CONTROL_START_REG_OFFSET) &= 
         ~(1u << BITREVERSAL_CONTROL_START_START_BIT);
 }
 
-/**
- * @brief Starts a READ then clears it to make the result available in DOUT.
- */
 void bitrev_trigger_read() {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 1U;
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 0U;
 }
 
-/**
- * @brief Starts a WRITE then clears it to make the result available in DOUT.
- */
 void bitrev_trigger_write() {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 1U;
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_WRITE_REG_OFFSET) = 0U;
 }
 
-/**
- * @brief Check if DONE flag is set.
- */
 uint8_t bitrev_is_done() {
     return ((*(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DONE_REG_OFFSET)) >> 
             BITREVERSAL_CONTROL_DONE_DONE_BIT) & 0x1;
 }
 
-/**
- * @brief Clear DONE flag (write-1-clear).
- */
 inline void bitrev_clear_done() {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DONE_REG_OFFSET) = 
         (1u << BITREVERSAL_CONTROL_DONE_DONE_BIT);
 }
 
-/**
- * @brief Get the result of the computation.
- */
 uint32_t bitrev_get_output() {
     *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_READ_REG_OFFSET) = 1U;
     uint32_t val = *(volatile uint32_t *)(BIT_REVERSAL_PERIPH_START_ADDRESS + BITREVERSAL_CONTROL_DOUT_REG_OFFSET);
@@ -1075,9 +1036,6 @@ uint32_t bitrev_get_output() {
     return val;
 }
 
-/**
- * @brief Polling until DONE=1, then clear it.
- */
 inline void bitrev_wait_done() {
     while (!bitrev_is_done()) {
         ; // busy-wait
@@ -1135,9 +1093,8 @@ En el listado \ref{lst:codigoBaremetal} se muestra el código desarrollado para 
 #include "x-heep.h"
 #include "soc_ctrl.h"
 
-/////////////////////////////////////////////////////////////
+
 // Reverse the bits of all numbers in the array - SOFTWARE //
-/////////////////////////////////////////////////////////////
 static inline uint32_t reverseBits_SW() {
     uint32_t timer_cycles;
     // Input array of 4 random numbers
@@ -1173,9 +1130,7 @@ static inline uint32_t reverseBits_SW() {
     return timer_cycles;
 }
 
-/////////////////////////////////////////////////////////////
-// Reverse the bits of all numbers in the array - SOFTWARE //
-/////////////////////////////////////////////////////////////
+// Reverse the bits of all numbers in the array - HARDWARE //
 static inline uint32_t reverseBits_HW() {
 	
     uint32_t timer_cycles;
@@ -1273,11 +1228,7 @@ void vApplicationStackOverflowHook(TaskHandle_t xTask, char *pcTaskName) {
     (void)xTask; (void)pcTaskName; for(;;);
 }
 
-/* Allocate heap to special section. Note that we have no references in the
- * whole program to this variable (since its just here to allocate space in the
- * section for our heap), so when using LTO it will be removed. We force it to
- * stay with the "used" attribute
- */
+/* Allocate heap to special section. Note that we have no references in the whole program to this variable (since its just here to allocatEspace in the section for our heap) */
 __attribute__((section(".heap"), used)) uint8_t ucHeap[configTOTAL_HEAP_SIZE];
 
 // Data structure for messages (can be the same for both directions or different)
@@ -1290,12 +1241,10 @@ typedef struct {
 // Queue handler
 static QueueHandle_t xQueue = NULL;
 
-/////////////////////////////////////////////////////////////
-// Reverse the bits of all numbers in the array - SOFTWARE //
-/////////////////////////////////////////////////////////////
 Packet_t reverseBits_SW(Packet_t received);
 Packet_t reverseBits_HW(Packet_t received);
 
+// Reverse the bits of all numbers in the array - SOFTWARE //
 Packet_t reverseBits_SW(Packet_t received) {
     
     Packet_t result;
@@ -1327,10 +1276,7 @@ Packet_t reverseBits_SW(Packet_t received) {
     return result;
 }
 
-/////////////////////////////////////////////////////////////
 // Reverse the bits of all numbers in the array - HARDWARE //
-/////////////////////////////////////////////////////////////
-
 Packet_t reverseBits_HW(Packet_t received) {
 	
     Packet_t result;
@@ -1436,5 +1382,5 @@ Sin embargo, tal y como se observa en los resultados mostrados en las figuras \r
 
     \item En segundo lugar, debe considerarse el efecto de las librerías y la memoria. En \textit{baremetal}, las funciones como \emph{rand()} y \emph{printf()} se utilizan por primera vez en las rutinas de prueba, lo que implica un mayor número de accesos a memoria y posibles penalizaciones de cache en su primera ejecución. En FreeRTOS, en cambio, antes de llegar a la tarea de medición, ya se han ejecutado varias operaciones que utilizan estas mismas librerías y estructuras, de manera que ya las inicializó, lo que reduce el coste en ciclos durante la medición.
 
-    \item Por último, el modelo de simulación con Verilator puede influir. En \textit{baremetal}, las mediciones se realizan inmediatamente después del arranque del sistema, en un estado inicial en el que las configuraciones de periféricos todavía incurren en costes adicionales. En FreeRTOS, por el contrario, el simulador ya ha ejecutado múltiples ciclos asociados al arranque del kernel, la creación de tareas y la comunicación mediante colas, de forma que al momento de realizar la medición el sistema está más estabilizado y los tiempos reportados son menores. Esto se puede observar en que el tiempo de ejecutar simulaciones sobre FreeeRTOS aumenta de forma desproporcional frente a \textit{baremetal}.
+    \item Por último, el modelo de simulación con Verilator puede influir. En \textit{baremetal}, las mediciones se realizan inmediatamente después del arranque del sistema, en un estado inicial en el que las configuraciones de periféricos todavía incurren en costes adicionales. En FreeRTOS, por el contrario, el simulador Verilator ya ha ejecutado múltiples ciclos asociados al arranque del kernel, la creación de tareas y la comunicación mediante colas, de forma que al momento de realizar la medición el sistema está más estabilizado y los tiempos reportados son menores. Esto se puede observar en que el tiempo de ejecutar simulaciones sobre FreeeRTOS aumenta de forma desproporcional frente a \textit{baremetal}.
 \end{itemize}

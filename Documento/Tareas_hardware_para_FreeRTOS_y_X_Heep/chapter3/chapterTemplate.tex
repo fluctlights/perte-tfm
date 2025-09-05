@@ -63,12 +63,16 @@ A modo de esquema, se presenta en \ref{tbl:cicloIteraciones} una tabla relaciona
 
 \section{Análisis de objetivos}
 \label{sec:objetivos}
-El objetivo principal del proyecto será, tal y como se ha introducido en \ref{sec:objetivos}, \textbf{la implementación e integración en X-HEEP/GR-HEEP de un acelerador AXI-Stream en hardware}, que sea funcional, y en la medida posible, utilizando metodologías basadas en herramientas EDA, y más eficiente que una versión realizada en software para el mismo propósito. Para el cumplimiento de este objetivo, se tienen una serie de objetivos parciales:
+El objetivo principal del proyecto será \textbf{la implementación e integración en GR-HEEP de una tarea hardware sobre el sistema operativo de tiempo real FreeRTOS}, de modo que sea más eficiente que una realizada en software. Para el cumplimiento de este objetivo, se tienen una serie de objetivos parciales:
 
 \begin{enumerate}
-    \item \emph{La validación del diseño mediante simulaciones y ejecuciones}, que permita verificar la funcionalidad del diseño realizado, empleado para ello herramientas de simulación y de ejecución que permitan obtener datos acerca del correcto funcionamiento del mismo.
+    \item \emph{La implementación de un mecanismo basado en colas FIFO}, que sirvan de nexo entre el \textit{software} ejecutado en el microcontrolador y el hardware.
+    \item \emph{La utilización del protocolo AXI-Stream para la entrada y salida de datos del acelerador} empleado en la tarea hardware a desarrollar.
+    \item \emph{La validación de la infraestructura hardware mediante simulaciones y ejecuciones}, que permita verificar la funcionalidad, empleado para ello herramientas de simulación y de ejecución que permitan obtener datos acerca del correcto funcionamiento del mismo.
+    \item \emph{La integración de la infraestructura hardware desarrollada en GR-HEEP}, para poder implementar y ejecutar la tarea hardware.
+    \item \emph{La adición del RTOS FreeRTOS a GR-HEEP y al software ejecutado en el microcontrolador}, para poder ejecutar las tareas desarrolladas.
     \item \emph{El desarrollo de \textit{drivers} que permitan la comunicación hardware-software}, y así servir de mediador en la comunicación entre el diseño realizado y los programas software empleando el sistema operativo de tiempo real FreeRTOS
-    \item \emph{La realización de comparativas de rendimiento frente a una versión \textit{software}} del algoritmo que finalmente sea seleccionado para ser acelerado por \textit{hardware}.
+    \item \emph{La comparativa de rendimiento entre la tarea hardware y una tarea software del mismo tipo}, como forma de evaluación real relativa al \textit{speedup} logrado con la tarea hardware a desarrollar.
 \end{enumerate}
 
 El cumplimiento (completo o parcial) o incumplimiento de estos objetivos se valorará con posterioridad, en el capítulo \ref{cap:conclusiones}.
